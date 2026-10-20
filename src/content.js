@@ -1,10 +1,16 @@
 export const lessons = [
   ["结构", "页面不是一张图", "DOM · 组件 · Props", "React / 浏览器开发者工具"],
   [
-    "布局与响应式",
-    "同一界面，不同屏幕",
-    "盒模型 · Flex · Grid · 容器查询",
-    "原生 CSS / 开发者工具",
+    "Flex · 一维排列",
+    "Flex——一维排列",
+    "row / column · gap · 对齐 · grow / shrink",
+    "原生 CSS Flexbox / DevTools / Figma Auto Layout",
+  ],
+  [
+    "Grid · 二维布局",
+    "Grid——二维布局",
+    "行列轨道 · 跨行跨列 · 响应式网格",
+    "原生 CSS Grid / DevTools",
   ],
   [
     "视觉",

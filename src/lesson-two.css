@@ -1,0 +1,676 @@
+.lesson-two .flex-lab-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(250px, 1fr);
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.lesson-two .flex-demo-card {
+  background: #fff;
+  border: 1px solid #e0e1ed;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+  box-shadow: 0 4px 16px #25205b03;
+}
+.lesson-two .flex-controls {
+  border: 1px solid #e2dff3;
+  background: #f2f0fb;
+  border-radius: 12px;
+  padding: 23px;
+  min-width: 0;
+}
+.lesson-two .flex-controls h3 {
+  font-size: 19px;
+  color: #353047;
+  margin: 7px 0 24px;
+}
+.lesson-two .flex-controls > label {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  color: #655b78;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+.lesson-two .flex-controls select {
+  font-size: 12px;
+  background: #fff;
+  min-height: 41px;
+}
+.lesson-two .flex-controls .checkbox-label {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12px;
+  line-height: 1.9;
+  margin-top: 17px;
+}
+.lesson-two .flex-controls .checkbox-label input {
+  margin-top: 4px;
+}
+.lesson-two .flex-choices {
+  border: 0;
+  margin: 0 0 23px;
+  padding: 0;
+  min-width: 0;
+}
+.lesson-two .flex-choices legend {
+  font-size: 11px;
+  color: #655b78;
+  font-weight: 550;
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+.lesson-two .flex-choices > div {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.lesson-two .flex-choices button {
+  font-size: 11px;
+  padding: 9px 12px;
+  background: #ffffffa8;
+  border-color: #ded9ef;
+  min-height: 38px;
+  line-height: 1.6;
+  flex: 1 0 auto;
+}
+.lesson-two .flex-choices button[aria-pressed="true"] {
+  background: #5851b8;
+  color: white;
+  border-color: #5851b8;
+  box-shadow: 0 2px 4px #45419612;
+}
+.lesson-two .flex-help {
+  font-size: 11px;
+  line-height: 1.95;
+  color: #6d617d;
+  margin: 0;
+  padding-top: 15px;
+  border-top: 1px solid #ddd7ec;
+}
+.lesson-two .flex-canvas {
+  position: relative;
+  padding: 60px 25px 35px 65px;
+  background-color: #fcfcff;
+  background-image: radial-gradient(#e9e5f3 1px, transparent 1px);
+  background-size: 15px 15px;
+  min-height: 400px;
+}
+.lesson-two .axis-line {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.lesson-two .axis-line span {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 550;
+  background: #fcfcff;
+  padding: 2px 7px;
+  letter-spacing: 0.2px;
+}
+.lesson-two .axis-row .main-axis,
+.lesson-two .axis-column .cross-axis {
+  left: 65px;
+  right: 25px;
+  top: 26px;
+  border-top: 2px solid;
+}
+.lesson-two .axis-row .main-axis {
+  color: #6553b4;
+  border-color: #8873cd;
+}
+.lesson-two .axis-column .cross-axis {
+  color: #3e746d;
+  border-color: #6f9992;
+}
+.lesson-two .axis-row .main-axis span,
+.lesson-two .axis-column .cross-axis span {
+  left: 50%;
+  top: -13px;
+  transform: translateX(-50%);
+}
+.lesson-two .axis-row .main-axis:after,
+.lesson-two .axis-column .cross-axis:after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  position: absolute;
+  right: 0;
+  top: -4px;
+  transform: rotate(45deg);
+}
+.lesson-two .axis-row .cross-axis,
+.lesson-two .axis-column .main-axis {
+  left: 28px;
+  top: 60px;
+  bottom: 35px;
+  border-left: 2px solid;
+}
+.lesson-two .axis-row .cross-axis {
+  color: #3e746d;
+  border-color: #6f9992;
+}
+.lesson-two .axis-column .main-axis {
+  color: #6553b4;
+  border-color: #8873cd;
+}
+.lesson-two .axis-row .cross-axis span,
+.lesson-two .axis-column .main-axis span {
+  writing-mode: vertical-rl;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 7px 2px;
+}
+.lesson-two .axis-row .cross-axis:after,
+.lesson-two .axis-column .main-axis:after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  position: absolute;
+  left: -4px;
+  bottom: 0;
+  transform: rotate(45deg);
+}
+.lesson-two .direction-demo,
+.lesson-two .alignment-demo {
+  min-height: 305px;
+  border: 1px dashed #bcb2dc;
+  border-radius: 9px;
+  padding: 18px;
+  background: #f6f4fd;
+  box-shadow: inset 0 0 0 4px #fff;
+  min-width: 0;
+}
+.lesson-two .direction-demo {
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-wrap: anywhere;
+}
+.lesson-two .demo-action {
+  border: 1px solid #d6cee9;
+  background: #fff;
+  box-shadow: 0 3px 6px #56418b08;
+  border-radius: 7px;
+  padding: 11px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #594b7c;
+  font-size: 11px;
+  line-height: 1.7;
+  max-width: 100%;
+  min-width: 0;
+}
+.lesson-two .demo-action small {
+  font: 9px monospace;
+  color: #756596;
+}
+.lesson-two .action-2,
+.lesson-two .example-card > .demo-action {
+  background: #6254ac;
+  border-color: #6254ac;
+  color: #fff;
+}
+.lesson-two .action-2 small {
+  color: #fff;
+}
+.lesson-two .card-symbol {
+  width: 47px;
+  height: 47px;
+  background: #e5dff6;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  flex-shrink: 0;
+  color: #6c57ae;
+}
+.lesson-two .example-card > strong {
+  font-size: 18px;
+  color: #413454;
+  min-width: 0;
+}
+.lesson-two .example-card > p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #6e6081;
+  margin: 0;
+  min-width: 0;
+  max-width: 240px;
+}
+.lesson-two .example-card[style*="row"] > p {
+  flex: 1;
+}
+.lesson-two .flex-live-reading {
+  padding: 16px 20px;
+  border-top: 1px solid #e7e2f1;
+  background: #fff;
+  font-size: 11px;
+  color: #6e617e;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  line-height: 1.9;
+}
+.lesson-two .flex-live-reading b {
+  color: #55428a;
+  font-size: 12px;
+  font-weight: 600;
+}
+.lesson-two .flex-note {
+  margin: 0 0 18px;
+}
+.lesson-two .flex-note p {
+  font-size: 12px;
+  line-height: 1.95;
+}
+.lesson-two .alignment-demo {
+  height: 305px;
+  overflow-wrap: anywhere;
+}
+.lesson-two .profile-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 1;
+  border: 1px solid #dfd7ef;
+  background: #fff;
+  border-radius: 7px;
+  padding: 10px;
+}
+.lesson-two .profile-group > div {
+  min-width: 0;
+}
+.lesson-two .profile-avatar {
+  width: 33px;
+  height: 33px;
+  flex-shrink: 0;
+  background: #dfd8ef;
+  color: #645187;
+  border: 1px solid #d0c5e5;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+.lesson-two .profile-group strong {
+  font-size: 12px;
+  color: #4c3d65;
+  display: block;
+  font-weight: 600;
+}
+.lesson-two .profile-group small {
+  display: block;
+  font-size: 10px;
+  color: #766586;
+  margin-top: 4px;
+}
+.lesson-two .profile-settings {
+  padding: 11px 13px;
+  min-width: 65px;
+  flex-shrink: 0;
+  border: 1px solid #c8bcdf;
+  border-radius: 7px;
+  background: #e6def4;
+  color: #5b477b;
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+}
+.lesson-two .flex-preset {
+  width: 100%;
+  font-size: 11px;
+  background: #fff;
+  border: 1px solid #c9bedf;
+  color: #665080;
+  line-height: 1.8;
+  padding: 11px;
+  margin: 0 0 20px;
+}
+.lesson-two .space-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #e3dff0;
+  background: #fff;
+  padding: 18px 22px 0;
+  border-radius: 11px;
+  margin-bottom: 18px;
+}
+.lesson-two .space-toolbar .flex-choices {
+  margin-bottom: 18px;
+}
+.lesson-two .space-stage {
+  padding: 55px 20px;
+  background-color: #fcfcff;
+  background-image: radial-gradient(#e9e5f3 1px, transparent 1px);
+  background-size: 15px 15px;
+  min-height: 255px;
+  display: flex;
+  align-items: center;
+}
+.lesson-two .space-scroller {
+  overflow: auto;
+  width: 100%;
+  padding: 3px 0 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #b7aaca #eee8f6;
+}
+.lesson-two .space-scroller:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+.lesson-two .space-demo {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  min-height: 110px;
+  background: #f2edf9;
+  outline: 1px dashed #ad9ec9;
+  outline-offset: 2px;
+}
+.lesson-two .space-item {
+  padding: 13px 10px;
+  border: 1px solid #ccc0e1;
+  border-radius: 7px;
+  background: #f3effa;
+  color: #5e4f7b;
+  font-size: 11px;
+  min-width: 0;
+}
+.lesson-two .space-item strong {
+  display: block;
+  font: 600 14px monospace;
+  color: #5c448c;
+  margin-bottom: 10px;
+}
+.lesson-two .space-item > span {
+  font-size: 11px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.lesson-two .space-B {
+  background: #e2daf2;
+  border-color: #b8a6d9;
+}
+.lesson-two .space-B > span {
+  overflow-wrap: normal;
+}
+.lesson-two .min-fixed .space-B > span {
+  overflow-wrap: anywhere;
+}
+.lesson-two .space-measurements {
+  display: flex;
+  padding: 18px 14px;
+  border-top: 1px solid #e7e1ee;
+  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.lesson-two .space-measurements > div {
+  flex: 1;
+  min-width: 70px;
+  text-align: center;
+}
+.lesson-two .space-measurements small {
+  display: block;
+  color: #786388;
+  font-size: 9px;
+  line-height: 1.8;
+  margin-bottom: 7px;
+}
+.lesson-two .space-measurements b {
+  font: 500 16px monospace;
+  color: #5a487c;
+}
+.lesson-two .overflow-feedback {
+  padding: 13px 18px;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #396a58;
+  background: #edf5f0;
+  border-top: 1px solid #e7e1ee;
+}
+.lesson-two .overflow-feedback.has-overflow {
+  background: #fff2e6;
+  color: #88582b;
+}
+.lesson-two .space-formula {
+  padding: 14px 16px;
+  background: #ffffffb0;
+  border: 1px solid #dfd5ed;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 11px;
+  color: #6d5d7f;
+  line-height: 1.9;
+}
+.lesson-two .space-formula small {
+  color: #5d497e;
+  font-size: 10px;
+  font-weight: 600;
+}
+.lesson-two .space-formula p {
+  margin: 7px 0 0;
+}
+.lesson-two .flex-mapping .roadmap-body p {
+  font-size: 12px;
+}
+.lesson-two .quiz-card legend {
+  font-size: 13px;
+}
+@media (max-width: 1100px) {
+  .lesson-two .flex-lab-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lesson-two .flex-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+  }
+  .lesson-two .flex-controls > .eyebrow,
+  .lesson-two .flex-controls > h3,
+  .lesson-two .flex-help {
+    grid-column: 1/-1;
+  }
+  .lesson-two .flex-controls h3 {
+    margin-bottom: 9px;
+  }
+  .lesson-two .flex-choices {
+    margin-bottom: 8px;
+  }
+  .lesson-two .flex-controls > label {
+    margin: 0 0 8px;
+  }
+  .lesson-two .flex-controls .space-formula {
+    grid-column: 1/-1;
+    grid-row: 4;
+  }
+  .lesson-two .space-toolbar {
+    flex-wrap: wrap;
+  }
+  .lesson-two .flex-canvas {
+    min-height: 365px;
+  }
+  .lesson-two .direction-demo,
+  .lesson-two .alignment-demo {
+    min-height: 270px;
+    height: 270px;
+  }
+  .lesson-two .example-card[style*="column"] {
+    min-height: 330px;
+    height: 330px;
+  }
+}
+@media (max-width: 760px) {
+  .lesson-two .flex-lab-grid {
+    gap: 14px;
+  }
+  .lesson-two .panel-heading {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .lesson-two .flex-canvas {
+    padding: 55px 14px 22px 43px;
+    min-height: 345px;
+  }
+  .lesson-two .axis-row .main-axis,
+  .lesson-two .axis-column .cross-axis {
+    left: 43px;
+    right: 14px;
+    top: 24px;
+  }
+  .lesson-two .axis-row .cross-axis,
+  .lesson-two .axis-column .main-axis {
+    left: 18px;
+    top: 55px;
+    bottom: 22px;
+  }
+  .lesson-two .axis-line span {
+    font-size: 9px;
+  }
+  .lesson-two .direction-demo,
+  .lesson-two .alignment-demo {
+    padding: 12px;
+    min-height: 268px;
+    height: 268px;
+  }
+  .lesson-two .demo-action {
+    padding: 9px 7px;
+    font-size: 10px;
+    gap: 4px;
+  }
+  .lesson-two .demo-action small {
+    font-size: 8px;
+  }
+  .lesson-two .example-card > strong {
+    font-size: 15px;
+  }
+  .lesson-two .example-card > p {
+    font-size: 11px;
+  }
+  .lesson-two .card-symbol {
+    width: 35px;
+    height: 35px;
+    border-radius: 9px;
+  }
+  .lesson-two .card-symbol svg {
+    width: 21px;
+    height: 21px;
+  }
+  .lesson-two .flex-live-reading {
+    padding: 14px;
+    font-size: 11px;
+  }
+  .lesson-two .flex-live-reading b {
+    font-size: 11px;
+  }
+  .lesson-two .flex-controls {
+    padding: 19px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .lesson-two .flex-controls h3 {
+    font-size: 18px;
+    margin-bottom: 22px;
+  }
+  .lesson-two .flex-choices {
+    margin-bottom: 20px;
+  }
+  .lesson-two .flex-choices button {
+    font-size: 11px;
+    min-height: 42px;
+    padding: 10px;
+  }
+  .lesson-two .flex-controls > label {
+    margin-bottom: 18px;
+  }
+  .lesson-two .flex-help {
+    font-size: 11px;
+    padding-top: 14px;
+  }
+  .lesson-two .flex-note {
+    padding: 15px 13px;
+    gap: 9px;
+  }
+  .lesson-two .flex-note p {
+    font-size: 11px;
+  }
+  .lesson-two .profile-group {
+    padding: 8px;
+    gap: 7px;
+  }
+  .lesson-two .profile-avatar {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
+  }
+  .lesson-two .profile-group strong {
+    font-size: 11px;
+  }
+  .lesson-two .profile-group small {
+    font-size: 9px;
+  }
+  .lesson-two .profile-settings {
+    padding: 9px 7px;
+    min-width: 52px;
+    font-size: 10px;
+  }
+  .lesson-two .space-toolbar {
+    padding: 17px 17px 0;
+    gap: 0;
+  }
+  .lesson-two .space-toolbar .flex-choices {
+    width: 100%;
+  }
+  .lesson-two .space-stage {
+    padding: 40px 16px;
+    min-height: 240px;
+  }
+  .lesson-two .space-measurements {
+    padding: 16px 10px;
+    gap: 6px;
+  }
+  .lesson-two .space-measurements > div {
+    min-width: 60px;
+  }
+  .lesson-two .space-measurements b {
+    font-size: 14px;
+  }
+  .lesson-two .space-measurements small {
+    font-size: 9px;
+  }
+  .lesson-two .space-item {
+    padding: 12px 8px;
+  }
+  .lesson-two .space-item > span {
+    font-size: 11px;
+  }
+  .lesson-two .space-formula {
+    font-size: 12px;
+  }
+  .lesson-two .flex-controls .checkbox-label {
+    font-size: 11px;
+    margin-top: 0;
+  }
+  .lesson-two .flex-mapping .roadmap-body p {
+    font-size: 11px;
+  }
+  .lesson-two .overflow-feedback {
+    font-size: 11px;
+    padding: 13px 15px;
+  }
+  .lesson-two .quiz-options button {
+    font-size: 11px;
+  }
+}

@@ -250,10 +250,10 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
   await page
     .getByRole("navigation", { name: "课程目录" })
     .getByRole("button")
-    .nth(1)
+    .nth(2)
     .click();
   await expect(
-    page.getByRole("heading", { name: "同一界面，不同屏幕" }),
+    page.getByRole("heading", { name: "Grid——二维布局" }),
   ).toBeVisible();
   await expect(
     page.getByText("尚未制作", { exact: true }).last(),
