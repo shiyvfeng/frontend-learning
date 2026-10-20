@@ -222,8 +222,8 @@ test("editable agent prompt, successful copy and explicit failure fallback", asy
   await page
     .getByLabel("我已检查结构、交互和验收标准，能据此判断结果。")
     .check();
-  await page.getByRole("button", { name: "完成第一节" }).click();
-  await expect(page.locator(".notice")).toContainText("第一节已完成");
+  await page.getByRole("button", { name: "保存本站成果" }).click();
+  await expect(page.locator(".notice")).toContainText("还有 4 站未完成");
   await noOverflow(page);
   await axeCheck(page);
 });
@@ -292,4 +292,48 @@ test("corrupt or unavailable browser storage does not break the lesson", async (
     "data-highlight",
     "component",
   );
+});
+
+test("five real tasks complete the lesson without skipping prerequisites", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "选择 Sidebar", exact: true }).click();
+  await page
+    .getByRole("button", { name: "选择 Message 2", exact: true })
+    .click();
+  await page.getByRole("button", { name: "DOM 树", exact: true }).click();
+  await page.getByRole("button", { name: "完成并继续" }).click();
+  await expect(page.locator("#stage-heading")).toHaveText(
+    "一套组件，可以出现很多次",
+  );
+  await page
+    .getByRole("button", { name: "新增 Message", exact: false })
+    .click();
+  await page.getByRole("button", { name: "4px", exact: true }).click();
+  await page.getByRole("button", { name: "完成并继续" }).click();
+  await page.getByLabel("role · 谁发的").selectOption("user");
+  await page.getByLabel("status · 当前状态").selectOption("error");
+  await page.getByLabel("content · 消息内容").fill("每个实例拥有独立内容。");
+  await page.getByRole("button", { name: "完成并继续" }).click();
+  for (const [i, answer] of [0, 1, 1].entries())
+    await page
+      .locator(".quiz-card")
+      .nth(i)
+      .getByRole("button")
+      .nth(answer)
+      .click();
+  await page.getByRole("button", { name: "完成并继续" }).click();
+  await expect(page.locator(".lesson-bottom")).toContainText("4 / 5");
+  await page.getByRole("button", { name: "生成 Agent 指令" }).click();
+  await page
+    .getByLabel("我已检查结构、交互和验收标准，能据此判断结果。")
+    .check();
+  await page
+    .getByRole("button", { name: "完成第一节" })
+    .click({ clickCount: 2 });
+  await expect(page.locator(".notice")).toContainText("第一节已完成");
+  await expect(page.locator(".lesson-bottom")).toContainText("5 / 5");
+  await page.reload();
+  await expect(page.locator(".lesson-bottom")).toContainText("5 / 5");
 });

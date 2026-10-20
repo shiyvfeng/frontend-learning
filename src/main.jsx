@@ -620,9 +620,13 @@ function App() {
     }
     patch((old) => ({ done: [...new Set([...old.done, old.step])] }));
     if (data.step < 4) go(data.step + 1);
-    else
+    else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
         "第一节已完成。你已经把界面观察变成了一份可交付的指令；后续课程尚未制作。",
+      );
+    else
+      setNotice(
+        `本站成果已保存。还有 ${[0, 1, 2, 3].filter((n) => !data.done.includes(n)).length} 站未完成，可以从顶部步骤继续学习。`,
       );
   };
   const generate = () => {
@@ -1118,7 +1122,11 @@ function App() {
                         </button>
                       )}
                       <button className="primary next-button" onClick={finish}>
-                        {data.step === 4 ? "完成第一节" : "完成并继续"}
+                        {data.step === 4
+                          ? [0, 1, 2, 3].every((n) => data.done.includes(n))
+                            ? "完成第一节"
+                            : "保存本站成果"
+                          : "完成并继续"}
                         <Icon type="arrow" size={18} />
                       </button>
                     </div>
