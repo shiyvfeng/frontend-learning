@@ -158,6 +158,10 @@ export const implementedCourseMetadata = {
   "08": { view: "glass" },
   "09": { view: "glow" },
   10: { view: "mask" },
+  11: {
+    view: "vector",
+    technology: "React + 内联 SVG + 原生 CSS · 无动画依赖",
+  },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");

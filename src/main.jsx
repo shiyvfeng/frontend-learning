@@ -19,6 +19,7 @@ import {
 } from "./route";
 const LessonNine = React.lazy(() => import("./lesson-nine"));
 const LessonTen = React.lazy(() => import("./lesson-ten"));
+const LessonEleven = React.lazy(() => import("./lesson-eleven"));
 const lessonViews = {
   flex: LessonTwo,
   grid: LessonThree,
@@ -29,6 +30,7 @@ const lessonViews = {
   glass: LessonEight,
   glow: LessonNine,
   mask: LessonTen,
+  vector: LessonEleven,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";

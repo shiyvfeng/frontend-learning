@@ -1,0 +1,199 @@
+.lesson-eleven .vector-lab {
+  min-width: 0;
+  border: 1px solid #e4dfef;
+  border-radius: 12px;
+  background: white;
+}
+.lesson-eleven .panel-heading {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lesson-eleven .vector-display {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 28px 18px;
+  background: #f7f5fa;
+}
+.lesson-eleven .vector-square {
+  width: 240px;
+  height: 240px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+.lesson-eleven .vector-square svg {
+  display: block;
+  background: white;
+  outline: 1px dashed #8f7ba4;
+}
+.lesson-eleven .vector-formula {
+  flex: 1 1 210px;
+  max-width: 320px;
+  font-size: 12px;
+  color: #51415f;
+  line-height: 1.9;
+}
+.lesson-eleven .vector-formula span {
+  display: block;
+  font-size: 11px;
+}
+.lesson-eleven .vector-formula strong {
+  display: block;
+  font-size: 25px;
+  color: #35235c;
+  margin: 4px 0 16px;
+}
+.lesson-eleven .vector-formula small {
+  font-size: 11px;
+  font-weight: normal;
+}
+.lesson-eleven .vector-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  padding: 20px;
+}
+.lesson-eleven .vector-controls .flex-choices {
+  flex: 1 1 220px;
+  margin: 0;
+}
+.lesson-eleven .vector-controls .checkbox-label {
+  flex: 1 1 100%;
+  min-height: 44px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.lesson-eleven .vector-action {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #796190;
+  border-radius: 6px;
+  background: white;
+  color: #44315e;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.lesson-eleven .vector-action:focus-visible {
+  outline: 3px solid #5942b2;
+  outline-offset: 3px;
+}
+.lesson-eleven .vector-action[aria-pressed="true"] {
+  border: 2px solid #5942b2;
+  background: #f0ebfa;
+}
+.lesson-eleven .vector-reading {
+  padding: 15px 18px;
+  border-top: 1px solid #e4dfef;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #51415f;
+  overflow-wrap: anywhere;
+}
+.lesson-eleven .vector-reading code,
+.lesson-eleven .vector-code {
+  display: block;
+  margin: 8px 0;
+  padding: 10px 12px;
+  border: 1px dashed #c4b5d4;
+  border-radius: 6px;
+  background: #f4f1fa;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+.lesson-eleven .vector-reading p {
+  margin: 8px 0 0;
+}
+.lesson-eleven .vector-path-wrap {
+  padding: 24px 18px;
+  background: #f7f5fa;
+}
+.lesson-eleven .vector-path-wrap svg {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  margin: auto;
+  background: white;
+  outline: 1px dashed #8f7ba4;
+}
+.lesson-eleven .vector-semantic {
+  padding: 4px 20px 20px;
+  color: #51415f;
+  font-size: 12px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.lesson-eleven .vector-semantic figure {
+  margin: 0 0 20px;
+}
+.lesson-eleven .vector-semantic figure > svg {
+  display: block;
+  margin: 12px auto;
+}
+.lesson-eleven .vector-semantic figcaption {
+  text-align: center;
+}
+.lesson-eleven .vector-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.lesson-eleven .vector-save svg {
+  flex-shrink: 0;
+}
+.lesson-eleven [data-vector-demo="chart"] {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  margin: 16px auto;
+  background: #f7f5fa;
+}
+.lesson-eleven table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+}
+.lesson-eleven caption {
+  text-align: left;
+  padding: 8px 0;
+  font-size: 11px;
+}
+.lesson-eleven th,
+.lesson-eleven td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #d9d0e5;
+}
+.lesson-eleven th {
+  background: #f7f5fa;
+}
+@media (max-width: 700px) {
+  .lesson-eleven .vector-controls {
+    padding: 16px;
+    gap: 18px;
+  }
+  .lesson-eleven .vector-controls .flex-choices {
+    flex-basis: 100%;
+  }
+  .lesson-eleven .vector-display {
+    gap: 18px;
+    padding: 22px 12px;
+  }
+  .lesson-eleven .vector-formula {
+    flex-basis: 100%;
+  }
+  .lesson-eleven .vector-semantic {
+    padding: 4px 16px 16px;
+  }
+  .lesson-eleven .vector-reading {
+    padding: 14px 16px;
+  }
+  .lesson-eleven .vector-path-wrap {
+    padding: 18px 16px;
+  }
+}
