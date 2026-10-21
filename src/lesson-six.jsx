@@ -348,6 +348,7 @@ function DrawerLab({ data, patch }) {
 }
 function PriorityLab({ data, patch }) {
   const ref = useRef(null),
+    lastFocused = useRef(null),
     primary = useRef(null),
     [message, setMessage] = useState(""),
     [layout, setLayout] = useState(""),
@@ -362,7 +363,19 @@ function PriorityLab({ data, patch }) {
             : "次要操作直接显示",
         );
         const active = document.activeElement;
-        if (el.contains(active) && !active.getClientRects().length)
+        // Some browsers clear focus to body before ResizeObserver runs.
+        // Restore the remembered hidden target only while focus is unclaimed;
+        // an already focused control outside this component keeps its focus.
+        const candidate = el.contains(active)
+          ? active
+          : active === document.body
+            ? lastFocused.current
+            : null;
+        if (
+          candidate &&
+          el.contains(candidate) &&
+          !candidate.getClientRects().length
+        )
           primary.current.focus({ preventScroll: true });
       };
     const ro = new ResizeObserver(update);
@@ -404,6 +417,9 @@ function PriorityLab({ data, patch }) {
               className={`responsive-priority-container ${fallback ? "container-fallback" : ""}`}
               style={{ width: data.priorityWidth }}
               data-testid="priority-container"
+              onFocusCapture={(event) => {
+                lastFocused.current = event.target;
+              }}
             >
               <article className="responsive-priority">
                 <h3>

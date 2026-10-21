@@ -76,7 +76,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("tenth available fourteenth planned and lesson module loads on demand", async ({
+test("tenth available fifteenth planned and lesson module loads on demand", async ({
   page,
 }) => {
   const requests = [];
@@ -91,11 +91,11 @@ test("tenth available fourteenth planned and lesson module loads on demand", asy
   await expect(
     page.getByRole("heading", { name: "Mask / Clip Path." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(13);
-  await expect(page.locator(".site-footer")).toContainText("01–13");
-  await course(page, 13);
+  await expect(page.locator(".available-dot")).toHaveCount(14);
+  await expect(page.locator(".site-footer")).toContainText("01–14");
+  await course(page, 14);
   await expect(
-    page.getByRole("heading", { name: "条件渲染", exact: true }),
+    page.getByRole("heading", { name: "Loading/Skeleton/Optimistic UI", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
@@ -292,7 +292,8 @@ test("WebKit-only mask capability is recognized and safe primary actions stay ou
   ).toBe(true);
   await page.locator(".mask-full-details summary").click();
   await expect(page.getByTestId("full-art")).toBeVisible();
-  expect((await progress(page)).fullSeen).toBe(true);
+  // Native details toggle is queued; wait for its persisted React update.
+  await expect.poll(async () => (await progress(page)).fullSeen).toBe(true);
   await expect(page.getByTestId("full-art")).toHaveCSS("mask-image", "none");
   await page.locator(".mask-full-details summary").click();
   await expect(page.getByTestId("full-art")).not.toBeVisible();

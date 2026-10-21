@@ -110,7 +110,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("twelfth State available on demand and fourteenth remains planned", async ({
+test("twelfth State available on demand and fifteenth remains planned", async ({
   page,
 }) => {
   const requests = [];
@@ -122,10 +122,10 @@ test("twelfth State available on demand and fourteenth remains planned", async (
   await expect(page.locator("#state-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-twelve-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("State · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(13);
-  await course(page, 13);
+  await expect(page.locator(".available-dot")).toHaveCount(14);
+  await course(page, 14);
   await expect(
-    page.getByRole("heading", { name: "条件渲染", exact: true }),
+    page.getByRole("heading", { name: "Loading/Skeleton/Optimistic UI", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

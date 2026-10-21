@@ -91,7 +91,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("thirteenth Props available on demand and fourteenth remains planned", async ({
+test("thirteenth Props available on demand and fifteenth remains planned", async ({
   page,
 }) => {
   const requests = [];
@@ -103,10 +103,10 @@ test("thirteenth Props available on demand and fourteenth remains planned", asyn
   await expect(page.locator("#props-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-thirteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Props与Variant · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(13);
-  await course(page, 13);
+  await expect(page.locator(".available-dot")).toHaveCount(14);
+  await course(page, 14);
   await expect(
-    page.getByRole("heading", { name: "条件渲染", exact: true }),
+    page.getByRole("heading", { name: "Loading/Skeleton/Optimistic UI", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
@@ -485,7 +485,7 @@ test("corrupt progress defaults safely full completion is unique and unavailable
     "5 / 5",
   );
   expect((await progress(page)).done.sort()).toEqual([0, 1, 2, 3, 4]);
-  await expect(page.locator(".notice")).toContainText("下一课 14");
+  await expect(page.locator(".notice")).toContainText("可以从课程目录继续 14 条件渲染。");
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
       throw Error("unavailable");

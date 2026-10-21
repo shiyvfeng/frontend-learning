@@ -164,6 +164,7 @@ export const implementedCourseMetadata = {
   },
   12: { view: "state", technology: "React State + 原生 CSS · 本地手动模拟" },
   13: { view: "props", technology: "React Props + 原生 CSS · 共享组件实例" },
+  14: { view: "conditional", technology: "React 条件渲染 + 原生 hidden · 本地模拟" },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");
