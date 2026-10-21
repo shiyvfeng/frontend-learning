@@ -82,16 +82,18 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("fifth lesson is available, sixth stays unbuilt, full 32-course route retained", async ({
+test("fifth lesson is available, seventh stays unbuilt, full 32-course route retained", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Sizing与Overflow · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("05 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("06 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await expect(page.locator(".available-dot")).toHaveCount(5);
-  await course(page, 5);
-  await expect(page.getByRole("heading", { name: "响应式" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(6);
+  await course(page, 6);
+  await expect(
+    page.getByRole("heading", { name: "圆角阴影层级" }),
+  ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await noOverflow(page);
 });
@@ -382,7 +384,7 @@ test("corrupt/unavailable storage remains usable and full completion is stable",
   );
   expect((await progress(page)).done.sort()).toEqual([0, 1, 2, 3, 4]);
   await expect(page.locator(".notice")).toContainText(
-    "下一课 06 响应式 尚未制作",
+    "可以从课程目录继续 06 响应式",
   );
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {

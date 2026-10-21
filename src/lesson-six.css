@@ -1,0 +1,206 @@
+.lesson-six .responsive-lab {
+  background: #fff;
+  border: 1px solid #e4dfef;
+  border-radius: 12px;
+  min-width: 0;
+}
+.lesson-six .responsive-surface {
+  padding: 16px;
+  background: #faf9fd;
+}
+.lesson-six .responsive-safe-scroll {
+  overflow: auto;
+  max-width: 100%;
+  padding: 4px 4px 14px;
+}
+.lesson-six .responsive-demo-frame {
+  display: block;
+  border: 1px solid #c6b8db;
+  background: white;
+  height: 330px;
+  max-width: none;
+}
+.lesson-six .drawer-demo-frame {
+  height: 380px;
+}
+.lesson-six .responsive-caption {
+  color: #665b7c;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0;
+  padding: 12px 16px;
+  background: #f3eff9;
+}
+.lesson-six .responsive-warning {
+  border: 1px solid #e5d4a8;
+  background: #fff7e5;
+  color: #735b23;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.lesson-six .responsive-readout {
+  padding: 14px 16px;
+  border-top: 1px solid #e4dfef;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #4d3c68;
+}
+.lesson-six .responsive-controls {
+  padding: 20px;
+  border-top: 1px solid #e4dfef;
+  display: flex;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+}
+.lesson-six .responsive-controls .flex-choices {
+  flex: 1 1 210px;
+  margin: 0;
+}
+.lesson-six .responsive-section-title {
+  font-size: 14px;
+  margin: 0 0 12px;
+  color: #49365f;
+}
+.lesson-six .responsive-card-container {
+  container: lesson-card / inline-size;
+}
+.lesson-six .responsive-query-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  border: 1px solid #c8bbdb;
+  border-radius: 9px;
+  padding: 16px;
+  background: #fff;
+  color: #49365f;
+}
+.lesson-six .responsive-card-art {
+  background: #eee7f7;
+  border-radius: 7px;
+  min-height: 76px;
+  display: grid;
+  place-items: center;
+  color: #665080;
+  font-size: 25px;
+}
+.lesson-six .responsive-query-card h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+.lesson-six .responsive-query-card p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@container lesson-card (min-width:340px) {
+  .responsive-card-container:not(.container-fallback) .responsive-query-card {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+}
+.lesson-six .responsive-priority-container {
+  container: lesson-priority / inline-size;
+}
+.lesson-six .responsive-priority {
+  border: 1px solid #c8bbdb;
+  border-radius: 10px;
+  background: #fff;
+  padding: 16px;
+  color: #49365f;
+}
+.lesson-six .responsive-priority h3 {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+.lesson-six .responsive-priority p {
+  font-size: 13px;
+  line-height: 1.9;
+  margin: 0 0 14px;
+  overflow-wrap: anywhere;
+}
+.lesson-six .priority-actions {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  flex-wrap: wrap;
+}
+.lesson-six .responsive-priority button,
+.lesson-six .responsive-priority summary {
+  min-height: 44px;
+  padding: 10px 12px;
+  font-size: 12px;
+  border: 1px solid #b5a5ce;
+  border-radius: 6px;
+  background: white;
+  color: #49365f;
+  cursor: pointer;
+}
+.lesson-six .responsive-priority .priority-main {
+  background: #5b4bc1;
+  border-color: #5b4bc1;
+  color: #fff;
+}
+.lesson-six .priority-inline {
+  display: none;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.lesson-six .priority-details {
+  width: 100%;
+}
+.lesson-six .priority-details[open] > div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
+.lesson-six .priority-result {
+  min-height: 22px;
+  margin-top: 14px;
+  font-size: 12px;
+}
+@container lesson-priority (min-width:440px) {
+  .responsive-priority-container:not(.container-fallback) .priority-inline {
+    display: flex;
+  }
+  .responsive-priority-container:not(.container-fallback) .priority-details {
+    display: none;
+  }
+}
+.lesson-six .container-fallback .priority-inline {
+  display: flex;
+}
+.lesson-six .container-fallback .priority-details {
+  display: none;
+}
+.lesson-six .responsive-safe-scroll:focus-visible,
+.lesson-six .responsive-frame-active {
+  outline: 3px solid #7975e7;
+  outline-offset: -3px;
+}
+@media (max-width: 700px) {
+  .lesson-six .responsive-surface {
+    padding: 12px;
+  }
+  .lesson-six .responsive-controls {
+    padding: 16px;
+    gap: 18px;
+  }
+  .lesson-six .responsive-controls .flex-choices {
+    flex-basis: 100%;
+  }
+}
+
+.lesson-six .responsive-lab .panel-heading {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lesson-six .responsive-demo-frame {
+  box-sizing: content-box;
+}
