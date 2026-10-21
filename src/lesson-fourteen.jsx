@@ -213,9 +213,14 @@ function UploadBranches({ data, patch }) {
     if (parentFilled.current && note.trim()) patch({ parentVerified: true });
     setMessage("已回到空状态，父级说明保留，可编辑后重新开始。");
   };
-  const deliver = () => {
+  const deliver = (event) => {
     const item = queue[0];
     if (!item) return;
+    // The last delivery disables its own native button on this commit.
+    // Move only its current focus before that happens; never reclaim focus
+    // from another control or move it while more deliveries remain available.
+    if (queue.length === 1 && document.activeElement === event.currentTarget)
+      focusEntry();
     setQueue((q) => q.slice(1));
     item.callback();
   };
