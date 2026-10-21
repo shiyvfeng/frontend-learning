@@ -74,15 +74,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("eighth available and tenth remains unmade with unified catalog", async ({
+test("eighth available and eleventh remains unmade with unified catalog", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("毛玻璃 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(9);
-  await expect(page.locator(".site-footer")).toContainText("01–09");
-  await course(page, 9);
-  await expect(page.getByRole("heading", { name: "Mask/Clip Path" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(10);
+  await expect(page.locator(".site-footer")).toContainText("01–10");
+  await course(page, 10);
+  await expect(page.getByRole("heading", { name: "SVG" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("same real scene switches own filter and backdrop, adjusts blur and keeps external readable equivalent", async ({

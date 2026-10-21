@@ -82,15 +82,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("seventh available, tenth unmade, existing route and tags remain plans", async ({
+test("seventh available, eleventh unmade, existing route and tags remain plans", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(9);
-  await expect(page.locator(".site-footer")).toContainText("01–09");
-  await course(page, 9);
-  await expect(page.getByRole("heading", { name: "Mask/Clip Path" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(10);
+  await expect(page.locator(".site-footer")).toContainText("01–10");
+  await course(page, 10);
+  await expect(page.getByRole("heading", { name: "SVG" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({

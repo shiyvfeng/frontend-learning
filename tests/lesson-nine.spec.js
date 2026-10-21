@@ -92,7 +92,7 @@ async function pseudo(page) {
     };
   });
 }
-test("ninth available and tenth stays planned; lesson is loaded on demand", async ({
+test("ninth available and eleventh stays planned; lesson is loaded on demand", async ({
   page,
 }) => {
   const loaded = [];
@@ -107,12 +107,10 @@ test("ninth available and tenth stays planned; lesson is loaded on demand", asyn
   await expect(
     page.getByRole("heading", { name: "渐变与光晕." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(9);
-  await expect(page.locator(".site-footer")).toContainText("01–09");
-  await course(page, 9);
-  await expect(
-    page.getByRole("heading", { name: "Mask/Clip Path" }),
-  ).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(10);
+  await expect(page.locator(".site-footer")).toContainText("01–10");
+  await course(page, 10);
+  await expect(page.getByRole("heading", { name: "SVG" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("three native gradient types, angle, palette and center affect the correct CSS input", async ({
@@ -172,6 +170,13 @@ test("comparison uses a real empty pseudo-element, supports zero/off, position a
 }) => {
   await open(page);
   await step(page, 1);
+  await expect(page.locator(".task-footer li").first()).toContainText(
+    "比较右侧光晕的开关状态",
+  );
+  await page.getByLabel("显示右侧额外光晕").uncheck();
+  await expect(page.locator(".task-footer li").first()).toHaveClass("done");
+  expect((await progress(page)).overlayOnSeen).toBe(true);
+  await page.getByLabel("显示右侧额外光晕").check();
   const left = page.getByTestId("simple-poster-art"),
     right = page.getByTestId("layered-poster-art");
   expect(await left.evaluate((e) => getComputedStyle(e).backgroundImage)).toBe(
@@ -407,7 +412,7 @@ test("corrupt storage sanitizes, completion counts once, and unavailable storage
     "5 / 5",
   );
   expect((await progress(page)).done.sort()).toEqual([0, 1, 2, 3, 4]);
-  await expect(page.locator(".notice")).toContainText("下一课 10");
+  await expect(page.locator(".notice")).toContainText("可以从课程目录继续 10");
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
       throw Error("unavailable");

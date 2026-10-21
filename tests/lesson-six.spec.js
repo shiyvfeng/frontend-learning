@@ -78,16 +78,16 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("sixth available and tenth stays unmade using shared metadata", async ({
+test("sixth available and eleventh stays unmade using shared metadata", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("响应式 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(9);
-  await expect(page.locator(".site-footer")).toContainText("01–09");
-  await course(page, 9);
+  await expect(page.locator(".available-dot")).toHaveCount(10);
+  await expect(page.locator(".site-footer")).toContainText("01–10");
+  await course(page, 10);
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
-  await expect(page.getByRole("heading", { name: "Mask/Clip Path" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "SVG" })).toBeVisible();
 });
 test("real media and container queries respond to independent widths and content breakpoints", async ({
   page,

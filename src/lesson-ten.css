@@ -1,0 +1,281 @@
+.lesson-ten .mask-lab {
+  min-width: 0;
+  border: 1px solid #e4dfef;
+  border-radius: 12px;
+  background: white;
+}
+.lesson-ten .mask-lab .panel-heading {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lesson-ten .mask-warning {
+  margin: 0;
+  padding: 14px 18px;
+  background: #f4f0fa;
+  border-block: 1px solid #e3dced;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #62516f;
+}
+.lesson-ten .mask-canvas {
+  padding: 24px;
+  background: #f7f5fa;
+}
+.lesson-ten .mask-frame {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  aspect-ratio: 5/3;
+  border: 1px dashed #8f7ba4;
+  background-color: #f8f6fb;
+  background-image:
+    linear-gradient(45deg, #e5dfed 25%, transparent 25%),
+    linear-gradient(-45deg, #e5dfed 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e5dfed 75%),
+    linear-gradient(-45deg, transparent 75%, #e5dfed 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0;
+}
+.lesson-ten .mask-material {
+  position: absolute;
+  inset: 0;
+}
+.lesson-ten .mask-artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.lesson-ten .mask-reading {
+  padding: 15px 18px;
+  border-bottom: 1px solid #e4dfef;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #51415f;
+  overflow-wrap: anywhere;
+}
+.lesson-ten .mask-reading code {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px dashed #c4b5d4;
+  border-radius: 6px;
+  background: #f4f1fa;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+.lesson-ten .mask-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  padding: 20px;
+}
+.lesson-ten .mask-controls .flex-choices {
+  flex: 1 1 220px;
+  margin: 0;
+}
+.lesson-ten .mask-controls .checkbox-label {
+  flex: 1 1 100%;
+  min-height: 44px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.lesson-ten .mask-action {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #796190;
+  border-radius: 6px;
+  background: white;
+  color: #44315e;
+  font-size: 12px;
+}
+.lesson-ten .mask-action:focus-visible {
+  outline: 3px solid #5942b2;
+  outline-offset: 3px;
+}
+.lesson-ten .mask-probe-group {
+  padding: 18px;
+  scroll-margin-top: 100px;
+}
+.lesson-ten .mask-probe-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.lesson-ten .mask-probe-toolbar span {
+  font-size: 11px;
+  color: #665574;
+  line-height: 1.8;
+}
+.lesson-ten .mask-hit-board {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: 240px;
+  margin: auto;
+  isolation: isolate;
+  outline: 1px dashed #8f7ba4;
+}
+.lesson-ten .mask-hit-underlay {
+  position: absolute;
+  inset: 0;
+  background: #d9d1e7;
+  z-index: 0;
+}
+.lesson-ten .mask-hit-material {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.lesson-ten .mask-focus-probe {
+  position: absolute;
+  left: 88%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border: 2px solid #5942b2;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.lesson-ten .mask-pin {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #5942b2;
+  background: white;
+  color: #44315e;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.lesson-ten .pin-a {
+  left: 25%;
+}
+.lesson-ten .pin-b {
+  left: 88%;
+}
+.lesson-ten .mask-point-caption,
+.lesson-ten .mask-pointer-reading {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #665574;
+  margin: 14px 0;
+  overflow-wrap: anywhere;
+}
+.lesson-ten .mask-probe-group .mask-reading {
+  padding: 14px;
+  background: #f6f3fb;
+  border: 1px solid #e0d7ec;
+  border-radius: 7px;
+}
+.lesson-ten .mask-safe-card {
+  padding: 22px;
+  background: #f5f2f9;
+}
+.lesson-ten .mask-safe-card .safe-image {
+  max-width: 560px;
+}
+.lesson-ten .mask-safe-copy {
+  position: relative;
+  max-width: 560px;
+  margin: 16px auto 0;
+  padding: 20px;
+  border: 1px solid #c9bbd7;
+  border-radius: 9px;
+  background: white;
+  color: #352246;
+  overflow-wrap: anywhere;
+}
+.lesson-ten .mask-label {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #665574;
+}
+.lesson-ten .mask-safe-copy h3 {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 8px 0;
+}
+.lesson-ten .mask-safe-copy p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+}
+.lesson-ten .mask-state {
+  display: block;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 12px 0;
+}
+.lesson-ten .mask-full-details {
+  padding: 0 20px 20px;
+  font-size: 12px;
+  color: #51415f;
+  line-height: 1.9;
+}
+.lesson-ten .mask-full-details summary {
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid #d4c8e0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.lesson-ten .mask-full-art {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 5/3;
+  margin: 16px auto;
+  background: #263d5c;
+}
+.lesson-ten .mask-full-details p {
+  margin-top: 14px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .lesson-ten .mask-canvas {
+    padding: 18px 16px;
+  }
+  .lesson-ten .mask-controls {
+    padding: 16px;
+    gap: 18px;
+  }
+  .lesson-ten .mask-controls .flex-choices {
+    flex-basis: 100%;
+  }
+  .lesson-ten .mask-reading {
+    padding: 14px 16px;
+  }
+  .lesson-ten .mask-probe-group {
+    padding: 16px;
+  }
+  .lesson-ten .mask-probe-toolbar {
+    gap: 8px;
+  }
+  .lesson-ten .mask-safe-card {
+    padding: 16px;
+  }
+  .lesson-ten .mask-safe-copy {
+    padding: 16px;
+  }
+  .lesson-ten .mask-safe-copy h3 {
+    font-size: 15px;
+  }
+  .lesson-ten .mask-full-details {
+    padding: 0 16px 16px;
+  }
+}

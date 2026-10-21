@@ -460,7 +460,7 @@ export default function LessonNine({ onStorageStatus }) {
       [data.positionChanged, "移动 radial / conic 的中心"],
     ],
     [
-      [data.overlayOffSeen && data.overlayOnSeen, "关闭并重新打开右侧光晕"],
+      [data.overlayOffSeen && data.overlayOnSeen, "比较右侧光晕的开关状态"],
       [data.lightMoved, "移动额外光源"],
       [data.strengthChanged && data.glowBlurChanged, "分别比较强度与模糊"],
     ],
