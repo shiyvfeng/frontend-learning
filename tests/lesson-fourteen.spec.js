@@ -71,7 +71,7 @@ const deny = () =>
     },
   });
 
-test("fourteenth lazy module registered while eighteenth remains preview", async ({
+test("fourteenth lazy module registered while nineteenth remains preview", async ({
   page,
 }) => {
   const req = [];
@@ -82,7 +82,7 @@ test("fourteenth lazy module registered while eighteenth remains preview", async
   await directory(page);
   expect(req.some((u) => /lesson-fourteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("条件渲染 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(17);
+  await expect(page.locator(".available-dot")).toHaveCount(18);
 });
 test("all five mutually exclusive branches replace actual nodes with failure retry and upload cancel", async ({
   page,

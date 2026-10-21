@@ -153,7 +153,7 @@ test("pure transition model enumerates all state-event combinations and validate
   ).toBe("stale");
   expect(assess(blank, { type: "UNKNOWN" }).code).toBe("unknown-event");
 });
-test("sixteenth is lazy with seventeen releases and no runtime XState or Rive dependency", async ({
+test("sixteenth is lazy with eighteen releases and no runtime XState or Rive dependency", async ({
   page,
 }) => {
   const urls = [];
@@ -164,7 +164,7 @@ test("sixteenth is lazy with seventeen releases and no runtime XState or Rive de
   await directory(page);
   expect(urls.some((u) => /lesson-sixteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("State Machine · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(17);
+  await expect(page.locator(".available-dot")).toHaveCount(18);
   await expect(page.locator(".machine-lab")).toContainText("无 XState / Rive");
   await phase(page, "draft");
 });

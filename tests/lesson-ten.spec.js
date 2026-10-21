@@ -76,7 +76,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("tenth available eighteenth planned and lesson module loads on demand", async ({
+test("tenth available nineteenth planned and lesson module loads on demand", async ({
   page,
 }) => {
   const requests = [];
@@ -91,11 +91,11 @@ test("tenth available eighteenth planned and lesson module loads on demand", asy
   await expect(
     page.getByRole("heading", { name: "Mask / Clip Path." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(17);
-  await expect(page.locator(".site-footer")).toContainText("01–17");
-  await course(page, 17);
+  await expect(page.locator(".available-dot")).toHaveCount(18);
+  await expect(page.locator(".site-footer")).toContainText("01–18");
+  await course(page, 18);
   await expect(
-    page.getByRole("heading", { name: "Enter/Exit", exact: true }),
+    page.getByRole("heading", { name: "Spring", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

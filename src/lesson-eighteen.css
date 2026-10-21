@@ -1,0 +1,192 @@
+.lesson-eighteen .presence-lab {
+  min-width: 0;
+  border: 1px solid #ded9ed;
+  border-radius: 18px;
+  background: #f7f5fb;
+  padding: 22px;
+}
+.presence-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.presence-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: end;
+}
+.presence-controls > label:not(.checkbox-label) {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  color: #51495e;
+}
+.presence-controls input:not([type="checkbox"]),
+.presence-row input {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cac3db;
+  background: white;
+  color: #342c46;
+  border-radius: 8px;
+  font: inherit;
+  min-height: 44px;
+}
+.presence-lab button {
+  min-height: 44px;
+  border: 1px solid #d4cbe9;
+  background: white;
+  color: #4b3e77;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font: inherit;
+}
+.presence-lab h3 {
+  font-size: 16px;
+  margin: 0 0 14px;
+}
+.presence-lab p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #655d77;
+}
+.presence-direct,
+.presence-managed,
+.presence-state,
+.presence-explain {
+  background: #fff;
+  border: 1px solid #dfd9ec;
+  border-radius: 13px;
+  padding: 18px;
+  margin: 20px 0;
+  min-width: 0;
+}
+.presence-direct-actions,
+.presence-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.presence-direct-node {
+  border: 1px dashed #bfb5d8;
+  background: #f6f2ff;
+  padding: 14px;
+  margin-top: 14px;
+  border-radius: 10px;
+}
+.presence-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.presence-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #d7ccef;
+  background: #f4efff;
+  border-radius: 10px;
+  opacity: 1;
+  transform: none;
+  min-width: 0;
+}
+.presence-row[data-phase="exiting"] {
+  background: #fff2db;
+  border-color: #b7904e;
+}
+.presence-row[data-phase="entering"] {
+  background: #eef3ff;
+  border-color: #a5b4da;
+}
+.presence-row[inert] {
+  pointer-events: none;
+}
+.presence-number {
+  font: 600 13px monospace;
+  color: #665688;
+}
+.presence-row strong {
+  display: block;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+  margin-bottom: 8px;
+}
+.presence-row label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: #62566e;
+}
+.presence-row input {
+  font-size: 13px;
+}
+.presence-row button {
+  font-size: 12px;
+}
+.presence-state {
+  background: #eee9fb;
+}
+.presence-state ul {
+  padding-left: 20px;
+  line-height: 2;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.presence-feedback,
+.presence-fallback {
+  border: 1px solid #d7caef;
+  background: #eee8fb;
+  padding: 14px;
+  border-radius: 10px;
+}
+.presence-empty {
+  border: 1px dashed #b7abc9;
+  border-radius: 8px;
+  padding: 16px;
+}
+.presence-explain p {
+  line-height: 2;
+}
+@media (max-width: 700px) {
+  .lesson-eighteen .presence-lab {
+    padding: 14px;
+  }
+  .presence-controls {
+    grid-template-columns: 1fr;
+  }
+  .presence-direct,
+  .presence-managed,
+  .presence-state,
+  .presence-explain {
+    padding: 14px;
+  }
+  .presence-row {
+    grid-template-columns: auto minmax(0, 1fr);
+    padding: 12px;
+  }
+  .presence-row button {
+    grid-column: 1/-1;
+  }
+  .presence-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .presence-heading {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson-eighteen .presence-row {
+    animation: none !important;
+    transition: none !important;
+  }
+}

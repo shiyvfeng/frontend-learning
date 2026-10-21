@@ -96,15 +96,15 @@ async function completeFirstThree(page) {
   await page.getByRole("button", { name: "关闭锚点说明" }).click();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("fourth lesson is available, eighteenth remains unbuilt and route count stays 32", async ({
+test("fourth lesson is available, nineteenth remains unbuilt and route count stays 32", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Position与浮层 · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("17 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("18 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await course(page, 17);
-  await expect(page.getByRole("heading", { name: "Enter/Exit" })).toBeVisible();
+  await course(page, 18);
+  await expect(page.getByRole("heading", { name: "Spring" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await noOverflow(page);
 });

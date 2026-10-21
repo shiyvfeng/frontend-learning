@@ -91,7 +91,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("thirteenth Props available on demand and eighteenth remains planned", async ({
+test("thirteenth Props available on demand and nineteenth remains planned", async ({
   page,
 }) => {
   const requests = [];
@@ -103,10 +103,10 @@ test("thirteenth Props available on demand and eighteenth remains planned", asyn
   await expect(page.locator("#props-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-thirteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Props与Variant · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(17);
-  await course(page, 17);
+  await expect(page.locator(".available-dot")).toHaveCount(18);
+  await course(page, 18);
   await expect(
-    page.getByRole("heading", { name: "Enter/Exit", exact: true }),
+    page.getByRole("heading", { name: "Spring", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
