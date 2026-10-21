@@ -1,3 +1,4 @@
+import { createKeyboardNavigator } from "./keyboard-navigation.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8"),
@@ -791,42 +792,10 @@ test("complete keyboard-only state experiments retry edit refresh and cancel/con
   await page.addInitScript(denyClipboard);
   await page.goto("/");
   await expect(page.locator("#stage-heading")).toBeVisible();
-  async function seek(locator, name) {
-    await expect(locator).toBeEnabled();
-    for (let n = 0; n < 240; n++) {
-      if (await locator.evaluate((e) => e === document.activeElement)) {
-        const state = await locator.evaluate((e) => {
-          const r = e.getBoundingClientRect(),
-            hit = document.elementFromPoint(
-              r.left + r.width / 2,
-              r.top + r.height / 2,
-            );
-          return {
-            outline: getComputedStyle(e).outlineStyle,
-            visible: r.top >= 0 && r.bottom <= innerHeight + 1,
-            covered: hit !== e && !e.contains(hit),
-          };
-        });
-        expect(state.outline).not.toBe("none");
-        expect(state.visible).toBe(true);
-        expect(state.covered).toBe(false);
-        trace.push({ name, tabs: n, ...state });
-        return;
-      }
-      await page.keyboard.press("Tab");
-    }
-    throw Error("Unreachable " + name);
-  }
-  const act = async (locator, name) => {
-      await seek(locator, name);
-      await page.keyboard.press("Enter");
-      trace.push({ enter: name });
-    },
-    toggle = async (locator, name) => {
-      await seek(locator, name);
-      await page.keyboard.press("Space");
-      trace.push({ space: name });
-    };
+  const { seek, act, toggle } = createKeyboardNavigator(page, expect, trace, {
+    lesson: "lesson-twelve",
+    profile: info.project.name,
+  });
   const result = await completeFlow(page, act, toggle, async (draft) => {
     await seek(draft, "edit draft");
     await page.keyboard.press("Control+End");
