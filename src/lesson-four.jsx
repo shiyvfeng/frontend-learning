@@ -10,6 +10,7 @@ import {
   readPositionProgress,
 } from "./lesson-four-content";
 import "./lesson-four.css";
+import AnchoredPopover from "./anchored-popover";
 const add = (values, value) => [...new Set([...values, value])];
 function FlowLab({ data, patch }) {
   const boardRef = useRef(null),
@@ -441,6 +442,7 @@ function LayerLab({ data, patch }) {
         等行为，我们设置名称、初始焦点、关闭与返回焦点。show() 或单独的 open
         属性不会自动变成同样的模态窗口。菜单、工具提示等其他浮层应按各自交互类型选择实现，不能一律改成模态框。
       </Note>
+      <AnchoredPopover data={data} patch={patch} />
       <dialog
         ref={dialogRef}
         className="position-demo-dialog"
@@ -485,12 +487,14 @@ function PositionReferences() {
       <div className="roadmap-body">
         <p>
           本节涵盖正常流、relative / absolute、定位包含块、fixed /
-          sticky、层叠上下文与原生模态
-          dialog。示例使用当前浏览器原生能力；不支持 showModal()
+          sticky、层叠上下文、非模态锚点浮层与原生模态 dialog。Popover
+          能力检查失败或打开异常时回退到 Portal +
+          fixed，并保留关闭与焦点策略；不支持 showModal()
           时会提示未打开，不伪装成已具备模态行为。
         </p>
         <p>
-          请按目标浏览器核对原生 dialog 和 CSS
+          Portal 不是浏览器顶层，也不自动解决所有遮挡。请按目标浏览器核对原生
+          popover、dialog 和 CSS
           定位支持，验证滚动祖先、长文本、窄屏、焦点与关闭。定位只处理一部分视觉关系；浮层语义和交互责任要单独验收。Anchor
           Positioning 等能力留待具体需求评估，本课不依赖它来运行。
         </p>
@@ -562,8 +566,13 @@ export default function LessonFour({ onStorageStatus }) {
       [data.childRaised, "把子元素提高到 999"],
       [data.parentRaised, "把父上下文 A 提高到 3"],
       [
-        data.dialogOpened && data.dialogEscapeClosed && data.dialogButtonClosed,
-        "打开真实对话框，分别用 Esc 与关闭按钮退出",
+        data.anchorOpened && data.anchorClosed,
+        "打开锚点说明，用按钮、外点或 Esc 收起",
+      ],
+      [
+        data.dialogOpened &&
+          (data.dialogEscapeClosed || data.dialogButtonClosed),
+        "打开真实对话框，用关闭按钮或 Esc 退出",
       ],
     ],
     positionQuestions.map((q, i) => [
@@ -609,7 +618,7 @@ export default function LessonFour({ onStorageStatus }) {
         : data.brief === "sticky"
           ? "实现局部滚动面板内的吸顶栏：明确哪一个祖先滚动，使用 sticky 并设置 top: 0；在所属区段结束时随区段离开。检查祖先 overflow、包含块边界和是否有足够滚动空间。"
           : "实现有可访问名称的原生模态 dialog，使用 showModal()；明确初始焦点、窗口内 Tab 路径、Esc 与可见关闭按钮，以及关闭后的焦点返回。重复打开不创建多个窗口，关闭后背景恢复可操作。";
-    const draft = `请在现有项目中${scenario}\n\n先确认布局与交互约束：定位包含块不一定是直接父节点；transform 等祖先属性可能改变 absolute / fixed 的参照。relative 偏移保留原占位，absolute / fixed 脱离正常流。不要用大量绝对坐标拼普通内容布局。\n\n层级与浮层：检查祖先层叠上下文，不能只提高子元素的 z-index。定位框不自动提供浮层语义与键盘行为；本需求若使用模态框，保留 dialog 的真实模态行为，不用一个高 z-index 的 div 冒充。对于其他类型的浮层先说明交互模式再选择实现。\n\n验收：\n1. 在 375px 手机、1440px 桌面及较窄父容器检查，正文和操作不被遮挡，无页面横向溢出；说明偏移参照与滚动归属。\n2. 切换内容长度、滚动到顶部 / 中部 / 区段末尾，核对 sticky 与 fixed 的实际差异，不把所有固定效果都当成视口 fixed。\n3. 若有浮层，用键盘打开、Tab / Shift+Tab、Esc / 关闭按钮完成流程；验证焦点回到合理触发点、背景交互正确恢复，不形成无法退出的挡板。\n${data.includeEdges ? "4. 重复打开关闭至少 3 次；测试长标题和长描述，必要时窗口内容可滚动，关闭按钮始终可到达。异常打开要给真实提示并允许重试。" : "4. 保留清晰的键盘焦点、可访问名称和可到达的关闭入口。"}\n5. 用 DevTools 核对包含块、计算位置与层叠上下文，说明目标浏览器支持和不支持时的可用降级。不为简单定位额外引入动画库；尊重减少动态效果的偏好。\n\n请先说明参照、结构和焦点方案，再实现并按以上标准自测。截图只提供视觉线索，不能证明真实技术。`;
+    const draft = `请在现有项目中${scenario}\n\n先确认布局与交互约束：定位包含块不一定是直接父节点；transform 等祖先属性可能改变 absolute / fixed 的参照。relative 偏移保留原占位，absolute / fixed 脱离正常流。不要用大量绝对坐标拼普通内容布局。\n\n层级与浮层：检查祖先层叠上下文，不能只提高子元素的 z-index。Portal 只改变 DOM 挂载位置，不保证免于所有层叠与遮挡。非模态锚点浮层需明确锚点、上下避让 / 横向回推、滚动时更新或收起、Esc 与触屏关闭入口、外点策略和焦点返回；点其他控件时保留用户的后续操作。定位框不自动提供浮层语义与键盘行为；本需求若使用模态框，保留 dialog 的真实模态行为，不用一个高 z-index 的 div 冒充。对于其他类型的浮层先说明交互模式再选择实现。\n\n验收：\n1. 在 375px 手机、1440px 桌面及较窄父容器检查，正文和操作不被遮挡，无页面横向溢出；说明偏移参照与滚动归属。\n2. 切换内容长度、滚动到顶部 / 中部 / 区段末尾，核对 sticky 与 fixed 的实际差异，不把所有固定效果都当成视口 fixed。\n3. 若有浮层，用键盘打开、Tab / Shift+Tab、Esc（有键盘时）或触屏关闭按钮完成流程；验证焦点回到合理触发点、背景交互正确恢复，不形成无法退出的挡板。\n${data.includeEdges ? "4. 重复打开关闭至少 3 次；测试长标题和长描述，必要时窗口内容可滚动，关闭按钮始终可到达。异常打开要给真实提示并允许重试。" : "4. 保留清晰的键盘焦点、可访问名称和可到达的关闭入口。"}\n5. 用 DevTools 核对包含块、计算位置与层叠上下文，说明目标浏览器支持和不支持时的可用降级。不为简单定位额外引入动画库；尊重减少动态效果的偏好。\n\n请先说明参照、结构和焦点方案，再实现并按以上标准自测。截图只提供视觉线索，不能证明真实技术。`;
     patch({ draft, generated: true, reviewed: false });
     setCopyMessage("");
   };

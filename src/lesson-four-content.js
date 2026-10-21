@@ -16,7 +16,7 @@ export const positionSteps = [
     short: "层与浮层",
     title: "数字很大，也未必在最上面",
     time: "4 分钟",
-    desc: "把子元素的 z-index 调到 999，再提高它所属的层叠上下文。最后打开真实模态对话框，体验关闭与焦点返回。",
+    desc: "把子元素的 z-index 调到 999，再提高它所属的层叠上下文。再对比有边缘避让的非模态锚点浮层与真实模态对话框，体验关闭与焦点返回。",
   },
   {
     short: "做出判断",
@@ -59,6 +59,22 @@ export const positionQuestions = [
 ];
 export const positionSources = [
   [
+    "React：Portal 的职责",
+    "https://react.dev/reference/react-dom/createPortal",
+  ],
+  [
+    "MDN：Popover 与非模态",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using",
+  ],
+  [
+    "MDN：浏览器顶层",
+    "https://developer.mozilla.org/en-US/docs/Glossary/Top_layer",
+  ],
+  [
+    "MDN：锚点矩形测量",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect",
+  ],
+  [
     "MDN：position 与 sticky",
     "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position",
   ],
@@ -97,6 +113,10 @@ export const positionInitial = () => ({
   dialogOpened: false,
   dialogButtonClosed: false,
   dialogEscapeClosed: false,
+  anchorOpened: false,
+  anchorClosed: false,
+  anchorEdge: "top",
+  anchorFallback: false,
   answers: [null, null, null],
   draft: "",
   generated: false,
@@ -118,6 +138,7 @@ export function readPositionProgress() {
       childZ: [1, 999],
       parentZ: [1, 3],
       brief: ["badge", "sticky", "dialog"],
+      anchorEdge: ["top", "bottom-right"],
     }))
       if (values.includes(x[k])) b[k] = x[k];
     for (const [k, values] of Object.entries({
@@ -135,6 +156,9 @@ export function readPositionProgress() {
       "dialogOpened",
       "dialogButtonClosed",
       "dialogEscapeClosed",
+      "anchorOpened",
+      "anchorClosed",
+      "anchorFallback",
       "generated",
       "reviewed",
     ])

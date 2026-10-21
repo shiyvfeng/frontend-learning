@@ -292,3 +292,126 @@
   border-color: #4b386e;
   color: #fff;
 }
+
+.lesson-four .anchor-experiment {
+  border: 1px solid var(--line, #ded9e8);
+  border-radius: 12px;
+  margin-top: 24px;
+  background: #fff;
+}
+.lesson-four .anchor-lab-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 22px;
+  padding: 20px;
+}
+.lesson-four .anchor-demo-board {
+  position: relative;
+  height: 340px;
+  min-width: 0;
+  border: 1px dashed #b3a2cc;
+  border-radius: 9px;
+  background: #f6f3fa;
+}
+.lesson-four .anchor-board-caption {
+  display: block;
+  padding: 14px;
+  color: #665b7c;
+  font-size: 10px;
+}
+.lesson-four .anchor-trigger {
+  position: absolute;
+  padding: 9px 12px;
+  border: 1px solid #b3a2cc;
+  border-radius: 7px;
+  background: #fff;
+  color: #49365f;
+  font-size: 12px;
+}
+.lesson-four .anchor-top {
+  top: 55px;
+  left: 16px;
+}
+.lesson-four .anchor-bottom-right {
+  bottom: 16px;
+  right: 16px;
+}
+.lesson-four .anchor-controls {
+  min-width: 0;
+}
+.lesson-four .anchor-controls .checkbox-label {
+  font-size: 12px;
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  line-height: 1.8;
+}
+.lesson-four .position-background-action {
+  margin-top: 15px;
+  padding: 9px 12px;
+  border: 1px solid #b3a2cc;
+  border-radius: 7px;
+  background: #f6f3fa;
+  color: #49365f;
+  font-size: 12px;
+}
+.lesson-four .anchor-status {
+  min-height: 42px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #49365f;
+  margin-top: 12px;
+}
+.position-anchor-popup {
+  box-sizing: border-box;
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  z-index: 100;
+  padding: 15px;
+  border: 1px solid #b3a2cc;
+  border-radius: 10px;
+  background: #fff;
+  color: #3d2f4e;
+  font-family: inherit;
+  box-shadow: 0 10px 30px #30204226;
+  overflow: auto;
+}
+.position-anchor-popup[hidden] {
+  display: none !important;
+}
+.position-anchor-popup .eyebrow {
+  font-size: 8px;
+  color: #665b7c;
+}
+.position-anchor-popup h4 {
+  font-size: 15px;
+  margin: 8px 0;
+}
+.position-anchor-popup p {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+.position-anchor-popup button {
+  font: inherit;
+  font-size: 12px;
+  padding: 8px 11px;
+  background: #4b386e;
+  color: white;
+  border: 1px solid #4b386e;
+  border-radius: 6px;
+  cursor: pointer;
+}
+@media (max-width: 700px) {
+  .lesson-four .anchor-lab-grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 15px;
+    gap: 18px;
+  }
+  .lesson-four .anchor-experiment .panel-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

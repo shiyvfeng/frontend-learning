@@ -92,6 +92,8 @@ async function completeFirstThree(page) {
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "打开原生模态对话框" }).click();
   await page.getByRole("button", { name: "关闭并返回" }).click();
+  await page.getByRole("button", { name: "ⓘ 锚点说明" }).click();
+  await page.getByRole("button", { name: "关闭锚点说明" }).click();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
 test("fourth lesson is available, fifth remains unbuilt and route count stays 32", async ({
@@ -512,6 +514,13 @@ test("full keyboard-only experiment, retry, native overlay and reset flow", asyn
     "button close modal",
   );
   await expect(trigger).toBeFocused();
+  const anchor = page.getByRole("button", { name: "ⓘ 锚点说明" });
+  await activate(anchor, "open anchored nonmodal");
+  await expect(
+    page.getByRole("button", { name: "关闭锚点说明" }),
+  ).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(anchor).toBeFocused();
   await activate(
     page.getByRole("button", { name: "完成并继续" }),
     "finish layers",
@@ -585,4 +594,319 @@ test("full keyboard-only experiment, retry, native overlay and reset flow", asyn
       2,
     ),
   );
+});
+
+async function anchorBounds(page) {
+  const result = await page.locator("#position-anchor-popup").evaluate((el) => {
+    const p = el.getBoundingClientRect(),
+      a = document.querySelector(".anchor-trigger").getBoundingClientRect(),
+      b = document
+        .querySelector('[data-testid="anchor-board"]')
+        .getBoundingClientRect();
+    return {
+      left: p.left,
+      right: p.right,
+      top: p.top,
+      bottom: p.bottom,
+      width: p.width,
+      height: p.height,
+      bounds: {
+        left: Math.max(8, b.left + 8),
+        right: Math.min(innerWidth - 8, b.right - 8),
+        top: Math.max(8, b.top + 8),
+        bottom: Math.min(innerHeight - 8, b.bottom - 8),
+      },
+      anchor: { top: a.top, bottom: a.bottom },
+      side: el.dataset.placement,
+      native: el.matches(":popover-open"),
+      parent: el.parentElement.tagName,
+    };
+  });
+  expect(result.width).toBeGreaterThan(100);
+  expect(result.height).toBeGreaterThan(100);
+  expect(result.left).toBeGreaterThanOrEqual(result.bounds.left - 1);
+  expect(result.right).toBeLessThanOrEqual(result.bounds.right + 1);
+  expect(result.top).toBeGreaterThanOrEqual(result.bounds.top - 1);
+  expect(result.bottom).toBeLessThanOrEqual(result.bounds.bottom + 1);
+  expect(result.parent).toBe("BODY");
+  if (result.side === "below")
+    expect(result.top).toBeGreaterThanOrEqual(result.anchor.bottom + 7);
+  else expect(result.bottom).toBeLessThanOrEqual(result.anchor.top - 7);
+  return result;
+}
+test("anchored nonmodal flips/shifts, preserves outside actions, returns focus and never traps Tab", async ({
+  page,
+}) => {
+  await open(page);
+  await step(page, 2);
+  const trigger = page.getByRole("button", { name: "ⓘ 锚点说明" }),
+    popup = page.locator("#position-anchor-popup"),
+    close = page.getByRole("button", { name: "关闭锚点说明" });
+  for (const fallback of [false, true]) {
+    await page
+      .getByLabel("模拟不支持 Popover，检查兼容回退")
+      .setChecked(fallback);
+    await choose(page, "锚点的位置", "上方");
+    await trigger.click();
+    await expect(popup).toBeVisible();
+    await expect(close).toBeFocused();
+    expect((await anchorBounds(page)).native).toBe(!fallback);
+    await expect(popup).toHaveAttribute("aria-modal", "false");
+    await expect(popup).toHaveAttribute("data-placement", "below");
+    await axeCheck(page);
+    await page.keyboard.press("Tab");
+    expect(
+      await popup.evaluate((el) => el.contains(document.activeElement)),
+    ).toBe(false);
+    await page.keyboard.press("Escape");
+    await expect(trigger).toBeFocused();
+    await choose(page, "锚点的位置", "右下边缘");
+    for (let i = 0; i < 3; i++) {
+      await trigger.click();
+      await expect(popup).toBeVisible();
+      await expect(popup).toHaveAttribute("data-placement", "above");
+      await expect(popup).toHaveAttribute("data-shifted", "true");
+      await anchorBounds(page);
+      if (i === 0) {
+        const viewport = page.viewportSize();
+        await page.setViewportSize({
+          ...viewport,
+          height: viewport.height - 100,
+        });
+        await anchorBounds(page);
+        await page.setViewportSize(viewport);
+        await anchorBounds(page);
+      }
+      await close.click();
+      await expect(trigger).toBeFocused();
+      await expect(popup).not.toBeVisible();
+    }
+    await trigger.click();
+    const background = page.getByRole("button", { name: /背景计数/ });
+    await background.click();
+    await expect(background).toContainText(fallback ? "2" : "1");
+    await expect(popup).not.toBeVisible();
+    await expect(background).toBeFocused();
+    await trigger.click();
+    await page
+      .getByTestId("anchor-board")
+      .click({ position: { x: 12, y: 12 } });
+    await expect(popup).not.toBeVisible();
+    await expect(trigger).toBeFocused();
+    await trigger.click();
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(popup).not.toBeVisible();
+    await noOverflow(page);
+  }
+});
+test("missing and throwing Popover APIs both open a usable compatible nonmodal", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    HTMLElement.prototype.showPopover = undefined;
+  });
+  await open(page);
+  await step(page, 2);
+  const trigger = page.getByRole("button", { name: "ⓘ 锚点说明" }),
+    popup = page.locator("#position-anchor-popup");
+  await trigger.click();
+  await expect(popup).toBeVisible();
+  await expect(popup).toHaveAttribute("data-native", "false");
+  await anchorBounds(page);
+  await page.getByRole("button", { name: "关闭锚点说明" }).click();
+  await expect(trigger).toBeFocused();
+  await page.evaluate(() => {
+    HTMLElement.prototype.showPopover = () => {
+      throw Error("simulated API failure");
+    };
+  });
+  await step(page, 0);
+  await step(page, 2);
+  await trigger.click();
+  await expect(popup).toBeVisible();
+  await expect(popup).toHaveAttribute("data-native", "false");
+  await expect(
+    page.getByLabel("模拟不支持 Popover，检查兼容回退"),
+  ).toBeChecked();
+  await anchorBounds(page);
+  await axeCheck(page);
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+});
+test("touch-only complete lesson, quiz retry, persisted progress and reset need no hardware keyboard", async ({
+  browser,
+}, info) => {
+  test.setTimeout(60000);
+  const context = await browser.newContext({
+    viewport: { width: 375, height: 812 },
+    isMobile: true,
+    hasTouch: true,
+    baseURL: "http://127.0.0.1:4173",
+  });
+  const page = await context.newPage(),
+    trace = [];
+  // Every action is a real touch tap; record and reject any emitted key events.
+  await page.addInitScript(() => {
+    window.lessonKeyEvents = [];
+    for (const type of ["keydown", "keyup"])
+      window.addEventListener(type, (e) => window.lessonKeyEvents.push(e.key));
+  });
+  async function tap(locator, name, options) {
+    await locator.tap(options);
+    trace.push(name);
+  }
+  async function directory(n) {
+    await tap(page.getByRole("button", { name: "☰ 课程" }), "directory");
+    await tap(
+      page
+        .getByRole("navigation", { name: "课程目录" })
+        .getByRole("button")
+        .nth(n),
+      "course " + (n + 1),
+    );
+  }
+  async function pick(label, value) {
+    await tap(
+      page
+        .getByRole("group", { name: label, exact: true })
+        .getByRole("button", { name: value, exact: true }),
+      label + ": " + value,
+    );
+  }
+  const next = () =>
+    tap(page.getByRole("button", { name: "完成并继续" }), "next");
+  await page.goto("/");
+  await directory(1);
+  await directory(2);
+  const before = await page.evaluate(
+    (keys) => keys.map((k) => localStorage.getItem(k)),
+    priorKeys,
+  );
+  await directory(3);
+  await pick("角标的 position", "relative · 留住位置");
+  await pick("角标的 position", "absolute · 脱离流");
+  await pick("偏移距离", "24px");
+  await pick("absolute 的定位参照", "卡片 static → 画布");
+  await next();
+  for (const mode of ["sticky · 区段内吸顶", "fixed · 实验视口固定"]) {
+    await pick("标题栏的定位方式", mode);
+    await tap(
+      page.getByRole("button", { name: "680px · 区段之后" }),
+      "scroll experiment",
+    );
+  }
+  await next();
+  await pick("A 内子元素的 z-index", "999");
+  await pick("父上下文 A 的 z-index", "3 · 高于 B");
+  for (let i = 0; i < 3; i++) {
+    await tap(
+      page.getByRole("button", { name: "打开原生模态对话框" }),
+      "open modal",
+    );
+    await tap(
+      page.getByRole("button", { name: "关闭并返回" }),
+      "touch close modal",
+    );
+    await expect(
+      page.getByRole("button", { name: "打开原生模态对话框" }),
+    ).toBeFocused();
+  }
+  await pick("锚点的位置", "右下边缘");
+  for (let i = 0; i < 3; i++) {
+    await tap(
+      page.getByRole("button", { name: "ⓘ 锚点说明" }),
+      "open anchored",
+    );
+    await anchorBounds(page);
+    await tap(
+      page.getByRole("button", { name: "关闭锚点说明" }),
+      "touch close anchored",
+    );
+    await expect(
+      page.getByRole("button", { name: "ⓘ 锚点说明" }),
+    ).toBeFocused();
+  }
+  await tap(
+    page.getByRole("button", { name: "ⓘ 锚点说明" }),
+    "touch outside open",
+  );
+  await tap(page.getByTestId("anchor-board"), "touch outside blank", {
+    position: { x: 12, y: 12 },
+  });
+  await expect(page.locator("#position-anchor-popup")).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "ⓘ 锚点说明" })).toBeFocused();
+  await next();
+  const cards = page.locator(".quiz-card");
+  await tap(cards.nth(0).getByRole("button").nth(1), "wrong");
+  await expect(cards.nth(0).getByRole("status")).toContainText("再想一想");
+  for (const [i, v] of [0, 1, 1].entries())
+    await tap(cards.nth(i).getByRole("button").nth(v), "retry/correct " + i);
+  await next();
+  await tap(page.getByRole("button", { name: "生成定位指令" }), "generate");
+  const draft = page.getByLabel("可编辑的 Position Agent 指令");
+  await expect(draft).toHaveValue(/锚点.*滚动.*触屏.*外点/s);
+  await tap(
+    page.getByLabel("我已检查定位参照、关闭路径、焦点和验收方式。"),
+    "review",
+  );
+  await tap(page.getByRole("button", { name: "完成第四节" }), "finish");
+  await expect(page.locator(".lesson-four .lesson-bottom")).toContainText(
+    "5 / 5",
+  );
+  const completed = await page.evaluate(
+    (k) => JSON.parse(localStorage.getItem(k)),
+    key,
+  );
+  expect(completed.dialogEscapeClosed).toBe(false);
+  expect(completed.dialogButtonClosed).toBe(true);
+  expect(completed.done.sort()).toEqual([0, 1, 2, 3, 4]);
+  expect(await page.evaluate(() => window.lessonKeyEvents)).toEqual([]);
+  await page.reload();
+  await directory(3);
+  await expect(page.locator(".lesson-four .lesson-bottom")).toContainText(
+    "5 / 5",
+  );
+  await tap(page.getByRole("button", { name: "重置第四节进度" }), "open reset");
+  await tap(
+    page.getByRole("button", { name: "确认重置第四节" }),
+    "confirm reset",
+  );
+  await expect(page.locator(".lesson-four .lesson-bottom")).toContainText(
+    "0 / 5",
+  );
+  const reset = await page.evaluate(
+    (k) => JSON.parse(localStorage.getItem(k)),
+    key,
+  );
+  expect(reset.dialogEscapeClosed).toBe(false);
+  expect(reset.dialogButtonClosed).toBe(false);
+  expect(reset.anchorOpened).toBe(false);
+  expect(reset.anchorClosed).toBe(false);
+  expect(reset.done).toEqual([]);
+  expect(
+    await page.evaluate(
+      (keys) => keys.map((k) => localStorage.getItem(k)),
+      priorKeys,
+    ),
+  ).toEqual(before);
+  expect(await page.evaluate(() => window.lessonKeyEvents)).toEqual([]);
+  await axeCheck(page);
+  await noOverflow(page);
+  mkdirSync("/tmp/position-acceptance", { recursive: true });
+  writeFileSync(
+    `/tmp/position-acceptance/touch-${info.project.name}.json`,
+    JSON.stringify(
+      {
+        passed: true,
+        keyEvents: [],
+        completed,
+        reset,
+        priorStoresUnchanged: true,
+        trace,
+      },
+      null,
+      2,
+    ),
+  );
+  await context.close();
 });
