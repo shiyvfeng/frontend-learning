@@ -6,6 +6,7 @@ import { Icon, Roadmap } from "./shared";
 import LessonTwo from "./lesson-two";
 import LessonThree from "./lesson-three";
 import LessonFour from "./lesson-four";
+import LessonFive from "./lesson-five";
 
 const STORAGE = "frontend-observatory.lesson1.v1";
 const initial = () => ({
@@ -605,7 +606,7 @@ function App() {
             说清实现。
           </div>
           <div className="nav-caption">
-            学习路线 <span>04 / {lessons.length}</span>
+            学习路线 <span>05 / {lessons.length}</span>
           </div>
           <nav aria-label="课程目录">
             {lessons.map((l, i) => (
@@ -624,9 +625,9 @@ function App() {
                 </span>
                 <span>
                   <strong>{l[0]}</strong>
-                  <small>{i < 4 ? l[1] : "尚未制作"}</small>
+                  <small>{i < 5 ? l[1] : "尚未制作"}</small>
                 </span>
-                {i < 4 ? (
+                {i < 5 ? (
                   <span className="available-dot" aria-label="可学习" />
                 ) : (
                   <Icon type="lock" size={13} />
@@ -1060,6 +1061,8 @@ function App() {
               <LessonThree onStorageStatus={setStorageMessage} />
             ) : course === 3 ? (
               <LessonFour onStorageStatus={setStorageMessage} />
+            ) : course === 4 ? (
+              <LessonFive onStorageStatus={setStorageMessage} />
             ) : (
               <section className="coming-soon">
                 <span className="pill">

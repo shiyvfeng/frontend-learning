@@ -1,0 +1,216 @@
+.lesson-five .sizing-workbench {
+  padding: 18px;
+  background: #faf9fd;
+  min-width: 0;
+}
+.lesson-five .sizing-fault-label {
+  color: #735b23;
+  background: #fff7e5;
+  border: 1px solid #e5d4a8;
+  padding: 10px 12px;
+  border-radius: 7px;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0 0 14px;
+}
+.lesson-five .sizing-safe-scroll {
+  overflow: auto;
+  max-width: 100%;
+  padding: 3px 3px 14px;
+}
+.lesson-five .sizing-frame {
+  max-width: 100%;
+  border: 2px dashed #b4a4ce;
+  background: #eee9f6;
+  padding: 0;
+  margin: 0 auto;
+}
+.lesson-five .sizing-card {
+  margin: 0;
+  border: 2px solid #7c649b;
+  background: #fff;
+  color: #49365f;
+  min-height: 138px;
+}
+.lesson-five .sizing-card h3 {
+  font-size: 17px;
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+}
+.lesson-five .sizing-card p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.lesson-five .sizing-reading {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  border-top: 1px solid #e7e2ee;
+  padding: 16px;
+  font-size: 10px;
+  color: #665b7c;
+  line-height: 1.8;
+}
+.lesson-five .sizing-reading b {
+  display: block;
+  font-size: 17px;
+  color: #49365f;
+}
+.lesson-five .sizing-text-row {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  min-height: 122px;
+  background: #fff;
+}
+.lesson-five .sizing-avatar {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  background: #eae3f5;
+  border-radius: 10px;
+  color: #5d467e;
+  font-size: 15px;
+}
+.lesson-five .sizing-text-main {
+  flex: 1 1 0%;
+  background: #f5f2f9;
+  padding: 10px;
+}
+.lesson-five .sizing-text-title {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.lesson-five .sizing-text-caption {
+  margin: 8px 0 0;
+  font-size: 10px;
+  color: #665b7c;
+}
+.lesson-five .policy-scroll {
+  overflow: auto;
+}
+.lesson-five .policy-clip {
+  overflow: clip;
+}
+.lesson-five .policy-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lesson-five .policy-wrap {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.lesson-five .sizing-full-access {
+  padding: 16px;
+  border-top: 1px solid #e7e2ee;
+}
+.lesson-five .sizing-full-access button {
+  border: 1px solid #b3a2cc;
+  background: #fff;
+  color: #49365f;
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.lesson-five .sizing-full-title {
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  margin: 14px 0 0;
+}
+.lesson-five .sizing-scroll-frame {
+  display: block;
+  border: 0;
+  width: 100%;
+  height: 350px;
+  background: #fff;
+}
+.lesson-five .sizing-scroll-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+}
+.lesson-five .sizing-scroll-actions button {
+  padding: 9px 12px;
+  border: 1px solid #b3a2cc;
+  border-radius: 6px;
+  color: #49365f;
+  background: #f6f3fa;
+  font-size: 12px;
+}
+.lesson-five .sizing-scroll-actions button:disabled {
+  opacity: 0.55;
+}
+.lesson-five .sizing-lab-caption {
+  margin: 0;
+  padding: 12px 18px;
+  color: #665b7c;
+  background: #f6f3fa;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.lesson-five .sizing-count {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.lesson-five .sizing-count button {
+  background: #fff;
+  border: 1px solid #b3a2cc;
+  color: #49365f;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+.lesson-five .sizing-count output {
+  font-size: 13px;
+  color: #49365f;
+}
+@media (max-width: 700px) {
+  .lesson-five .sizing-workbench {
+    padding: 14px;
+  }
+  .lesson-five .sizing-reading {
+    gap: 8px;
+    padding: 14px;
+    font-size: 9px;
+  }
+  .lesson-five .sizing-reading b {
+    font-size: 14px;
+  }
+  .lesson-five .sizing-text-row {
+    padding: 10px;
+    gap: 8px;
+  }
+  .lesson-five .sizing-avatar {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+  .lesson-five .sizing-card h3 {
+    font-size: 16px;
+  }
+  .lesson-five .sizing-scroll-actions {
+    padding: 12px;
+  }
+  .lesson-five .sizing-scroll-actions button {
+    font-size: 11px;
+  }
+}
+
+.lesson-five .sizing-safe-scroll:focus-visible,
+.lesson-five .sizing-text-title:focus-visible,
+.lesson-five .sizing-scroll-frame:focus,
+.lesson-five .sizing-frame-active {
+  outline: 3px solid #7975e7;
+  outline-offset: -3px;
+}

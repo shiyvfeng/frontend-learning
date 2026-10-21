@@ -76,7 +76,7 @@ async function completeExperiments(page) {
   await page.getByLabel("允许 B 继续变窄并换行").check();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("directory keeps Flex and future Sizing while axes and gap change real layout", async ({
+test("directory keeps Flex and future responsive lesson while axes and gap change real layout", async ({
   page,
 }) => {
   const errors = [];
@@ -102,10 +102,8 @@ test("directory keeps Flex and future Sizing while axes and gap change real layo
   await choose(page, "观察例子", "图标与内容卡片");
   await expect(demo.getByText("一页灵感")).toBeVisible();
   await noOverflow(page);
-  await course(page, 4);
-  await expect(
-    page.getByRole("heading", { name: "Sizing与Overflow" }),
-  ).toBeVisible();
+  await course(page, 5);
+  await expect(page.getByRole("heading", { name: "响应式" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await expect(page.locator(".course-link")).toHaveCount(32);
   expect(errors).toEqual([]);

@@ -79,7 +79,7 @@ async function completeExperiments(page) {
   await page.getByRole("button", { name: "新增卡片", exact: false }).click();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("third lesson is Grid, complete route is present, fifth remains unbuilt", async ({
+test("third lesson is Grid, complete route is present, sixth remains unbuilt", async ({
   page,
 }) => {
   const errors = [];
@@ -87,11 +87,9 @@ test("third lesson is Grid, complete route is present, fifth remains unbuilt", a
   await open(page);
   await expect(page).toHaveTitle("Grid——二维布局 · 前端观察室");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await expect(page.locator(".nav-caption")).toContainText("04 / 32");
-  await course(page, 4);
-  await expect(
-    page.getByRole("heading", { name: "Sizing与Overflow" }),
-  ).toBeVisible();
+  await expect(page.locator(".nav-caption")).toContainText("05 / 32");
+  await course(page, 5);
+  await expect(page.getByRole("heading", { name: "响应式" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await expect(page.locator("#grid-stage-heading")).toHaveCount(0);
   await course(page, 31);
