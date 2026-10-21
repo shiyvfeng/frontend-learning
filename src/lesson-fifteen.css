@@ -1,0 +1,218 @@
+.feedback-lab {
+  margin: 24px 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #f6f7fa;
+  padding: 20px;
+}
+.feedback-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.feedback-controls label,
+.feedback-memory label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  color: #424452;
+}
+.feedback-controls input,
+.feedback-memory input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #888b9d;
+  border-radius: 8px;
+  padding: 10px;
+  background: white;
+  color: #242536;
+}
+.feedback-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.feedback-panel {
+  min-width: 0;
+  padding: 20px;
+  background: white;
+  border: 1px solid #d9dce6;
+  border-radius: 12px;
+}
+.feedback-panel h3 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.feedback-panel p {
+  color: #535665;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.feedback-panel code {
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #555466;
+}
+.feedback-memory {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+.feedback-lab button {
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+}
+.feedback-panel section button {
+  margin: 6px 12px 6px 0;
+}
+.lesson-fifteen [role="status"] {
+  line-height: 1.8;
+  color: #47415b;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .feedback-lab {
+    padding: 14px;
+  }
+  .feedback-columns {
+    grid-template-columns: 1fr;
+  }
+  .feedback-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .feedback-panel {
+    padding: 16px;
+  }
+}
+.lesson-fifteen :is(button, input, textarea):focus {
+  outline: 3px solid #5c4ac8;
+  outline-offset: 3px;
+}
+.lesson-fifteen button[aria-disabled="true"] {
+  opacity: 0.65;
+  cursor: default;
+}
+@media (forced-colors: active) {
+  .lesson-fifteen :is(button, input, textarea):focus {
+    outline-color: Highlight;
+  }
+}
+
+.feedback-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.feedback-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.feedback-cards article,
+.feedback-skeleton {
+  border: 1px solid #d9dce6;
+  border-radius: 10px;
+  padding: 16px;
+  min-height: 160px;
+}
+.feedback-cards h4,
+.feedback-item h4 {
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+.feedback-skeleton i {
+  display: block;
+  border-radius: 6px;
+  background: #dfe1ec;
+  height: 18px;
+  margin: 12px 0;
+}
+.feedback-skeleton i:first-child {
+  height: 40px;
+}
+.feedback-skeleton i:last-child {
+  width: 70%;
+}
+.feedback-wait {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  min-height: 160px;
+}
+.feedback-spinner {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 4px solid #d9dce6;
+  border-top-color: #5b4bc1;
+  border-radius: 50%;
+}
+.motion .feedback-spinner {
+  animation: feedback-spin 1.5s linear infinite;
+}
+.motion .feedback-skeleton {
+  animation: feedback-pulse 2.2s ease-in-out infinite;
+}
+.feedback-panel progress {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+}
+.feedback-favorite {
+  font-weight: 700;
+  font-size: 21px;
+}
+.feedback-item {
+  border-top: 1px solid #d9dce6;
+  padding: 16px 0;
+}
+.feedback-item:last-child {
+  padding-bottom: 0;
+}
+.feedback-controls input {
+  max-width: 100%;
+}
+.feedback-controls .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.feedback-controls .checkbox-label input {
+  width: 20px;
+  min-height: 24px;
+}
+@keyframes feedback-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes feedback-pulse {
+  50% {
+    opacity: 0.6;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion .feedback-spinner,
+  .motion .feedback-skeleton {
+    animation: none;
+  }
+}
+@media (max-width: 700px) {
+  .feedback-columns,
+  .feedback-cards {
+    grid-template-columns: 1fr;
+  }
+  .feedback-cards article,
+  .feedback-skeleton {
+    min-height: 130px;
+  }
+}

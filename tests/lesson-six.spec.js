@@ -78,17 +78,17 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("sixth available and fifteenth stays unmade using shared metadata", async ({
+test("sixth available and sixteenth stays unmade using shared metadata", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("响应式 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(14);
-  await expect(page.locator(".site-footer")).toContainText("01–14");
-  await course(page, 14);
+  await expect(page.locator(".available-dot")).toHaveCount(15);
+  await expect(page.locator(".site-footer")).toContainText("01–15");
+  await course(page, 15);
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await expect(
-    page.getByRole("heading", { name: "Loading/Skeleton/Optimistic UI" }),
+    page.getByRole("heading", { name: "State Machine" }),
   ).toBeVisible();
 });
 test("real media and container queries respond to independent widths and content breakpoints", async ({

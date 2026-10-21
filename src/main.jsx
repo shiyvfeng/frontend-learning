@@ -23,6 +23,7 @@ const LessonEleven = React.lazy(() => import("./lesson-eleven"));
 const LessonTwelve = React.lazy(() => import("./lesson-twelve"));
 const LessonThirteen = React.lazy(() => import("./lesson-thirteen"));
 const LessonFourteen = React.lazy(() => import("./lesson-fourteen"));
+const LessonFifteen = React.lazy(() => import("./lesson-fifteen"));
 const lessonViews = {
   flex: LessonTwo,
   grid: LessonThree,
@@ -37,6 +38,7 @@ const lessonViews = {
   state: LessonTwelve,
   props: LessonThirteen,
   conditional: LessonFourteen,
+  feedback: LessonFifteen,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";
