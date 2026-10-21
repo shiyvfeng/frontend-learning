@@ -109,7 +109,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("twelfth State available on demand and thirteenth remains planned", async ({
+test("twelfth State available on demand and fourteenth remains planned", async ({
   page,
 }) => {
   const requests = [];
@@ -121,10 +121,10 @@ test("twelfth State available on demand and thirteenth remains planned", async (
   await expect(page.locator("#state-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-twelve-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("State · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(12);
-  await course(page, 12);
+  await expect(page.locator(".available-dot")).toHaveCount(13);
+  await course(page, 13);
   await expect(
-    page.getByRole("heading", { name: "Props与Variant", exact: true }),
+    page.getByRole("heading", { name: "条件渲染", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
@@ -521,7 +521,7 @@ test("corrupt progress sanitizes full completion stays unique unavailable storag
     "5 / 5",
   );
   expect((await progress(page)).done.sort()).toEqual([0, 1, 2, 3, 4]);
-  await expect(page.locator(".notice")).toContainText("下一课 13");
+  await expect(page.locator(".notice")).toContainText("可以从课程目录继续 13");
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
       throw Error("unavailable");

@@ -1,0 +1,282 @@
+.lesson-thirteen .props-lab {
+  min-width: 0;
+  border: 1px solid #e4dfef;
+  border-radius: 12px;
+  background: white;
+}
+.lesson-thirteen .panel-heading {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lesson-thirteen .props-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  padding: 20px;
+}
+.lesson-thirteen .props-controls .flex-choices {
+  flex: 1 1 230px;
+  margin: 0;
+}
+.lesson-thirteen .props-control-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  flex-basis: 100%;
+}
+.lesson-thirteen .props-action {
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid #796190;
+  border-radius: 6px;
+  background: white;
+  color: #44315e;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.lesson-thirteen .props-action:focus-visible,
+.lesson-thirteen .props-demo-action:focus-visible {
+  outline: 3px solid #5942b2;
+  outline-offset: 3px;
+}
+.lesson-thirteen .props-caption {
+  margin: 0;
+  padding: 14px 20px;
+  border-top: 1px solid #e4dfef;
+  color: #62516f;
+  background: #f7f5fa;
+  font-size: 11px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.lesson-thirteen .props-instance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 20px;
+  background: #f7f5fa;
+}
+.lesson-thirteen .props-instance {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #d9d0e5;
+  border-radius: 10px;
+  background: white;
+  color: #51415f;
+  font-size: 12px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.lesson-thirteen .props-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lesson-thirteen .props-id {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #cfc4e5;
+  border-radius: 8px;
+  color: #5942b2;
+  background: #f0ebfb;
+  font-size: 13px;
+}
+.lesson-thirteen .props-card-heading h3 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #35235c;
+}
+.lesson-thirteen .props-card-heading div > span {
+  font-size: 10px;
+}
+.lesson-thirteen .props-instance > p {
+  margin: 14px 0;
+}
+.lesson-thirteen .props-code {
+  display: block;
+  padding: 10px;
+  margin: 12px 0 18px;
+  border: 1px dashed #cfc4e5;
+  border-radius: 6px;
+  background: #f7f5fa;
+  white-space: normal;
+  font-size: 10px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.lesson-thirteen .props-demo-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #5b4bce;
+  border-radius: 7px;
+  line-height: 1.6;
+}
+.lesson-thirteen .size-sm {
+  min-height: 44px;
+  font-size: 12px;
+}
+.lesson-thirteen .size-md {
+  min-height: 52px;
+  font-size: 13px;
+}
+.lesson-thirteen .size-lg {
+  min-height: 60px;
+  font-size: 14px;
+}
+.lesson-thirteen .variant-solid {
+  background: #5b4bce;
+  color: white;
+}
+.lesson-thirteen .variant-outline {
+  background: white;
+  color: #5140b8;
+}
+.lesson-thirteen .variant-quiet {
+  background: #f2effb;
+  color: #5140b8;
+  border-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lesson-thirteen .props-demo-action:disabled {
+  background: #efedf3;
+  color: #75697e;
+  border: 1px dashed #c4bbcf;
+  cursor: default;
+  text-decoration: none;
+}
+.lesson-thirteen .props-memory {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid #e6e0ee;
+}
+.lesson-thirteen .props-memory strong {
+  font-weight: 500;
+  font-size: 11px;
+}
+.lesson-thirteen .props-memory span {
+  font-size: 10px;
+}
+.lesson-thirteen .props-reading {
+  padding: 16px 20px;
+  border-top: 1px solid #e4dfef;
+  color: #51415f;
+  font-size: 12px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.lesson-thirteen .props-reading p {
+  margin: 8px 0 0;
+}
+.lesson-thirteen .props-behavior {
+  padding: 20px;
+  color: #51415f;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.lesson-thirteen .props-behavior h3 {
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0 0 10px;
+  color: #35235c;
+}
+.lesson-thirteen .props-behavior > .checkbox-label {
+  min-height: 44px;
+  margin: 14px 0;
+}
+.lesson-thirteen .props-behavior .flex-choices {
+  max-width: 600px;
+}
+.lesson-thirteen .props-behavior > .props-control-actions {
+  margin: 16px 0;
+}
+.lesson-thirteen .props-behavior > .props-reading {
+  border: 1px solid #d9d0e5;
+  border-radius: 7px;
+  background: #f7f5fa;
+}
+.lesson-thirteen .props-mapping {
+  margin-top: 18px;
+}
+.lesson-thirteen .props-mapping summary,
+.lesson-thirteen .props-event-log summary {
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid #d9d0e5;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lesson-thirteen .props-mapping p {
+  padding: 0 12px;
+}
+.lesson-thirteen .props-inspector {
+  padding: 20px;
+  border-top: 1px solid #e4dfef;
+}
+.lesson-thirteen .props-report {
+  padding: 12px 12px 12px 28px;
+  border: 1px solid #d9d0e5;
+  border-radius: 7px;
+  background: #f7f5fa;
+  color: #51415f;
+  font-size: 11px;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+.lesson-thirteen .props-report li + li {
+  margin-top: 10px;
+}
+.lesson-thirteen .props-event-log {
+  padding: 0 20px 20px;
+  color: #51415f;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.lesson-thirteen .props-event-log ol {
+  padding-left: 32px;
+}
+@media (max-width: 1100px) {
+  .lesson-thirteen .props-instance-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .lesson-thirteen .props-controls {
+    padding: 16px;
+    gap: 18px;
+  }
+  .lesson-thirteen .props-controls .flex-choices {
+    flex-basis: 100%;
+  }
+  .lesson-thirteen .props-instance-grid {
+    padding: 16px;
+    gap: 16px;
+  }
+  .lesson-thirteen .props-instance {
+    padding: 16px;
+  }
+  .lesson-thirteen .props-caption,
+  .lesson-thirteen .props-reading {
+    padding: 14px 16px;
+  }
+  .lesson-thirteen .props-behavior,
+  .lesson-thirteen .props-inspector {
+    padding: 16px;
+  }
+  .lesson-thirteen .props-event-log {
+    padding: 0 16px 16px;
+  }
+}

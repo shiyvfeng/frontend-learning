@@ -252,9 +252,9 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
   await page
     .getByRole("navigation", { name: "课程目录" })
     .getByRole("button")
-    .nth(12)
+    .nth(13)
     .click();
-  await expect(page.getByRole("heading", { name: "Props与Variant" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "条件渲染" })).toBeVisible();
   await expect(page.locator(".coming-status")).toBeVisible();
   await page.getByRole("button", { name: "返回第一节" }).click();
   await expect(page.locator("#stage-heading")).toHaveText(
