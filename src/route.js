@@ -162,6 +162,7 @@ export const implementedCourseMetadata = {
     view: "vector",
     technology: "React + 内联 SVG + 原生 CSS · 无动画依赖",
   },
+  12: { view: "state", technology: "React State + 原生 CSS · 本地手动模拟" },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");

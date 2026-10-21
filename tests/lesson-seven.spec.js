@@ -82,15 +82,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("seventh available, twelfth unmade, existing route and tags remain plans", async ({
+test("seventh available, thirteenth unmade, existing route and tags remain plans", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(11);
-  await expect(page.locator(".site-footer")).toContainText("01–11");
-  await course(page, 11);
-  await expect(page.getByRole("heading", { name: "State" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(12);
+  await expect(page.locator(".site-footer")).toContainText("01–12");
+  await course(page, 12);
+  await expect(page.getByRole("heading", { name: "Props与Variant" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({
