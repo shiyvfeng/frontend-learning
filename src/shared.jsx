@@ -1,6 +1,11 @@
 import React from "react";
 import { sources } from "./content";
-import { courseRoute, coverageTags } from "./route";
+import {
+  courseRoute,
+  lessonCatalog,
+  coverageCatalog,
+  availabilityText,
+} from "./route";
 
 export function Icon({ type = "layers", size = 20 }) {
   const paths = {
@@ -92,27 +97,27 @@ export function Roadmap() {
           </li>
         </ul>
         <p>
-          原课程按 32 课逐章推进；已制作
-          01–03，其他章节尚未制作。此前目录把多个主题合并为 8
+          原课程按 {courseRoute.length} 课逐章推进。{availabilityText}{" "}
+          此前目录把多个主题合并为 8
           类，本次展开保留各课，主干分类用于理解关系，不替代原课编号。
         </p>
         <details className="full-course-outline">
-          <summary>查看完整 32 课目录及覆盖标签</summary>
+          <summary>查看完整 {courseRoute.length} 课目录及覆盖标签</summary>
           <ol>
-            {courseRoute.map((lesson, i) => (
-              <li key={lesson[1]}>
-                {lesson[1]} <span>{i < 4 ? "已制作" : "尚未制作"}</span>
+            {lessonCatalog.map((lesson) => (
+              <li key={lesson.id} data-lesson-id={lesson.id}>
+                {lesson.title} <span>{lesson.status}</span>
               </li>
             ))}
           </ol>
           <p>
             A、B 和 T01–T12
-            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习。
+            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习；这些覆盖计划尚未作为独立模块制作。
           </p>
           <div className="source-links">
-            {coverageTags.map(([tag, title]) => (
-              <span key={tag}>
-                {tag} · {title}
+            {coverageCatalog.map(({ id, title, status }) => (
+              <span key={id} data-coverage-id={id}>
+                {id} · {title} · {status}
               </span>
             ))}
           </div>

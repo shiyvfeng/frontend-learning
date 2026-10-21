@@ -397,6 +397,8 @@ test("corrupt/unavailable storage remains usable and all tasks complete once", a
     .getByRole("button", { name: "完成第四节" })
     .click({ clickCount: 2 });
   await expect(page.locator(".notice")).toContainText("第四节已完成");
+  await expect(page.locator(".notice")).toContainText("05 Sizing与Overflow");
+  await expect(page.locator(".notice")).not.toContainText("尚未制作");
   await expect(page.locator(".lesson-four .lesson-bottom")).toContainText(
     "5 / 5",
   );

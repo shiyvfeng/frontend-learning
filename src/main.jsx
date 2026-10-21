@@ -7,6 +7,19 @@ import LessonTwo from "./lesson-two";
 import LessonThree from "./lesson-three";
 import LessonFour from "./lesson-four";
 import LessonFive from "./lesson-five";
+import {
+  lessonCatalog,
+  availableLessons,
+  availabilityText,
+  availabilityFooter,
+  nextLessonHint,
+} from "./route";
+const lessonViews = {
+  flex: LessonTwo,
+  grid: LessonThree,
+  position: LessonFour,
+  sizing: LessonFive,
+};
 
 const STORAGE = "frontend-observatory.lesson1.v1";
 const initial = () => ({
@@ -437,6 +450,8 @@ function App() {
   const [storageMessage, setStorageMessage] =
     useState("进度仅保存在当前浏览器");
   const [course, setCourse] = useState(0);
+  const activeLesson = lessonCatalog[course];
+  const ActiveLesson = lessonViews[activeLesson.view];
   const [menu, setMenu] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const [notice, setNotice] = useState("");
@@ -522,7 +537,8 @@ function App() {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "第一节已完成。你已经把界面观察变成了一份可交付的指令；可以从课程目录继续第二节 Flex。",
+        "第一节已完成。你已经把界面观察变成了一份可交付的指令；" +
+          nextLessonHint(0),
       );
     else
       setNotice(
@@ -606,7 +622,11 @@ function App() {
             说清实现。
           </div>
           <div className="nav-caption">
-            学习路线 <span>05 / {lessons.length}</span>
+            学习路线{" "}
+            <span>
+              {String(availableLessons.length).padStart(2, "0")} /{" "}
+              {lessons.length}
+            </span>
           </div>
           <nav aria-label="课程目录">
             {lessons.map((l, i) => (
@@ -625,9 +645,11 @@ function App() {
                 </span>
                 <span>
                   <strong>{l[0]}</strong>
-                  <small>{i < 5 ? l[1] : "尚未制作"}</small>
+                  <small>
+                    {lessonCatalog[i].available ? l[1] : "尚未制作"}
+                  </small>
                 </span>
-                {i < 5 ? (
+                {lessonCatalog[i].available ? (
                   <span className="available-dot" aria-label="可学习" />
                 ) : (
                   <Icon type="lock" size={13} />
@@ -660,7 +682,7 @@ function App() {
             </div>
           </header>
           <main id="lesson">
-            {course === 0 ? (
+            {activeLesson.view === "structure" ? (
               <>
                 <div className="lesson-overline">
                   <span className="pill">第一节 · 结构</span>
@@ -1055,14 +1077,8 @@ function App() {
                 </div>
                 <Roadmap />
               </>
-            ) : course === 1 ? (
-              <LessonTwo onStorageStatus={setStorageMessage} />
-            ) : course === 2 ? (
-              <LessonThree onStorageStatus={setStorageMessage} />
-            ) : course === 3 ? (
-              <LessonFour onStorageStatus={setStorageMessage} />
-            ) : course === 4 ? (
-              <LessonFive onStorageStatus={setStorageMessage} />
+            ) : ActiveLesson ? (
+              <ActiveLesson onStorageStatus={setStorageMessage} />
             ) : (
               <section className="coming-soon">
                 <span className="pill">
@@ -1081,9 +1097,7 @@ function App() {
                   <br />
                   <strong>{lessons[course][3]}</strong>
                 </div>
-                <p className="micro">
-                  目前第一至四节可以学习。其余保留目录，按节逐步制作。
-                </p>
+                <p className="micro">{availabilityText}</p>
                 <button
                   className="primary"
                   onClick={() => {
@@ -1099,7 +1113,12 @@ function App() {
             )}
             <footer className="site-footer">
               <span>前端观察室 · 从观察到表达</span>
-              <span>本节：React + 原生 CSS · 无动画依赖</span>
+              <span>
+                {activeLesson.technology
+                  ? `本节：${activeLesson.technology}`
+                  : "目录预览 · 尚未制作"}
+              </span>
+              <span>{availabilityFooter}</span>
             </footer>
           </main>
         </div>

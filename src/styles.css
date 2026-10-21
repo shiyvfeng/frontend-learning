@@ -1094,6 +1094,7 @@ main {
   font-size: 10px;
 }
 .site-footer {
+  flex-wrap: wrap;
   padding: 14px 0 23px;
   color: #64616d;
   font-size: 9px;

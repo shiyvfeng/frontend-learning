@@ -144,3 +144,63 @@ export const coverageTags = [
   ["T11", "XState"],
   ["T12", "dnd-kit / Virtualization"],
 ];
+
+// Register a lesson only once its view is implemented. All availability UI reads
+// this release metadata; planned numbered lessons and coverage tags stay locked.
+export const implementedCourseMetadata = {
+  "01": { view: "structure" },
+  "02": { view: "flex" },
+  "03": { view: "grid" },
+  "04": { view: "position" },
+  "05": { view: "sizing" },
+};
+export const lessonCatalog = courseRoute.map((lesson, index) => {
+  const id = String(index + 1).padStart(2, "0");
+  const release = implementedCourseMetadata[id];
+  return {
+    id,
+    index,
+    label: lesson[0],
+    title: lesson[1],
+    available: Boolean(release),
+    status: release ? "已制作" : "尚未制作",
+    view: release?.view,
+    technology: release
+      ? (release.technology ?? "React + 原生 CSS · 无动画依赖")
+      : null,
+  };
+});
+export const coverageCatalog = coverageTags.map(([id, title]) => ({
+  id,
+  title,
+  available: Boolean(implementedCourseMetadata[id]),
+  status: implementedCourseMetadata[id] ? "已制作" : "尚未制作",
+}));
+export const availableLessons = lessonCatalog.filter(
+  (lesson) => lesson.available,
+);
+const formatRanges = (numbers) => {
+  const ranges = [];
+  for (let i = 0; i < numbers.length; i++) {
+    const start = numbers[i];
+    let end = start;
+    while (numbers[i + 1] === end + 1) end = numbers[++i];
+    const label = (n) => String(n).padStart(2, "0");
+    ranges.push(start === end ? label(start) : `${label(start)}–${label(end)}`);
+  }
+  return ranges.join("、");
+};
+export const availableLessonRange = formatRanges(
+  availableLessons.map((lesson) => lesson.index + 1),
+);
+export const availabilityText = availableLessons.length
+  ? `目前 ${availableLessonRange} 课可以学习。其余保留目录，按节逐步制作。`
+  : "课程尚未制作，当前提供目录预览。";
+export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}`;
+export function nextLessonHint(index) {
+  const next = lessonCatalog[index + 1];
+  if (!next) return "已到课程目录末尾。";
+  return next.available
+    ? `可以从课程目录继续 ${next.id} ${next.title}。`
+    : `下一课 ${next.id} ${next.title} 尚未制作。`;
+}

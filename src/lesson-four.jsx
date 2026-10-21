@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Icon, Roadmap } from "./shared";
+import { nextLessonHint } from "./route";
 import { Choices, Note } from "./lesson-two";
 import {
   POSITION_STORAGE,
@@ -605,7 +606,7 @@ export default function LessonFour({ onStorageStatus }) {
     patch((old) => ({ done: add(old.done, old.step) }));
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
-      setNotice("第四节已完成。请先验收本节；第五节尚未制作。");
+      setNotice("第四节已完成。" + nextLessonHint(3));
     else
       setNotice(
         `本站成果已保存。还有 ${[0, 1, 2, 3].filter((n) => !data.done.includes(n)).length} 站未完成，可以从顶部继续。`,

@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Icon, Roadmap } from "./shared";
+import { nextLessonHint } from "./route";
 import { Choices, Note } from "./lesson-two";
 import {
   GRID_STORAGE,
@@ -658,9 +659,7 @@ export default function LessonThree({ onStorageStatus }) {
     patch((old) => ({ done: add(old.done, old.step) }));
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
-      setNotice(
-        "第三节已完成。你已能描述行列与尺寸约束；可以从目录继续第四节 Position 与浮层。",
-      );
+      setNotice("第三节已完成。你已能描述行列与尺寸约束；" + nextLessonHint(2));
     else
       setNotice(
         `本站成果已保存。还有 ${[0, 1, 2, 3].filter((n) => !data.done.includes(n)).length} 站未完成，可以从顶部继续。`,

@@ -381,6 +381,9 @@ test("corrupt/unavailable storage remains usable and full completion is stable",
     "5 / 5",
   );
   expect((await progress(page)).done.sort()).toEqual([0, 1, 2, 3, 4]);
+  await expect(page.locator(".notice")).toContainText(
+    "下一课 06 响应式 尚未制作",
+  );
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
       throw Error("unavailable");

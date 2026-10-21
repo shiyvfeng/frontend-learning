@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Icon, Roadmap } from "./shared";
+import { nextLessonHint } from "./route";
 import {
   LAYOUT_STORAGE,
   layoutInitial,
@@ -633,7 +634,8 @@ export default function LessonTwo({ onStorageStatus }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "第二节已完成。你已能描述 Flex 的方向、对齐与空间分配；可以从目录继续第三节 Grid。",
+        "第二节已完成。你已能描述 Flex 的方向、对齐与空间分配；" +
+          nextLessonHint(1),
       );
     else
       setNotice(
