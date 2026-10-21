@@ -78,18 +78,16 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("sixth available and seventh stays unmade using shared metadata", async ({
+test("sixth available and eighth stays unmade using shared metadata", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("响应式 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(6);
-  await expect(page.locator(".site-footer")).toContainText("01–06");
-  await course(page, 6);
+  await expect(page.locator(".available-dot")).toHaveCount(7);
+  await expect(page.locator(".site-footer")).toContainText("01–07");
+  await course(page, 7);
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
-  await expect(
-    page.getByRole("heading", { name: "圆角阴影层级" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "毛玻璃" })).toBeVisible();
 });
 test("real media and container queries respond to independent widths and content breakpoints", async ({
   page,
@@ -410,7 +408,7 @@ test("corrupt and unavailable storage remains usable and complete progress is st
   await expect(page.locator(".lesson-six .lesson-bottom")).toContainText(
     "5 / 5",
   );
-  await expect(page.locator(".notice")).toContainText("下一课 07");
+  await expect(page.locator(".notice")).toContainText("可以从课程目录继续 07");
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
       throw Error("unavailable");

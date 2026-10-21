@@ -82,18 +82,16 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("fifth lesson is available, seventh stays unbuilt, full 32-course route retained", async ({
+test("fifth lesson is available, eighth stays unbuilt, full 32-course route retained", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Sizing与Overflow · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("06 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("07 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await expect(page.locator(".available-dot")).toHaveCount(6);
-  await course(page, 6);
-  await expect(
-    page.getByRole("heading", { name: "圆角阴影层级" }),
-  ).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(7);
+  await course(page, 7);
+  await expect(page.getByRole("heading", { name: "毛玻璃" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await noOverflow(page);
 });
