@@ -4,6 +4,7 @@ import { lessons, steps, responsibilities, questions } from "./content";
 import "./styles.css";
 import { Icon, Roadmap } from "./shared";
 import LessonTwo from "./lesson-two";
+import LessonThree from "./lesson-three";
 
 const STORAGE = "frontend-observatory.lesson1.v1";
 const initial = () => ({
@@ -603,7 +604,7 @@ function App() {
             说清实现。
           </div>
           <div className="nav-caption">
-            学习路线 <span>02 / 08</span>
+            学习路线 <span>03 / {lessons.length}</span>
           </div>
           <nav aria-label="课程目录">
             {lessons.map((l, i) => (
@@ -622,9 +623,9 @@ function App() {
                 </span>
                 <span>
                   <strong>{l[0]}</strong>
-                  <small>{i < 2 ? l[1] : "尚未制作"}</small>
+                  <small>{i < 3 ? l[1] : "尚未制作"}</small>
                 </span>
-                {i < 2 ? (
+                {i < 3 ? (
                   <span className="available-dot" aria-label="可学习" />
                 ) : (
                   <Icon type="lock" size={13} />
@@ -1054,6 +1055,8 @@ function App() {
               </>
             ) : course === 1 ? (
               <LessonTwo onStorageStatus={setStorageMessage} />
+            ) : course === 2 ? (
+              <LessonThree onStorageStatus={setStorageMessage} />
             ) : (
               <section className="coming-soon">
                 <span className="pill">
@@ -1073,7 +1076,7 @@ function App() {
                   <strong>{lessons[course][3]}</strong>
                 </div>
                 <p className="micro">
-                  目前第一、二节可以学习。其余保留目录，按节逐步制作。
+                  目前第一至三节可以学习。其余保留目录，按节逐步制作。
                 </p>
                 <button
                   className="primary"

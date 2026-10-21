@@ -1,43 +1,4 @@
-export const lessons = [
-  ["结构", "页面不是一张图", "DOM · 组件 · Props", "React / 浏览器开发者工具"],
-  [
-    "Flex · 一维排列",
-    "Flex——一维排列",
-    "row / column · gap · 对齐 · grow / shrink",
-    "原生 CSS Flexbox / DevTools / Figma Auto Layout",
-  ],
-  [
-    "Grid · 二维布局",
-    "Grid——二维布局",
-    "行列轨道 · 跨行跨列 · 响应式网格",
-    "原生 CSS Grid / DevTools",
-  ],
-  [
-    "视觉",
-    "把感觉说成规则",
-    "字体 · 间距 · 色彩 · 层级",
-    "CSS 变量 / 设计 Token",
-  ],
-  ["状态", "界面如何回应你", "事件 · 状态 · 表单 · 焦点", "React / Base UI"],
-  [
-    "动效",
-    "让变化有来有回",
-    "过渡 · 布局 · 滚动 · 视图切换",
-    "CSS / Motion / 按需 GSAP",
-  ],
-  [
-    "特殊渲染",
-    "超出普通盒子的表达",
-    "SVG · Canvas · WebGL · 动画资产",
-    "Lottie / Rive / 按需 Three.js",
-  ],
-  [
-    "设计实现映射",
-    "从看到，到说清楚",
-    "观察证据 · 实现假设 · Agent 验收",
-    "设计工具 / DevTools / Coding Agent",
-  ],
-];
+export { courseRoute as lessons } from "./route";
 export const steps = [
   {
     short: "拆开界面",

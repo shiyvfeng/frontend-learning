@@ -1,0 +1,312 @@
+.lesson-three .live-dot {
+  background: #3d867f;
+}
+.lesson-three .grid-playfield {
+  padding: 22px;
+  background: #fcfefd;
+  background-image: radial-gradient(#dbe9e6 1px, transparent 1px);
+  background-size: 16px 16px;
+  min-height: 350px;
+  max-height: 500px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.lesson-three .grid-playfield:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: -5px;
+}
+.lesson-three .grid-axis-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  color: #436863;
+  font-size: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.lesson-three .tracks-grid {
+  min-width: 0;
+}
+.lesson-three .grid-tile {
+  min-width: 0;
+  border: 1px solid #c3d8d2;
+  border-radius: 8px;
+  background: #eef6f3;
+  color: #3b5f55;
+  padding: 14px;
+  overflow-wrap: anywhere;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.lesson-three .grid-tile small {
+  font: 10px monospace;
+  color: #47675e;
+}
+.lesson-three .grid-tile strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.lesson-three .grid-tile > span {
+  font-size: 10px;
+  color: #48675f;
+}
+.lesson-three .tile-0 {
+  background: #dfede7;
+  border-color: #91b5a6;
+}
+.lesson-three .tile-2,
+.lesson-three .tile-5 {
+  background: #f5f5ec;
+  border-color: #dadcc0;
+  color: #61633f;
+}
+.lesson-three .grid-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #e3dff0;
+  background: #fff;
+  padding: 18px 22px 0;
+  border-radius: 11px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.lesson-three .grid-toolbar .flex-choices {
+  margin-bottom: 18px;
+}
+.lesson-three .fraction-stage,
+.lesson-three .adaptive-stage {
+  padding: 35px 22px;
+  background-color: #fcfefd;
+  background-image: radial-gradient(#dbe9e6 1px, transparent 1px);
+  background-size: 16px 16px;
+  min-height: 290px;
+}
+.lesson-three .fraction-stage {
+  display: flex;
+  align-items: center;
+}
+.lesson-three .fraction-grid {
+  outline: 1px dashed #9dbeb4;
+  outline-offset: 3px;
+  min-width: 0;
+}
+.lesson-three .fraction-grid > section {
+  min-width: 0;
+  padding: 20px 14px;
+  min-height: 155px;
+  background: #e7f0eb;
+  border: 1px solid #b6cdc1;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+.lesson-three .fraction-grid > section:last-child {
+  background: #edf1f8;
+  border-color: #c6d0e1;
+}
+.lesson-three .track-tag {
+  display: block;
+  font: 12px monospace;
+  color: #4a665a;
+  margin-bottom: 25px;
+}
+.lesson-three .fraction-grid strong {
+  font-size: 15px;
+  display: block;
+  color: #395d4f;
+}
+.lesson-three .fraction-grid p {
+  font-size: 12px;
+  color: #4a6652;
+  margin: 8px 0 0;
+}
+.lesson-three .grid-metrics {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 18px;
+  gap: 10px;
+  border-top: 1px solid #dfeae4;
+  flex-wrap: wrap;
+}
+.lesson-three .grid-metrics > div {
+  text-align: center;
+  flex: 1;
+}
+.lesson-three .grid-metrics small {
+  display: block;
+  font-size: 10px;
+  color: #52635c;
+  margin-bottom: 8px;
+}
+.lesson-three .grid-metrics b {
+  font: 500 17px monospace;
+  color: #3e6557;
+}
+.lesson-three .grid-rule-reading {
+  border-top: 1px solid #dfeae4;
+  background: #f8fbf9;
+  padding: 15px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.lesson-three .grid-rule-reading .eyebrow {
+  color: #45685c;
+  font-size: 9px;
+}
+.lesson-three .grid-rule-reading code {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #45675a;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.lesson-three .adaptive-grid {
+  min-width: 0;
+}
+.lesson-three .adaptive-card {
+  border: 1px solid #d4e1dc;
+  border-radius: 9px;
+  background: #fff;
+  overflow: hidden;
+  min-width: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  overflow-wrap: anywhere;
+}
+.lesson-three .card-art {
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  background: #e4eee9;
+  color: #466659;
+}
+.lesson-three .art-1 {
+  background: #eae7f6;
+  color: #6a5692;
+}
+.lesson-three .art-2 {
+  background: #f3eddd;
+  color: #715e3c;
+}
+.lesson-three .adaptive-card small {
+  font: 8px monospace;
+  color: #54655c;
+}
+.lesson-three .adaptive-card strong {
+  font-size: 12px;
+  color: #365b4d;
+  font-weight: 600;
+}
+.lesson-three .adaptive-card p {
+  font-size: 10px;
+  color: #53635a;
+  margin: 0;
+  line-height: 1.8;
+}
+.lesson-three .grid-small-note {
+  font-size: 10px;
+  color: #675b76;
+  line-height: 1.9;
+  margin: 15px 0 0;
+}
+.lesson-three .flex-controls > .primary {
+  margin-bottom: 20px;
+}
+.lesson-three .flex-controls .checkbox-label {
+  margin-top: 0;
+}
+@media (max-width: 1100px) {
+  .lesson-three .flex-controls .grid-small-note {
+    grid-column: 1/-1;
+  }
+  .lesson-three .flex-controls > .primary {
+    align-self: end;
+    justify-self: start;
+  }
+  .lesson-three .adaptive-stage {
+    min-height: 240px;
+  }
+}
+@media (max-width: 760px) {
+  .lesson-three .grid-playfield {
+    padding: 18px 14px;
+    min-height: 270px;
+    max-height: 420px;
+  }
+  .lesson-three .grid-axis-labels {
+    font-size: 10px;
+    gap: 9px;
+    margin-bottom: 17px;
+  }
+  .lesson-three .grid-tile {
+    padding: 11px 8px;
+    gap: 6px;
+  }
+  .lesson-three .grid-tile strong {
+    font-size: 11px;
+  }
+  .lesson-three .grid-tile small,
+  .lesson-three .grid-tile > span {
+    font-size: 9px;
+  }
+  .lesson-three .grid-toolbar {
+    padding: 17px 17px 0;
+    gap: 0;
+  }
+  .lesson-three .grid-toolbar .flex-choices {
+    width: 100%;
+  }
+  .lesson-three .fraction-stage,
+  .lesson-three .adaptive-stage {
+    padding: 28px 15px;
+    min-height: 245px;
+  }
+  .lesson-three .fraction-grid > section {
+    padding: 15px 11px;
+    min-height: 145px;
+  }
+  .lesson-three .fraction-grid strong {
+    font-size: 13px;
+  }
+  .lesson-three .fraction-grid p {
+    font-size: 11px;
+  }
+  .lesson-three .grid-metrics {
+    padding: 18px 12px;
+    gap: 8px;
+  }
+  .lesson-three .grid-metrics b {
+    font-size: 15px;
+  }
+  .lesson-three .grid-rule-reading {
+    padding: 14px;
+  }
+  .lesson-three .grid-rule-reading code {
+    font-size: 10px;
+  }
+  .lesson-three .adaptive-card {
+    padding: 8px;
+    gap: 8px;
+  }
+  .lesson-three .card-art {
+    height: 55px;
+  }
+  .lesson-three .adaptive-card strong {
+    font-size: 11px;
+  }
+  .lesson-three .adaptive-card small {
+    font-size: 7px;
+  }
+  .lesson-three .adaptive-card p {
+    font-size: 10px;
+  }
+  .course-sidebar.open {
+    max-height: calc(100dvh - 61px);
+    overflow-y: auto;
+  }
+}

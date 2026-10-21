@@ -2185,3 +2185,32 @@ dialog p {
     font-size: 9px;
   }
 }
+
+.full-course-outline {
+  border-top: 1px solid var(--line);
+  margin: 16px 0;
+  padding: 8px 0;
+}
+.full-course-outline > ol {
+  columns: 2;
+  column-gap: 35px;
+  padding-left: 24px;
+  font-size: 11px;
+}
+.full-course-outline > ol > li {
+  break-inside: avoid;
+}
+.full-course-outline > ol > li > span {
+  font-size: 9px;
+  color: #63736c;
+  margin-left: 7px;
+}
+.full-course-outline .source-links > span {
+  font-size: 10px;
+  color: #655d76;
+}
+@media (max-width: 760px) {
+  .full-course-outline > ol {
+    columns: 1;
+  }
+}

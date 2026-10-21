@@ -76,7 +76,7 @@ async function completeExperiments(page) {
   await page.getByLabel("允许 B 继续变窄并换行").check();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("directory follows Flex then unbuilt Grid, axes and gap change real layout", async ({
+test("directory keeps Flex and future Position while axes and gap change real layout", async ({
   page,
 }) => {
   const errors = [];
@@ -102,12 +102,12 @@ test("directory follows Flex then unbuilt Grid, axes and gap change real layout"
   await choose(page, "观察例子", "图标与内容卡片");
   await expect(demo.getByText("一页灵感")).toBeVisible();
   await noOverflow(page);
-  await course(page, 2);
+  await course(page, 3);
   await expect(
-    page.getByRole("heading", { name: "Grid——二维布局" }),
+    page.getByRole("heading", { name: "Position与浮层" }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
-  await expect(page.locator(".course-link")).toHaveCount(8);
+  await expect(page.locator(".course-link")).toHaveCount(32);
   expect(errors).toEqual([]);
 });
 test("justify and align follow direction with real geometry", async ({

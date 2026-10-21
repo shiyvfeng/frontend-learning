@@ -11,7 +11,7 @@ import {
 import "./lesson-two.css";
 
 const unique = (values, value) => [...new Set([...values, value])];
-function Choices({ label, values, value, onChange }) {
+export function Choices({ label, values, value, onChange }) {
   return (
     <fieldset className="flex-choices">
       <legend>{label}</legend>
@@ -66,7 +66,7 @@ function AxisFrame({ direction, children }) {
     </div>
   );
 }
-function Note({ title, children }) {
+export function Note({ title, children }) {
   return (
     <div className="insight flex-note">
       <span className="insight-icon">
@@ -529,7 +529,7 @@ function LayoutSources() {
       <div className="roadmap-body">
         <p>
           本节按“方向 → gap → 主轴对齐 → 交叉轴对齐 → grow → shrink”学习 Flex
-          一维排列。Grid 在第三节，仅保留目录。原生 CSS
+          一维排列。Grid 在第三节独立学习。原生 CSS
           足以完成这些排列；实际项目可以沿用框架中的布局组件，先看它的约束和生成结果，不凭截图断言技术栈。
         </p>
         <p>
@@ -633,7 +633,7 @@ export default function LessonTwo({ onStorageStatus }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "第二节已完成。你已能描述 Flex 的方向、对齐与空间分配；第三节 Grid 尚未制作。",
+        "第二节已完成。你已能描述 Flex 的方向、对齐与空间分配；可以从目录继续第三节 Grid。",
       );
     else
       setNotice(

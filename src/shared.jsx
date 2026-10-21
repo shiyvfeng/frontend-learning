@@ -1,5 +1,6 @@
 import React from "react";
 import { sources } from "./content";
+import { courseRoute, coverageTags } from "./route";
 
 export function Icon({ type = "layers", size = 20 }) {
   const paths = {
@@ -63,7 +64,8 @@ export function Roadmap() {
       <summary>
         <span>路线核对说明与官方来源</span>
         <span className="micro">
-          2026-10-20 核对 <span aria-hidden="true">＋</span>
+          技术参考 2026-10-20 · 目录对齐 2026-10-21{" "}
+          <span aria-hidden="true">＋</span>
         </span>
       </summary>
       <div className="roadmap-body">
@@ -89,6 +91,32 @@ export function Roadmap() {
             指令验收贯穿每节：可用键盘、焦点可见、减少动态效果、移动端可读、依赖适量并有降级。
           </li>
         </ul>
+        <p>
+          原课程按 32 课逐章推进；已制作
+          01–03，其他章节尚未制作。此前目录把多个主题合并为 8
+          类，本次展开保留各课，主干分类用于理解关系，不替代原课编号。
+        </p>
+        <details className="full-course-outline">
+          <summary>查看完整 32 课目录及覆盖标签</summary>
+          <ol>
+            {courseRoute.map((lesson, i) => (
+              <li key={lesson[1]}>
+                {lesson[1]} <span>{i < 3 ? "已制作" : "尚未制作"}</span>
+              </li>
+            ))}
+          </ol>
+          <p>
+            A、B 和 T01–T12
+            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习。
+          </p>
+          <div className="source-links">
+            {coverageTags.map(([tag, title]) => (
+              <span key={tag}>
+                {tag} · {title}
+              </span>
+            ))}
+          </div>
+        </details>
         <div className="source-links">
           {sources.map(([label, url]) => (
             <a key={url} href={url} target="_blank" rel="noreferrer">
