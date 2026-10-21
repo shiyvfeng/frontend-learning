@@ -82,15 +82,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("seventh available, eighth unmade, existing route and tags remain plans", async ({
+test("seventh available, ninth unmade, existing route and tags remain plans", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(7);
-  await expect(page.locator(".site-footer")).toContainText("01–07");
-  await course(page, 7);
-  await expect(page.getByRole("heading", { name: "毛玻璃" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(8);
+  await expect(page.locator(".site-footer")).toContainText("01–08");
+  await course(page, 8);
+  await expect(page.getByRole("heading", { name: "渐变光晕" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({
@@ -333,7 +333,7 @@ test("corrupt and unavailable storage stays usable and completion counts once", 
   await expect(page.locator(".lesson-seven .lesson-bottom")).toContainText(
     "5 / 5",
   );
-  await expect(page.locator(".notice")).toContainText("下一课 08");
+  await expect(page.locator(".notice")).toContainText("可以从课程目录继续 08");
   expect((await progress(page)).done.sort()).toEqual([0, 1, 2, 3, 4]);
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {

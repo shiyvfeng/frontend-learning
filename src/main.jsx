@@ -9,6 +9,7 @@ import LessonFour from "./lesson-four";
 import LessonFive from "./lesson-five";
 import LessonSix from "./lesson-six";
 import LessonSeven from "./lesson-seven";
+import LessonEight from "./lesson-eight";
 import {
   lessonCatalog,
   availableLessons,
@@ -23,6 +24,7 @@ const lessonViews = {
   sizing: LessonFive,
   responsive: LessonSix,
   surface: LessonSeven,
+  glass: LessonEight,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";

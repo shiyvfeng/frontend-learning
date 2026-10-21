@@ -231,6 +231,8 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
   page,
 }, info) => {
   await page.goto("/");
+  // React can commit after the document load event; wait for the actual UI.
+  await expect(page.locator("#stage-heading")).toBeVisible();
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "跳到课程内容" })).toBeFocused();
   for (let i = 0; i < 5; i++) {
@@ -250,9 +252,9 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
   await page
     .getByRole("navigation", { name: "课程目录" })
     .getByRole("button")
-    .nth(7)
+    .nth(8)
     .click();
-  await expect(page.getByRole("heading", { name: "毛玻璃" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "渐变光晕" })).toBeVisible();
   await expect(page.locator(".coming-status")).toBeVisible();
   await page.getByRole("button", { name: "返回第一节" }).click();
   await expect(page.locator("#stage-heading")).toHaveText(

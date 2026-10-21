@@ -293,7 +293,13 @@ function LayerLab({ data, patch }) {
     returnRef = useRef(null);
   const [status, setStatus] = useState("");
   const restore = () => {
-    if (returnRef.current?.isConnected) returnRef.current.focus();
+    // The close event may arrive after the user has already tabbed onward.
+    // Restore only a stranded focus; never override that subsequent choice.
+    const dialog = dialogRef.current,
+      active = document.activeElement;
+    if (dialog?.open || !returnRef.current?.isConnected) return;
+    if (!active || active === document.body || dialog?.contains(active))
+      returnRef.current.focus();
   };
   const open = (e) => {
     returnRef.current = e.currentTarget;

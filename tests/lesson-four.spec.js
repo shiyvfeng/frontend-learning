@@ -96,15 +96,15 @@ async function completeFirstThree(page) {
   await page.getByRole("button", { name: "关闭锚点说明" }).click();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("fourth lesson is available, eighth remains unbuilt and route count stays 32", async ({
+test("fourth lesson is available, ninth remains unbuilt and route count stays 32", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Position与浮层 · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("07 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("08 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await course(page, 7);
-  await expect(page.getByRole("heading", { name: "毛玻璃" })).toBeVisible();
+  await course(page, 8);
+  await expect(page.getByRole("heading", { name: "渐变光晕" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await noOverflow(page);
 });
@@ -909,4 +909,23 @@ test("touch-only complete lesson, quiz retry, persisted progress and reset need 
     ),
   );
   await context.close();
+});
+
+test("delayed modal close event preserves a subsequent keyboard focus target", async ({
+  page,
+}) => {
+  await open(page);
+  await step(page, 2);
+  await page.getByRole("button", { name: "打开原生模态对话框" }).click();
+  await page.getByRole("button", { name: "关闭并返回" }).click();
+  const trigger = page.getByRole("button", { name: "打开原生模态对话框" }),
+    anchor = page.getByRole("button", { name: "ⓘ 锚点说明" });
+  await expect(trigger).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(anchor).toBeFocused();
+  await page
+    .locator(".position-demo-dialog")
+    .evaluate((el) => el.dispatchEvent(new Event("close")));
+  await expect(anchor).toBeFocused();
+  await expect(anchor).not.toHaveCSS("outline-style", "none");
 });

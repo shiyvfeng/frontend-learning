@@ -1,0 +1,183 @@
+.lesson-eight .glass-lab {
+  min-width: 0;
+  border: 1px solid #e4dfef;
+  border-radius: 12px;
+  background: white;
+}
+.lesson-eight .glass-lab .panel-heading {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lesson-eight .glass-scene {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 340px;
+  padding: 32px 0;
+  background: #e8e0f0;
+  border-block: 1px solid #d5cbe2;
+}
+.lesson-eight .glass-backdrop-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.lesson-eight .glass-backdrop-position {
+  width: calc(100% + 160px);
+  height: 100%;
+}
+.lesson-eight .glass-background {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: glass-drift 24s ease-in-out infinite alternate;
+}
+@keyframes glass-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(32px);
+  }
+}
+.lesson-eight .glass-pane {
+  position: relative;
+  box-sizing: border-box;
+  border: 2px solid #68517e;
+  border-radius: 18px;
+  padding: 16px;
+  min-width: 0;
+  color: #352246;
+  box-shadow: 0 8px 20px #39234b21;
+}
+.lesson-eight .glass-window {
+  height: 68px;
+  display: flex;
+  align-items: center;
+}
+.lesson-eight .glass-ink {
+  display: block;
+  width: 28px;
+  height: 28px;
+  background: #352246;
+  border: 3px solid white;
+}
+.lesson-eight .glass-readable {
+  background: #fff;
+  border: 1px solid #c5b5d3;
+  border-radius: 8px;
+  padding: 14px;
+  overflow-wrap: anywhere;
+}
+.lesson-eight .glass-state {
+  display: block;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #51415f;
+}
+.lesson-eight .glass-readable h3 {
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+.lesson-eight .glass-readable p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+}
+.lesson-eight .glass-reading {
+  padding: 16px 20px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #51415f;
+  border-bottom: 1px solid #e4dfef;
+  overflow-wrap: anywhere;
+}
+.lesson-eight .glass-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  padding: 20px;
+}
+.lesson-eight .glass-controls .flex-choices {
+  flex: 1 1 200px;
+  margin: 0;
+}
+.lesson-eight .glass-controls .checkbox-label {
+  font-size: 12px;
+  line-height: 1.8;
+  flex: 1 1 100%;
+  min-height: 44px;
+}
+.lesson-eight .glass-motion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px 20px;
+}
+.lesson-eight .glass-motion button {
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #8a769e;
+  border-radius: 6px;
+  background: #faf8fd;
+}
+.lesson-eight .glass-motion span {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #665574;
+}
+.lesson-eight .glass-motion button:disabled {
+  opacity: 1;
+  color: #665574;
+  background: #f2eef6;
+  border-style: dashed;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson-eight .glass-background {
+    animation: none;
+    animation-play-state: paused !important;
+  }
+}
+@media (forced-colors: active) {
+  .lesson-eight .glass-pane {
+    background: Canvas !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .lesson-eight .glass-readable {
+    background: Canvas;
+    color: CanvasText;
+  }
+}
+@media (max-width: 700px) {
+  .lesson-eight .glass-controls {
+    padding: 16px;
+    gap: 18px;
+  }
+  .lesson-eight .glass-controls .flex-choices {
+    flex-basis: 100%;
+  }
+  .lesson-eight .glass-pane {
+    padding: 12px;
+  }
+  .lesson-eight .glass-readable {
+    padding: 12px;
+  }
+  .lesson-eight .glass-readable h3 {
+    font-size: 15px;
+  }
+  .lesson-eight .glass-reading {
+    padding: 14px 16px;
+  }
+  .lesson-eight .glass-motion {
+    padding: 0 16px 16px;
+  }
+  .lesson-eight .glass-scene {
+    min-height: 360px;
+  }
+}
