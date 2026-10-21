@@ -250,10 +250,10 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
   await page
     .getByRole("navigation", { name: "课程目录" })
     .getByRole("button")
-    .nth(3)
+    .nth(4)
     .click();
   await expect(
-    page.getByRole("heading", { name: "Position与浮层" }),
+    page.getByRole("heading", { name: "Sizing与Overflow" }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toBeVisible();
   await page.getByRole("button", { name: "返回第一节" }).click();

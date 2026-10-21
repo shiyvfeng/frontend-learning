@@ -101,7 +101,7 @@ export function Roadmap() {
           <ol>
             {courseRoute.map((lesson, i) => (
               <li key={lesson[1]}>
-                {lesson[1]} <span>{i < 3 ? "已制作" : "尚未制作"}</span>
+                {lesson[1]} <span>{i < 4 ? "已制作" : "尚未制作"}</span>
               </li>
             ))}
           </ol>
