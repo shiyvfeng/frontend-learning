@@ -1,0 +1,192 @@
+.lesson-nine .glow-lab {
+  min-width: 0;
+  background: white;
+  border: 1px solid #e4dfef;
+  border-radius: 12px;
+}
+.lesson-nine .glow-lab .panel-heading {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lesson-nine .glow-poster {
+  isolation: isolate;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  min-height: 350px;
+  padding: 24px;
+  background: #171d31;
+  color: #352246;
+}
+.lesson-nine .glow-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #171d31;
+}
+.lesson-nine .glow-art::before {
+  content: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    ellipse var(--light-size, 220px) var(--light-size, 220px) at
+      var(--light-x, 50%) var(--light-y, 35%),
+    var(--light-color, #d6b4ff) 0%,
+    transparent 72%
+  );
+  opacity: var(--light-strength, 0.55);
+  filter: blur(var(--light-blur, 12px));
+}
+.lesson-nine .glow-art.has-light::before {
+  content: "";
+}
+.lesson-nine .glow-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #c7b7d8;
+  border-radius: 10px;
+  background: white;
+  overflow-wrap: anywhere;
+}
+.lesson-nine .glow-caption {
+  display: block;
+  font-size: 10px;
+  line-height: 1.9;
+  color: #655375;
+  letter-spacing: 0.07em;
+}
+.lesson-nine .glow-copy h3 {
+  font-size: 17px;
+  line-height: 1.65;
+  margin: 8px 0;
+}
+.lesson-nine .glow-copy p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+}
+.lesson-nine .glow-state {
+  display: block;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 12px 0;
+  color: #51415f;
+}
+.lesson-nine .glow-action {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #796190;
+  background: white;
+  border-radius: 6px;
+  color: #44315e;
+  font-size: 12px;
+}
+.lesson-nine .glow-action:focus-visible {
+  outline: 3px solid #5942b2;
+  outline-offset: 3px;
+}
+.lesson-nine .glow-reading {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e4dfef;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #51415f;
+  overflow-wrap: anywhere;
+}
+.lesson-nine .glow-reading code {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #f4f1fa;
+  border: 1px dashed #c5b5d4;
+  border-radius: 6px;
+  white-space: normal;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.lesson-nine .glow-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  padding: 20px;
+}
+.lesson-nine .glow-controls .flex-choices {
+  flex: 1 1 220px;
+  margin: 0;
+}
+.lesson-nine .glow-controls .checkbox-label {
+  flex: 1 1 100%;
+  min-height: 44px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.lesson-nine .glow-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 18px;
+  background: #f4f1fa;
+}
+.lesson-nine .glow-compare > div {
+  min-width: 0;
+}
+.lesson-nine .glow-compare > div > h3 {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0 0 10px;
+  color: #51415f;
+}
+.lesson-nine .glow-compare .glow-poster {
+  min-height: 370px;
+  padding: 18px;
+  border-radius: 9px;
+}
+@media (forced-colors: active) {
+  .lesson-nine .glow-copy {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+  }
+  .lesson-nine .glow-art {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .lesson-nine .glow-compare {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 14px;
+    gap: 22px;
+  }
+  .lesson-nine .glow-poster {
+    padding: 20px;
+    min-height: 380px;
+  }
+  .lesson-nine .glow-copy {
+    padding: 15px;
+  }
+  .lesson-nine .glow-copy h3 {
+    font-size: 15px;
+  }
+  .lesson-nine .glow-controls {
+    padding: 16px;
+    gap: 18px;
+  }
+  .lesson-nine .glow-controls .flex-choices {
+    flex-basis: 100%;
+  }
+  .lesson-nine .glow-reading {
+    padding: 14px 16px;
+  }
+  .lesson-nine .glow-compare .glow-poster {
+    padding: 16px;
+    min-height: 380px;
+  }
+}

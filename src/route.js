@@ -156,6 +156,7 @@ export const implementedCourseMetadata = {
   "06": { view: "responsive" },
   "07": { view: "surface" },
   "08": { view: "glass" },
+  "09": { view: "glow" },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");

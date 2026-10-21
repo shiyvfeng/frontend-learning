@@ -74,15 +74,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("eighth available and ninth remains unmade with unified catalog", async ({
+test("eighth available and tenth remains unmade with unified catalog", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("毛玻璃 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(8);
-  await expect(page.locator(".site-footer")).toContainText("01–08");
-  await course(page, 8);
-  await expect(page.getByRole("heading", { name: "渐变光晕" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(9);
+  await expect(page.locator(".site-footer")).toContainText("01–09");
+  await course(page, 9);
+  await expect(page.getByRole("heading", { name: "Mask/Clip Path" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("same real scene switches own filter and backdrop, adjusts blur and keeps external readable equivalent", async ({
@@ -375,7 +375,7 @@ test("corrupt storage sanitizes and repeated completion counts once; unavailable
     "5 / 5",
   );
   expect((await progress(page)).done.sort()).toEqual([0, 1, 2, 3, 4]);
-  await expect(page.locator(".notice")).toContainText("下一课 09");
+  await expect(page.locator(".notice")).toContainText("可以从课程目录继续 09");
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
       throw Error("unavailable");

@@ -17,6 +17,7 @@ import {
   availabilityFooter,
   nextLessonHint,
 } from "./route";
+const LessonNine = React.lazy(() => import("./lesson-nine"));
 const lessonViews = {
   flex: LessonTwo,
   grid: LessonThree,
@@ -25,6 +26,7 @@ const lessonViews = {
   responsive: LessonSix,
   surface: LessonSeven,
   glass: LessonEight,
+  glow: LessonNine,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";
@@ -1084,7 +1086,9 @@ function App() {
                 <Roadmap />
               </>
             ) : ActiveLesson ? (
-              <ActiveLesson onStorageStatus={setStorageMessage} />
+              <React.Suspense fallback={<p role="status">正在载入本课实验…</p>}>
+                <ActiveLesson onStorageStatus={setStorageMessage} />
+              </React.Suspense>
             ) : (
               <section className="coming-soon">
                 <span className="pill">
