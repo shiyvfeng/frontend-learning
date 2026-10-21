@@ -176,6 +176,10 @@ export const implementedCourseMetadata = {
     view: "machine",
     technology: "React + 普通转换表 · 无 XState / Rive 依赖",
   },
+  17: {
+    view: "micro",
+    technology: "原生 CSS transition + 手写 rAF spring · 无 Motion 依赖",
+  },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");
