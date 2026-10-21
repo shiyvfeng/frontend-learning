@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
-const summary = "目前 01–15 课可以学习。其余保留目录，按节逐步制作。";
+const summary = "目前 01–16 课可以学习。其余保留目录，按节逐步制作。";
 const chapterNames = [
   "第一节学习步骤",
   "第二节学习步骤",
@@ -18,6 +18,7 @@ const chapterNames = [
   "第十三节学习步骤",
   "第十四节学习步骤",
   "第十五节学习步骤",
+  "第十六节学习步骤",
 ];
 async function course(page, n) {
   const nav = page.getByRole("navigation", { name: "课程目录" }),
@@ -44,7 +45,7 @@ async function axeCheck(page) {
     })),
   ).toEqual([]);
 }
-test("all fifteen implemented views, side directory, complete roadmap and footers agree on availability", async ({
+test("all sixteen implemented views, side directory, complete roadmap and footers agree on availability", async ({
   page,
 }) => {
   test.setTimeout(60000);
@@ -54,36 +55,38 @@ test("all fifteen implemented views, side directory, complete roadmap and footer
     await page.getByRole("button", { name: "☰ 课程" }).click();
   const links = nav.getByRole("button");
   await expect(links).toHaveCount(32);
-  await expect(page.locator(".nav-caption")).toContainText("15 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("16 / 32");
   for (let n = 0; n < 32; n++) {
     await expect(links.nth(n).locator(".available-dot")).toHaveCount(
-      n < 15 ? 1 : 0,
+      n < 16 ? 1 : 0,
     );
-    if (n >= 15)
+    if (n >= 16)
       await expect(links.nth(n).locator("small")).toHaveText("尚未制作");
     else await expect(links.nth(n).locator("small")).not.toHaveText("尚未制作");
   }
-  for (let n = 0; n < 15; n++) {
+  for (let n = 0; n < 16; n++) {
     await course(page, n);
     await expect(
       page.getByRole("navigation", { name: chapterNames[n] }),
     ).toBeVisible();
     await expect(page.locator(".coming-status")).toHaveCount(0);
     await expect(page.locator(".site-footer")).toContainText(
-      "可学习课程 01–15 · 15 / 32",
+      "可学习课程 01–16 · 16 / 32",
     );
     await expect(page.locator(".site-footer")).toContainText(
-      n === 14
-        ? "本节：React State + 原生 CSS"
-        : n === 13
-          ? "本节：React 条件渲染"
-          : n === 12
-            ? "本节：React Props"
-            : n === 11
-              ? "本节：React State"
-              : n === 10
-                ? "本节：React + 内联 SVG"
-                : "本节：React + 原生 CSS",
+      n === 15
+        ? "本节：React + 普通转换表"
+        : n === 14
+          ? "本节：React State + 原生 CSS"
+          : n === 13
+            ? "本节：React 条件渲染"
+            : n === 12
+              ? "本节：React Props"
+              : n === 11
+                ? "本节：React State"
+                : n === 10
+                  ? "本节：React + 内联 SVG"
+                  : "本节：React + 原生 CSS",
     );
     const outline = await expand(page);
     await expect(outline.locator(":scope > ol > li")).toHaveCount(32);
@@ -95,7 +98,7 @@ test("all fifteen implemented views, side directory, complete roadmap and footer
         outline.locator(
           `[data-lesson-id="${String(i + 1).padStart(2, "0")}"] > span`,
         ),
-      ).toHaveText(i < 15 ? "已制作" : "尚未制作");
+      ).toHaveText(i < 16 ? "已制作" : "尚未制作");
   }
   await axeCheck(page);
   expect(
@@ -109,7 +112,7 @@ test("every unimplemented numbered course stays a preview with the same availabi
 }) => {
   test.setTimeout(60000);
   await page.goto("/");
-  for (let n = 15; n < 32; n++) {
+  for (let n = 16; n < 32; n++) {
     await course(page, n);
     await expect(page.locator(".coming-status")).toHaveText("尚未制作");
     await expect(page.locator(".stepper")).toHaveCount(0);
@@ -119,7 +122,7 @@ test("every unimplemented numbered course stays a preview with the same availabi
     );
     await expect(page.locator(".site-footer")).not.toContainText("本节：");
     await expect(page.locator(".site-footer")).toContainText(
-      "可学习课程 01–15 · 15 / 32",
+      "可学习课程 01–16 · 16 / 32",
     );
     expect(
       await page.evaluate(
