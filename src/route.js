@@ -189,6 +189,10 @@ export const implementedCourseMetadata = {
     view: "layout",
     technology: "位置型 FLIP + 原生 WAAPI · React真实布局",
   },
+  21: {
+    view: "shared",
+    technology: "原生 View Transition + React · 无 Motion 依赖",
+  },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");

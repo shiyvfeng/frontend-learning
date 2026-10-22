@@ -74,15 +74,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("eighth available and twenty-first remains unmade with unified catalog", async ({
+test("eighth available and twenty-second remains unmade with unified catalog", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("毛玻璃 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(20);
-  await expect(page.locator(".site-footer")).toContainText("01–20");
-  await course(page, 20);
-  await expect(page.getByRole("heading", { name: "Shared Element Transition" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(21);
+  await expect(page.locator(".site-footer")).toContainText("01–21");
+  await course(page, 21);
+  await expect(page.getByRole("heading", { name: "Scroll Animation" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("same real scene switches own filter and backdrop, adjusts blur and keeps external readable equivalent", async ({

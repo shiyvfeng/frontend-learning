@@ -82,15 +82,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("seventh available, twenty-first unmade, existing route and tags remain plans", async ({
+test("seventh available, twenty-second unmade, existing route and tags remain plans", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(20);
-  await expect(page.locator(".site-footer")).toContainText("01–20");
-  await course(page, 20);
-  await expect(page.getByRole("heading", { name: "Shared Element Transition" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(21);
+  await expect(page.locator(".site-footer")).toContainText("01–21");
+  await course(page, 21);
+  await expect(page.getByRole("heading", { name: "Scroll Animation" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({

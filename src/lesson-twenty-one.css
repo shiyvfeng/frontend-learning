@@ -1,0 +1,172 @@
+.shared-lab {
+  min-width: 0;
+  display: grid;
+  gap: 18px;
+}
+.shared-controls,
+.shared-explain,
+.shared-candidates {
+  padding: 18px;
+  background: #f4f2ee;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+  min-width: 0;
+}
+.shared-controls {
+  display: grid;
+  gap: 12px;
+}
+.shared-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.shared-lab button {
+  min-height: 42px;
+  white-space: normal;
+  line-height: 1.5;
+}
+.shared-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.shared-view {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #d8d4cc;
+  border-radius: 14px;
+}
+.shared-view h3 {
+  scroll-margin-top: 100px;
+}
+.shared-gallery {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 16px;
+}
+.shared-gallery li {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 14px;
+  background: #f6f4f0;
+  border-radius: 12px;
+}
+.shared-gallery h4 {
+  margin: 0;
+}
+.shared-gallery p {
+  font-size: 13px;
+  margin: 7px 0;
+}
+.shared-art {
+  overflow: hidden;
+  flex-shrink: 0;
+  contain: layout;
+}
+.shared-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.shared-art.thumb {
+  width: 112px;
+  height: 72px;
+  border-radius: 12px;
+}
+.shared-art.hero {
+  width: min(100%, 560px);
+  aspect-ratio: 16/9;
+  border-radius: 24px;
+  margin: 24px 0;
+}
+.shared-detail {
+  min-width: 0;
+}
+.shared-detail p,
+.shared-explain p,
+.shared-candidates p {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.shared-note {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 10px;
+}
+.shared-note input {
+  width: 100%;
+  max-width: 560px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+  background: white;
+  color: #2b2934;
+}
+.shared-detail > .checkbox-label {
+  margin-top: 20px;
+}
+.shared-status {
+  min-height: 52px;
+  padding: 14px 18px;
+  background: #ece8f5;
+  border-radius: 10px;
+  color: #493b67;
+  line-height: 1.7;
+}
+.shared-inspection {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+html.lesson21-transition {
+  view-transition-name: none;
+}
+html.lesson21-transition::view-transition {
+  pointer-events: none;
+}
+html.lesson21-transition::view-transition-group(lesson21-a),
+html.lesson21-transition::view-transition-group(lesson21-b),
+html.lesson21-transition::view-transition-group(lesson21-c) {
+  animation-duration: var(--shared-duration, 400ms);
+  animation-timing-function: ease-in-out;
+}
+html.lesson21-transition::view-transition-old(*),
+html.lesson21-transition::view-transition-new(*) {
+  animation-duration: var(--shared-duration, 400ms);
+}
+@media (max-width: 600px) {
+  .shared-view {
+    padding: 14px;
+  }
+  .shared-gallery li {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+  }
+  .shared-art.thumb {
+    width: 86px;
+    height: 60px;
+  }
+  .shared-controls,
+  .shared-explain,
+  .shared-candidates {
+    padding: 14px;
+  }
+  .shared-buttons > * {
+    flex: 1 1 120px;
+  }
+  .shared-art.hero {
+    margin: 20px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.lesson21-transition::view-transition-group(*),
+  html.lesson21-transition::view-transition-old(*),
+  html.lesson21-transition::view-transition-new(*) {
+    animation-duration: 0s !important;
+  }
+}
