@@ -451,6 +451,32 @@ test("missing or throwing WAAPI completes immediately with honest fallback and n
     await c.close();
   }
 });
+test("experiment and generated brief agree on notification-only animation scope and layout remains planned", async ({
+  page,
+}, info) => {
+  await open(page);
+  const scope = page.getByTestId("presence-animation-scope");
+  await expect(scope).toContainText("只作用于进入或离开的通知本身");
+  await expect(scope).toContainText(
+    "其余通知会按正常布局重新排列，可能直接跳到新位置",
+  );
+  await expect(scope).toContainText("尚未实现 Layout Animation");
+  await expect(scope).toContainText("布局动画留到第20课");
+  const wording = await scope.innerText();
+  await fit(page);
+  mkdirSync(out, { recursive: true });
+  await scope.screenshot({
+    path: `${out}/animation-scope-${info.project.name}.png`,
+  });
+  await stage(page, 4).click();
+  await btn(page, "生成进入退出指令").click();
+  const draft = await page
+    .getByLabel("可编辑的 进入退出 Agent 指令")
+    .inputValue();
+  expect(draft).toContain(`动画范围：${wording}`);
+  expect(draft.split(wording)).toHaveLength(2);
+  await fit(page);
+});
 test("all five stations and inert transition phase pass axe and desktop 375 local crops", async ({
   page,
 }, info) => {

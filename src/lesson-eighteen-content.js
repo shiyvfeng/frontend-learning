@@ -1,4 +1,6 @@
 export const PRESENCE_STORAGE = "frontend-observatory.lesson18.v1";
+export const presenceAnimationScope =
+  "本例的淡入淡出（opacity）和上下移动（transform）只作用于进入或离开的通知本身。通知真正删除后，其余通知会按正常布局重新排列，可能直接跳到新位置。本例尚未实现 Layout Animation；让其余项平滑换位的布局动画留到第20课。";
 export const presenceSteps = [
   {
     short: "去留",

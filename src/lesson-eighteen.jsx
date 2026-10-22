@@ -6,6 +6,7 @@ import {
   presenceSteps,
   presenceQuestions,
   presenceSources,
+  presenceAnimationScope,
   presenceInitial,
   readPresenceProgress,
 } from "./lesson-eighteen-content";
@@ -134,6 +135,8 @@ export default function LessonEighteen({ onStorageStatus }) {
       draft: `请在现有项目实现进入/退出动效与清楚的存在管理，不只把通知 opacity 设为0后永久隐藏。仅本地演示，不把动画结束当成真实业务成功，不假称使用未安装的 Motion。
 
 触发与属性：添加时先挂载 entering，opacity 0→1、translateY 12px→0；请求移除时先进入 exiting，opacity 1→0、translateY 0→-12px，结束后从数据中删除并真正卸载。当前教学时长 ${data.duration}ms ease-out。可见性、DOM存在、动画阶段、可操作性分别表达；直接条件 false 立即卸载，没有 DOM 可以播放离场。
+
+动画范围：${presenceAnimationScope}
 
 技术选择：简单 CSS transition/animation 可以描述属性与时序，WAAPI 给 Animation 对象以暂停、完成、取消；React或库的presence机制负责节点保留、身份、打断与删除。按复杂度选择，不因淡出效果就强制引库。本课使用原生 Element.animate 和手写存在管理，能力不可用或创建失败时立即完成并说明降级。
 

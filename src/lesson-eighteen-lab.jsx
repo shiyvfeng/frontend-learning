@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Choices, Note } from "./lesson-two";
+import { presenceAnimationScope } from "./lesson-eighteen-content";
 
 function useReduced() {
   const [r, set] = useState(
@@ -546,6 +547,7 @@ export default function PresenceWorkbench({ data, patch }) {
           opacity:0 代替移除。移除当前持焦项时，先移到下个 present
           通知的移除入口或添加按钮；外部控件已有焦点则不抢走。
         </p>
+        <p data-testid="presence-animation-scope">{presenceAnimationScope}</p>
         <p>
           CSS transition/animation 描述属性与时序，也可配合事件和存在管理；WAAPI
           提供 Animation 对象、暂停/完成/取消。二者本身都不替 React
