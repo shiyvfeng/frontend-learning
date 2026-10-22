@@ -1,0 +1,218 @@
+.tool06-panel,
+.tool06-runtime,
+.tool06-controls,
+.tool06-art,
+.tool06-viewport,
+.tool06-snapshot {
+  border: 1px solid #d9dae8;
+  border-radius: 16px;
+  background: #fff;
+  padding: 16px;
+  margin: 16px 0;
+  min-width: 0;
+}
+.tool06-panel h3 {
+  margin: 0 0 12px;
+}
+.tool06-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.tool-six button,
+.tool06-controls select {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.tool06-buttons button[aria-pressed="true"] {
+  background: #edebff;
+  border-color: #6860ce;
+  color: #342e7c;
+}
+.tool06-controls {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) minmax(160px, 2fr);
+  gap: 12px;
+  align-items: center;
+}
+.tool06-controls select {
+  width: 100%;
+  min-height: 44px;
+  background: #fff;
+  color: #24243b;
+  border: 1px solid #77788b;
+  border-radius: 8px;
+  padding: 8px;
+}
+.tool06-controls .checkbox-label {
+  grid-column: 1/-1;
+}
+.tool06-runtime {
+  background: #f4f2ff;
+  color: #33304f;
+}
+.tool06-runtime p,
+.tool06-boundary {
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.tool06-art {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 142px;
+  margin: 0;
+  background: #f4f3fb;
+  overflow: hidden;
+  color: #292743;
+}
+.tool06-lane {
+  height: 32px;
+  border-bottom: 1px dashed #c5c1df;
+  margin-bottom: 12px;
+}
+.tool06-dot {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #6259c7;
+}
+.tool06-bar {
+  height: 9px;
+  width: 100%;
+  background: #b4a9ed;
+  transform: scaleX(0.1);
+  transform-origin: left center;
+  border-radius: 8px;
+}
+.tool06-art-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 9px;
+}
+.tool06-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 24px;
+  background: #e2ddfa;
+  border-radius: 8px;
+}
+.tool06-progress {
+  font-variant-numeric: tabular-nums;
+}
+.tool06-viewport {
+  height: clamp(240px, 43svh, 360px);
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: auto;
+  touch-action: pan-y;
+  scroll-behavior: auto;
+  position: relative;
+  isolation: isolate;
+}
+.tool06-scroll-intro {
+  height: 80px;
+  box-sizing: border-box;
+  padding: 16px;
+  color: #56516e;
+  font-size: 13px;
+}
+.tool06-scroll-outro {
+  min-height: 400px;
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.tool06-viewport [data-scroll-track] {
+  position: relative;
+}
+.tool06-phases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  list-style-position: inside;
+  padding: 0;
+  margin: 20px 0;
+}
+.tool06-phases li {
+  background: #f5f5fa;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.tool06-snapshot {
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #33304f;
+}
+.tool06-feedback {
+  min-height: 28px;
+  font-size: 13px;
+  color: #484265;
+  line-height: 1.8;
+}
+.tool06-context {
+  width: 100%;
+  min-height: 150px;
+  box-sizing: border-box;
+  padding: 12px;
+  line-height: 1.7;
+  border: 1px solid #8d8ba4;
+  border-radius: 10px;
+}
+.tool06-context-editor {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+.tool-six :focus-visible {
+  outline: 3px solid #655be0;
+  outline-offset: 3px;
+}
+.tool06-viewport:focus-visible {
+  outline-offset: -4px;
+}
+.tool-six .agent-editor textarea {
+  scroll-margin-block: 100px;
+}
+.tool-six .roadmap-body {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .tool06-controls {
+    grid-template-columns: 1fr;
+  }
+  .tool06-controls .checkbox-label {
+    grid-column: auto;
+  }
+  .tool06-phases {
+    grid-template-columns: 1fr;
+  }
+  .tool06-panel,
+  .tool06-runtime,
+  .tool06-controls {
+    padding: 13px;
+  }
+  .tool06-buttons button {
+    flex: 1 1 auto;
+    min-height: 44px;
+  }
+  .tool06-scroll-outro {
+    min-height: 380px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-six * {
+    scroll-behavior: auto;
+  }
+}

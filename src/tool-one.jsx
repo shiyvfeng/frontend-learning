@@ -161,7 +161,7 @@ export default function ToolOne({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T01工具专题已完成；这不代表真实Next服务已运行或性能/SEO已验证。可以继续T02 Tailwind工具专题，T06–T12仍为预告。",
+        "T01工具专题已完成；这不代表真实Next服务已运行或性能/SEO已验证。可以继续T02 Tailwind工具专题，T07–T12仍为预告。",
       );
     else
       setNotice(
@@ -554,7 +554,7 @@ export default function ToolOne({ onStorageStatus, onNavigate }) {
       </div>
       {onNavigate && <button className="primary" onClick={()=>onNavigate("T02")}>继续T02 · Tailwind</button>}
       <p className="tool01-boundary">
-        T02 Tailwind已开放；T06–T12仍为预告，课程尚未全部结束。
+        T02 Tailwind已开放；T07–T12仍为预告，课程尚未全部结束。
       </p>
       {onNavigate && (
         <button onClick={() => onNavigate("B")}>返回综合B复习</button>
