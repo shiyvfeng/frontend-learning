@@ -1,0 +1,73 @@
+/* Local handwritten CSS adaptation; not global Tailwind output. */
+.tool04-preview {
+  --t04-brand: #5740a4;
+  --t04-on-brand: #fff;
+  --t04-gap: 12px;
+  --t04-pad: 16px;
+  --t04-radius: 12px;
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.tool04-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--t04-gap);
+  padding: var(--t04-pad);
+  border-radius: var(--t04-radius);
+  border: 1px solid #96859e;
+  background: #fff;
+  color: #2e293a;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tool04-card-header {
+  display: grid;
+  gap: 8px;
+}
+.tool04-card [data-slot="card-title"] {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.5;
+}
+.tool04-card [data-slot="card-description"] {
+  margin: 0;
+  color: #595263;
+}
+.tool04-card [data-slot="card-footer"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.tool04-button {
+  font: inherit;
+  line-height: 1.5;
+  min-height: 44px;
+  border: 2px solid var(--t04-brand);
+  border-radius: 8px;
+  padding: 8px 14px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  background: var(--t04-brand);
+  color: var(--t04-on-brand);
+}
+.tool04-button[data-variant="outline"] {
+  background: #fff;
+  color: var(--t04-brand);
+}
+.tool04-button[data-size="large"] {
+  min-height: 52px;
+  padding: 12px 20px;
+}
+.tool04-button:focus-visible {
+  outline: 3px solid #473074;
+  outline-offset: 3px;
+}
+.tool04-button:disabled {
+  background: #e8e3ee;
+  border-color: #857790;
+  color: #574c61;
+  cursor: not-allowed;
+}

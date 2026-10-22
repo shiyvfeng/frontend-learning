@@ -130,7 +130,7 @@ test('unavailable browser storage still permits local interactions without false
 });
 test('B exit opens T01 while T02 opens and T03 remains noninteractive preview and 32 plus A/B still available',async({page})=>{
  await open(page);await b(page,'返回综合B复习').click();await b(page,'继续T01 · React / Next.js').click();await expect(page.locator('#tool01-stage-heading')).toBeVisible();
- const nav=page.getByRole('navigation',{name:'综合与工具模块'});if(!await nav.isVisible())await b(page,'☰ 课程').click();expect(await nav.getByRole('button').count()).toBe(5);await expect(nav.locator('.coverage-preview')).toHaveCount(9);await expect(page.locator('.available-dot')).toHaveCount(32);await expect(page.locator('body')).toContainText('T02 Tailwind已开放');
+ const nav=page.getByRole('navigation',{name:'综合与工具模块'});if(!await nav.isVisible())await b(page,'☰ 课程').click();expect(await nav.getByRole('button').count()).toBe(5);await expect(nav.locator('.coverage-preview')).toHaveCount(8);await expect(page.locator('.available-dot')).toHaveCount(32);await expect(page.locator('body')).toContainText('T02 Tailwind已开放');
 });
 test('five stations axe, viewport fit and local visual crops',async({page},info)=>{
  await open(page);for(let i=0;i<5;i++){await st(page,i).click();await axeCheck(page);await page.locator('.lesson-stage').screenshot({path:`${out}/${info.project.name}-station${i+1}.png`});}

@@ -154,7 +154,7 @@ export default function ToolThree({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T03工具专题已完成；不代表安装primitive就完成全部无障碍或生产验收。下一专题T04尚未制作，T04–T12仍为9个预告。",
+        "T03工具专题已完成；不代表安装primitive就完成全部无障碍或生产验收。T04已开放，T05–T12仍为8个预告。",
       );
     else
       setNotice(
@@ -544,11 +544,13 @@ export default function ToolThree({ onStorageStatus, onNavigate }) {
         </button>
       </div>
       <p className="tool03-boundary">
-        下一专题 T04 · shadcn/ui
-        尚未制作；T04–T12共9工具模块仍为预告，课程尚未全部结束。
+        T04 · shadcn/ui已开放；T05–T12共8工具模块仍为预告，课程尚未全部结束。
       </p>
       {onNavigate && (
-        <button onClick={() => onNavigate("T02")}>返回T02复习</button>
+        <div className="tool03-actions">
+          <button onClick={() => onNavigate("T04")}>继续T04 · shadcn/ui</button>
+          <button onClick={() => onNavigate("T02")}>返回T02复习</button>
+        </div>
       )}
       <Tool03References />
       <Roadmap />

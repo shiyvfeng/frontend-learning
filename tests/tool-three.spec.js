@@ -131,7 +131,7 @@ test("real primitive package and source use Radix parts while Base UI is not ins
     "Base UI仅作未安装",
     "不是浏览器top layer",
     "不要把ARIA声明当成",
-    "T04–T12仍为9个预告",
+    "T05–T12仍为8个预告",
   ])
     expect(text).toContain(t);
 });
@@ -952,7 +952,7 @@ for (const reducedMotion of ["no-preference", "reduce"])
     );
     await c.close();
   });
-test("T02 exit enters actual T03, nine tool previews remain readonly without invented37", async ({
+test("T02 exit enters actual T03, eight tool previews remain readonly without invented37", async ({
   page,
 }) => {
   await open(page);
@@ -961,8 +961,8 @@ test("T02 exit enters actual T03, nine tool previews remain readonly without inv
   await expect(page.locator("#tool03-stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(5);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(9);
+  await expect(nav.getByRole("button")).toHaveCount(6);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(8);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator("body")).toContainText("T04 · shadcn/ui");
   await expect(page.locator('[data-lesson-id="37"]')).toHaveCount(0);

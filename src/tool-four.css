@@ -1,0 +1,195 @@
+.tool04-workbench {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.tool04-boundary,
+.tool04-panel,
+.tool04-readout,
+.tool04-maintenance {
+  border: 1px solid #d6cbdf;
+  border-radius: 14px;
+  padding: 18px;
+  background: #f7f4fa;
+  color: #343044;
+  overflow-wrap: anywhere;
+}
+.tool-four legend {
+  padding: 0 8px;
+  font-weight: 700;
+}
+.tool-four label:not(.checkbox-label) {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.tool-four select,
+.tool-four input:not([type="checkbox"]),
+.tool-four textarea.tool04-context {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid #93839f;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: #302a3c;
+  font: inherit;
+  min-height: 44px;
+  margin: 8px 0;
+}
+.tool-four textarea.tool04-context {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.tool-four button {
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.tool04-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.tool04-controls {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #c3b5cd;
+  border-radius: 14px;
+}
+.tool04-controls > button {
+  margin: 8px 8px 8px 0;
+}
+.tool04-workbench .checkbox-label {
+  font: inherit;
+  color: #343044;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+.tool04-workbench input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.tool04-panel > button {
+  margin: 12px 8px 4px 0;
+}
+.tool04-actions button[aria-pressed="true"] {
+  background: #ece8f8;
+  border-color: #76518d;
+  color: #3d2852;
+}
+.tool04-code {
+  min-width: 0;
+}
+.tool04-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-height: 320px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  background: #282535;
+  color: #f7f4ff;
+  border: 1px solid #988aa9;
+  border-radius: 10px;
+  font:
+    13px/1.8 ui-monospace,
+    monospace;
+}
+.tool04-code pre:focus-visible {
+  outline: 3px solid #5740a4;
+  outline-offset: 3px;
+}
+.tool04-feedback {
+  border-left: 3px solid #80638f;
+  padding: 14px;
+  background: #f5f1f9;
+  color: #343044;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.tool04-check {
+  border: 2px solid #8b7d99;
+  padding: 16px;
+  margin: 12px 0;
+  background: #fff;
+}
+.tool-four .agent-editor textarea {
+  min-height: 430px;
+}
+.tool04-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(24 19 36 / 0.64);
+  z-index: 1000;
+}
+.tool04-dialog {
+  position: fixed;
+  z-index: 1001;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(540px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+  border: 2px solid #93839f;
+  border-radius: 18px;
+  padding: 24px;
+  background: #fff;
+  color: #302a3c;
+  font:
+    16px/1.7 system-ui,
+    sans-serif;
+  overflow-wrap: anywhere;
+}
+.tool04-dialog h2 {
+  font-size: 24px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+.tool04-dialog button {
+  font: inherit;
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  border: 1px solid #8b789c;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #f6f3fc;
+  color: #302a3c;
+  margin: 8px 8px 8px 0;
+}
+.tool04-dialog button:focus-visible {
+  outline: 3px solid #5740a4;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .tool04-boundary,
+  .tool04-panel,
+  .tool04-readout,
+  .tool04-maintenance,
+  .tool04-controls {
+    padding: 14px;
+  }
+  .tool04-actions button {
+    width: 100%;
+  }
+  .tool-four .agent-editor textarea {
+    min-height: 360px;
+  }
+  .tool04-dialog {
+    padding: 20px;
+  }
+}
