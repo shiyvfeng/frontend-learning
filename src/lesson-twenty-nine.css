@@ -1,0 +1,234 @@
+.chart29-lab {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.chart29-controls,
+.chart29-inspector,
+.chart29-explain {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #d2cbdc;
+  border-radius: 12px;
+  background: #f3f1ed;
+}
+.chart29-boundary,
+.chart29-hero-boundary {
+  padding: 16px;
+  border: 2px solid #66508b;
+  border-radius: 12px;
+  background: #ede8f6;
+  color: #35234d;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.chart29-boundary p {
+  margin: 8px 0 0;
+}
+.chart29-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.chart29-lab button {
+  min-height: 42px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.chart29-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.chart29-controls label {
+  display: grid;
+  gap: 8px;
+  line-height: 1.7;
+}
+.chart29-controls input,
+.chart29-controls select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+  color: #2b2934;
+  background: white;
+}
+.chart29-controls fieldset {
+  min-width: 0;
+  border: 1px solid #c5becf;
+  border-radius: 8px;
+  padding: 12px;
+}
+.chart29-controls legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+.chart29-controls p,
+.chart29-caption,
+.chart29-summary,
+.chart29-explain p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.chart29-figure {
+  margin: 0;
+  min-width: 0;
+  border: 1px solid #c5becf;
+  border-radius: 12px;
+  padding: 16px;
+  background: #faf9f6;
+}
+.chart29-figure h3,
+.chart29-inspector h3 {
+  margin: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.chart29-figure figcaption p {
+  margin: 8px 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.chart29-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+}
+.chart29-tick {
+  font-size: 28px;
+  fill: #494251;
+}
+.chart29-label {
+  font-size: 30px;
+  fill: #342b43;
+}
+.chart29-missing {
+  font-size: 28px;
+  fill: #6c3e28;
+}
+.chart29-grid {
+  stroke: #d2cbdc;
+  stroke-width: 1.5;
+}
+.chart29-axis {
+  stroke: #5a5069;
+  stroke-width: 3;
+}
+.chart29-bar {
+  fill: #74608e;
+}
+.chart29-bar.selected {
+  stroke: #342047;
+  stroke-width: 4;
+  stroke-dasharray: 7 3;
+}
+.chart29-line {
+  stroke: #665087;
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+.chart29-dot {
+  fill: #665087;
+  stroke: #342047;
+  stroke-width: 2;
+}
+.chart29-zero {
+  fill: #fff;
+  stroke: #443253;
+  stroke-width: 3;
+}
+.chart29-empty {
+  padding: 24px 16px;
+  border: 2px dashed #b9abc9;
+  border-radius: 10px;
+  line-height: 1.8;
+}
+.chart29-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 9px;
+  min-width: 0;
+}
+.chart29-values button {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.chart29-detail {
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #b8a7cd;
+  border-radius: 10px;
+  background: #eee7f5;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.chart29-table-wrap {
+  min-width: 0;
+  border: 1px solid #c5becf;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.chart29-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #faf9f6;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.chart29-table-wrap caption {
+  padding: 12px;
+  font-weight: 700;
+  background: #eee7f5;
+  text-align: left;
+}
+.chart29-table-wrap th,
+.chart29-table-wrap td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #dfd8e7;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.chart29-table-wrap thead {
+  background: #f0ecf5;
+}
+.chart29-table-wrap tbody tr:last-child > * {
+  border-bottom: 0;
+}
+.chart29-status {
+  padding: 16px;
+  border-radius: 10px;
+  background: #e9e3f2;
+  color: #3d2b55;
+  line-height: 1.8;
+  min-height: 60px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .chart29-controls,
+  .chart29-inspector,
+  .chart29-explain,
+  .chart29-figure {
+    padding: 12px;
+  }
+  .chart29-buttons > * {
+    flex: 1 1 110px;
+  }
+  .chart29-values {
+    grid-template-columns: 1fr;
+  }
+  .chart29-table-wrap th,
+  .chart29-table-wrap td {
+    padding: 9px 5px;
+    font-size: 13px;
+  }
+}

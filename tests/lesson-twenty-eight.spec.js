@@ -136,7 +136,7 @@ test("business visual rules keep boolean degree and trigger responsibilities sep
     /dotLottie支持状态机.*Data Binding.*legacy/s,
   );
 });
-test("lazy runtime real original asset and29 preview stay consistent", async ({
+test("lazy runtime real original asset and30 preview stay consistent", async ({
   page,
 }) => {
   const urls = [];
@@ -161,9 +161,9 @@ test("lazy runtime real original asset and29 preview stay consistent", async ({
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(28).click();
+  await nav.getByRole("button").nth(29).click();
   await expect(
-    page.getByRole("heading", { name: "数据可视化", exact: true }),
+    page.getByRole("heading", { name: "长列表虚拟化", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

@@ -202,6 +202,10 @@ export const implementedCourseMetadata = {
     view: "pointer",
     technology: "Pointer Events + CSS变量 / transform · 无图形库",
   },
+  29: {
+    view: "charts",
+    technology: "React + 原生SVG / HTML数据表 · 虚构教学样例",
+  },
   28: {
     view: "resourceMotion",
     technology: "lottie-web 5.13.0 SVG · 自制JSON / Rive输入模拟",

@@ -156,7 +156,7 @@ test("typed binding only changes specified object and rejects unsaved missing wr
     ).objects.tag.accent,
   ).toBe(true);
 });
-test("lazy01–28 release has no Spline Three SDK or assets and29 remains preview", async ({
+test("lazy01–29 release has no Spline Three SDK or assets and30 remains preview", async ({
   page,
 }) => {
   const urls = [];
@@ -166,7 +166,7 @@ test("lazy01–28 release has no Spline Three SDK or assets and29 remains previe
   expect(urls.some((u) => /lesson-twenty-seven/.test(u))).toBe(false);
   await directory(page);
   await expect(lab(page)).toHaveAttribute("data-status", "empty");
-  await expect(page.locator(".available-dot")).toHaveCount(28);
+  await expect(page.locator(".available-dot")).toHaveCount(29);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
@@ -178,9 +178,9 @@ test("lazy01–28 release has no Spline Three SDK or assets and29 remains previe
   await expect(page.locator("canvas,iframe")).toHaveCount(0);
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(28).click();
+  await nav.getByRole("button").nth(29).click();
   await expect(
-    page.getByRole("heading", { name: "数据可视化", exact: true }),
+    page.getByRole("heading", { name: "长列表虚拟化", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toContainText("尚未制作");
 });

@@ -155,7 +155,7 @@ test("logical view inversion, topmost geometry hit and full-shape bounds", () =>
   });
   expect(canvasView(300, 180, 0.75).scale).toBe(0.375);
 });
-test("lazy Canvas release01–28 only, next data visualization remains preview and local requests", async ({
+test("lazy Canvas release01–29 only, next virtualization remains preview and local requests", async ({
   page,
 }) => {
   const urls = [];
@@ -166,15 +166,15 @@ test("lazy Canvas release01–28 only, next data visualization remains preview a
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-four-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Canvas · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(28);
+  await expect(page.locator(".available-dot")).toHaveCount(29);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(28).click();
+  await nav.getByRole("button").nth(29).click();
   await expect(
-    page.getByRole("heading", { name: "数据可视化", exact: true }),
+    page.getByRole("heading", { name: "长列表虚拟化", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

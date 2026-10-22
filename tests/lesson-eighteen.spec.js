@@ -93,7 +93,7 @@ test("eighteenth lazy route opens first eighteen only without Motion or external
   await directory(page);
   expect(requests.some((u) => /lesson-eighteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Enter/Exit · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(28);
+  await expect(page.locator(".available-dot")).toHaveCount(29);
   await expect(page.getByTestId("presence-lab")).toContainText("未使用 Motion");
   expect(
     requests
