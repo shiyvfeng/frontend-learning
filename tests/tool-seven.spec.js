@@ -1189,3 +1189,41 @@ test("long own context remains inert editable text and narrow brief focus stays 
   });
   save(info.project.name + "-long-focus", trace);
 });
+
+test("speed and loop contract changes preserve edited draft and invalidate prior human review", async ({
+  page,
+}) => {
+  const d = {
+    ...good(),
+    context: "已有原创JSON与Web约束",
+    generated: true,
+    reviewed: true,
+  };
+  d.draft = tool07Brief(d) + "\n用户自己的修改。";
+  await seed(page, d);
+  await open(page, 4);
+  await expect(f(page, "agent-draft")).toHaveValue(d.draft);
+  await stage(page, 1).click();
+  await f(page, "speed").selectOption("2");
+  await stage(page, 4).click();
+  expect((await read(page)).draftStale).toBe(true);
+  expect((await read(page)).reviewed).toBe(false);
+  await expect(f(page, "agent-draft")).toHaveValue(d.draft);
+  const check = page.getByRole("checkbox", {
+    name: "我已核对资产、输入合同、部署环境和回退验收。",
+    exact: true,
+  });
+  await expect(check).toBeDisabled();
+  await b(page, "重新生成工具选型草稿").click();
+  expect(await f(page, "agent-draft").inputValue()).toContain("速度2倍");
+  await check.check();
+  const second = await f(page, "agent-draft").inputValue();
+  await stage(page, 1).click();
+  await page
+    .getByRole("checkbox", { name: "显式允许循环（默认关闭）", exact: true })
+    .check();
+  await stage(page, 4).click();
+  expect((await read(page)).draftStale).toBe(true);
+  expect((await read(page)).reviewed).toBe(false);
+  await expect(f(page, "agent-draft")).toHaveValue(second);
+});

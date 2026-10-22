@@ -84,6 +84,13 @@ function Player({
       setSnapshot(null);
     }
   }, [blocked]);
+  function contract(values) {
+    patch((old) => ({
+      ...values,
+      draftStale: old.generated || old.draftStale,
+      reviewed: false,
+    }));
+  }
   function sample(n) {
     patch({ frame: n, sampledSeen: true });
     controller.current?.seek(n);
@@ -167,7 +174,7 @@ function Player({
         <select
           id="tool07-speed"
           value={data.speed}
-          onChange={(e) => patch({ speed: e.target.value })}
+          onChange={(e) => contract({ speed: e.target.value })}
         >
           <option value="0.5">0.5倍</option>
           <option value="1">1倍</option>
@@ -177,9 +184,7 @@ function Player({
           <input
             type="checkbox"
             checked={data.loop}
-            onChange={(e) =>
-              patch({ loop: e.target.checked, draftStale: data.generated })
-            }
+            onChange={(e) => contract({ loop: e.target.checked })}
           />
           显式允许循环（默认关闭）
         </label>
