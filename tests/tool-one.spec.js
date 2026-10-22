@@ -42,6 +42,7 @@ test('explicit constraints admit multiple public solutions and distinguish reque
  expect(tool01Check({...tool01Initial(),model:'export',controlSide:'server'}).issues.map(i=>i.id)).toContain('boundary');
  expect(tool01Check({...tool01Initial(),model:'export',controlSide:'server',interactive:false}).valid).toBe(true);
  expect(tool01Check({...tool01Initial(),dataSource:'api',host:'api'}).valid).toBe(true);
+ const browserData={...tool01Initial(),model:'export',dataSource:'api',host:'api',interactive:false,controlSide:'server',contentSide:'server'};expect(tool01Check(browserData).issues.map(i=>i.id)).toContain('boundary');expect(tool01Check({...browserData,contentSide:'client'}).valid).toBe(true);
 });
 test('logical phases separate deployment build, RSC output, first HTML and hydration, not blanket React SSR claims',()=>{
  const d=tool01Initial();expect(tool01Preparation(d)).toContain('createRoot');
@@ -82,6 +83,7 @@ test('browser API model retains initial placeholder then accepts local sample af
 test('Server-only noninteractive model coordinates output without asserting zero framework JS',async({page})=>{
  await open(page,1);await model(page,'export').click();await page.getByRole('checkbox',{name:'需要客户端事件与本地状态',exact:true}).uncheck();await choose(page,'control','server');
  await start(page);await expect(page.locator('.tool01-timeline')).toContainText('不代表框架必定零JS');await b(page,'体验真实React控件').click();await expect(page.locator('[data-real-count]')).toHaveText('0');await expect(feedback(page)).toContainText('没有用户交互需求');
+ await choose(page,'host','api');await choose(page,'data','api');await b(page,'开始模拟首访').click();expect((await run(page)).status).toBe('idle');await expect(feedback(page)).toContainText('不会自动承担业务API逻辑');await choose(page,'content','client');await start(page);await expect(page.locator('.tool01-output')).toContainText('API教学课程');
 });
 test('sealed failure stays failure, duplicate starts blocked, retry preserves readable result and real counter',async({page})=>{
  await open(page,2);await start(page);await b(page,'体验真实React控件').click();await choose(page,'result','error');await b(page,'开始模拟首访').click();const id=(await run(page)).id;await b(page,'开始模拟首访').dblclick();expect((await run(page)).id).toBe(id);

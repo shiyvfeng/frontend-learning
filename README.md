@@ -401,6 +401,8 @@ B为未编号综合阶段，不是第34课。五站以两组人工案例对照�
 
 ## 工具专题T01：React / Next.js
 
+浏览器后取API并更新内容的本例需要客户端执行边界；仅有框架路由运行时不会自动承担业务取数。正文/控件都保留Server职责时会阻止该组合，并提供改为Client子树或构建/请求时数据的路径；独立脚本等替代需另行设计。
+
 沿用本站React19.3.1 + Vite8.3.4及createRoot客户端渲染，未安装Next、未迁移应用。React是UI库，Next是基于React组合路由/渲染/服务能力的框架候选；三种代表模型为本站式CSR、Next App Router静态导出、Next请求时渲染路由，不代表所有React/Next架构。官方React19.3与Next App Router16.4.2页面于2026-10-22核对，文档版本不是本站运行Next的声明。
 
 五站以可选静态目录/个性化首次HTML/公开文档场景核对数据、部署与组件边界，再手动推进首访阶段。部署前构建明确与本次请求分离；Next首次Client边界也可有预渲染HTML，之后由JS水合，不等于浏览器才生成首次HTML。Server Components的RSC职责与生成HTML的SSR阶段分开解释；React也可用于其他SSR架构，不以Next名称保证性能或SEO。

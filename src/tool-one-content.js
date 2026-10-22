@@ -103,6 +103,16 @@ export function tool01Check(d) {
       id: "boundary",
       text: "交互控件需要事件/状态，不能在本RSC模型中只做Server Component；把交互放入Client边界，数据读取仍可留服务端。",
     });
+  if (
+    d.model !== "vite" &&
+    d.dataSource === "api" &&
+    d.contentSide === "server" &&
+    d.controlSide === "server"
+  )
+    issues.push({
+      id: "boundary",
+      text: "本例要在浏览器后取API并更新正文，需要选择客户端执行边界（如正文的Client子树），或改为构建/请求时取数。框架路由运行时不会自动承担业务API逻辑；独立脚本等其他方案需另行设计。",
+    });
   return { valid: issues.length === 0, issues };
 }
 export function tool01Preparation(d) {
