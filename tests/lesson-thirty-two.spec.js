@@ -187,7 +187,7 @@ test("finite nodes fit including edge positions and brief separates camera from 
   expect(spaceBrief(spaceInitial())).toMatch(
     /数据结构.*导航与锚点.*选择与编辑.*事务与输入.*滚动与无障碍.*性能与持久化.*验收/s,
   );
-  expect(spaceBrief(spaceInitial())).toContain("综合A/B已开放，T01/T02/T03/T04已开放，T05–T12仍待制作");
+  expect(spaceBrief(spaceInitial())).toContain("综合A/B已开放，T01/T02/T03/T04/T05已开放，T06–T12仍待制作");
 });
 test("actual SVG module is lazy all32 numbered open while A/B/T01/T02 open and10 tool modules remain previews", async ({
   page,
@@ -807,7 +807,7 @@ async function flow(p, act, toggle, edit) {
   );
   await a("完成第三十二节");
   await expect(p.locator(".notice")).toContainText(
-    "可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01/T02/T03/T04已开放，T05–T12尚未制作，课程仍在继续",
+    "可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01/T02/T03/T04/T05已开放，T06–T12尚未制作，课程仍在继续",
   );
   await expect(p.locator(".notice")).not.toContainText("全课程已完成");
   await expect(p.locator(".lesson-thirty-two .lesson-bottom")).toContainText(

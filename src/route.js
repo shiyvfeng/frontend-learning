@@ -148,6 +148,10 @@ export const coverageTags = [
 // Register a lesson only once its view is implemented. All availability UI reads
 // this release metadata; planned numbered lessons and coverage tags stay locked.
 export const implementedCourseMetadata = {
+  T05: {
+    view: "motionLab",
+    technology: "真实Motion14.6.0 / Presence与position布局 / CSS简单反馈",
+  },
   T04: {
     view: "localComponents",
     technology: "本地Card来源改编 / 真实配置与源码 / 维护候选模拟",
@@ -303,15 +307,15 @@ export const availableLessonRange = formatRanges(
 );
 export const availabilityText =
   availableLessons.length === lessonCatalog.length
-    ? `目前 ${availableLessonRange} 编号课可以学习；综合阶段A/B及T01/T02/T03/T04已开放；T05–T12共8工具模块尚未制作，课程仍在继续。`
+    ? `目前 ${availableLessonRange} 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05已开放；T06–T12共7工具模块尚未制作，课程仍在继续。`
     : availableLessons.length
       ? `目前 ${availableLessonRange} 课可以学习。其余保留目录，按节逐步制作。`
       : "课程尚未制作，当前提供目录预览。";
-export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}${availableLessons.length === lessonCatalog.length ? "（编号课；另有综合A/B已开放，T01/T02/T03/T04已开放；T05–T12尚未制作）" : ""}`;
+export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}${availableLessons.length === lessonCatalog.length ? "（编号课；另有综合A/B已开放，T01/T02/T03/T04/T05已开放；T06–T12尚未制作）" : ""}`;
 export function nextLessonHint(index) {
   const next = lessonCatalog[index + 1];
   if (!next)
-    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01/T02/T03/T04已开放，T05–T12尚未制作，课程仍在继续。`;
+    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01/T02/T03/T04/T05已开放，T06–T12尚未制作，课程仍在继续。`;
   return next.available
     ? `可以从课程目录继续 ${next.id} ${next.title}。`
     : `下一课 ${next.id} ${next.title} 尚未制作。`;

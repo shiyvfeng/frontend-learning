@@ -169,7 +169,7 @@ export default function ToolTwo({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T02工具专题已完成；不代表安装工具就得到设计系统或实际项目通过验收。可以继续T03 Radix / Base UI工具专题，T05–T12仍为预告。",
+        "T02工具专题已完成；不代表安装工具就得到设计系统或实际项目通过验收。可以继续T03 Radix / Base UI工具专题，T06–T12仍为预告。",
       );
     else
       setNotice(
@@ -561,7 +561,7 @@ export default function ToolTwo({ onStorageStatus, onNavigate }) {
       </div>
       {onNavigate && <button className="primary" onClick={()=>onNavigate("T03")}>继续T03 · Radix / Base UI</button>}
       <p className="tool02-boundary">
-        T03已开放；T05–T12共8工具模块仍为预告，课程尚未全部结束。
+        T03已开放；T06–T12共7工具模块仍为预告，课程尚未全部结束。
       </p>
       {onNavigate && (
         <button onClick={() => onNavigate("T01")}>返回T01复习</button>

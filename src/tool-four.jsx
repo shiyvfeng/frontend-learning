@@ -155,7 +155,7 @@ export default function ToolFour({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T04工具专题已完成；不代表源码入库就完成全部维护或生产验收。下一专题T05尚未制作，T05–T12仍为8个预告。",
+        "T04工具专题已完成；不代表源码入库就完成全部维护或生产验收。T05已开放，T06–T12仍为7个预告。",
       );
     else
       setNotice(
@@ -545,11 +545,13 @@ export default function ToolFour({ onStorageStatus, onNavigate }) {
         </button>
       </div>
       <p className="tool04-boundary">
-        下一专题 T05 · Motion
-        尚未制作；T05–T12共8工具模块仍为预告，课程尚未全部结束。
+        T05 · Motion已开放；T06–T12共7工具模块仍为预告，课程尚未全部结束。
       </p>
       {onNavigate && (
-        <button onClick={() => onNavigate("T03")}>返回T03复习</button>
+        <div className="tool04-actions">
+          <button onClick={() => onNavigate("T05")}>继续T05 · Motion</button>
+          <button onClick={() => onNavigate("T03")}>返回T03复习</button>
+        </div>
       )}
       <Tool04References />
       <Roadmap />

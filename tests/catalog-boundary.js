@@ -8,7 +8,7 @@ export async function assertRemainingPlans32(page, expect) {
   await expect(page.locator(".coming-status")).toHaveCount(0);
   await expect(page.locator(".site-footer")).toContainText("01–32 · 32 / 32");
   await expect(page.locator(".site-footer")).toContainText(
-    "综合A/B已开放，T01/T02/T03/T04已开放；T05–T12尚未制作",
+    "综合A/B已开放，T01/T02/T03/T04/T05已开放；T06–T12尚未制作",
   );
   const summary = page.getByText("路线核对说明与官方来源", { exact: true });
   if (!(await summary.evaluate((e) => e.closest("details").open)))
@@ -43,10 +43,12 @@ export async function assertRemainingPlans32(page, expect) {
   await expect(outline.locator('[data-coverage-id="T03"] button')).toHaveCount(1);
   await expect(outline.locator('[data-coverage-id="T04"]')).toContainText("已制作");
   await expect(outline.locator('[data-coverage-id="T04"] button')).toHaveCount(1);
+  await expect(outline.locator('[data-coverage-id="T05"]')).toContainText("已制作");
+  await expect(outline.locator('[data-coverage-id="T05"] button')).toHaveCount(1);
   for (const id of [
     ...Array.from(
-      { length: 8 },
-      (_, i) => "T" + String(i + 5).padStart(2, "0"),
+      { length: 7 },
+      (_, i) => "T" + String(i + 6).padStart(2, "0"),
     ),
   ]) {
     const tag = outline.locator(`[data-coverage-id="${id}"]`);

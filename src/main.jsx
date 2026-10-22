@@ -27,6 +27,7 @@ const LessonFourteen = React.lazy(() => import("./lesson-fourteen"));
 const LessonFifteen = React.lazy(() => import("./lesson-fifteen"));
 const ToolThree = React.lazy(() => import("./tool-three"));
 const ToolFour = React.lazy(() => import("./tool-four"));
+const ToolFive = React.lazy(() => import("./tool-five"));
 const ToolTwo = React.lazy(() => import("./tool-two"));
 const ToolOne = React.lazy(() => import("./tool-one"));
 const StageB = React.lazy(() => import("./stage-b"));
@@ -86,6 +87,7 @@ const lessonViews = {
   utilities: ToolTwo,
   primitives: ToolThree,
   localComponents: ToolFour,
+  motionLab: ToolFive,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";

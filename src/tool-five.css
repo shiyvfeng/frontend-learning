@@ -1,0 +1,241 @@
+.tool05-workbench {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.tool05-boundary,
+.tool05-panel,
+.tool05-readout,
+.tool05-maintenance {
+  border: 1px solid #d6cbdf;
+  border-radius: 14px;
+  padding: 18px;
+  background: #f7f4fa;
+  color: #343044;
+  overflow-wrap: anywhere;
+}
+.tool-five legend {
+  padding: 0 8px;
+  font-weight: 700;
+}
+.tool-five label:not(.checkbox-label) {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.tool-five select,
+.tool-five input:not([type="checkbox"]),
+.tool-five textarea.tool05-context {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid #93839f;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: #302a3c;
+  font: inherit;
+  min-height: 44px;
+  margin: 8px 0;
+}
+.tool-five textarea.tool05-context {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.tool-five button {
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.tool05-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.tool05-controls {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #c3b5cd;
+  border-radius: 14px;
+}
+.tool05-controls > button {
+  margin: 8px 8px 8px 0;
+}
+.tool05-workbench .checkbox-label {
+  font: inherit;
+  color: #343044;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+.tool05-workbench input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.tool05-panel > button {
+  margin: 12px 8px 4px 0;
+}
+.tool05-actions button[aria-pressed="true"] {
+  background: #ece8f8;
+  border-color: #76518d;
+  color: #3d2852;
+}
+.tool05-feedback {
+  border-left: 3px solid #80638f;
+  padding: 14px;
+  background: #f5f1f9;
+  color: #343044;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.tool05-check {
+  border: 2px solid #8b7d99;
+  padding: 16px;
+  margin: 12px 0;
+  background: #fff;
+}
+.tool-five .agent-editor textarea {
+  min-height: 430px;
+}
+
+@media (max-width: 600px) {
+  .tool05-boundary,
+  .tool05-panel,
+  .tool05-readout,
+  .tool05-controls {
+    padding: 14px;
+  }
+  .tool05-actions button {
+    width: 100%;
+  }
+  .tool-five .agent-editor textarea {
+    min-height: 360px;
+  }
+}
+.tool05-runtime {
+  padding: 18px;
+  border: 2px solid #a497b2;
+  border-radius: 14px;
+  background: #fff;
+  color: #343044;
+  overflow-wrap: anywhere;
+}
+.tool05-css-demo {
+  padding: 16px;
+  margin-top: 16px;
+  border: 1px solid #b5a7c1;
+  border-radius: 12px;
+  background: #fff;
+}
+.tool05-css-demo button {
+  background: #f1ecfb;
+  border: 2px solid #76618a;
+  color: #342447;
+  transition:
+    background-color 120ms,
+    border-color 120ms;
+}
+.tool05-css-demo button:hover {
+  background: #e4d9f5;
+  border-color: #59406f;
+}
+.tool05-css-demo button:active {
+  background: #d4c1ed;
+  border-color: #433057;
+}
+.tool05-css-demo button:focus-visible {
+  outline: 3px solid #5740a4;
+  outline-offset: 3px;
+}
+.tool05-css-demo[data-static="true"] button {
+  transition: none;
+}
+.tool05-scene {
+  min-width: 0;
+  position: relative;
+}
+.tool05-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  min-height: 160px;
+}
+.tool05-card {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid #a391b0;
+  border-radius: 14px;
+  padding: 18px;
+  background: #fff;
+  color: #302a3c;
+  overflow-wrap: anywhere;
+}
+.tool05-card h3 {
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.tool05-card p {
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 8px 0;
+}
+.tool05-card[data-present="false"] {
+  pointer-events: none;
+}
+.tool05-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #7454a4;
+}
+.tool05-detail {
+  border-top: 1px dashed #baa9c6;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+.tool05-log {
+  border: 1px solid #c9bdd2;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f7f4fa;
+  color: #343044;
+}
+.tool05-log summary {
+  min-height: 44px;
+  cursor: pointer;
+}
+.tool05-empty {
+  border: 1px dashed #a391b0;
+  padding: 18px;
+  background: #f7f4fa;
+  color: #343044;
+}
+.tool05-readout ul {
+  padding-left: 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool05-css-demo button {
+    transition: none;
+  }
+}
+@media (max-width: 600px) {
+  .tool05-card {
+    padding: 14px;
+  }
+  .tool05-runtime {
+    padding: 14px;
+  }
+}
