@@ -156,7 +156,7 @@ test("typed binding only changes specified object and rejects unsaved missing wr
     ).objects.tag.accent,
   ).toBe(true);
 });
-test("lazy01–27 release has no Spline Three SDK or assets and28 remains preview", async ({
+test("lazy01–28 release has no Spline Three SDK or assets and29 remains preview", async ({
   page,
 }) => {
   const urls = [];
@@ -178,9 +178,9 @@ test("lazy01–27 release has no Spline Three SDK or assets and28 remains previe
   await expect(page.locator("canvas,iframe")).toHaveCount(0);
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(27).click();
+  await nav.getByRole("button").nth(28).click();
   await expect(
-    page.getByRole("heading", { name: "Lottie与Rive", exact: true }),
+    page.getByRole("heading", { name: "数据可视化", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toContainText("尚未制作");
 });

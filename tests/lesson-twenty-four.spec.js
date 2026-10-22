@@ -155,7 +155,7 @@ test("logical view inversion, topmost geometry hit and full-shape bounds", () =>
   });
   expect(canvasView(300, 180, 0.75).scale).toBe(0.375);
 });
-test("lazy Canvas release01–27 only, next Lottie/Rive remains preview and local requests", async ({
+test("lazy Canvas release01–28 only, next data visualization remains preview and local requests", async ({
   page,
 }) => {
   const urls = [];
@@ -172,9 +172,9 @@ test("lazy Canvas release01–27 only, next Lottie/Rive remains preview and loca
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(27).click();
+  await nav.getByRole("button").nth(28).click();
   await expect(
-    page.getByRole("heading", { name: "Lottie与Rive", exact: true }),
+    page.getByRole("heading", { name: "数据可视化", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

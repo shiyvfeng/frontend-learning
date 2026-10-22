@@ -135,7 +135,7 @@ test("bounded normalized values, amplitude, viewport-local coordinates and zero 
     inside: false,
   });
 });
-test("on-demand lesson23 registration opens01–27 only and next Lottie/Rive remains preview", async ({
+test("on-demand lesson23 registration opens01–28 only and next data visualization remains preview", async ({
   page,
 }) => {
   const urls = [];
@@ -152,9 +152,9 @@ test("on-demand lesson23 registration opens01–27 only and next Lottie/Rive rem
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(27).click();
+  await nav.getByRole("button").nth(28).click();
   await expect(
-    page.getByRole("heading", { name: "Lottie与Rive", exact: true }),
+    page.getByRole("heading", { name: "数据可视化", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

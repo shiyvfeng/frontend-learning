@@ -178,7 +178,7 @@ test("budget math caps DPR dimensions and preserves aspect ratio", () => {
   expect(glSize(3000, 1800, 4).width).toBe(1024);
   expect(glSize(400, 240, 2, false, 128).width).toBe(128);
 });
-test("lazy release01–27 only, next Lottie/Rive remains preview with local requests", async ({
+test("lazy release01–28 only, next data visualization remains preview with local requests", async ({
   page,
 }) => {
   const urls = [];
@@ -195,9 +195,9 @@ test("lazy release01–27 only, next Lottie/Rive remains preview with local requ
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(27).click();
+  await nav.getByRole("button").nth(28).click();
   await expect(
-    page.getByRole("heading", { name: "Lottie与Rive", exact: true }),
+    page.getByRole("heading", { name: "数据可视化", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toContainText("尚未制作");
 });

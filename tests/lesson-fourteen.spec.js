@@ -71,7 +71,7 @@ const deny = () =>
     },
   });
 
-test("fourteenth lazy module registered while twenty-eighth remains preview", async ({
+test("fourteenth lazy module registered while twenty-ninth remains preview", async ({
   page,
 }) => {
   const req = [];
