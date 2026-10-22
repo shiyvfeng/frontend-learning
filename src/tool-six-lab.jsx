@@ -103,6 +103,7 @@ export default function Tool06Workbench({ data, patch }) {
   }, []);
   useLayoutEffect(() => {
     let owned = true;
+    setInspection(null);
     fraction.current = 0;
     const art =
       data.step === 0
@@ -385,11 +386,13 @@ export default function Tool06Workbench({ data, patch }) {
         <>
           <p className="tool06-boundary">
             只在下方边框内滚动。Tab聚焦后可用原生PageDown/End/Home，Tab仍能离开；框外页面正常滚动。
-            {short
-              ? "短视口/极窄屏已取消pin，scrub仍可用。"
-              : data.pin && dynamic
-                ? "只固定无交互图示，预留实际占位。"
-                : "当前不固定图示。"}{" "}
+            {!dynamic
+              ? "当前是静态阶段示意，没有滚动绑定或额外的动态区间占位。"
+              : short
+                ? "短视口/极窄屏已取消pin，完整滚动距离仍保留，scrub仍可用。"
+                : data.pin && dynamic
+                  ? "只固定无交互图示，预留实际占位。"
+                  : "当前不固定图示，会随内容滚走；普通布局仍保留完整区间距离。"}{" "}
             本例不捕获滚轮或触摸，不使用滚动平滑/锁页。
           </p>
           <div

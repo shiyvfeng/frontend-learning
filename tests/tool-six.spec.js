@@ -1275,3 +1275,195 @@ test("GSAP media-query subscriptions are owned and removed across resets static 
   });
   expect(after).toEqual([]);
 });
+
+for (const shortViewport of [false, true])
+  for (const distance of ["480", "720"])
+    test(`pin-off ${distance}px ${shortViewport ? "automatic-short" : "explicit-normal"} real scroll maximum and helper reach end then native Home returns`, async ({
+      page,
+    }, info) => {
+      await open(page, 2);
+      if (shortViewport)
+        await page.setViewportSize({ width: 375, height: 480 });
+      else await field(page, "pin").uncheck();
+      await field(page, "distance").selectOption(distance);
+      await expect(page.locator(".pin-spacer")).toHaveCount(0);
+      await expect(lab(page)).toHaveAttribute("data-pin", "false");
+      await b(page, "辅助定位滚动100%").click();
+      const helper = await inspect(page);
+      const dimensions = await region(page).evaluate((el) => ({
+        scrollHeight: el.scrollHeight,
+        clientHeight: el.clientHeight,
+        maxScrollTop: el.scrollHeight - el.clientHeight,
+      }));
+      await b(page, "辅助定位滚动0%").click();
+      const trace = [],
+        k = createKeyboardNavigator(page, expect, trace, {
+          lesson: "tool06-pin-off-bounds",
+          profile: info.project.name,
+        });
+      await k.seek(region(page), "pin-off native scroll viewport");
+      await region(page).evaluate((el) => {
+        el.dataset.completedScrolls = "0";
+        el.addEventListener(
+          "scrollend",
+          () =>
+            (el.dataset.completedScrolls = String(
+              Number(el.dataset.completedScrolls) + 1,
+            )),
+        );
+      });
+      const outer = await page.evaluate(() => scrollY);
+      await page.keyboard.press("End");
+      await expect
+        .poll(() =>
+          region(page).getAttribute("data-completed-scrolls").then(Number),
+        )
+        .toBeGreaterThan(0);
+      await expect(region(page)).toBeFocused();
+      const nativeEnd = await lab(page).evaluate((el) => {
+        const v = el.querySelector(".tool06-viewport"),
+          a = el.querySelector("[data-scroll-art]");
+        return {
+          top: v.scrollTop,
+          max: v.scrollHeight - v.clientHeight,
+          progress: Number(el.dataset.scrollProgress),
+          animationProgress: Number(a.dataset.progress),
+        };
+      });
+      const endCount = Number(
+        await region(page).getAttribute("data-completed-scrolls"),
+      );
+      await page.keyboard.press("Home");
+      await expect
+        .poll(() =>
+          region(page).getAttribute("data-completed-scrolls").then(Number),
+        )
+        .toBeGreaterThan(endCount);
+      await expect(region(page)).toBeFocused();
+      const nativeHome = await lab(page).evaluate((el) => ({
+        top: el.querySelector(".tool06-viewport").scrollTop,
+        progress: Number(el.dataset.scrollProgress),
+        animationProgress: Number(
+          el.querySelector("[data-scroll-art]").dataset.progress,
+        ),
+      }));
+      save(
+        `${info.project.name}-pin-off-${distance}-${shortViewport ? "short" : "normal"}`,
+        {
+          helper,
+          dimensions,
+          nativeEnd,
+          nativeHome,
+          outer,
+          trace,
+          input:
+            "Actual helper native scrollTo + genuine Tab/End/Home with native scrollend; no scripted focus or timeline.progress assignment.",
+        },
+      );
+      expect(dimensions.maxScrollTop).toBeGreaterThanOrEqual(helper.end);
+      expect(helper.end - helper.start).toBeCloseTo(Number(distance), 1);
+      expect(helper.progress).toBe(1);
+      expect(helper.animationProgress).toBe(1);
+      expect(nativeEnd.top).toBe(nativeEnd.max);
+      expect(nativeEnd.progress).toBe(1);
+      expect(nativeEnd.animationProgress).toBe(1);
+      expect(nativeHome).toEqual({ top: 0, progress: 0, animationProgress: 0 });
+      expect(await page.evaluate(() => scrollY)).toBe(outer);
+    });
+
+test("pin flow runway switches resize reduce and teardown preserve real reachable bounds without leftover layout", async ({
+  page,
+}, info) => {
+  await open(page, 2);
+  await field(page, "distance").selectOption("720");
+  const track = page.locator("[data-scroll-track]");
+  const capture = async (name, pin) => {
+    await b(page, "辅助定位滚动100%").click();
+    await expect
+      .poll(() => scrollArt(page).getAttribute("data-progress").then(Number))
+      .toBe(1);
+    const x = await inspect(page);
+    expect(x.maxScrollTop).toBeGreaterThanOrEqual(x.end);
+    expect(x).toMatchObject({
+      pin,
+      progress: 1,
+      animationProgress: 1,
+      triggerCount: 1,
+    });
+    expect(x.flowRunwayPx).toBe(pin ? 0 : 720);
+    return { name, ...x };
+  };
+  const rows = [];
+  rows.push(await capture("pin-on", true));
+  await field(page, "pin").uncheck();
+  await expect(page.locator("[data-snapshot]")).toHaveCount(0);
+  rows.push(await capture("explicit-off", false));
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  await field(page, "pin").check();
+  rows.push(await capture("pin-on-again", true));
+  await expect(page.locator(".pin-spacer")).toHaveCount(1);
+  await page.setViewportSize({ width: 375, height: 480 });
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  rows.push(await capture("automatic-short-off", false));
+  await page.setViewportSize({ width: 1440, height: 1050 });
+  await expect(page.locator(".pin-spacer")).toHaveCount(1);
+  rows.push(await capture("restored-pin", true));
+  await field(page, "pin").uncheck();
+  rows.push(await capture("off-before-reduce", false));
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(lab(page)).toHaveAttribute("data-policy", "static");
+  await expect
+    .poll(() => track.evaluate((e) => getComputedStyle(e).paddingBottom))
+    .toBe("0px");
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  expect(await inspect(page)).toMatchObject({
+    kind: "static",
+    triggerCount: 0,
+  });
+  await b(page, "静态示意跳到100%").click();
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await expect(lab(page)).toHaveAttribute("data-policy", "active");
+  rows.push(await capture("normal-after-reduce", false));
+  await field(page, "mode").selectOption("static");
+  await expect
+    .poll(() => track.evaluate((e) => getComputedStyle(e).paddingBottom))
+    .toBe("0px");
+  await field(page, "mode").selectOption("normal");
+  rows.push(await capture("normal-after-manual-static", false));
+  await b(page, "恢复场景起点").click();
+  await expect(b(page, "恢复场景起点")).toBeFocused();
+  expect(await inspect(page)).toMatchObject({
+    progress: 0,
+    animationProgress: 0,
+    triggerCount: 1,
+    flowRunwayPx: 720,
+  });
+  const handle = await track.elementHandle();
+  await page.evaluate(async () => {
+    const url = performance
+      .getEntriesByType("resource")
+      .find((e) => /tool-six-runtime-[^/]+\.js/.test(e.name)).name;
+    window.pinFixService = (await import(url)).getServiceState;
+  });
+  await b(page, "返回T05复习").click();
+  await expect(page.locator("#tool05-stage-heading")).toBeVisible();
+  await expect(lab(page)).toHaveCount(0);
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  expect(
+    await handle.evaluate((e) => ({
+      connected: e.isConnected,
+      padding: e.style.paddingBottom,
+    })),
+  ).toEqual({ connected: false, padding: "" });
+  expect(await page.evaluate(() => window.pinFixService())).toEqual({
+    methodsRestored: true,
+    pluginEnabled: false,
+    triggerCount: 0,
+    globalAnimationCount: 0,
+  });
+  save(info.project.name + "-pin-runway-lifecycle", {
+    rows,
+    staticPaddingRestored: true,
+    teardownPaddingRestored: true,
+  });
+});

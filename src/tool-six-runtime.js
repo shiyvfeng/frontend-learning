@@ -161,6 +161,10 @@ export function createScrollScene(
     root.dataset.triggerCount = String(ScrollTrigger.getAll().length);
   };
   const ctx = gsap.context(() => {
+    // pinSpacing supplies this distance only while pin is enabled. With pin
+    // off the ordinary document flow must still reach the same scroll end.
+    // Keep it in the context so reduce/static/unmount restores the layout.
+    if (!pin) gsap.set(track, { paddingBottom: distance });
     tl = choreography(scene, () => {
       if (live) paint(scene, tl);
     });
@@ -232,6 +236,10 @@ export function createScrollScene(
         start: st.start,
         end: st.end,
         scrollTop: viewport.scrollTop,
+        scrollHeight: viewport.scrollHeight,
+        clientHeight: viewport.clientHeight,
+        maxScrollTop: viewport.scrollHeight - viewport.clientHeight,
+        flowRunwayPx: parseFloat(getComputedStyle(track).paddingBottom) || 0,
         scrollerMatches: st.scroller === viewport,
         pin: !!st.pin,
         scrub: st.vars.scrub,
