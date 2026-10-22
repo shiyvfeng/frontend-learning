@@ -262,7 +262,20 @@ test("lost capture fixture and window blur cancel without accepting late pointer
   await page.mouse.up();
   await idle(page);
   expect(await board(page)).toEqual(initialBoard31());
+  await page.evaluate(() => {
+    const original = Element.prototype.setPointerCapture;
+    Element.prototype.setPointerCapture = function (id) {
+      original.call(this, id);
+      this.releasePointerCapture(id);
+    };
+  });
+  await dragStart(page);
+  await page.mouse.move(3, 3);
+  await page.mouse.up();
+  await idle(page);
+  expect(await board(page)).toEqual(initialBoard31());
   save(`cancel-fixtures-${info.project.name}`, {
+    pendingCaptureWithdrawnAPIAndActualOutsideUp: true,
     captureEvents: await page.evaluate(() => window.captureEvents31),
     captureReleaseAPI: true,
     windowBlurDispatchedFixture: true,

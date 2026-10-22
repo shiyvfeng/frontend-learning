@@ -380,12 +380,22 @@ export default function MoveWorkbench({ data, patch }) {
           actions.current.cancel("Escape");
         }
       };
+    // If a pending capture was withdrawn before becoming active, browsers may
+    // emit no lostpointercapture. An outside end still cancels this pointer's
+    // transaction. Normal handle commits run before this bubbling fallback.
+    const onOutsideEnd = (e) => {
+      const s = active.current;
+      if (s?.mode === "pointer" && s.pointerId === e.pointerId)
+        actions.current.cancel("指针在捕获外结束");
+    };
     document.addEventListener("focusin", onFocus);
     document.addEventListener("keydown", onKey);
     document.addEventListener("visibilitychange", onHidden);
     window.addEventListener("blur", onBlur);
     window.addEventListener("resize", onResize);
     window.addEventListener("scroll", onScroll, true);
+    window.addEventListener("pointerup", onOutsideEnd);
+    window.addEventListener("pointercancel", onOutsideEnd);
     const m = matchMedia("(prefers-reduced-motion: reduce)"),
       change = () => {
         setReduced(m.matches);
@@ -403,6 +413,8 @@ export default function MoveWorkbench({ data, patch }) {
       window.removeEventListener("blur", onBlur);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("pointerup", onOutsideEnd);
+      window.removeEventListener("pointercancel", onOutsideEnd);
       m.removeEventListener("change", change);
     };
   }, []);
