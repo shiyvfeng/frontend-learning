@@ -189,7 +189,7 @@ test("lazy release01–28 only, next data visualization remains preview with loc
   await directory(page);
   await expect(lab(page)).toHaveAttribute("data-state", "ready");
   expect(urls.some((u) => /lesson-twenty-five-.*\.js/.test(u))).toBe(true);
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );

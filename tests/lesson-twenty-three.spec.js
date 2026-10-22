@@ -146,7 +146,7 @@ test("on-demand lesson23 registration opens01–28 only and next data visualizat
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-three-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Cursor/Pointer Driven · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );

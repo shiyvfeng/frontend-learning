@@ -89,7 +89,7 @@ test("fifth lesson is available, twenty-ninth stays unbuilt, full 32-course rout
   await expect(page).toHaveTitle("Sizing与Overflow · 前端观察室");
   await expect(page.locator(".nav-caption")).toContainText("28 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   await course(page, 28);
   await expect(page.getByRole("heading", { name: "数据可视化" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");

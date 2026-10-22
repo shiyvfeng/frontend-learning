@@ -78,7 +78,7 @@ test("new feedback module loads on demand with twenty-four releases and twenty-f
   expect(urls.some((u) => /lesson-fifteen-.*\.js/.test(u))).toBe(false);
   await open(page);
   await expect(page).toHaveTitle("Loading/Skeleton/Optimistic UI · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   expect(urls.some((u) => /lesson-fifteen-.*\.js/.test(u))).toBe(true);
 });
 test("actual spinner skeleton known progress success failure duplicate guard and canceled stale result", async ({

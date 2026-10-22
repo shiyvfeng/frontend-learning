@@ -107,7 +107,7 @@ test("ninth available and twenty-ninth stays planned; lesson is loaded on demand
   await expect(
     page.getByRole("heading", { name: "渐变与光晕." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   await expect(page.locator(".site-footer")).toContainText("01–28");
   await course(page, 28);
   await expect(page.getByRole("heading", { name: "数据可视化" })).toBeVisible();

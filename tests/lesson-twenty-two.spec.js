@@ -143,7 +143,7 @@ test("lazy registration only opens 01–28, next data visualization lesson stays
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-two-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Scroll Animation · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );

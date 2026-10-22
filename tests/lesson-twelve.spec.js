@@ -122,7 +122,7 @@ test("twelfth State available on demand and twenty-ninth remains planned", async
   await expect(page.locator("#state-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-twelve-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("State · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   await course(page, 28);
   await expect(
     page.getByRole("heading", { name: "数据可视化", exact: true }),

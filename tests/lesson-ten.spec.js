@@ -91,7 +91,7 @@ test("tenth available twenty-fifth planned and lesson module loads on demand", a
   await expect(
     page.getByRole("heading", { name: "Mask / Clip Path." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   await expect(page.locator(".site-footer")).toContainText("01–28");
   await course(page, 28);
   await expect(

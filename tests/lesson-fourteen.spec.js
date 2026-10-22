@@ -82,7 +82,7 @@ test("fourteenth lazy module registered while twenty-ninth remains preview", asy
   await directory(page);
   expect(req.some((u) => /lesson-fourteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("条件渲染 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
 });
 test("all five mutually exclusive branches replace actual nodes with failure retry and upload cancel", async ({
   page,

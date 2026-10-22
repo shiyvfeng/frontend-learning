@@ -98,7 +98,7 @@ async function detail(p, id) {
 }
 test("only 01–28 available; next remains preview", async ({ page }) => {
   await open(page);
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   await expect(page.locator(".site-footer")).toContainText("01–28");
   await page
     .getByRole("navigation", { name: "课程目录" })

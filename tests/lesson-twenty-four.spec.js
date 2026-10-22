@@ -166,7 +166,7 @@ test("lazy Canvas release01–28 only, next data visualization remains preview a
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-four-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Canvas · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );

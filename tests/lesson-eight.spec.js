@@ -79,7 +79,7 @@ test("eighth available and twenty-ninth remains unmade with unified catalog", as
 }) => {
   await open(page);
   await expect(page).toHaveTitle("毛玻璃 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   await expect(page.locator(".site-footer")).toContainText("01–28");
   await course(page, 28);
   await expect(page.getByRole("heading", { name: "数据可视化" })).toBeVisible();

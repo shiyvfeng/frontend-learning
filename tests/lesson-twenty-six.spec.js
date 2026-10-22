@@ -196,7 +196,7 @@ test("lazy real Three module release01–28 and data visualization29 remains pre
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
   await nav.getByRole("button").nth(28).click();

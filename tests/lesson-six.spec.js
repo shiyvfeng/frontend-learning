@@ -83,7 +83,7 @@ test("sixth available and twenty-ninth stays unmade using shared metadata", asyn
 }) => {
   await open(page);
   await expect(page).toHaveTitle("响应式 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   await expect(page.locator(".site-footer")).toContainText("01–28");
   await course(page, 28);
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");

@@ -166,7 +166,7 @@ test("lazy01–28 release has no Spline Three SDK or assets and29 remains previe
   expect(urls.some((u) => /lesson-twenty-seven/.test(u))).toBe(false);
   await directory(page);
   await expect(lab(page)).toHaveAttribute("data-status", "empty");
-  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".available-dot")).toHaveCount(28);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
