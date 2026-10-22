@@ -83,12 +83,12 @@ test("sixth available and twenty-fifth stays unmade using shared metadata", asyn
 }) => {
   await open(page);
   await expect(page).toHaveTitle("响应式 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(24);
-  await expect(page.locator(".site-footer")).toContainText("01–24");
+  await expect(page.locator(".available-dot")).toHaveCount(25);
+  await expect(page.locator(".site-footer")).toContainText("01–25");
   await course(page, 24);
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await expect(
-    page.getByRole("heading", { name: "WebGL/Shader" }),
+    page.getByRole("heading", { name: "Three.js" }),
   ).toBeVisible();
 });
 test("real media and container queries respond to independent widths and content breakpoints", async ({

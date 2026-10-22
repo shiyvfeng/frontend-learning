@@ -101,10 +101,10 @@ test("fourth lesson is available, twenty-fifth remains unbuilt and route count s
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Position与浮层 · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("24 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("25 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
   await course(page, 24);
-  await expect(page.getByRole("heading", { name: "WebGL/Shader" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Three.js" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await noOverflow(page);
 });

@@ -79,10 +79,10 @@ test("eighth available and twenty-fifth remains unmade with unified catalog", as
 }) => {
   await open(page);
   await expect(page).toHaveTitle("毛玻璃 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(24);
-  await expect(page.locator(".site-footer")).toContainText("01–24");
+  await expect(page.locator(".available-dot")).toHaveCount(25);
+  await expect(page.locator(".site-footer")).toContainText("01–25");
   await course(page, 24);
-  await expect(page.getByRole("heading", { name: "WebGL/Shader" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Three.js" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("same real scene switches own filter and backdrop, adjusts blur and keeps external readable equivalent", async ({

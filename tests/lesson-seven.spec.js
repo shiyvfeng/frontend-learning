@@ -87,10 +87,10 @@ test("seventh available, twenty-fifth unmade, existing route and tags remain pla
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(24);
-  await expect(page.locator(".site-footer")).toContainText("01–24");
+  await expect(page.locator(".available-dot")).toHaveCount(25);
+  await expect(page.locator(".site-footer")).toContainText("01–25");
   await course(page, 24);
-  await expect(page.getByRole("heading", { name: "WebGL/Shader" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Three.js" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({

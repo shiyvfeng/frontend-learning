@@ -1,0 +1,123 @@
+.gl25-lab {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.gl25-controls,
+.gl25-explain,
+.gl25-objects {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  background: #f3f1ed;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+}
+.gl25-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.gl25-lab button {
+  min-height: 42px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.gl25-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.gl25-caption {
+  display: grid;
+  gap: 8px;
+}
+.gl25-caption input {
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #2b2934;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+}
+.gl25-guide,
+.gl25-metrics,
+.gl25-inspection,
+.gl25-explain p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.gl25-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.gl25-wrapper {
+  position: relative;
+  aspect-ratio: 5/3;
+  max-width: 840px;
+  width: 100%;
+  justify-self: center;
+  overflow: clip;
+  border: 1px solid #aaa0bc;
+  border-radius: 12px;
+  background: #ece8f5;
+}
+.gl25-wrapper canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: auto;
+}
+.gl25-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  text-align: center;
+  padding: 16px;
+  color: #332b4b;
+  background: linear-gradient(120deg, #e4dff0, #d7ebe7);
+}
+.gl25-metrics,
+.gl25-inspection {
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+  font-size: 13px;
+  color: #50475d;
+}
+.gl25-status,
+.gl25-inspection {
+  padding: 14px;
+  background: #ece8f5;
+  color: #493b67;
+  border-radius: 10px;
+  line-height: 1.7;
+}
+.gl25-lab input[type="range"] {
+  display: block;
+  width: 100%;
+  min-height: 38px;
+  accent-color: #615091;
+}
+@media (max-width: 600px) {
+  .gl25-controls,
+  .gl25-explain {
+    padding: 14px;
+  }
+  .gl25-buttons > * {
+    flex: 1 1 120px;
+  }
+  .gl25-fallback {
+    font-size: 13px;
+    padding: 10px;
+  }
+  .gl25-fallback p {
+    margin: 4px;
+  }
+}

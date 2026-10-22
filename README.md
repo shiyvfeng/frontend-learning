@@ -2,7 +2,7 @@
 
 面向不想手写代码、希望看懂 UI 并与 Coding Agent 协作的中文交互课程。
 
-当前已完成第一节「页面不是一张图」、第二节「Flex——一维排列」、第三节「Grid——二维布局」、第四节「Position与浮层」、第五节「Sizing与Overflow」、第六节「响应式设计」、第七节「圆角、阴影与层级」、第八节「毛玻璃」、第九节「渐变与光晕」、第十节「Mask / Clip Path」、第十一节「SVG」、第十二节「State」、第十三节「Props 与 Variant」、第十四节「条件渲染」、第十五节「Loading / Skeleton / Optimistic UI」、第十六节「State Machine」、第十七节「Micro Interaction」、第十八节「Enter / Exit Animation」、第十九节「Spring」、第二十节「Layout Animation」、第二十一节「Shared Element Transition」、第二十二节「Scroll Animation」、第二十三节「Cursor / Pointer Driven Interaction」和第二十四节「Canvas」。其余章节只提供目录与“尚未制作”提示，第二十五节尚未制作。路线核对日期为 **2026-10-20**，官方参考链接可在网站底部展开。
+当前已完成第一节「页面不是一张图」、第二节「Flex——一维排列」、第三节「Grid——二维布局」、第四节「Position与浮层」、第五节「Sizing与Overflow」、第六节「响应式设计」、第七节「圆角、阴影与层级」、第八节「毛玻璃」、第九节「渐变与光晕」、第十节「Mask / Clip Path」、第十一节「SVG」、第十二节「State」、第十三节「Props 与 Variant」、第十四节「条件渲染」、第十五节「Loading / Skeleton / Optimistic UI」、第十六节「State Machine」、第十七节「Micro Interaction」、第十八节「Enter / Exit Animation」、第十九节「Spring」、第二十节「Layout Animation」、第二十一节「Shared Element Transition」、第二十二节「Scroll Animation」、第二十三节「Cursor / Pointer Driven Interaction」、第二十四节「Canvas」和第二十五节「WebGL / Shader」。其余章节只提供目录与“尚未制作”提示，第二十六节尚未制作。路线核对日期为 **2026-10-20**，官方参考链接可在网站底部展开。
 
 ## 第一节
 
@@ -176,23 +176,29 @@ disabled/loading 通过父级控制，原生 button disabled 和逻辑守卫共�
 
 明确标注的局部滚动框，原生被动scroll事件按scrollTop/(scrollHeight-clientHeight)绑定进度与三阶段，20%–80%区间可选，反滚可回退。原生CSS scroll timeline细线实际绑定全程，IntersectionObserver另触发一次600ms只读反馈，区分入场触发与scrub；未安装GSAP。辅助按钮真实移动同一滚动框，不切假状态。
 
-小读数带仅在框内CSS sticky，短视口或有效宽度很窄时解除，控件在框外；正常滚动、Tab退出和全文阅读不锁定。ResizeObserver重算内容/容器，0分母安全处理；减少动态实时停止位移/装饰动画，文字进度与完整正文保留。隐藏/换站/卸载清理单次待处理rAF、observer、监听和时间动画，无持续循环。可重试题、编辑复制简报、独立键 `frontend-observatory.lesson22.v1`，重置保留01–21。官方资料核对 **2026-10-22**，25以后预告。
+小读数带仅在框内CSS sticky，短视口或有效宽度很窄时解除，控件在框外；正常滚动、Tab退出和全文阅读不锁定。ResizeObserver重算内容/容器，0分母安全处理；减少动态实时停止位移/装饰动画，文字进度与完整正文保留。隐藏/换站/卸载清理单次待处理rAF、observer、监听和时间动画，无持续循环。可重试题、编辑复制简报、独立键 `frontend-observatory.lesson22.v1`，重置保留01–21。官方资料核对 **2026-10-22**，26以后预告。
 
 ## 第二十三节：Cursor / Pointer Driven Interaction
 
 只读卡片用Pointer Events与当前未变形边界计算局部坐标，CSS变量驱动radial-gradient聚光和限幅CSS平面倾斜，非几何扭曲/完整3D场景，无图形库。每次最多一个待处理rAF，只更新少量样式/读数，不逐帧重建React树，空闲不循环。
 
-离开/cancel/blur/隐藏/减少动态/重置清理，旧代次回调隔离；滚动/resize重算当前边界。触摸不跟随、不捕获、不劫持页面滚动，键盘/触屏分区按钮改变同样参数，减少动态保留静态聚光采样与完整内容。装饰pointer-events:none且无Tab目标，控件在变形区外。五站、解释重试、编辑复制brief，独立键 `frontend-observatory.lesson23.v1`，重置保留01–22。官方资料核对 **2026-10-22**，25以后预告。
+离开/cancel/blur/隐藏/减少动态/重置清理，旧代次回调隔离；滚动/resize重算当前边界。触摸不跟随、不捕获、不劫持页面滚动，键盘/触屏分区按钮改变同样参数，减少动态保留静态聚光采样与完整内容。装饰pointer-events:none且无Tab目标，控件在变形区外。五站、解释重试、编辑复制brief，独立键 `frontend-observatory.lesson23.v1`，重置保留01–22。官方资料核对 **2026-10-22**，26以后预告。
 
 ## 第二十四节：Canvas
 
 真实Canvas 2D路径、填充与文字，600×360逻辑模型保存多个图形。可添加、列表/画布选择、按钮移动/删除/清空/恢复及20步数据撤销；不是DOM图形或静态图片。画布内短按只选择，无拖拽，不捕获触摸、不劫持页面滚动。外部列表主动提供语义和替代操作。
 
-CSS尺寸×当前DPR设置位图并重绘；resize和视图缩放不误清模型，点击反算当前CSS矩形与视图变换，不重复乘DPR。半透明填充几何命中、空模型/透明像素/恢复入口均明确；无上下文保留列表并可重试。离散重绘无持续循环，无装饰动画，减少动态完整可操作。五站、解释重试、编辑复制brief，独立键 `frontend-observatory.lesson24.v1`，重置保留01–23。对象限额不是性能基准，不宣称总比SVG快，不加入WebGL/3D。官方资料核对 **2026-10-22**，25以后预告。
+CSS尺寸×当前DPR设置位图并重绘；resize和视图缩放不误清模型，点击反算当前CSS矩形与视图变换，不重复乘DPR。半透明填充几何命中、空模型/透明像素/恢复入口均明确；无上下文保留列表并可重试。离散重绘无持续循环，无装饰动画，减少动态完整可操作。五站、解释重试、编辑复制brief，独立键 `frontend-observatory.lesson24.v1`，重置保留01–23。对象限额不是性能基准，不宣称总比SVG快，不加入WebGL/3D。官方资料核对 **2026-10-22**，26以后预告。
+
+## 第二十五节：WebGL / Shader
+
+真实WebGL 1着色器绘制二维波纹，参数上传uniform后按需重绘；无纹理图片或DOM冒充，不默认播放。短按画布与外部按钮改变中心，静态相位采样在减少动态下也能完成。区分Canvas表面、WebGL API与3D内容；软件渲染不能证明硬件性能。
+
+常规DPR最多1.5、低预算最多0.75、位图每边1024px并尊重实现上限；resize/DPR重新测量。真实编译/链接/丢失恢复及主动模拟回退保留语义与重试，CSS回退明确不是shader结果。隐藏释放程序/着色器/缓冲并缩小位图，卸载释放上下文，空闲无持续rAF。五站、解释重试、编辑复制brief与独立键`frontend-observatory.lesson25.v1`，重置保留01–24。官方资料核对2026-10-22，26以后仍预告。
 
 ## 完整课程目录与范围
 
-原课按 32 课逐章推进，01 的展示名为「页面不是一张图」。这里只完成 01–24，其余均未制作。
+原课按 32 课逐章推进，01 的展示名为「页面不是一张图」。这里只完成 01–25，其余均未制作。
 
 | 原课 | 主题 | 当前状态 |
 | --- | --- | --- |
@@ -220,7 +226,7 @@ CSS尺寸×当前DPR设置位图并重绘；resize和视图缩放不误清模型
 | 22 | Scroll Animation | 已制作 |
 | 23 | Cursor/Pointer Driven | 已制作 |
 | 24 | Canvas | 已制作 |
-| 25 | WebGL/Shader | 尚未制作 |
+| 25 | WebGL/Shader | 已制作 |
 | 26 | Three.js | 尚未制作 |
 | 27 | Spline | 尚未制作 |
 | 28 | Lottie与Rive | 尚未制作 |

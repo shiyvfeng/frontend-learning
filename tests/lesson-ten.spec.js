@@ -91,11 +91,11 @@ test("tenth available twenty-fifth planned and lesson module loads on demand", a
   await expect(
     page.getByRole("heading", { name: "Mask / Clip Path." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(24);
-  await expect(page.locator(".site-footer")).toContainText("01–24");
+  await expect(page.locator(".available-dot")).toHaveCount(25);
+  await expect(page.locator(".site-footer")).toContainText("01–25");
   await course(page, 24);
   await expect(
-    page.getByRole("heading", { name: "WebGL/Shader", exact: true }),
+    page.getByRole("heading", { name: "Three.js", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

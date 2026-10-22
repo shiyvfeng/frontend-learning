@@ -107,10 +107,10 @@ test("ninth available and twenty-fifth stays planned; lesson is loaded on demand
   await expect(
     page.getByRole("heading", { name: "渐变与光晕." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(24);
-  await expect(page.locator(".site-footer")).toContainText("01–24");
+  await expect(page.locator(".available-dot")).toHaveCount(25);
+  await expect(page.locator(".site-footer")).toContainText("01–25");
   await course(page, 24);
-  await expect(page.getByRole("heading", { name: "WebGL/Shader" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Three.js" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("three native gradient types, angle, palette and center affect the correct CSS input", async ({

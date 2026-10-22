@@ -132,7 +132,7 @@ test("metrics zero denominator negative overscroll and exact full/middle boundar
     expect(scrollMetrics(top, 1100, 100, "middle").progress).toBe(want);
   expect(scrollMetrics(500, 1100, 100).max).toBe(1000);
 });
-test("lazy registration only opens 01–24, subsequent pointer lesson stays preview and requests local", async ({
+test("lazy registration only opens 01–25, next Three lesson stays preview and requests local", async ({
   page,
 }) => {
   const urls = [];
@@ -143,15 +143,15 @@ test("lazy registration only opens 01–24, subsequent pointer lesson stays prev
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-two-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Scroll Animation · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(24);
+  await expect(page.locator(".available-dot")).toHaveCount(25);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(24).click();
+  await nav.getByRole("button").nth(25).click();
   await expect(
-    page.getByRole("heading", { name: "WebGL/Shader", exact: true }),
+    page.getByRole("heading", { name: "Three.js", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toContainText("尚未制作");
 });

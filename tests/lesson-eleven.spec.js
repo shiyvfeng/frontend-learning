@@ -90,10 +90,10 @@ test("eleventh SVG available on demand, twenty-fifth remains planned", async ({
   await expect(page.locator("#vector-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-eleven-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("SVG · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(24);
+  await expect(page.locator(".available-dot")).toHaveCount(25);
   await course(page, 24);
   await expect(
-    page.getByRole("heading", { name: "WebGL/Shader", exact: true }),
+    page.getByRole("heading", { name: "Three.js", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

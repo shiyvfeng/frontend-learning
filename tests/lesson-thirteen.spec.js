@@ -103,10 +103,10 @@ test("thirteenth Props available on demand and twenty-fifth remains planned", as
   await expect(page.locator("#props-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-thirteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Props与Variant · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(24);
+  await expect(page.locator(".available-dot")).toHaveCount(25);
   await course(page, 24);
   await expect(
-    page.getByRole("heading", { name: "WebGL/Shader", exact: true }),
+    page.getByRole("heading", { name: "Three.js", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
