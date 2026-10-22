@@ -1,0 +1,17 @@
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@theme static {
+  --spacing: 4px;
+  --color-brand: #5b46b5;
+  --color-brand-deep: #40317e;
+  --color-paper: #ffffff;
+  --color-ink: #272334;
+  --color-muted: #51495f;
+  --color-line: #b8acc8;
+  --color-soft: #ece8f8;
+  --radius-card: 16px;
+  --breakpoint-lab: 256px;
+  --container-lab: 192px;
+}
+@source inline("flex flex-wrap flex-col flex-row flex-1 items-start min-w-0 max-w-full box-border gap-3 gap-4 p-4 p-6 px-4 py-2 rounded-card rounded-lg border border-2 border-solid border-line border-brand bg-paper bg-brand bg-soft text-ink text-brand text-white text-base font-sans font-semibold min-h-11 wrap-anywhere shrink-0 @container/panel lab:flex-row @lab/panel:flex-row enabled:hover:bg-brand-deep enabled:hover:text-white focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-ink disabled:bg-soft disabled:text-muted disabled:border-line disabled:cursor-not-allowed");

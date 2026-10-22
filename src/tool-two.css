@@ -1,0 +1,141 @@
+.tool02-workbench {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.tool02-boundary,
+.tool02-readout,
+.tool02-preview {
+  border: 1px solid #d6cbdf;
+  border-radius: 14px;
+  padding: 18px;
+  background: #f7f4fa;
+  color: #343044;
+  overflow-wrap: anywhere;
+}
+.tool02-controls {
+  display: grid;
+  gap: 18px;
+}
+.tool02-controls fieldset {
+  min-width: 0;
+  border: 1px solid #d6cbdf;
+  border-radius: 14px;
+  padding: 18px;
+}
+.tool-two legend {
+  padding: 0 8px;
+  font-weight: 700;
+}
+.tool-two label:not(.checkbox-label) {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.tool-two select,
+.tool-two textarea.tool02-context,
+.tool-two #tool02-title {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid #93839f;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: #302a3c;
+  font: inherit;
+  min-height: 44px;
+  margin: 8px 0;
+}
+.tool-two textarea.tool02-context {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.tool-two #tool02-title {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.tool-two button {
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.tool02-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tool02-feedback {
+  border-left: 3px solid #80638f;
+  padding: 14px;
+  background: #f5f1f9;
+  color: #343044;
+  line-height: 1.75;
+}
+.tool02-preview iframe {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #93839f;
+  border-radius: 12px;
+  background: #fff;
+  margin-top: 16px;
+}
+.tool02-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.tool02-readout table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+.tool02-readout th,
+.tool02-readout td {
+  padding: 10px;
+  border-bottom: 1px solid #d6cbdf;
+  vertical-align: top;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.tool02-readout caption {
+  text-align: left;
+  margin: 10px 0;
+}
+.tool02-readout pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #fff;
+  border: 1px solid #d6cbdf;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  max-height: 300px;
+  overflow: auto;
+}
+.tool-two .agent-editor textarea {
+  min-height: 430px;
+}
+@media (max-width: 600px) {
+  .tool02-controls fieldset,
+  .tool02-boundary,
+  .tool02-readout,
+  .tool02-preview {
+    padding: 14px;
+  }
+  .tool02-actions button {
+    width: 100%;
+  }
+  .tool-two .agent-editor textarea {
+    min-height: 360px;
+  }
+  .tool02-readout th,
+  .tool02-readout td {
+    padding: 7px;
+    font-size: 12px;
+  }
+}

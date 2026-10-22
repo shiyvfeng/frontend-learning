@@ -500,7 +500,7 @@ async function finishFlow(p, info, mode) {
   await act(btn(p, "完成综合阶段A"), "finish A");
   expect((await read(p)).done).toEqual([0, 1, 2, 3, 4]);
   await expect(p.locator(".notice")).toContainText(
-    "可以继续综合阶段B「Agent指令能力」。T01已开放，T02–T12仍为预告",
+    "可以继续综合阶段B「Agent指令能力」。T01/T02已开放，T03–T12仍为预告",
   );
   await p.reload();
   await directory(p, act);
@@ -627,7 +627,7 @@ test("corrupt unavailable storage is scoped to A and design inputs remain operab
     "让设计约束成为真实布局",
   );
 });
-test("directory roadmap and32 exit open actual A without invented33 while B and T01 open and11 tools stay planned", async ({
+test("directory roadmap and32 exit open actual A without invented33 while B and T01/T02 open and10 tools stay planned", async ({
   page,
 }) => {
   await page.goto("/");
@@ -649,9 +649,10 @@ test("directory roadmap and32 exit open actual A without invented33 while B and 
   await expect(outline.locator("[data-coverage-id=A] button")).toHaveCount(1);
   await expect(outline.locator("[data-coverage-id=B] button")).toHaveCount(1);
   await expect(outline.locator("[data-coverage-id=T01] button")).toHaveCount(1);
+  await expect(outline.locator("[data-coverage-id=T02] button")).toHaveCount(1);
   await expect(
     outline.locator("[data-coverage-id]").filter({ hasText: "尚未制作" }),
-  ).toHaveCount(11);
+  ).toHaveCount(10);
   await expect(outline.locator('[data-lesson-id="33"]')).toHaveCount(0);
 });
 

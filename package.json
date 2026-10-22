@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "dev": "npm run compile:tool02 && vite --host 0.0.0.0",
+    "build": "npm run compile:tool02 && vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "test": "playwright test"
+    "test": "playwright test",
+    "compile:tool02": "node scripts/compile-tool-two.mjs"
   },
   "dependencies": {
     "lottie-web": "5.13.0",
@@ -17,7 +18,9 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",
+    "@tailwindcss/cli": "4.3.3",
     "axe-core": "^4.14.0",
+    "tailwindcss": "4.3.3",
     "vite": "^8.3.4"
   }
 }

@@ -25,6 +25,7 @@ const LessonTwelve = React.lazy(() => import("./lesson-twelve"));
 const LessonThirteen = React.lazy(() => import("./lesson-thirteen"));
 const LessonFourteen = React.lazy(() => import("./lesson-fourteen"));
 const LessonFifteen = React.lazy(() => import("./lesson-fifteen"));
+const ToolTwo = React.lazy(() => import("./tool-two"));
 const ToolOne = React.lazy(() => import("./tool-one"));
 const StageB = React.lazy(() => import("./stage-b"));
 const StageA = React.lazy(() => import("./stage-a"));
@@ -80,6 +81,7 @@ const lessonViews = {
   handoff: StageA,
   briefWriting: StageB,
   reactNext: ToolOne,
+  utilities: ToolTwo,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";

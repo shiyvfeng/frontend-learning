@@ -7,3 +7,6 @@ test-results/
 .env
 .env.*
 !.env.example
+
+# Rebuilt by the pinned Tailwind CLI before dev/build; never imported globally.
+src/tool-two.generated.css

@@ -128,9 +128,9 @@ test('malformed progress bounded and missing boolean preserves usable interactiv
 test('unavailable browser storage still permits local interactions without false saved promise',async({page})=>{
  await page.addInitScript(()=>{Storage.prototype.setItem=()=>{throw Error('storage denied fixture')};});await open(page);await start(page);await b(page,'体验真实React控件').click();await expect(page.locator('[data-real-count]')).toHaveText('1');await expect(page.locator('body')).toContainText('浏览器存储不可用');
 });
-test('B exit opens T01 while T02 remains noninteractive preview and 32 plus A/B still available',async({page})=>{
+test('B exit opens T01 while T02 opens and T03 remains noninteractive preview and 32 plus A/B still available',async({page})=>{
  await open(page);await b(page,'返回综合B复习').click();await b(page,'继续T01 · React / Next.js').click();await expect(page.locator('#tool01-stage-heading')).toBeVisible();
- const nav=page.getByRole('navigation',{name:'综合与工具模块'});if(!await nav.isVisible())await b(page,'☰ 课程').click();expect(await nav.getByRole('button').count()).toBe(3);await expect(nav.locator('.coverage-preview')).toHaveCount(11);await expect(page.locator('.available-dot')).toHaveCount(32);await expect(page.locator('body')).toContainText('T02 · Tailwind 尚未制作');
+ const nav=page.getByRole('navigation',{name:'综合与工具模块'});if(!await nav.isVisible())await b(page,'☰ 课程').click();expect(await nav.getByRole('button').count()).toBe(4);await expect(nav.locator('.coverage-preview')).toHaveCount(10);await expect(page.locator('.available-dot')).toHaveCount(32);await expect(page.locator('body')).toContainText('T02 Tailwind已开放');
 });
 test('five stations axe, viewport fit and local visual crops',async({page},info)=>{
  await open(page);for(let i=0;i<5;i++){await st(page,i).click();await axeCheck(page);await page.locator('.lesson-stage').screenshot({path:`${out}/${info.project.name}-station${i+1}.png`});}
