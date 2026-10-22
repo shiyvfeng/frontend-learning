@@ -164,7 +164,7 @@ test("sixteenth is lazy with twenty-four releases and no runtime XState or Rive 
   await directory(page);
   expect(urls.some((u) => /lesson-sixteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("State Machine · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(25);
+  await expect(page.locator(".available-dot")).toHaveCount(26);
   await expect(page.locator(".machine-lab")).toContainText("无 XState / Rive");
   await phase(page, "draft");
 });

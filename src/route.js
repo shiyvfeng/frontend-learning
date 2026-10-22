@@ -202,6 +202,10 @@ export const implementedCourseMetadata = {
     view: "pointer",
     technology: "Pointer Events + CSS变量 / transform · 无图形库",
   },
+  26: {
+    view: "scene3d",
+    technology: "Three.js 0.186.1 + WebGL 2 · 自制几何 / 按需渲染",
+  },
   25: {
     view: "shader",
     technology: "原生 WebGL 1 + GLSL uniform · 静态按需重绘",

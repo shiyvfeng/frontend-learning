@@ -1,0 +1,139 @@
+.three26-lab {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.three26-controls,
+.three26-explain,
+.three26-objects {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  background: #f3f1ed;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+}
+.three26-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.three26-lab button {
+  min-height: 42px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.three26-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.three26-caption {
+  display: grid;
+  gap: 8px;
+}
+.three26-caption input {
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #2b2934;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+}
+.three26-guide,
+.three26-metrics,
+.three26-inspection,
+.three26-explain p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.three26-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.three26-wrapper {
+  position: relative;
+  aspect-ratio: 5/3;
+  max-width: 840px;
+  width: 100%;
+  justify-self: center;
+  overflow: clip;
+  border: 1px solid #aaa0bc;
+  border-radius: 12px;
+  background: #ece8f5;
+}
+.three26-wrapper canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: auto;
+}
+.three26-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  text-align: center;
+  padding: 16px;
+  color: #332b4b;
+  background: linear-gradient(120deg, #e4dff0, #d7ebe7);
+}
+.three26-metrics,
+.three26-inspection {
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+  font-size: 13px;
+  color: #50475d;
+}
+.three26-status,
+.three26-inspection {
+  padding: 14px;
+  background: #ece8f5;
+  color: #493b67;
+  border-radius: 10px;
+  line-height: 1.7;
+}
+.three26-lab input[type="range"] {
+  display: block;
+  width: 100%;
+  min-height: 38px;
+  accent-color: #615091;
+}
+@media (max-width: 600px) {
+  .three26-controls,
+  .three26-explain {
+    padding: 14px;
+  }
+  .three26-buttons > * {
+    flex: 1 1 120px;
+  }
+  .three26-fallback {
+    font-size: 13px;
+    padding: 10px;
+  }
+  .three26-fallback p {
+    margin: 4px;
+  }
+}
+
+.three26-wrapper canvas {
+  pointer-events: none;
+}
+.three26-explain dl {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.three26-explain dt {
+  font-weight: 700;
+}
+.three26-explain dd {
+  margin: 0 0 12px;
+  line-height: 1.7;
+}
