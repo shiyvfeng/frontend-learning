@@ -178,7 +178,7 @@ test("budget math caps DPR dimensions and preserves aspect ratio", () => {
   expect(glSize(3000, 1800, 4).width).toBe(1024);
   expect(glSize(400, 240, 2, false, 128).width).toBe(128);
 });
-test("lazy release01–29 only, next virtualization remains preview with local requests", async ({
+test("lazy release01–30 only, next drag remains preview with local requests", async ({
   page,
 }) => {
   const urls = [];
@@ -189,15 +189,15 @@ test("lazy release01–29 only, next virtualization remains preview with local r
   await directory(page);
   await expect(lab(page)).toHaveAttribute("data-state", "ready");
   expect(urls.some((u) => /lesson-twenty-five-.*\.js/.test(u))).toBe(true);
-  await expect(page.locator(".available-dot")).toHaveCount(29);
+  await expect(page.locator(".available-dot")).toHaveCount(30);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(29).click();
+  await nav.getByRole("button").nth(30).click();
   await expect(
-    page.getByRole("heading", { name: "长列表虚拟化", exact: true }),
+    page.getByRole("heading", { name: "Drag/Drop/Resize", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toContainText("尚未制作");
 });

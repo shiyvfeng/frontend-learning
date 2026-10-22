@@ -1,0 +1,223 @@
+.list30-lab {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.list30-controls,
+.list30-explain,
+.list30-detail,
+.list30-model {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #d2cbdc;
+  border-radius: 12px;
+  background: #f3f1ed;
+}
+.list30-boundary,
+.list30-hero-boundary {
+  padding: 16px;
+  border: 2px solid #66508b;
+  border-radius: 12px;
+  background: #ede8f6;
+  color: #35234d;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.list30-boundary p {
+  margin: 8px 0 0;
+}
+.list30-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.list30-lab button {
+  min-height: 42px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.list30-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.list30-controls label {
+  display: grid;
+  gap: 8px;
+  line-height: 1.7;
+}
+.list30-controls input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+  color: #2b2934;
+  background: white;
+}
+.list30-controls fieldset {
+  min-width: 0;
+  border: 1px solid #c5becf;
+  border-radius: 8px;
+  padding: 12px;
+}
+.list30-controls legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+.list30-title,
+.list30-detail h3,
+.list30-model h3 {
+  margin: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.list30-controls p,
+.list30-help,
+.list30-explain p,
+.list30-detail p,
+.list30-model p,
+.list30-counts p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.list30-viewport {
+  overflow: auto;
+  max-height: 60svh;
+  min-height: 120px;
+  border: 2px solid #887899;
+  border-radius: 10px;
+  background: #faf9f6;
+  overflow-anchor: none;
+  scroll-behavior: auto;
+  touch-action: pan-y;
+}
+.list30-viewport:focus-visible {
+  outline: 3px solid #5553c5;
+  outline-offset: 3px;
+}
+.list30-spacer,
+.list30-page {
+  min-width: 0;
+}
+.list30-row {
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 20px 20px;
+  column-gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #d8d0e2;
+  background: #eee9f4;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.list30-row > strong {
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list30-row > span {
+  font-size: 12px;
+  line-height: 20px;
+  grid-row: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list30-row > small {
+  font-size: 12px;
+  line-height: 20px;
+  grid-column: 2;
+  grid-row: 1/3;
+  align-self: center;
+  color: #5b3e76;
+}
+.list30-row[data-zone="buffer"] {
+  background: #f2e9d4;
+}
+.list30-page-item {
+  width: 100%;
+  height: 64px;
+  display: grid;
+  align-content: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #d8d0e2;
+  text-align: left;
+  padding: 8px 12px;
+  color: #2d2639;
+  background: #faf9f6;
+}
+.list30-page-item strong {
+  font-size: 14px;
+  line-height: 20px;
+}
+.list30-page-item span {
+  font-size: 12px;
+  line-height: 18px;
+}
+.list30-empty {
+  padding: 20px;
+  line-height: 1.8;
+}
+.list30-counts {
+  padding: 16px;
+  border: 1px solid #c4b7d2;
+  border-radius: 10px;
+  background: #ede7f4;
+  display: grid;
+  gap: 8px;
+}
+.list30-status {
+  padding: 16px;
+  border-radius: 10px;
+  background: #e9e3f2;
+  color: #3d2b55;
+  line-height: 1.8;
+  min-height: 60px;
+  overflow-wrap: anywhere;
+}
+.list30-model-cards {
+  position: relative;
+}
+.list30-model-cards > [data-model-row] {
+  min-height: 64px;
+  padding: 10px;
+  border: 1px solid #c6b9d4;
+  background: #faf9f6;
+  line-height: 20px;
+  box-sizing: border-box;
+}
+.list30-model-cards p {
+  line-height: 20px;
+  font-size: 13px;
+}
+.list30-measurements {
+  margin: 0;
+  padding-left: 22px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .list30-controls,
+  .list30-explain,
+  .list30-detail,
+  .list30-model,
+  .list30-counts {
+    padding: 12px;
+  }
+  .list30-buttons > * {
+    flex: 1 1 120px;
+  }
+  .list30-row {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
