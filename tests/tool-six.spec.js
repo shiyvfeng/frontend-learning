@@ -1191,3 +1191,87 @@ test("topic reset while actual module is delayed ignores old generation and buil
     triggerCount: 0,
   });
 });
+
+test("GSAP media-query subscriptions are owned and removed across resets static and unmount", async ({
+  page,
+}, info) => {
+  await page.addInitScript(() => {
+    window.media06 = [];
+    window.originalMatch06 = window.matchMedia;
+    window.externalMedia06 = window.matchMedia("(max-width: 500px)");
+    window.externalCount06 = 0;
+    window.externalMedia06.addEventListener(
+      "change",
+      () => window.externalCount06++,
+    );
+    for (const [addName, removeName] of [
+      ["addListener", "removeListener"],
+      ["addEventListener", "removeEventListener"],
+    ]) {
+      const add = MediaQueryList.prototype[addName],
+        remove = MediaQueryList.prototype[removeName];
+      MediaQueryList.prototype[addName] = function (...args) {
+        const fn = addName === "addListener" ? args[0] : args[1];
+        if (new Error().stack.includes("tool-six-runtime-"))
+          window.media06.push({ target: this, fn, query: this.media });
+        return add.apply(this, args);
+      };
+      MediaQueryList.prototype[removeName] = function (...args) {
+        const fn = removeName === "removeListener" ? args[0] : args[1];
+        window.media06 = window.media06.filter(
+          (x) => !(x.target === this && x.fn === fn),
+        );
+        return remove.apply(this, args);
+      };
+    }
+  });
+  await open(page, 1);
+  const initialService = await page.evaluate(async () => {
+    const url = performance
+      .getEntriesByType("resource")
+      .find((e) => /tool-six-runtime-[^/]+\.js/.test(e.name)).name;
+    const module = await import(url);
+    window.readService06 = module.getServiceState;
+    return module.getServiceState();
+  });
+  expect(initialService).toMatchObject({
+    methodsRestored: true,
+    pluginEnabled: true,
+    triggerCount: 1,
+  });
+  for (let i = 0; i < 3; i++) await b(page, "恢复场景起点").click();
+  const during = await page.evaluate(() => window.media06.map((x) => x.query));
+  expect(during).toEqual(["(orientation: portrait)"]);
+  await b(page, "返回T05复习").click();
+  const after = await page.evaluate(() => window.media06.map((x) => x.query));
+  const service = await page.evaluate(() => window.readService06());
+  const methodsRestored = service.methodsRestored;
+  expect(methodsRestored).toBe(true);
+  const globalRestored = await page.evaluate(
+    () => window.matchMedia === window.originalMatch06,
+  );
+  expect(globalRestored).toBe(true);
+  const externalBefore = await page.evaluate(() => window.externalCount06);
+  await page.evaluate(() =>
+    window.externalMedia06.dispatchEvent(new Event("change")),
+  );
+  const externalAfter = await page.evaluate(() => window.externalCount06);
+  save(info.project.name + "-media-subscriptions", {
+    during,
+    after,
+    globalRestored,
+    methodsRestored,
+    externalBefore,
+    externalAfter,
+    service,
+    externalPreserved: externalAfter === externalBefore + 1,
+  });
+  expect(externalAfter).toBe(externalBefore + 1);
+  expect(service).toEqual({
+    methodsRestored: true,
+    pluginEnabled: false,
+    triggerCount: 0,
+    globalAnimationCount: 0,
+  });
+  expect(after).toEqual([]);
+});

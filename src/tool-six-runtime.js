@@ -1,18 +1,37 @@
 import { gsap } from "gsap";
+import {
+  beginInitializationOwnership,
+  initialRegistrationOwnership,
+  initializationMethodsRestored,
+} from "./tool-six-owner";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // T06 is the only GSAP owner in this project. Keep the plugin asleep until a
 // live scroll scene owns it; disabling restores global listeners/keep-alive.
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.disable(true, true);
+initialRegistrationOwnership.dispose();
 gsap.ticker.sleep();
 let pluginEnabled = false;
+let pluginOwnership = null;
 const disablePlugin = () => {
   if (pluginEnabled) {
     ScrollTrigger.disable(true, true);
     pluginEnabled = false;
+    pluginOwnership?.dispose();
+    pluginOwnership = null;
   }
   gsap.ticker.sleep();
 };
+// Read-only lifecycle diagnostics also appear in the normal inspector.
+export function getServiceState() {
+  return {
+    methodsRestored: initializationMethodsRestored(),
+    pluginEnabled,
+    triggerCount: ScrollTrigger.getAll().length,
+    globalAnimationCount: gsap.globalTimeline.getChildren(true, true, true)
+      .length,
+  };
+}
 function paint(root, tl) {
   root.dataset.progress = tl.progress().toFixed(5);
   root.dataset.time = tl.time().toFixed(4);
@@ -93,6 +112,7 @@ export function createTimeScene(root, notify) {
     },
     inspect() {
       return {
+        ...getServiceState(),
         kind: "time",
         gsap: gsap.version,
         duration: tl.duration(),
@@ -123,7 +143,12 @@ export function createScrollScene(
     st,
     frame = 0,
     last = 0;
-  ScrollTrigger.enable();
+  pluginOwnership = beginInitializationOwnership();
+  try {
+    ScrollTrigger.enable();
+  } finally {
+    pluginOwnership.restore();
+  }
   pluginEnabled = true;
   const scene = root.querySelector("[data-scroll-art]"),
     track = root.querySelector("[data-scroll-track]");
@@ -198,6 +223,7 @@ export function createScrollScene(
     inspect() {
       bounds();
       return {
+        ...getServiceState(),
         kind: "scroll",
         gsap: gsap.version,
         scrollTrigger: ScrollTrigger.version,
