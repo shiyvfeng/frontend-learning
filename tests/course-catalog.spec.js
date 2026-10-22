@@ -89,47 +89,49 @@ test("all thirty-one implemented views, side directory, complete roadmap and foo
       "可学习课程 01–31 · 31 / 32",
     );
     await expect(page.locator(".site-footer")).toContainText(
-      n === 29
-        ? "本节：React + 固定64px"
-        : n === 28
-          ? "本节：React + 原生SVG"
-          : n === 27
-            ? "本节：lottie-web 5.13.0"
-            : n === 26
-              ? "本节：React本地工作流模拟"
-              : n === 25
-                ? "本节：Three.js 0.186.1"
-                : n === 24
-                  ? "本节：原生 WebGL 1"
-                  : n === 23
-                    ? "本节：Canvas 2D"
-                    : n === 22
-                      ? "本节：Pointer Events"
-                      : n === 21
-                        ? "本节：原生 scroll"
-                        : n === 20
-                          ? "本节：原生 View Transition"
-                          : n === 19
-                            ? "本节：位置型 FLIP"
-                            : n === 18
-                              ? "本节：时间插值 + 手写物理 spring"
-                              : n === 17
-                                ? "本节：React presence"
-                                : n === 16
-                                  ? "本节：原生 CSS transition"
-                                  : n === 15
-                                    ? "本节：React + 普通转换表"
-                                    : n === 14
-                                      ? "本节：React State + 原生 CSS"
-                                      : n === 13
-                                        ? "本节：React 条件渲染"
-                                        : n === 12
-                                          ? "本节：React Props"
-                                          : n === 11
-                                            ? "本节：React State"
-                                            : n === 10
-                                              ? "本节：React + 内联 SVG"
-                                              : "本节：React + 原生 CSS",
+      n === 30
+        ? "本节：原生Pointer Events + React事务预览 / 点击与键盘替代"
+        : n === 29
+          ? "本节：React + 固定64px"
+          : n === 28
+            ? "本节：React + 原生SVG"
+            : n === 27
+              ? "本节：lottie-web 5.13.0"
+              : n === 26
+                ? "本节：React本地工作流模拟"
+                : n === 25
+                  ? "本节：Three.js 0.186.1"
+                  : n === 24
+                    ? "本节：原生 WebGL 1"
+                    : n === 23
+                      ? "本节：Canvas 2D"
+                      : n === 22
+                        ? "本节：Pointer Events"
+                        : n === 21
+                          ? "本节：原生 scroll"
+                          : n === 20
+                            ? "本节：原生 View Transition"
+                            : n === 19
+                              ? "本节：位置型 FLIP"
+                              : n === 18
+                                ? "本节：时间插值 + 手写物理 spring"
+                                : n === 17
+                                  ? "本节：React presence"
+                                  : n === 16
+                                    ? "本节：原生 CSS transition"
+                                    : n === 15
+                                      ? "本节：React + 普通转换表"
+                                      : n === 14
+                                        ? "本节：React State + 原生 CSS"
+                                        : n === 13
+                                          ? "本节：React 条件渲染"
+                                          : n === 12
+                                            ? "本节：React Props"
+                                            : n === 11
+                                              ? "本节：React State"
+                                              : n === 10
+                                                ? "本节：React + 内联 SVG"
+                                                : "本节：React + 原生 CSS",
     );
     const outline = await expand(page);
     await expect(outline.locator(":scope > ol > li")).toHaveCount(32);
