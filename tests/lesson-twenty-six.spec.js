@@ -182,7 +182,7 @@ test("pixel budget caps density dimensions while preserving aspect", () => {
   expect(threeSize(3000, 1800, 3).width).toBe(1024);
   expect(threeSize(400, 240, 2, false, 128).width).toBe(128);
 });
-test("lazy real Three module release01–26 and Spline27 remains preview, requests local", async ({
+test("lazy real Three module release01–27 and Lottie/Rive28 remains preview, requests local", async ({
   page,
 }) => {
   const urls = [];
@@ -196,12 +196,12 @@ test("lazy real Three module release01–26 and Spline27 remains preview, reques
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
-  await expect(page.locator(".available-dot")).toHaveCount(26);
+  await expect(page.locator(".available-dot")).toHaveCount(27);
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(26).click();
+  await nav.getByRole("button").nth(27).click();
   await expect(
-    page.getByRole("heading", { name: "Spline", exact: true }),
+    page.getByRole("heading", { name: "Lottie与Rive", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toContainText("尚未制作");
 });

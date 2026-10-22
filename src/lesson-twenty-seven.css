@@ -1,0 +1,197 @@
+.spline27-lab {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.spline27-controls,
+.spline27-explain,
+.spline27-objects {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  background: #f3f1ed;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+}
+.spline27-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.spline27-lab button {
+  min-height: 42px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.spline27-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.spline27-caption {
+  display: grid;
+  gap: 8px;
+}
+.spline27-caption input {
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #2b2934;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+}
+.spline27-guide,
+.spline27-metrics,
+.spline27-inspection,
+.spline27-explain p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.spline27-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.spline27-boundary,
+.spline27-hero-boundary {
+  padding: 16px;
+  border: 2px solid #66508b;
+  border-radius: 12px;
+  background: #ede8f6;
+  color: #35234d;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.spline27-boundary p {
+  margin: 8px 0 0;
+}
+.spline27-controls fieldset {
+  min-width: 0;
+  border: 1px solid #c5becf;
+  border-radius: 10px;
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+.spline27-controls legend {
+  font-weight: 700;
+  padding: 0 6px;
+}
+.spline27-controls p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.spline27-pipeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.spline27-pipeline li {
+  padding: 16px;
+  border: 1px solid #c5becf;
+  border-radius: 10px;
+  background: #f1edf6;
+  display: grid;
+  gap: 8px;
+  line-height: 1.7;
+}
+.spline27-pipeline li span {
+  font-size: 13px;
+}
+.spline27-diagram {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px;
+  border: 2px dashed #9c90af;
+  border-radius: 12px;
+  background: #f6f4f8;
+}
+.spline27-diagram-label,
+.spline27-fallback {
+  grid-column: 1/-1;
+  margin: 0;
+  line-height: 1.8;
+}
+.spline27-diagram-label {
+  font-weight: 700;
+  color: #514260;
+}
+.spline27-object {
+  min-width: 0;
+  padding: 20px;
+  border: 3px solid #c8bfdb;
+  border-radius: 10px;
+  background: #eee8f8;
+  color: #34294b;
+  overflow-wrap: anywhere;
+}
+.spline27-object[data-theme="night"] {
+  background: #3e3454;
+  color: #fff;
+}
+.spline27-object[data-accent="true"] {
+  border-color: #a57519;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+.spline27-object h4 {
+  margin: 0 0 10px;
+}
+.spline27-object p {
+  line-height: 1.7;
+}
+.spline27-object span {
+  font-weight: 700;
+}
+.spline27-metrics,
+.spline27-status,
+.spline27-explain,
+.spline27-log {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.spline27-status {
+  padding: 16px;
+  border-radius: 10px;
+  background: #e9e3f2;
+  color: #3d2b55;
+  min-height: 60px;
+}
+.spline27-log {
+  padding: 14px;
+  border: 1px solid #c5becf;
+  border-radius: 10px;
+}
+.spline27-log summary {
+  cursor: pointer;
+}
+.spline27-log li {
+  margin-bottom: 8px;
+}
+@media (max-width: 600px) {
+  .spline27-controls,
+  .spline27-explain {
+    padding: 14px;
+  }
+  .spline27-buttons > * {
+    flex: 1 1 130px;
+  }
+  .spline27-pipeline,
+  .spline27-diagram {
+    grid-template-columns: 1fr;
+  }
+  .spline27-diagram {
+    padding: 14px;
+  }
+  .spline27-controls fieldset {
+    padding: 12px;
+  }
+}

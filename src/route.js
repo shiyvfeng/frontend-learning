@@ -202,6 +202,10 @@ export const implementedCourseMetadata = {
     view: "pointer",
     technology: "Pointer Events + CSS变量 / transform · 无图形库",
   },
+  27: {
+    view: "workflow3d",
+    technology: "React本地工作流模拟 · 未接入Spline/Three运行时",
+  },
   26: {
     view: "scene3d",
     technology: "Three.js 0.186.1 + WebGL 2 · 自制几何 / 按需渲染",

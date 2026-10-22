@@ -87,10 +87,10 @@ test("seventh available, twenty-fifth unmade, existing route and tags remain pla
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(26);
-  await expect(page.locator(".site-footer")).toContainText("01–26");
-  await course(page, 26);
-  await expect(page.getByRole("heading", { name: "Spline" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(27);
+  await expect(page.locator(".site-footer")).toContainText("01–27");
+  await course(page, 27);
+  await expect(page.getByRole("heading", { name: "Lottie与Rive" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({

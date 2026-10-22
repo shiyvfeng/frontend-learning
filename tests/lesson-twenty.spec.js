@@ -130,7 +130,7 @@ test("twentieth is lazy with twenty-four releases and honest FLIP mechanism with
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Layout Animation · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(26);
+  await expect(page.locator(".available-dot")).toHaveCount(27);
   await expect(page.getByTestId("layout-lab")).toContainText("未使用Motion");
   expect(
     urls

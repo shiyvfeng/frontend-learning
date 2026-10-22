@@ -94,7 +94,7 @@ test("seventeenth is lazy, first seventeen metadata agree and later lessons rema
   await directory(page);
   expect(urls.some((u) => /lesson-seventeen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Micro Interaction · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(26);
+  await expect(page.locator(".available-dot")).toHaveCount(27);
   await expect(page.getByTestId("micro-lab")).toContainText("未使用 Motion");
   expect(
     urls
