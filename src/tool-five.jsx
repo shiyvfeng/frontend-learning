@@ -23,9 +23,8 @@ function Tool05References() {
       </summary>
       <div className="roadmap-body">
         <p>
-          Motion Open
-          Code、主题token、CLI预览/差异与Card固定来源于2026-10-22核对；MIT声明保留，改编范围明确。复用既有Radix
-          Dialog1.3.1。
+          本章按Motion官方React文档与已安装类型核对组件、AnimatePresence/popLayout、布局动画、spring和减少动态能力，实际版本为Motion14.6.0。
+          教学卡片和业务模型为本站原创，重置确认使用浏览器原生dialog；库及所需子包的MIT声明单独保留。
           {tool05Scope}
         </p>
         <div className="source-links">

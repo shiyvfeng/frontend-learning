@@ -157,6 +157,41 @@ test("actual pinned Motion lazy runtime and CSS division are honest while existi
   ])
     expect(tool05Brief(good())).toContain(s);
 });
+test("references identify real Motion APIs original cards and native reset dialog without T04 provenance", async ({
+  page,
+}) => {
+  await open(page);
+  const references = page.locator(".tool-five .roadmap-details").filter({
+    hasText: "T05工具专题核对说明与官方来源",
+  });
+  await references.locator("summary").click();
+  await expect(references).toContainText("Motion官方React文档与已安装类型");
+  await expect(references).toContainText("AnimatePresence/popLayout");
+  await expect(references).toContainText("Motion14.6.0");
+  await expect(references).toContainText("教学卡片和业务模型为本站原创");
+  await expect(references).toContainText("重置确认使用浏览器原生dialog");
+  await expect(references).toContainText("MIT声明单独保留");
+  await expect(references).not.toContainText(
+    /Open\s*Code|主题\s*token|CLI|shadcn|Radix|Dialog\s*1\.3\.1/,
+  );
+  expect(
+    await references
+      .getByRole("link")
+      .evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
+  ).toEqual([
+    "/licenses/motion-MIT.txt",
+    "https://motion.dev/docs/react-motion-component",
+    "https://motion.dev/docs/react-animate-presence",
+    "https://motion.dev/docs/react-layout-animations",
+    "https://motion.dev/docs/react-motion-config",
+    "https://motion.dev/docs/react-use-reduced-motion",
+    "https://motion.dev/docs/react-transitions",
+  ]);
+  await b(page, "重置T05工具专题进度").click();
+  await expect(page.getByRole("dialog")).toHaveJSProperty("tagName", "DIALOG");
+  await expect(page.getByRole("dialog")).toHaveJSProperty("open", true);
+  await b(page, "保留T05工具专题进度").click();
+});
 test("real Motion enter and exit intermediate computed styles geometry DOM presence inert and eventual removal", async ({
   page,
 }, info) => {
