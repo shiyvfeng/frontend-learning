@@ -1117,6 +1117,28 @@ test("actual item renderer error fixture destroys own instance and captured late
       (e) => e.isConnected && e === document.activeElement,
     ),
   ).toBe(true);
+  const immediateErrorFocus = await heldControl.evaluate((e) => {
+    const r = e.getBoundingClientRect(),
+      hit = document.elementFromPoint(
+        r.left + r.width / 2,
+        r.top + r.height / 2,
+      );
+    return {
+      focused: e === document.activeElement,
+      visible: r.top >= 0 && r.bottom <= innerHeight + 1,
+      covered: hit !== e && !e.contains(hit),
+      outline: getComputedStyle(e).outlineStyle,
+      rect: { top: r.top, bottom: r.bottom },
+      height: innerHeight,
+    };
+  });
+  expect(immediateErrorFocus).toMatchObject({
+    focused: true,
+    visible: true,
+    covered: false,
+  });
+  expect(immediateErrorFocus.outline).not.toBe("none");
+  trace.push({ immediateErrorFocus });
   await expect(lab(page)).toContainText("初始化/渲染失败");
   expect((await state(page)).owned).toBe(0);
   await load(page);
