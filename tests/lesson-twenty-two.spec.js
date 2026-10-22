@@ -114,6 +114,39 @@ function instrument() {
     window.scrollFrameMap.delete(id);
   };
 }
+// Read-only native input evidence: reaching a rounded progress value is not
+// the same as the browser completing its keyboard scroll gesture.
+function keyboardScrollTelemetry() {
+  window.scrollKeyboard = { key: null, events: [], completed: [] };
+  for (const type of ["keydown", "keyup", "scrollend"]) {
+    document.addEventListener(
+      type,
+      (event) => {
+        const el = document.querySelector(".scroll22-viewport");
+        if (!el || event.target !== el) return;
+        const state = window.scrollKeyboard;
+        if (type === "keydown" && ["End", "Home"].includes(event.key))
+          state.key = event.key;
+        const row = {
+          type,
+          key: event.key || state.key,
+          at: performance.now(),
+          top: el.scrollTop,
+          max: el.scrollHeight - el.clientHeight,
+          progress: document.querySelector(".scroll22-lab")?.dataset.progress,
+          focused: document.activeElement === el,
+          trusted: event.isTrusted,
+          defaultPrevented: event.defaultPrevented,
+          outer: scrollY,
+        };
+        state.events.push(row);
+        if (state.events.length > 100) state.events.shift();
+        if (type === "scrollend") state.completed.push(row);
+      },
+      { capture: true, passive: true },
+    );
+  }
+}
 test("metrics zero denominator negative overscroll and exact full/middle boundaries", () => {
   for (const args of [
     [0, 0, 0],
@@ -209,55 +242,98 @@ test("delayed navigation preserves newer real Tab focus and real End/Home scroll
   page,
 }, info) => {
   await page.addInitScript(instrument);
-  await open(page);
-  await expect(page.locator("#scroll-animation-stage-heading")).toBeFocused();
-  await page.evaluate(() => (window.holdScrollFrame = true));
-  await stage(page, 0).click();
-  await expect
-    .poll(() => page.evaluate(() => window.scrollFrames.length))
-    .toBeGreaterThan(0);
-  const trace = [],
-    { seek } = createKeyboardNavigator(page, expect, trace, {
-      lesson: "lesson22-late-navigation",
-      profile: info.project.name,
+  await page.addInitScript(keyboardScrollTelemetry);
+  try {
+    await open(page);
+    await expect(page.locator("#scroll-animation-stage-heading")).toBeFocused();
+    await page.evaluate(() => (window.holdScrollFrame = true));
+    await stage(page, 0).click();
+    await expect
+      .poll(() => page.evaluate(() => window.scrollFrames.length))
+      .toBeGreaterThan(0);
+    const trace = [],
+      { seek } = createKeyboardNavigator(page, expect, trace, {
+        lesson: "lesson22-late-navigation",
+        profile: info.project.name,
+      });
+    await seek(region(page), "scroll region after delayed navigation");
+    const outer = await page.evaluate(() => scrollY);
+    await page.keyboard.press("End");
+    await expect
+      .poll(() => region(page).evaluate((e) => e.scrollTop))
+      .toBeGreaterThan(0);
+    await page.evaluate(() => {
+      window.holdScrollFrame = false;
+      window.scrollFrames.splice(0).forEach((cb) => cb(performance.now()));
     });
-  await seek(region(page), "scroll region after delayed navigation");
-  const outer = await page.evaluate(() => scrollY);
-  await page.keyboard.press("End");
-  await expect
-    .poll(() => region(page).evaluate((e) => e.scrollTop))
-    .toBeGreaterThan(0);
-  await page.evaluate(() => {
-    window.holdScrollFrame = false;
-    window.scrollFrames.splice(0).forEach((cb) => cb(performance.now()));
-  });
-  // Check immediately after delivery: no subsequent Tab/click may hide a steal.
-  await expect(region(page)).toBeFocused();
-  await expect
-    .poll(() => lab(page).getAttribute("data-progress").then(Number))
-    .toBe(1);
-  await page.keyboard.press("Home");
-  await expect
-    .poll(() => lab(page).getAttribute("data-progress").then(Number))
-    .toBe(0);
-  await expect(region(page)).toBeFocused();
-  expect(await page.evaluate(() => scrollY)).toBe(outer);
-  mkdirSync(out, { recursive: true });
-  writeFileSync(
-    `${out}/late-navigation-${info.project.name}.json`,
-    JSON.stringify(
-      {
-        passed: true,
-        trace,
-        outer,
-        realKeys: ["Tab", "End", "Home"],
-        fixture:
-          "delayed JS RAF delivery only; focus and scrolling use real keyboard input",
-      },
-      null,
-      2,
-    ),
-  );
+    // Check immediately after delivery: no subsequent Tab/click may hide a steal.
+    await expect(region(page)).toBeFocused();
+    await expect
+      .poll(() => lab(page).getAttribute("data-progress").then(Number))
+      .toBe(1);
+    // Chromium can expose the exact end position before its native End scroll
+    // has completed. In that interval Home can be ignored even on plain HTML.
+    // Observe actual completion, not a longer timeout or scripted scroll/focus.
+    // The immediate late-RAF focus assertion above remains before this boundary.
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          window.scrollKeyboard.completed.some(
+            (e) => e.key === "End" && e.top === e.max,
+          ),
+        ),
+      )
+      .toBe(true);
+    expect(
+      await region(page).evaluate(
+        (e) => e.scrollTop === e.scrollHeight - e.clientHeight,
+      ),
+    ).toBe(true);
+    await expect(region(page)).toBeFocused();
+    await page.keyboard.press("Home");
+    await expect
+      .poll(() => lab(page).getAttribute("data-progress").then(Number))
+      .toBe(0);
+    await expect(region(page)).toBeFocused();
+    expect(await region(page).evaluate((e) => e.scrollTop)).toBe(0);
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          window.scrollKeyboard.completed.some(
+            (e) => e.key === "Home" && e.top === 0,
+          ),
+        ),
+      )
+      .toBe(true);
+    expect(await page.evaluate(() => scrollY)).toBe(outer);
+    mkdirSync(out, { recursive: true });
+    writeFileSync(
+      `${out}/late-navigation-${info.project.name}.json`,
+      JSON.stringify(
+        {
+          passed: true,
+          trace,
+          outer,
+          realKeys: ["Tab", "End", "Home"],
+          fixture:
+            "delayed JS RAF delivery only; focus and scrolling use real keyboard input",
+        },
+        null,
+        2,
+      ),
+    );
+  } finally {
+    const telemetry = await page.evaluate(() => window.scrollKeyboard);
+    mkdirSync(out, { recursive: true });
+    writeFileSync(
+      `${out}/late-navigation-native-${info.project.name}.json`,
+      JSON.stringify(telemetry, null, 2),
+    );
+    await info.attach("native-End-Home-evidence", {
+      body: JSON.stringify(telemetry, null, 2),
+      contentType: "application/json",
+    });
+  }
 });
 test("navigation normally focuses heading; cancelled generations reset and unmount cannot steal newer focus", async ({
   page,
