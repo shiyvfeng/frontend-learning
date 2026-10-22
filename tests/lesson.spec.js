@@ -1,6 +1,7 @@
 import { assertRemainingPlans32 } from "./catalog-boundary.js";
+import { createKeyboardNavigator } from "./keyboard-navigation.js";
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
+import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
 async function step(page, n) {
   await page
@@ -255,9 +256,27 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
     .getByRole("button")
     .nth(31)
     .click();
-  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Infinite Canvas." }),
+  ).toBeVisible();
   await assertRemainingPlans32(page, expect);
-  await page.getByRole("button", { name: "返回第一节" }).click();
+  //32 is a real lesson now, so return through the real directory rather than
+  //the former unimplemented-preview-only button. Keep actual keyboard focus.
+  const trace = [],
+    navigator = createKeyboardNavigator(page, expect, trace, {
+      lesson: "lesson1-return-from32",
+      profile: info.project.name,
+    }),
+    directory = page.getByRole("navigation", { name: "课程目录" });
+  if (!(await directory.isVisible()))
+    await navigator.act(
+      page.getByRole("button", { name: "☰ 课程", exact: true }),
+      "open-directory",
+    );
+  await navigator.act(
+    directory.getByRole("button").nth(0),
+    "return-first-lesson",
+  );
   await expect(page.locator("#stage-heading")).toHaveText(
     "把观察变成一条好指令",
   );
@@ -266,6 +285,19 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
     page.getByRole("link", { name: "MDN：滚动驱动动画" }),
   ).toBeVisible();
   await noOverflow(page);
+  mkdirSync("/tmp/infinite-canvas-acceptance", { recursive: true });
+  writeFileSync(
+    `/tmp/infinite-canvas-acceptance/legacy-return-${info.project.name}.json`,
+    JSON.stringify(
+      {
+        trace,
+        returnedStage: await page.locator("#stage-heading").textContent(),
+        firstProgressRetained: true,
+      },
+      null,
+      2,
+    ),
+  );
 });
 test("corrupt or unavailable browser storage does not break the lesson", async ({
   page,
