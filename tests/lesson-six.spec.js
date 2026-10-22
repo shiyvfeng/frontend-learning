@@ -78,14 +78,14 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("sixth available and twenty-fifth stays unmade using shared metadata", async ({
+test("sixth available and twenty-sixth stays unmade using shared metadata", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("响应式 · 前端观察室");
   await expect(page.locator(".available-dot")).toHaveCount(25);
   await expect(page.locator(".site-footer")).toContainText("01–25");
-  await course(page, 24);
+  await course(page, 25);
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await expect(
     page.getByRole("heading", { name: "Three.js" }),

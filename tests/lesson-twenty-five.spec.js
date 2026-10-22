@@ -814,3 +814,30 @@ test("copy success, late reset rejection and corrupt/unavailable storage preserv
     page.getByText("浏览器存储不可用；本次进度仅在页面内保留", { exact: true }),
   ).toBeVisible();
 });
+test("without optional lose-context extension unmount still unbinds and deletes actual GL objects", async ({
+  page,
+}, info) => {
+  await page.addInitScript(instrument);
+  await open(page);
+  await page.evaluate(() => {
+    const gl = window.glAudit.context,
+      get = gl.getExtension.bind(gl);
+    gl.getExtension = (n) => (n === "WEBGL_lose_context" ? null : get(n));
+  });
+  await stage(page, 3).click();
+  const result = await page.evaluate(() => ({
+    created: window.glAudit.created,
+    deleted: window.glAudit.deleted,
+    live: window.glAudit.handles.filter((x) => x.gl["is" + x.suffix](x.handle))
+      .length,
+    contextLost: window.glAudit.context.isContextLost(),
+  }));
+  expect(result.created).toEqual(result.deleted);
+  expect(result.live).toBe(0);
+  expect(result.contextLost).toBe(false);
+  save(`optional-cleanup-${info.project.name}`, {
+    ...result,
+    fixture:
+      "Optional WEBGL_lose_context extension unavailable; actual resource validity checks, browser owns eventual context reclamation",
+  });
+});

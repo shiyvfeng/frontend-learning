@@ -92,7 +92,7 @@ async function pseudo(page) {
     };
   });
 }
-test("ninth available and twenty-fifth stays planned; lesson is loaded on demand", async ({
+test("ninth available and twenty-sixth stays planned; lesson is loaded on demand", async ({
   page,
 }) => {
   const loaded = [];
@@ -109,7 +109,7 @@ test("ninth available and twenty-fifth stays planned; lesson is loaded on demand
   ).toBeVisible();
   await expect(page.locator(".available-dot")).toHaveCount(25);
   await expect(page.locator(".site-footer")).toContainText("01–25");
-  await course(page, 24);
+  await course(page, 25);
   await expect(page.getByRole("heading", { name: "Three.js" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

@@ -79,7 +79,7 @@ async function completeExperiments(page) {
   await page.getByRole("button", { name: "新增卡片", exact: false }).click();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("third lesson is Grid, complete route is present, twenty-fifth remains unbuilt", async ({
+test("third lesson is Grid, complete route is present, twenty-sixth remains unbuilt", async ({
   page,
 }) => {
   const errors = [];
@@ -88,7 +88,7 @@ test("third lesson is Grid, complete route is present, twenty-fifth remains unbu
   await expect(page).toHaveTitle("Grid——二维布局 · 前端观察室");
   await expect(page.locator(".course-link")).toHaveCount(32);
   await expect(page.locator(".nav-caption")).toContainText("25 / 32");
-  await course(page, 24);
+  await course(page, 25);
   await expect(page.getByRole("heading", { name: "Three.js" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await expect(page.locator("#grid-stage-heading")).toHaveCount(0);

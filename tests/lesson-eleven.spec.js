@@ -78,7 +78,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("eleventh SVG available on demand, twenty-fifth remains planned", async ({
+test("eleventh SVG available on demand, twenty-sixth remains planned", async ({
   page,
 }) => {
   const requests = [];
@@ -91,7 +91,7 @@ test("eleventh SVG available on demand, twenty-fifth remains planned", async ({
   expect(requests.some((u) => /lesson-eleven-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("SVG · 前端观察室");
   await expect(page.locator(".available-dot")).toHaveCount(25);
-  await course(page, 24);
+  await course(page, 25);
   await expect(
     page.getByRole("heading", { name: "Three.js", exact: true }),
   ).toBeVisible();

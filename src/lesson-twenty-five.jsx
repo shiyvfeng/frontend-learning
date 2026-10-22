@@ -158,7 +158,7 @@ export default function LessonTwentyFive({ onStorageStatus }) {
 
 错误与恢复：getContext失败、真实shader编译/程序链接失败、webglcontextlost都保留文本与参数、标明CSS回退不是shader结果，不能假成功。编译/链接失败删除已创建的部分资源；重试重新编译链接。contextlost preventDefault允许恢复，restored后重新建立program/buffer/shader/uniform位置，不复用旧资源。模拟不支持只是主动体验回退。必要内容与操作在Canvas外，回退也能完成所有学习门槛。
 
-生命周期与减少动态：本例始终静态，无闪烁和自动播放，系统reduce实时显示且不妨碍调参采样。隐藏取消待处理帧、删除program/shader/buffer并缩小位图；返回按最新参数重建；重置、换站与卸载取消回调/监听/observer并释放GL上下文，旧代次不得绘制新会话。不把可访问文字烘焙进GPU画面，不逐帧live播报。
+生命周期与减少动态：本例始终静态，无闪烁和自动播放，系统reduce实时显示且不妨碍调参采样。隐藏取消待处理帧、删除program/shader/buffer并缩小位图；返回按最新参数重建；重置、换站与卸载取消回调/监听/observer并删除GL资源；支持WEBGL_lose_context时主动丢弃上下文，否则交由浏览器回收。旧代次不得绘制新会话。不把可访问文字烘焙进GPU画面，不逐帧live播报。
 
 验收：真实WebGL上下文、uniform值和readPixels变化，不能只断言文字；DPR/尺寸上限、真实短按、快速参数变化、编译/链接故障、丢失恢复、隐藏/卸载资源释放、无后台循环。桌面/375px、axe、真实Tab及正常/系统reduce零键盘触屏完成错题重试、示例与真实编辑、复制回退、刷新、取消/确认重置，保留01–24进度。明确软件渲染/模拟事件与真实硬件测试的区别。只实现25，不开始26。`,
       generated: true,

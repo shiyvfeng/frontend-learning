@@ -91,7 +91,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("thirteenth Props available on demand and twenty-fifth remains planned", async ({
+test("thirteenth Props available on demand and twenty-sixth remains planned", async ({
   page,
 }) => {
   const requests = [];
@@ -104,7 +104,7 @@ test("thirteenth Props available on demand and twenty-fifth remains planned", as
   expect(requests.some((u) => /lesson-thirteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Props与Variant · 前端观察室");
   await expect(page.locator(".available-dot")).toHaveCount(25);
-  await course(page, 24);
+  await course(page, 25);
   await expect(
     page.getByRole("heading", { name: "Three.js", exact: true }),
   ).toBeVisible();

@@ -90,7 +90,7 @@ test("fifth lesson is available, twenty-sixth stays unbuilt, full 32-course rout
   await expect(page.locator(".nav-caption")).toContainText("25 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
   await expect(page.locator(".available-dot")).toHaveCount(25);
-  await course(page, 24);
+  await course(page, 25);
   await expect(page.getByRole("heading", { name: "Three.js" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await noOverflow(page);
