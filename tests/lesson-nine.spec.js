@@ -92,7 +92,7 @@ async function pseudo(page) {
     };
   });
 }
-test("ninth available and twenty-second stays planned; lesson is loaded on demand", async ({
+test("ninth available and twenty-third stays planned; lesson is loaded on demand", async ({
   page,
 }) => {
   const loaded = [];
@@ -107,10 +107,10 @@ test("ninth available and twenty-second stays planned; lesson is loaded on deman
   await expect(
     page.getByRole("heading", { name: "渐变与光晕." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(21);
-  await expect(page.locator(".site-footer")).toContainText("01–21");
-  await course(page, 21);
-  await expect(page.getByRole("heading", { name: "Scroll Animation" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(22);
+  await expect(page.locator(".site-footer")).toContainText("01–22");
+  await course(page, 22);
+  await expect(page.getByRole("heading", { name: "Cursor/Pointer Driven" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("three native gradient types, angle, palette and center affect the correct CSS input", async ({

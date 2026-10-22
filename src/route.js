@@ -193,6 +193,11 @@ export const implementedCourseMetadata = {
     view: "shared",
     technology: "原生 View Transition + React · 无 Motion 依赖",
   },
+  22: {
+    view: "scroll",
+    technology:
+      "原生 scroll + CSS scroll timeline + IntersectionObserver · 无 GSAP",
+  },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");

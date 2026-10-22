@@ -1,0 +1,201 @@
+.scroll22-lab {
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+}
+.scroll22-controls,
+.scroll22-explain {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  background: #f3f1ed;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+}
+.scroll22-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.scroll22-lab button {
+  min-height: 42px;
+  white-space: normal;
+  line-height: 1.5;
+}
+.scroll22-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.scroll22-caption {
+  display: grid;
+  gap: 8px;
+}
+.scroll22-caption input {
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+  background: white;
+  color: #2b2934;
+}
+.scroll22-guide p,
+.scroll22-explain p,
+.scroll22-mode,
+.scroll22-inspection {
+  line-height: 1.8;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.scroll22-guide {
+  padding: 4px;
+}
+.scroll22-viewport {
+  height: clamp(220px, 45svh, 420px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: auto;
+  scrollbar-gutter: stable;
+  scroll-behavior: auto;
+  border: 2px solid #8f84ad;
+  border-radius: 12px;
+  background: #fbfaf7;
+  touch-action: pan-y;
+  position: relative;
+  isolation: isolate;
+}
+.scroll22-viewport:focus-visible {
+  outline: 3px solid #5848b6;
+  outline-offset: 4px;
+}
+.scroll22-content {
+  min-width: 0;
+}
+.scroll22-pin {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 9px 14px;
+  background: #eeeaf6;
+  border-bottom: 1px solid #b5accb;
+  color: #493b67;
+  pointer-events: none;
+}
+.scroll22-pin-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.scroll22-track,
+.scroll22-native-track {
+  height: 5px;
+  overflow: clip;
+  background: #d9d2e9;
+  border-radius: 10px;
+  margin: 5px 0;
+}
+.scroll22-js-fill,
+.scroll22-native-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #6151ae;
+  transform-origin: left center;
+}
+.scroll22-native-label {
+  font-size: 11px;
+  line-height: 1.4;
+}
+.scroll22-native-fill {
+  background: #317681;
+}
+.scroll22-card {
+  min-height: 350px;
+  margin: 16px;
+  padding: 24px 20px;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+  background: #fff;
+  overflow-wrap: anywhere;
+}
+.scroll22-card h3 {
+  font-size: 20px;
+  line-height: 1.5;
+}
+.scroll22-card p {
+  line-height: 1.9;
+}
+.scroll22-entry-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  margin: 16px 0;
+  border-radius: 14px;
+  background: #dbecee;
+  color: #245b64;
+  font-size: 32px;
+}
+.scroll22-extra {
+  padding-top: 10px;
+}
+.scroll22-mode {
+  font-size: 13px;
+  color: #5c536c;
+}
+.scroll22-lab[data-short="true"] .scroll22-pin {
+  position: static;
+}
+.scroll22-inspection {
+  font-variant-numeric: tabular-nums;
+}
+.scroll22-explain > button {
+  justify-self: start;
+}
+@keyframes scroll22-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@supports (animation-timeline: scroll(nearest block)) {
+  .scroll22-lab[data-native="true"][data-dynamic="true"]
+    .scroll22-native-track[data-scrollable="true"]
+    .scroll22-native-fill {
+    animation: scroll22-fill 1s linear both;
+    animation-timeline: scroll(nearest block);
+  }
+}
+@media (max-width: 600px) {
+  .scroll22-controls,
+  .scroll22-explain {
+    padding: 14px;
+  }
+  .scroll22-buttons > * {
+    flex: 1 1 120px;
+  }
+  .scroll22-card {
+    margin: 12px;
+    padding: 20px 16px;
+  }
+  .scroll22-pin {
+    padding: 8px 12px;
+  }
+  .scroll22-viewport {
+    scrollbar-gutter: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll22-native-fill {
+    animation: none !important;
+    transform: none !important;
+  }
+}
