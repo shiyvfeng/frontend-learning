@@ -121,7 +121,7 @@ test("utility maps and brief separate shared tokens, mutually exclusive variants
     "不导入Preflight",
     "构建期",
     "不能仅靠颜色",
-    "T07–T12仍为预告",
+    "T08–T12仍为预告",
   ])
     expect(text).toContain(t);
 });
@@ -923,8 +923,8 @@ test("T01 exit enters actual T02, six remaining modules are readonly and catalog
   await expect(page.locator("#tool02-stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(8);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(6);
+  await expect(nav.getByRole("button")).toHaveCount(9);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(5);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator("body")).toContainText(
     "T03已开放",

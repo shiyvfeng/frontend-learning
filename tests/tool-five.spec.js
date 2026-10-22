@@ -153,7 +153,7 @@ test("actual pinned Motion lazy runtime and CSS division are honest while existi
     "inert",
     "position",
     "不声称卡片尺寸平滑",
-    "T07–T12仍为6个预告",
+    "T08–T12仍为5个预告",
   ])
     expect(tool05Brief(good())).toContain(s);
 });
@@ -1092,7 +1092,7 @@ for (const reducedMotion of ["no-preference", "reduce"])
     );
     await c.close();
   });
-test("T04 exit opens actual T05 with eight available tags and six readonly previews not numbered39", async ({
+test("T04 exit opens actual T05 with nine available tags and five readonly previews not numbered39", async ({
   page,
 }) => {
   await open(page);
@@ -1102,11 +1102,11 @@ test("T04 exit opens actual T05 with eight available tags and six readonly previ
   await expect(field(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(8);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(6);
+  await expect(nav.getByRole("button")).toHaveCount(9);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(5);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(nav.getByRole("button", { name: /T06/ })).toHaveCount(1);
-  await expect(nav.getByRole("button", { name: /T07/ })).toHaveCount(0);
+  await expect(nav.getByRole("button", { name: /T07/ })).toHaveCount(1);
   await expect(page.locator('[data-lesson-id="39"]')).toHaveCount(0);
 });
 test("actual delayed module after topic reset mounts only fresh scene and preserves new owned input", async ({

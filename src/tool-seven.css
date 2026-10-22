@@ -1,0 +1,143 @@
+.tool07-panel,
+.tool07-runtime,
+.tool07-controls,
+.tool07-snapshot {
+  border: 1px solid #d9dae8;
+  border-radius: 16px;
+  background: #fff;
+  padding: 16px;
+  margin: 16px 0;
+  min-width: 0;
+}
+.tool07-runtime {
+  background: #f4f2ff;
+  color: #33304f;
+}
+.tool07-panel p,
+.tool07-runtime p,
+.tool07-boundary,
+.tool07-feedback {
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.tool07-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.tool-seven button,
+.tool-seven select {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.tool07-buttons [aria-pressed="true"] {
+  background: #edebff;
+  border-color: #6860ce;
+  color: #342e7c;
+}
+.tool-seven select {
+  min-height: 44px;
+  background: white;
+  color: #24243b;
+  border: 1px solid #77788b;
+  border-radius: 8px;
+  padding: 8px;
+}
+.tool07-controls {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(130px, 2fr);
+  gap: 12px;
+  align-items: center;
+}
+.tool07-controls .checkbox-label {
+  grid-column: 1/-1;
+}
+.tool07-art {
+  background: #f4f3fb;
+  border: 1px solid #d9dae8;
+  border-radius: 12px;
+  max-width: 100%;
+  height: 190px;
+  overflow: hidden;
+}
+.tool07-art [data-lottie-host] {
+  width: 100%;
+  height: 100%;
+}
+.tool07-snapshot {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.tool07-context {
+  width: 100%;
+  min-height: 150px;
+  box-sizing: border-box;
+  padding: 12px;
+  line-height: 1.7;
+  border: 1px solid #8d8ba4;
+  border-radius: 10px;
+}
+.tool07-context-editor {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+.tool-seven :focus-visible {
+  outline: 3px solid #655be0;
+  outline-offset: 3px;
+}
+.tool-seven .agent-editor textarea {
+  scroll-margin-block: 100px;
+}
+.tool-seven table {
+  width: 100%;
+  table-layout: fixed;
+  font-size: 13px;
+  line-height: 1.7;
+  border-collapse: collapse;
+}
+.tool-seven th,
+.tool-seven td {
+  overflow-wrap: anywhere;
+  padding: 10px;
+  border: 1px solid #d9dae8;
+  text-align: left;
+}
+.tool07-error {
+  padding: 12px;
+  background: #fff1ef;
+  color: #802d24;
+}
+.tool07-panel ul {
+  padding-left: 20px;
+  line-height: 1.9;
+}
+.tool07-hero-boundary {
+  font-size: 13px;
+  line-height: 1.8;
+}
+@media (max-width: 700px) {
+  .tool07-controls {
+    grid-template-columns: 1fr;
+  }
+  .tool07-controls .checkbox-label {
+    grid-column: auto;
+  }
+  .tool07-buttons button {
+    flex: 1 1 auto;
+    min-height: 44px;
+  }
+  .tool07-panel,
+  .tool07-runtime,
+  .tool07-controls {
+    padding: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-seven * {
+    scroll-behavior: auto;
+  }
+}

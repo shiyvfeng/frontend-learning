@@ -142,7 +142,7 @@ export default function StageA({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "综合阶段A已完成。可以继续综合阶段B「Agent指令能力」。T01/T02/T03/T04/T05/T06已开放，T07–T12仍为预告，课程继续推进。",
+        "综合阶段A已完成。可以继续综合阶段B「Agent指令能力」。T01/T02/T03/T04/T05/T06/T07已开放，T08–T12仍为预告，课程继续推进。",
       );
     else
       setNotice(
