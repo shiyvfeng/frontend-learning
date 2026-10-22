@@ -989,3 +989,54 @@ test("late clipboard denial preserves deliberately moved real Tab focus", async 
     focusPreserved: true,
   });
 });
+
+test("native paging boundary activation preserves immediate scroll position and focus", async ({
+  page,
+}, info) => {
+  await open(page, 2);
+  await btn(page, "非虚拟分页3000条").click();
+  const trace = [],
+    nav = createKeyboardNavigator(page, expect, trace, {
+      lesson: "lesson30",
+      profile: info.project.name,
+    });
+  await page
+    .getByLabel("查找源记录编号（1–3000）", { exact: true })
+    .fill("2976");
+  await nav.act(btn(page, "查找并定位编号"), "find-last-page-start");
+  await expect(vp(page).getByRole("button").first()).toHaveAccessibleName(
+    "读取记录2976",
+  );
+  for (let i = 0; i < 3; i++) await page.keyboard.press("Shift+Tab");
+  await expect(btn(page, "下一页（非虚拟）")).toBeFocused();
+  await nav.seek(btn(page, "下一页（非虚拟）"), "verify-last-next");
+  const lastBefore = await vp(page).evaluate((e) => e.scrollTop);
+  expect(lastBefore).toBe(0);
+  await page.keyboard.press("Enter");
+  await expect(btn(page, "下一页（非虚拟）")).toBeFocused();
+  expect(await vp(page).evaluate((e) => e.scrollTop)).toBe(lastBefore);
+  await expect(page.locator(".list30-status")).toContainText("位置和焦点保留");
+  await page.getByLabel("查找源记录编号（1–3000）", { exact: true }).fill("1");
+  await nav.act(btn(page, "查找并定位编号"), "find-first-page");
+  await nav.act(btn(page, "向下滚动一屏"), "read-position-in-first-page");
+  await nav.seek(btn(page, "上一页（非虚拟）"), "verify-first-prev");
+  const firstBefore = await vp(page).evaluate((e) => e.scrollTop);
+  expect(firstBefore).toBeGreaterThan(0);
+  await page.keyboard.press("Enter");
+  await expect(btn(page, "上一页（非虚拟）")).toBeFocused();
+  expect(await vp(page).evaluate((e) => e.scrollTop)).toBe(firstBefore);
+  await consistency(page);
+  await nav.act(btn(page, "空结果（教学）"), "empty-page");
+  await nav.act(btn(page, "下一页（非虚拟）"), "empty-next");
+  await expect(btn(page, "下一页（非虚拟）")).toBeFocused();
+  await expect(vp(page).getByRole("button")).toHaveCount(0);
+  expect(await vp(page).evaluate((e) => e.scrollTop)).toBe(0);
+  await expect(page.locator(".list30-status")).toContainText("当前没有记录");
+  save(`paging-boundary-${info.project.name}`, {
+    trace,
+    lastBefore,
+    firstBefore,
+    immediateFocus: true,
+    noEvaluateFocusOrScrollWrites: true,
+  });
+});

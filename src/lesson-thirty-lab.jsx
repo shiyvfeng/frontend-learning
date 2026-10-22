@@ -695,26 +695,32 @@ export default function ListWorkbench({ data, patch }) {
           <div className="list30-buttons">
             <button
               onClick={() => {
-                position(Math.max(0, (safePage - 1) * PAGE_SIZE));
-                setMessage(
-                  safePage === 0
-                    ? "已经在第一页，按钮与焦点保留。"
-                    : "已换到上一整页，非虚拟分页不是窗口化。",
-                );
+                if (!items.length || safePage === 0) {
+                  setMessage(
+                    items.length
+                      ? "已经在第一页，位置和焦点保留。"
+                      : "当前没有记录，位置和焦点保留。",
+                  );
+                  return;
+                }
+                position((safePage - 1) * PAGE_SIZE);
+                setMessage("已换到上一整页，非虚拟分页不是窗口化。");
               }}
             >
               上一页（非虚拟）
             </button>
             <button
               onClick={() => {
-                position(
-                  Math.min(items.length - 1, (safePage + 1) * PAGE_SIZE),
-                );
-                setMessage(
-                  safePage === pages - 1
-                    ? "已经在最后一页，按钮与焦点保留。"
-                    : "已换到下一整页，非虚拟分页不是窗口化。",
-                );
+                if (!items.length || safePage === pages - 1) {
+                  setMessage(
+                    items.length
+                      ? "已经在最后一页，位置和焦点保留。"
+                      : "当前没有记录，位置和焦点保留。",
+                  );
+                  return;
+                }
+                position((safePage + 1) * PAGE_SIZE);
+                setMessage("已换到下一整页，非虚拟分页不是窗口化。");
               }}
             >
               下一页（非虚拟）
