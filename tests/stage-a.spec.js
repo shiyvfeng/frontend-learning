@@ -499,7 +499,9 @@ async function finishFlow(p, info, mode) {
   else await review.tap();
   await act(btn(p, "完成综合阶段A"), "finish A");
   expect((await read(p)).done).toEqual([0, 1, 2, 3, 4]);
-  await expect(p.locator(".notice")).toContainText("B和T01–T12仍为预告");
+  await expect(p.locator(".notice")).toContainText(
+    "可以继续综合阶段B「Agent指令能力」。T01–T12仍为预告",
+  );
   await p.reload();
   await directory(p, act);
   expect(await draft.inputValue()).toBe((await read(p)).draft);
@@ -625,7 +627,7 @@ test("corrupt unavailable storage is scoped to A and design inputs remain operab
     "让设计约束成为真实布局",
   );
 });
-test("directory roadmap and32 exit open actual A without invented33 or unlocking13 plans", async ({
+test("directory roadmap and32 exit open actual A without invented33 while B opens and12 tools stay planned", async ({
   page,
 }) => {
   await page.goto("/");
@@ -637,7 +639,7 @@ test("directory roadmap and32 exit open actual A without invented33 or unlocking
   await expect(
     page.getByRole("navigation", { name: "综合阶段A学习步骤" }),
   ).toBeVisible();
-  await expect(page.locator(".site-footer")).toContainText("另有综合A已开放");
+  await expect(page.locator(".site-footer")).toContainText("另有综合A/B已开放");
   await expect(page.locator(".breadcrumb")).toContainText("设计工具映射");
   await expect(page).toHaveTitle("设计工具映射 · 前端观察室");
   await page.getByText("路线核对说明与官方来源", { exact: true }).click();
@@ -645,9 +647,10 @@ test("directory roadmap and32 exit open actual A without invented33 or unlocking
   const outline = page.locator(".full-course-outline");
   await expect(outline.locator("[data-coverage-id]")).toHaveCount(14);
   await expect(outline.locator("[data-coverage-id=A] button")).toHaveCount(1);
+  await expect(outline.locator("[data-coverage-id=B] button")).toHaveCount(1);
   await expect(
     outline.locator("[data-coverage-id]").filter({ hasText: "尚未制作" }),
-  ).toHaveCount(13);
+  ).toHaveCount(12);
   await expect(outline.locator('[data-lesson-id="33"]')).toHaveCount(0);
 });
 

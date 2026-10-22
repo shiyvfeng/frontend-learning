@@ -35,7 +35,7 @@ function AReferences() {
     </details>
   );
 }
-export default function StageA({ onStorageStatus }) {
+export default function StageA({ onStorageStatus, onNavigate }) {
   const [data, setData] = useState(readAProgress),
     [notice, setNotice] = useState(""),
     [copyMessage, setCopyMessage] = useState(""),
@@ -142,7 +142,7 @@ export default function StageA({ onStorageStatus }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "综合阶段A已完成；可从目录复习。综合阶段B和T01–T12仍为预告，课程继续推进。",
+        "综合阶段A已完成。可以继续综合阶段B「Agent指令能力」。T01–T12仍为预告，课程继续推进。",
       );
     else
       setNotice(
@@ -479,6 +479,11 @@ export default function StageA({ onStorageStatus }) {
           重置综合阶段A进度
         </button>
       </div>
+      {onNavigate && (
+        <button className="primary" onClick={() => onNavigate("B")}>
+          继续综合阶段B · Agent指令能力
+        </button>
+      )}
       <AReferences />
       <Roadmap />
       <dialog

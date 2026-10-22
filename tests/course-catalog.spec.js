@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
 const summary =
-  "目前 01–32 编号课可以学习；综合阶段A已开放；B与T01–T12共13模块尚未制作，课程仍在继续。";
+  "目前 01–32 编号课可以学习；综合阶段A/B已开放；T01–T12共12工具模块尚未制作，课程仍在继续。";
 const chapterNames = [
   "第一节学习步骤",
   "第二节学习步骤",
@@ -169,7 +169,7 @@ test("all numbered lessons are released but remaining modules are real previews,
   );
   await axeCheck(page);
 });
-test("A is available while B and all twelve tool tags remain unmade plans without learning links", async ({
+test("A and B are available while all twelve tool tags remain unmade plans without learning links", async ({
   page,
 }) => {
   await page.goto("/");
@@ -181,8 +181,11 @@ test("A is available while B and all twelve tool tags remain unmade plans withou
     "已制作",
   );
   await expect(outline.locator('[data-coverage-id="A"] button')).toHaveCount(1);
+  await expect(outline.locator('[data-coverage-id="B"]')).toContainText(
+    "已制作",
+  );
+  await expect(outline.locator('[data-coverage-id="B"] button')).toHaveCount(1);
   for (const id of [
-    "B",
     ...Array.from(
       { length: 12 },
       (_, i) => "T" + String(i + 1).padStart(2, "0"),
