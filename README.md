@@ -2,7 +2,7 @@
 
 面向不想手写代码、希望看懂 UI 并与 Coding Agent 协作的中文交互课程。
 
-当前已完成第一节「页面不是一张图」、第二节「Flex——一维排列」、第三节「Grid——二维布局」、第四节「Position与浮层」、第五节「Sizing与Overflow」、第六节「响应式设计」、第七节「圆角、阴影与层级」、第八节「毛玻璃」、第九节「渐变与光晕」、第十节「Mask / Clip Path」、第十一节「SVG」、第十二节「State」、第十三节「Props 与 Variant」、第十四节「条件渲染」、第十五节「Loading / Skeleton / Optimistic UI」、第十六节「State Machine」、第十七节「Micro Interaction」、第十八节「Enter / Exit Animation」、第十九节「Spring」、第二十节「Layout Animation」、第二十一节「Shared Element Transition」、第二十二节「Scroll Animation」、第二十三节「Cursor / Pointer Driven Interaction」、第二十四节「Canvas」、第二十五节「WebGL / Shader」、第二十六节「Three.js」、第二十七节「Spline」、第二十八节「Lottie 与 Rive」、第二十九节「数据可视化」和第三十节「长列表与虚拟化」。其余章节只提供目录与“尚未制作”提示，第三十一节尚未制作。路线核对日期为 **2026-10-20**，官方参考链接可在网站底部展开。
+当前已完成第一节「页面不是一张图」、第二节「Flex——一维排列」、第三节「Grid——二维布局」、第四节「Position与浮层」、第五节「Sizing与Overflow」、第六节「响应式设计」、第七节「圆角、阴影与层级」、第八节「毛玻璃」、第九节「渐变与光晕」、第十节「Mask / Clip Path」、第十一节「SVG」、第十二节「State」、第十三节「Props 与 Variant」、第十四节「条件渲染」、第十五节「Loading / Skeleton / Optimistic UI」、第十六节「State Machine」、第十七节「Micro Interaction」、第十八节「Enter / Exit Animation」、第十九节「Spring」、第二十节「Layout Animation」、第二十一节「Shared Element Transition」、第二十二节「Scroll Animation」、第二十三节「Cursor / Pointer Driven Interaction」、第二十四节「Canvas」、第二十五节「WebGL / Shader」、第二十六节「Three.js」、第二十七节「Spline」、第二十八节「Lottie 与 Rive」、第二十九节「数据可视化」、第三十节「长列表与虚拟化」和第三十一节「Drag / Drop / Resize」。其余章节只提供目录与“尚未制作”提示，第三十二节尚未制作。路线核对日期为 **2026-10-20**，官方参考链接可在网站底部展开。
 
 ## 第一节
 
@@ -228,7 +228,7 @@ CSS尺寸×当前DPR设置位图并重绘；resize和视图缩放不误清模型
 
 ## 完整课程目录与范围
 
-原课按 32 课逐章推进，01 的展示名为「页面不是一张图」。这里只完成 01–30，其余均未制作。
+原课按 32 课逐章推进，01 的展示名为「页面不是一张图」。这里只完成 01–31，其余均未制作。
 
 | 原课 | 主题 | 当前状态 |
 | --- | --- | --- |
@@ -262,7 +262,7 @@ CSS尺寸×当前DPR设置位图并重绘；resize和视图缩放不误清模型
 | 28 | Lottie与Rive | 已制作 |
 | 29 | 数据可视化 | 已制作 |
 | 30 | 长列表虚拟化 | 已制作 |
-| 31 | Drag/Drop/Resize | 尚未制作 |
+| 31 | Drag/Drop/Resize | 已制作 |
 | 32 | Infinite Canvas | 尚未制作 |
 
 此前目录压缩为 8 项；现在展开回原课，保留各主题：
@@ -362,3 +362,9 @@ Playwright 覆盖 1440×1050 桌面及 375×812 手机视口，回归前十九�
 第十九节额外检查真实时间/弹簧轨迹与可调刚度阻尼、无过冲配方、运行中目标位置及速度连续、快速重复单运行器、稳定终止/长帧保护、后台与旧回调清理、实时减少动态与复原；五站axe、桌面/375px裁切、实际Tab和正常/减少动态零键盘触屏错题重试/编辑/复制/刷新/取消确认重置，保护前十八课存储。最终命令起止时间和退出码可靠落盘。
 
 第二十节额外核对真实DOM顺序/offset布局与FLIP视觉差异、展开高度与邻卡移动、文本/插画无scale、备注/节点/焦点保留、快速连击和当前画面接续、旧完成/取消回调、减少动态/宽度/隐藏/卸载清理；双视口axe裁切、真实Tab和正常/减少动态零键盘触屏重试/编辑/复制/刷新/取消确认重置，保护前十九课。命令起止和真实退出码可靠记录。
+
+## 第三十一节：Drag / Drop / Resize
+
+三张原创教学卡片使用原生Pointer Events和pointer capture完成同列排序、跨列放置及真实尺寸调整，不使用dnd-kit或文件拖入。预览保留原模型，合法放下/确认才提交；无效目标、Escape、pointercancel、capture丢失、失焦、滚动、resize、换站与卸载取消。提供选择/移到目标列、上下移动、尺寸按钮，以及最多10步会话内撤销，触屏无需拖动也能完成同样结果。只有把手禁止触摸滚动，其余区域正常滚动，无自动滚屏。
+
+宽度180–480px、高度132–300px，并受窄容器可用宽度限制；期望与实际尺寸分开显示。键盘把手可拿起、方向键预览、确认或取消，Tab能离开；真实重排后的焦点只在因本次操作失效时恢复，不抢外部控件。包含五站、三道解释重试题、可编辑复制简报。独立键`frontend-observatory.lesson31.v1`只保存本浏览器已提交模型、参数、草稿与进度，预览与撤销不跨刷新/离开，无云同步；保留01–30进度。减少动态无通关障碍，不运行空闲动画循环。官方资料于2026-10-22核对。

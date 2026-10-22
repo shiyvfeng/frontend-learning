@@ -96,10 +96,10 @@ async function detail(p, id) {
   await expect(lab(p)).toHaveAttribute("data-view", id);
   await expect(p.locator(`[data-detail="${id}"]`)).toBeVisible();
 }
-test("only 01–30 available; next remains preview", async ({ page }) => {
+test("only 01–31 available; next remains preview", async ({ page }) => {
   await open(page);
-  await expect(page.locator(".available-dot")).toHaveCount(30);
-  await expect(page.locator(".site-footer")).toContainText("01–30");
+  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".site-footer")).toContainText("01–31");
   await page
     .getByRole("navigation", { name: "课程目录" })
     .isVisible()
@@ -109,10 +109,10 @@ test("only 01–30 available; next remains preview", async ({ page }) => {
   await page
     .getByRole("navigation", { name: "课程目录" })
     .getByRole("button")
-    .nth(30)
+    .nth(31)
     .click();
   await expect(
-    page.getByRole("heading", { name: "Drag/Drop/Resize", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toContainText("尚未制作");
 });

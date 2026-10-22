@@ -190,7 +190,7 @@ test("minute parser and brief retain field unit distribution and implementation 
   ])
     expect(text).toMatch(re);
 });
-test("lazy actual SVG lesson29 opens only01–30 and30 stays a preview without chart libraries", async ({
+test("lazy actual SVG lesson29 opens only01–31 and32 stays a preview without chart libraries", async ({
   page,
 }) => {
   const urls = [];
@@ -200,7 +200,7 @@ test("lazy actual SVG lesson29 opens only01–30 and30 stays a preview without c
   expect(urls.some((u) => /lesson-twenty-nine/.test(u))).toBe(false);
   await directory(page);
   await expect(page.locator(".chart29-svg")).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(30);
+  await expect(page.locator(".available-dot")).toHaveCount(31);
   expect(urls.some((u) => /lesson-twenty-nine/.test(u))).toBe(true);
   expect(urls.every((u) => new URL(u).origin === "http://127.0.0.1:4173")).toBe(
     true,
@@ -210,9 +210,9 @@ test("lazy actual SVG lesson29 opens only01–30 and30 stays a preview without c
   );
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(30).click();
+  await nav.getByRole("button").nth(31).click();
   await expect(
-    page.getByRole("heading", { name: "Drag/Drop/Resize", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

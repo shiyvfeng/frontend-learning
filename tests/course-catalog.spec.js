@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
-const summary = "目前 01–30 课可以学习。其余保留目录，按节逐步制作。";
+const summary = "目前 01–31 课可以学习。其余保留目录，按节逐步制作。";
 const chapterNames = [
   "第一节学习步骤",
   "第二节学习步骤",
@@ -33,6 +33,7 @@ const chapterNames = [
   "第二十八节学习步骤",
   "第二十九节学习步骤",
   "第三十节学习步骤",
+  "第三十一节学习步骤",
 ];
 async function course(page, n) {
   const nav = page.getByRole("navigation", { name: "课程目录" }),
@@ -59,7 +60,7 @@ async function axeCheck(page) {
     })),
   ).toEqual([]);
 }
-test("all thirty implemented views, side directory, complete roadmap and footers agree on availability", async ({
+test("all thirty-one implemented views, side directory, complete roadmap and footers agree on availability", async ({
   page,
 }) => {
   test.setTimeout(60000);
@@ -69,23 +70,23 @@ test("all thirty implemented views, side directory, complete roadmap and footers
     await page.getByRole("button", { name: "☰ 课程" }).click();
   const links = nav.getByRole("button");
   await expect(links).toHaveCount(32);
-  await expect(page.locator(".nav-caption")).toContainText("30 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("31 / 32");
   for (let n = 0; n < 32; n++) {
     await expect(links.nth(n).locator(".available-dot")).toHaveCount(
-      n < 30 ? 1 : 0,
+      n < 31 ? 1 : 0,
     );
-    if (n >= 30)
+    if (n >= 31)
       await expect(links.nth(n).locator("small")).toHaveText("尚未制作");
     else await expect(links.nth(n).locator("small")).not.toHaveText("尚未制作");
   }
-  for (let n = 0; n < 30; n++) {
+  for (let n = 0; n < 31; n++) {
     await course(page, n);
     await expect(
       page.getByRole("navigation", { name: chapterNames[n] }),
     ).toBeVisible();
     await expect(page.locator(".coming-status")).toHaveCount(0);
     await expect(page.locator(".site-footer")).toContainText(
-      "可学习课程 01–30 · 30 / 32",
+      "可学习课程 01–31 · 31 / 32",
     );
     await expect(page.locator(".site-footer")).toContainText(
       n === 29
@@ -140,7 +141,7 @@ test("all thirty implemented views, side directory, complete roadmap and footers
         outline.locator(
           `[data-lesson-id="${String(i + 1).padStart(2, "0")}"] > span`,
         ),
-      ).toHaveText(i < 30 ? "已制作" : "尚未制作");
+      ).toHaveText(i < 31 ? "已制作" : "尚未制作");
   }
   await axeCheck(page);
   expect(
@@ -154,7 +155,7 @@ test("every unimplemented numbered course stays a preview with the same availabi
 }) => {
   test.setTimeout(60000);
   await page.goto("/");
-  for (let n = 30; n < 32; n++) {
+  for (let n = 31; n < 32; n++) {
     await course(page, n);
     await expect(page.locator(".coming-status")).toHaveText("尚未制作");
     await expect(page.locator(".stepper")).toHaveCount(0);
@@ -164,7 +165,7 @@ test("every unimplemented numbered course stays a preview with the same availabi
     );
     await expect(page.locator(".site-footer")).not.toContainText("本节：");
     await expect(page.locator(".site-footer")).toContainText(
-      "可学习课程 01–30 · 30 / 32",
+      "可学习课程 01–31 · 31 / 32",
     );
     expect(
       await page.evaluate(

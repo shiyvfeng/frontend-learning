@@ -202,6 +202,10 @@ export const implementedCourseMetadata = {
     view: "pointer",
     technology: "Pointer Events + CSS变量 / transform · 无图形库",
   },
+  31: {
+    view: "move",
+    technology: "原生Pointer Events + React事务预览 / 点击与键盘替代",
+  },
   30: {
     view: "windowed",
     technology: "React + 固定64px真实DOM窗口化 / 原生分页替代",

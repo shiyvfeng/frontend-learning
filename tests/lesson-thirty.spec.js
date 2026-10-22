@@ -245,7 +245,7 @@ test("record parser and brief do not conflate pagination loading or dynamic supp
   ])
     expect(text).toMatch(re);
 });
-test("lazy actual window opens01–30 only31 preview and no virtual library request", async ({
+test("lazy actual window opens01–31 only32 preview and no virtual library request", async ({
   page,
 }) => {
   const urls = [];
@@ -255,7 +255,7 @@ test("lazy actual window opens01–30 only31 preview and no virtual library requ
   expect(urls.some((u) => /lesson-thirty/.test(u))).toBe(false);
   await directory(page);
   await expect.poll(() => lab(page).getAttribute("data-rows")).not.toBe("0");
-  await expect(page.locator(".available-dot")).toHaveCount(30);
+  await expect(page.locator(".available-dot")).toHaveCount(31);
   expect(urls.every((u) => new URL(u).origin === "http://127.0.0.1:4173")).toBe(
     true,
   );
@@ -264,9 +264,9 @@ test("lazy actual window opens01–30 only31 preview and no virtual library requ
   ).toBe(false);
   const nav = page.getByRole("navigation", { name: "课程目录" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await nav.getByRole("button").nth(30).click();
+  await nav.getByRole("button").nth(31).click();
   await expect(
-    page.getByRole("heading", { name: "Drag/Drop/Resize", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });

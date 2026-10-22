@@ -91,11 +91,11 @@ test("tenth available twenty-fifth planned and lesson module loads on demand", a
   await expect(
     page.getByRole("heading", { name: "Mask / Clip Path." }),
   ).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(30);
-  await expect(page.locator(".site-footer")).toContainText("01–30");
-  await course(page, 30);
+  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".site-footer")).toContainText("01–31");
+  await course(page, 31);
   await expect(
-    page.getByRole("heading", { name: "Drag/Drop/Resize", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
