@@ -1,0 +1,192 @@
+.lesson-nineteen .spring-lab {
+  border: 1px solid #ddd7ed;
+  border-radius: 18px;
+  background: #f6f4fa;
+  padding: 22px;
+  min-width: 0;
+}
+.spring-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.spring-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+.spring-controls > label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  color: #5b526c;
+}
+.spring-controls input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #c8bedb;
+  background: #fff;
+  color: #302a3c;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 44px;
+  font: inherit;
+}
+.spring-lab button {
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid #d2c7e9;
+  border-radius: 8px;
+  background: #fff;
+  color: #4a3c78;
+  font: inherit;
+}
+.spring-lab p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #62586f;
+}
+.spring-lab h3 {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+.spring-presets,
+.spring-targets,
+.spring-observe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+.spring-targets button[aria-pressed="true"] {
+  background: #5b4cb5;
+  color: #fff;
+  border-color: #5b4cb5;
+}
+.spring-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.spring-comparison article {
+  min-width: 0;
+  background: white;
+  border: 1px solid #ded6ed;
+  border-radius: 13px;
+  padding: 18px;
+}
+.spring-track {
+  height: 146px;
+  position: relative;
+  border: 1px solid #ded6ee;
+  border-radius: 10px;
+  background: linear-gradient(#faf8ff, #f1edfa);
+  overflow: hidden;
+}
+.spring-track::before {
+  content: "";
+  position: absolute;
+  top: 69px;
+  left: 0;
+  right: 0;
+  border-top: 2px solid #c6bbdf;
+}
+.spring-marker {
+  position: absolute;
+  top: 30px;
+  bottom: 22px;
+  border-left: 1px dashed #c9bddf;
+}
+.spring-marker span {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font: 12px monospace;
+  color: #625773;
+}
+.spring-dot {
+  position: absolute;
+  top: 70px;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #5444a9;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  transition: none !important;
+}
+.spring-dot.spring {
+  background: #285c81;
+}
+.spring-constraint,
+.spring-policy,
+.spring-command,
+.spring-explain {
+  padding: 16px;
+  border: 1px solid #ded4ee;
+  border-radius: 12px;
+  background: #fff;
+  margin: 18px 0;
+}
+.spring-policy,
+.spring-command {
+  background: #ede7f9;
+}
+.spring-observe p {
+  flex-basis: 100%;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #ded7ec;
+  overflow-wrap: anywhere;
+}
+.spring-status {
+  padding: 14px;
+  border-radius: 10px;
+  background: #eae5f8;
+  border: 1px solid #d4c8ed;
+}
+.spring-command strong {
+  font-size: 14px;
+}
+.spring-explain p {
+  line-height: 2;
+}
+@media (max-width: 700px) {
+  .lesson-nineteen .spring-lab {
+    padding: 14px;
+  }
+  .spring-controls,
+  .spring-comparison {
+    grid-template-columns: 1fr;
+  }
+  .spring-comparison article {
+    padding: 14px;
+  }
+  .spring-presets,
+  .spring-targets,
+  .spring-observe {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .spring-heading {
+    font-size: 13px;
+  }
+  .spring-observe p {
+    min-width: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson-nineteen .spring-dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}

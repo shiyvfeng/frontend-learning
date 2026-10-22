@@ -82,16 +82,16 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("fifth lesson is available, nineteenth stays unbuilt, full 32-course route retained", async ({
+test("fifth lesson is available, twentieth stays unbuilt, full 32-course route retained", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Sizing与Overflow · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("18 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("19 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await expect(page.locator(".available-dot")).toHaveCount(18);
-  await course(page, 18);
-  await expect(page.getByRole("heading", { name: "Spring" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(19);
+  await course(page, 19);
+  await expect(page.getByRole("heading", { name: "Layout Animation" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await noOverflow(page);
 });

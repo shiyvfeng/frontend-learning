@@ -102,8 +102,8 @@ test("directory keeps Flex and future responsive lesson while axes and gap chang
   await choose(page, "观察例子", "图标与内容卡片");
   await expect(demo.getByText("一页灵感")).toBeVisible();
   await noOverflow(page);
-  await course(page, 18);
-  await expect(page.getByRole("heading", { name: "Spring" })).toBeVisible();
+  await course(page, 19);
+  await expect(page.getByRole("heading", { name: "Layout Animation" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
   await expect(page.locator(".course-link")).toHaveCount(32);
   expect(errors).toEqual([]);

@@ -184,6 +184,7 @@ export const implementedCourseMetadata = {
     view: "presence",
     technology: "React presence + 原生 WAAPI · 无 Motion 依赖",
   },
+  19: { view: "spring", technology: "时间插值 + 手写物理 spring · 原生 rAF" },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");
