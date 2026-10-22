@@ -121,7 +121,7 @@ test("utility maps and brief separate shared tokens, mutually exclusive variants
     "不导入Preflight",
     "构建期",
     "不能仅靠颜色",
-    "T03–T12仍为预告",
+    "T04–T12仍为预告",
   ])
     expect(text).toContain(t);
 });
@@ -914,7 +914,7 @@ test("held late navigation RAF respects actual Tab focus and cannot steal after 
     JSON.stringify(trace, null, 2),
   );
 });
-test("T01 exit enters actual T02, ten remaining modules are readonly and catalog is not numbered36", async ({
+test("T01 exit enters actual T02, nine remaining modules are readonly and catalog is not numbered36", async ({
   page,
 }) => {
   await open(page);
@@ -923,11 +923,11 @@ test("T01 exit enters actual T02, ten remaining modules are readonly and catalog
   await expect(page.locator("#tool02-stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(4);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(10);
+  await expect(nav.getByRole("button")).toHaveCount(5);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(9);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator("body")).toContainText(
-    "T03 · Radix / Base UI 尚未制作",
+    "T03已开放",
   );
   await expect(page.locator('[data-lesson-id="36"]')).toHaveCount(0);
 });

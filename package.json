@@ -11,6 +11,7 @@
     "compile:tool02": "node scripts/compile-tool-two.mjs"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "1.3.1",
     "lottie-web": "5.13.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

@@ -1,0 +1,253 @@
+.tool03-workbench {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.tool03-boundary,
+.tool03-readout,
+.tool03-static,
+.tool03-choices {
+  border: 1px solid #d6cbdf;
+  border-radius: 14px;
+  padding: 18px;
+  background: #f7f4fa;
+  color: #343044;
+  overflow-wrap: anywhere;
+}
+.tool03-static[data-theme="ink"] {
+  background: #282535;
+  color: #f7f4ff;
+  border-color: #988aa9;
+}
+.tool03-choices > div {
+  border-bottom: 1px solid #d6cbdf;
+  padding: 12px 0;
+}
+.tool03-choices button[aria-pressed="true"] {
+  background: #ece8f8;
+  border-color: #76518d;
+  color: #3d2852;
+}
+.tool03-appearance {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.tool-three legend {
+  padding: 0 8px;
+  font-weight: 700;
+}
+.tool-three label:not(.checkbox-label),
+.tool03-dialog label:not(.checkbox-label) {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.tool-three select,
+.tool-three textarea.tool03-context {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid #93839f;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: #302a3c;
+  font: inherit;
+  min-height: 44px;
+  margin: 8px 0;
+}
+.tool-three textarea.tool03-context {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.tool-three button {
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.tool03-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.tool03-clipped {
+  overflow: hidden;
+  transform: translateZ(0);
+  border: 2px dashed #93839f;
+  border-radius: 14px;
+  padding: 18px;
+  max-height: 180px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.tool03-feedback {
+  border-left: 3px solid #80638f;
+  padding: 14px;
+  background: #f5f1f9;
+  color: #343044;
+  line-height: 1.75;
+}
+.tool03-contract {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 8px 14px;
+  overflow-wrap: anywhere;
+}
+.tool03-contract dt {
+  font-weight: 700;
+}
+.tool03-contract dd {
+  margin: 0;
+}
+.tool03-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(24 19 36 / 0.64);
+  z-index: 1000;
+}
+.tool03-dialog {
+  --surface: #fff;
+  --ink: #272334;
+  --control: #fff;
+  --border: #93839f;
+  --accent: #5b46b5;
+  --accent-ink: #fff;
+  --focus: #5145bb;
+  position: fixed;
+  z-index: 1001;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(440px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+  padding: 24px;
+  scroll-padding: 20px;
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 20px 80px rgb(0 0 0/0.25);
+  font:
+    16px/1.7 Inter,
+    "Noto Sans SC",
+    system-ui,
+    sans-serif;
+  overflow-wrap: anywhere;
+}
+.tool03-dialog[data-size="wide"] {
+  width: min(640px, calc(100vw - 32px));
+}
+.tool03-dialog[data-theme="ink"] {
+  --surface: #282535;
+  --ink: #f7f4ff;
+  --control: #353048;
+  --border: #c7b6dd;
+  --accent: #b8a8ff;
+  --accent-ink: #242131;
+  --focus: #f0d6ff;
+}
+.tool03-dialog h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  line-height: 1.4;
+}
+.tool03-dialog p {
+  margin: 12px 0;
+}
+.tool03-dialog input[type="text"],
+.tool03-dialog select {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--control);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  min-height: 44px;
+  padding: 8px 10px;
+}
+.tool03-dialog button {
+  box-sizing: border-box;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--control);
+  color: var(--ink);
+  font: inherit;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.tool03-dialog button:focus-visible,
+.tool03-dialog input:focus-visible,
+.tool03-dialog select:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.tool03-dialog .tool03-save {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+.tool03-dialog .checkbox-label {
+  color: var(--ink);
+  font: inherit;
+  min-height: 44px;
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  margin: 12px 0;
+}
+.tool03-dialog input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  accent-color: var(--accent);
+}
+.tool03-error {
+  color: #9b2332;
+  border-left: 3px solid currentColor;
+  padding-left: 12px;
+}
+.tool03-dialog[data-theme="ink"] .tool03-error {
+  color: #ffb7c0;
+}
+.tool-three .agent-editor textarea {
+  min-height: 430px;
+}
+@media (max-width: 600px) {
+  .tool03-boundary,
+  .tool03-readout,
+  .tool03-static,
+  .tool03-choices {
+    padding: 14px;
+  }
+  .tool03-actions button {
+    width: 100%;
+  }
+  .tool03-dialog {
+    padding: 20px;
+  }
+  .tool03-contract {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .tool03-contract dd {
+    margin-bottom: 10px;
+  }
+  .tool-three .agent-editor textarea {
+    min-height: 360px;
+  }
+}
