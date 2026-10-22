@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createKeyboardNavigator } from "./keyboard-navigation.js";
@@ -136,7 +137,7 @@ test("business visual rules keep boolean degree and trigger responsibilities sep
     /dotLottie支持状态机.*Data Binding.*legacy/s,
   );
 });
-test("lazy runtime real original asset and32 preview stay consistent", async ({
+test("lazy runtime real original asset and32 release stay consistent", async ({
   page,
 }) => {
   const urls = [];
@@ -163,9 +164,9 @@ test("lazy runtime real original asset and32 preview stay consistent", async ({
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
   await nav.getByRole("button").nth(31).click();
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("real runtime sampling changes actual SVG geometry and resets without CSS animation", async ({
   page,

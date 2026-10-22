@@ -24,6 +24,7 @@ const LessonTwelve = React.lazy(() => import("./lesson-twelve"));
 const LessonThirteen = React.lazy(() => import("./lesson-thirteen"));
 const LessonFourteen = React.lazy(() => import("./lesson-fourteen"));
 const LessonFifteen = React.lazy(() => import("./lesson-fifteen"));
+const LessonThirtyTwo = React.lazy(() => import("./lesson-thirty-two"));
 const LessonThirtyOne = React.lazy(() => import("./lesson-thirty-one"));
 const LessonThirty = React.lazy(() => import("./lesson-thirty"));
 const LessonTwentyNine = React.lazy(() => import("./lesson-twenty-nine"));
@@ -71,6 +72,7 @@ const lessonViews = {
   charts: LessonTwentyNine,
   windowed: LessonThirty,
   move: LessonThirtyOne,
+  space: LessonThirtyTwo,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";
@@ -674,7 +676,7 @@ function App() {
             说清实现。
           </div>
           <div className="nav-caption">
-            学习路线{" "}
+            编号课路线{" "}
             <span>
               {String(availableLessons.length).padStart(2, "0")} /{" "}
               {lessons.length}

@@ -69,7 +69,7 @@ export function Roadmap() {
       <summary>
         <span>路线核对说明与官方来源</span>
         <span className="micro">
-          技术参考 2026-10-20 · 目录对齐 2026-10-21{" "}
+          技术参考 2026-10-20 · 目录对齐 2026-10-22{" "}
           <span aria-hidden="true">＋</span>
         </span>
       </summary>
@@ -97,7 +97,7 @@ export function Roadmap() {
           </li>
         </ul>
         <p>
-          原课程按 {courseRoute.length} 课逐章推进。{availabilityText}{" "}
+          编号课主干按 {courseRoute.length} 课逐章推进。{availabilityText}{" "}
           此前目录把多个主题合并为 8
           类，本次展开保留各课，主干分类用于理解关系，不替代原课编号。
         </p>
@@ -112,7 +112,7 @@ export function Roadmap() {
           </ol>
           <p>
             A、B 和 T01–T12
-            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习；这些覆盖计划尚未作为独立模块制作。
+            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习；这些覆盖计划尚未作为独立模块制作。编号课开放不代表全课程结束，后续继续逐模块推进。
           </p>
           <div className="source-links">
             {coverageCatalog.map(({ id, title, status }) => (

@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
@@ -79,7 +80,7 @@ async function completeExperiments(page) {
   await page.getByRole("button", { name: "新增卡片", exact: false }).click();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("third lesson is Grid, complete route is present, thirty-second remains unbuilt", async ({
+test("third lesson is Grid, complete route is present, numbered32 opens with remaining modules planned", async ({
   page,
 }) => {
   const errors = [];
@@ -87,14 +88,14 @@ test("third lesson is Grid, complete route is present, thirty-second remains unb
   await open(page);
   await expect(page).toHaveTitle("Grid——二维布局 · 前端观察室");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await expect(page.locator(".nav-caption")).toContainText("31 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("32 / 32");
   await course(page, 31);
-  await expect(page.getByRole("heading", { name: "Infinite Canvas" })).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await assertRemainingPlans32(page, expect);
   await expect(page.locator("#grid-stage-heading")).toHaveCount(0);
   await course(page, 31);
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas" }),
+    page.getByRole("heading", { name: "Infinite Canvas." }),
   ).toBeVisible();
   await course(page, 2);
   await expect(page.locator("#grid-stage-heading")).toBeFocused();

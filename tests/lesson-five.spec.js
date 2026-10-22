@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8"),
@@ -82,17 +83,17 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("fifth lesson is available, thirty-second stays unbuilt, full 32-course route retained", async ({
+test("fifth lesson is available, numbered32 opens with remaining modules planned, full 32-course route retained", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Sizing与Overflow · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("31 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("32 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
-  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".available-dot")).toHaveCount(32);
   await course(page, 31);
-  await expect(page.getByRole("heading", { name: "Infinite Canvas" })).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await assertRemainingPlans32(page, expect);
   await noOverflow(page);
 });
 test("min wins conflicting max; border/content-box and padding have measured effects", async ({

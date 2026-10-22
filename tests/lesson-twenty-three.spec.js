@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createKeyboardNavigator } from "./keyboard-navigation.js";
@@ -135,7 +136,7 @@ test("bounded normalized values, amplitude, viewport-local coordinates and zero 
     inside: false,
   });
 });
-test("on-demand lesson23 registration opens01–31 only and next canvas remains preview", async ({
+test("on-demand lesson23 registration opens01–32 only and numbered32 opens with tool plans", async ({
   page,
 }) => {
   const urls = [];
@@ -146,7 +147,7 @@ test("on-demand lesson23 registration opens01–31 only and next canvas remains 
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-three-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Cursor/Pointer Driven · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".available-dot")).toHaveCount(32);
   expect(urls.filter((u) => !u.startsWith("http://127.0.0.1:4173/"))).toEqual(
     [],
   );
@@ -154,9 +155,9 @@ test("on-demand lesson23 registration opens01–31 only and next canvas remains 
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
   await nav.getByRole("button").nth(31).click();
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("real mouse coordinates alter gradient CSS variables and transform; leave immediately restores center", async ({
   page,

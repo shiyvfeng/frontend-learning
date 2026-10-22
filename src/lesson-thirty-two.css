@@ -1,0 +1,150 @@
+.lesson-thirty-two {
+  --accent: #67447e;
+}
+.space32-hero-boundary {
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+}
+.space32-lab {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.space32-lab p {
+  line-height: 1.8;
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+.space32-lab label {
+  display: grid;
+  gap: 8px;
+}
+.space32-lab input:not([type="checkbox"]) {
+  width: 100%;
+  min-width: 0;
+}
+.space32-explain,
+.space32-readout,
+.space32-objects,
+.space32-edit,
+.space32-boundaries {
+  padding: 18px;
+  border: 1px solid #c8bcd3;
+  border-radius: 12px;
+  background: #faf9f6;
+  min-width: 0;
+}
+.space32-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.space32-buttons > button {
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+}
+.space32-viewport {
+  height: 320px;
+  max-height: 60svh;
+  min-height: 220px;
+  border: 2px solid #8d789d;
+  border-radius: 12px;
+  overflow: hidden;
+  touch-action: pinch-zoom;
+  user-select: none;
+  background: #f7f4fb;
+  min-width: 0;
+}
+.space32-viewport:focus-visible {
+  outline: 3px solid #5553c5;
+  outline-offset: 3px;
+}
+.space32-viewport svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.space32-node {
+  cursor: grab;
+}
+.space32-node:active {
+  cursor: grabbing;
+}
+.space32-objects h3,
+.space32-edit h3,
+.space32-boundaries h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+.space32-objects ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.space32-objects li {
+  border: 1px solid #c9bdd4;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 0;
+}
+.space32-objects button {
+  width: 100%;
+  min-height: 44px;
+  white-space: normal;
+}
+.space32-objects small {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.space32-edit,
+.space32-boundaries {
+  display: grid;
+  gap: 12px;
+}
+.space32-boundaries .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.space32-boundaries input[type="checkbox"] {
+  flex: none;
+}
+.space32-empty {
+  background: #eee7f4;
+  border: 1px dashed #8d789d;
+  padding: 20px;
+  border-radius: 10px;
+  line-height: 1.8;
+}
+.space32-status {
+  border-radius: 10px;
+  background: #ece4f3;
+  color: #3f2c53;
+  padding: 16px;
+  line-height: 1.8;
+  min-height: 64px;
+  overflow-wrap: anywhere;
+}
+.space32-help {
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .space32-explain,
+  .space32-readout,
+  .space32-objects,
+  .space32-edit,
+  .space32-boundaries {
+    padding: 12px;
+  }
+  .space32-buttons > button {
+    flex: 1 1 120px;
+  }
+  .space32-objects ul {
+    grid-template-columns: 1fr;
+  }
+}

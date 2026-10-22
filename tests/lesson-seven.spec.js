@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8"),
@@ -87,11 +88,11 @@ test("seventh available, twenty-fifth unmade, existing route and tags remain pla
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(31);
-  await expect(page.locator(".site-footer")).toContainText("01–31");
+  await expect(page.locator(".available-dot")).toHaveCount(32);
+  await expect(page.locator(".site-footer")).toContainText("01–32");
   await course(page, 31);
-  await expect(page.getByRole("heading", { name: "Infinite Canvas" })).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await assertRemainingPlans32(page, expect);
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({
   page,

@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8"),
@@ -78,7 +79,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("eleventh SVG available on demand, thirty-second remains planned", async ({
+test("eleventh SVG available on demand, numbered32 opens while tool plans remain", async ({
   page,
 }) => {
   const requests = [];
@@ -90,12 +91,12 @@ test("eleventh SVG available on demand, thirty-second remains planned", async ({
   await expect(page.locator("#vector-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-eleven-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("SVG · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".available-dot")).toHaveCount(32);
   await course(page, 31);
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("real SVG structure sizes and viewBox produce actual coordinate transformations", async ({
   page,

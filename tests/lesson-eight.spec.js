@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8"),
@@ -74,16 +75,16 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("eighth available and thirty-second remains unmade with unified catalog", async ({
+test("eighth available and numbered32 opens; tools stay planned with unified catalog", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("毛玻璃 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(31);
-  await expect(page.locator(".site-footer")).toContainText("01–31");
+  await expect(page.locator(".available-dot")).toHaveCount(32);
+  await expect(page.locator(".site-footer")).toContainText("01–32");
   await course(page, 31);
-  await expect(page.getByRole("heading", { name: "Infinite Canvas" })).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await assertRemainingPlans32(page, expect);
 });
 test("same real scene switches own filter and backdrop, adjusts blur and keeps external readable equivalent", async ({
   page,

@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
@@ -103,8 +104,8 @@ test("directory keeps Flex and future responsive lesson while axes and gap chang
   await expect(demo.getByText("一页灵感")).toBeVisible();
   await noOverflow(page);
   await course(page, 31);
-  await expect(page.getByRole("heading", { name: "Infinite Canvas" })).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await assertRemainingPlans32(page, expect);
   await expect(page.locator(".course-link")).toHaveCount(32);
   expect(errors).toEqual([]);
 });

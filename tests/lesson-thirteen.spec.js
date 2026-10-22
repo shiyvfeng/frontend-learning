@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { createKeyboardNavigator } from "./keyboard-navigation.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
@@ -91,7 +92,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("thirteenth Props available on demand and thirty-second remains planned", async ({
+test("thirteenth Props available on demand and numbered32 opens while tool plans remain", async ({
   page,
 }) => {
   const requests = [];
@@ -103,12 +104,12 @@ test("thirteenth Props available on demand and thirty-second remains planned", a
   await expect(page.locator("#props-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-thirteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Props与Variant · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".available-dot")).toHaveCount(32);
   await course(page, 31);
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("three shared implementations change real size and visual variant while preserving DOM identity", async ({
   page,

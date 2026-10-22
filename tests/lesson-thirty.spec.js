@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createKeyboardNavigator } from "./keyboard-navigation.js";
@@ -245,7 +246,7 @@ test("record parser and brief do not conflate pagination loading or dynamic supp
   ])
     expect(text).toMatch(re);
 });
-test("lazy actual window opens01–31 only32 preview and no virtual library request", async ({
+test("lazy actual window opens01–32 all numbered releases and no virtual library request", async ({
   page,
 }) => {
   const urls = [];
@@ -255,7 +256,7 @@ test("lazy actual window opens01–31 only32 preview and no virtual library requ
   expect(urls.some((u) => /lesson-thirty/.test(u))).toBe(false);
   await directory(page);
   await expect.poll(() => lab(page).getAttribute("data-rows")).not.toBe("0");
-  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".available-dot")).toHaveCount(32);
   expect(urls.every((u) => new URL(u).origin === "http://127.0.0.1:4173")).toBe(
     true,
   );
@@ -266,9 +267,9 @@ test("lazy actual window opens01–31 only32 preview and no virtual library requ
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
   await nav.getByRole("button").nth(31).click();
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("actual DOM window has only visible plus buffer rows despite resident3000 model", async ({
   page,

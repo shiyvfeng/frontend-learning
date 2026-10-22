@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createKeyboardNavigator } from "./keyboard-navigation.js";
@@ -96,10 +97,10 @@ async function detail(p, id) {
   await expect(lab(p)).toHaveAttribute("data-view", id);
   await expect(p.locator(`[data-detail="${id}"]`)).toBeVisible();
 }
-test("only 01–31 available; next remains preview", async ({ page }) => {
+test("only 01–32 available; tool plans remain preview", async ({ page }) => {
   await open(page);
-  await expect(page.locator(".available-dot")).toHaveCount(31);
-  await expect(page.locator(".site-footer")).toContainText("01–31");
+  await expect(page.locator(".available-dot")).toHaveCount(32);
+  await expect(page.locator(".site-footer")).toContainText("01–32");
   await page
     .getByRole("navigation", { name: "课程目录" })
     .isVisible()
@@ -112,9 +113,9 @@ test("only 01–31 available; next remains preview", async ({ page }) => {
     .nth(31)
     .click();
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toContainText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("real native pairing changes geometry between different DOM nodes and returns correct B source", async ({
   page,

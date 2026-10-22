@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createKeyboardNavigator } from "./keyboard-navigation.js";
@@ -190,7 +191,7 @@ test("minute parser and brief retain field unit distribution and implementation 
   ])
     expect(text).toMatch(re);
 });
-test("lazy actual SVG lesson29 opens only01–31 and32 stays a preview without chart libraries", async ({
+test("lazy actual SVG lesson29 opens only01–32 and32 opens with tool plans without chart libraries", async ({
   page,
 }) => {
   const urls = [];
@@ -200,7 +201,7 @@ test("lazy actual SVG lesson29 opens only01–31 and32 stays a preview without c
   expect(urls.some((u) => /lesson-twenty-nine/.test(u))).toBe(false);
   await directory(page);
   await expect(page.locator(".chart29-svg")).toBeVisible();
-  await expect(page.locator(".available-dot")).toHaveCount(31);
+  await expect(page.locator(".available-dot")).toHaveCount(32);
   expect(urls.some((u) => /lesson-twenty-nine/.test(u))).toBe(true);
   expect(urls.every((u) => new URL(u).origin === "http://127.0.0.1:4173")).toBe(
     true,
@@ -212,9 +213,9 @@ test("lazy actual SVG lesson29 opens only01–31 and32 stays a preview without c
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
   await nav.getByRole("button").nth(31).click();
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("comparison bars encode actual values and fixed zero scale with table parity", async ({
   page,

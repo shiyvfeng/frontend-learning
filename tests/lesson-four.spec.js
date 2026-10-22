@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
@@ -96,16 +97,16 @@ async function completeFirstThree(page) {
   await page.getByRole("button", { name: "关闭锚点说明" }).click();
   await page.getByRole("button", { name: "完成并继续" }).click();
 }
-test("fourth lesson is available, thirty-second remains unbuilt and route count stays 32", async ({
+test("fourth lesson is available, numbered32 opens with remaining modules planned and route count stays 32", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("Position与浮层 · 前端观察室");
-  await expect(page.locator(".nav-caption")).toContainText("31 / 32");
+  await expect(page.locator(".nav-caption")).toContainText("32 / 32");
   await expect(page.locator(".course-link")).toHaveCount(32);
   await course(page, 31);
-  await expect(page.getByRole("heading", { name: "Infinite Canvas" })).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await assertRemainingPlans32(page, expect);
   await noOverflow(page);
 });
 test("relative preserves flow, absolute removes space and containing block changes", async ({

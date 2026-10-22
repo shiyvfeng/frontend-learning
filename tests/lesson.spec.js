@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
@@ -254,8 +255,8 @@ test("keyboard, visible focus, directory and accessibility at every stage", asyn
     .getByRole("button")
     .nth(31)
     .click();
-  await expect(page.getByRole("heading", { name: "Infinite Canvas" })).toBeVisible();
-  await expect(page.locator(".coming-status")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Infinite Canvas." })).toBeVisible();
+  await assertRemainingPlans32(page, expect);
   await page.getByRole("button", { name: "返回第一节" }).click();
   await expect(page.locator("#stage-heading")).toHaveText(
     "把观察变成一条好指令",

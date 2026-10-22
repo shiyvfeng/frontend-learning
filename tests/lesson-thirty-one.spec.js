@@ -1,3 +1,4 @@
+import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createKeyboardNavigator } from "./keyboard-navigation.js";
@@ -137,7 +138,7 @@ test("size helper clamps narrow containers and brief matches actual transaction 
   );
   expect(moveBrief(moveInitial())).toContain("未接入dnd-kit");
 });
-test("lazy chapter31 native implementation opens01–31 and only32 stays preview", async ({
+test("lazy chapter31 native implementation opens01–32 and numbered32 opens; tool plans stay preview", async ({
   page,
 }) => {
   const requests = [];
@@ -145,8 +146,8 @@ test("lazy chapter31 native implementation opens01–31 and only32 stays preview
   await page.goto("/");
   expect(requests.some((u) => /lesson-thirty-one/.test(u))).toBe(false);
   await directory(page);
-  await expect(page.locator(".available-dot")).toHaveCount(31);
-  await expect(page.locator(".site-footer")).toContainText("01–31");
+  await expect(page.locator(".available-dot")).toHaveCount(32);
+  await expect(page.locator(".site-footer")).toContainText("01–32");
   expect(requests.some((u) => /lesson-thirty-one/.test(u))).toBe(true);
   expect(requests.some((u) => /dnd-kit|sortablejs/.test(u))).toBe(false);
   await expect(page).toHaveTitle("Drag/Drop/Resize · 前端观察室");
@@ -154,9 +155,9 @@ test("lazy chapter31 native implementation opens01–31 and only32 stays preview
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
   await nav.getByRole("button").nth(31).click();
   await expect(
-    page.getByRole("heading", { name: "Infinite Canvas", exact: true }),
+    page.getByRole("heading", { name: "Infinite Canvas.", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".coming-status")).toHaveText("尚未制作");
+  await assertRemainingPlans32(page, expect);
 });
 test("real mouse capture preview does not commit until valid cross-column release", async ({
   page,

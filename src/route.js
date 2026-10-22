@@ -202,6 +202,10 @@ export const implementedCourseMetadata = {
     view: "pointer",
     technology: "Pointer Events + CSS变量 / transform · 无图形库",
   },
+  32: {
+    view: "space",
+    technology: "原生SVG viewBox + Pointer Events · 有限教学世界",
+  },
   31: {
     view: "move",
     technology: "原生Pointer Events + React事务预览 / 点击与键盘替代",
@@ -274,13 +278,17 @@ const formatRanges = (numbers) => {
 export const availableLessonRange = formatRanges(
   availableLessons.map((lesson) => lesson.index + 1),
 );
-export const availabilityText = availableLessons.length
-  ? `目前 ${availableLessonRange} 课可以学习。其余保留目录，按节逐步制作。`
-  : "课程尚未制作，当前提供目录预览。";
-export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}`;
+export const availabilityText =
+  availableLessons.length === lessonCatalog.length
+    ? `目前 ${availableLessonRange} 编号课可以学习；综合阶段A/B与T01–T12工具模块尚未制作，课程仍在继续。`
+    : availableLessons.length
+      ? `目前 ${availableLessonRange} 课可以学习。其余保留目录，按节逐步制作。`
+      : "课程尚未制作，当前提供目录预览。";
+export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}${availableLessons.length === lessonCatalog.length ? "（编号课；A/B与T01–T12尚未制作）" : ""}`;
 export function nextLessonHint(index) {
   const next = lessonCatalog[index + 1];
-  if (!next) return "已到课程目录末尾。";
+  if (!next)
+    return `已到${lessonCatalog.length}个编号课的末尾；综合阶段A/B与T01–T12工具模块尚未制作，课程仍在继续。`;
   return next.available
     ? `可以从课程目录继续 ${next.id} ${next.title}。`
     : `下一课 ${next.id} ${next.title} 尚未制作。`;
