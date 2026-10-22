@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
 const summary =
-  "目前 01–32 编号课可以学习；综合阶段A/B已开放；T01–T12共12工具模块尚未制作，课程仍在继续。";
+  "目前 01–32 编号课可以学习；综合阶段A/B及T01已开放；T02–T12共11工具模块尚未制作，课程仍在继续。";
 const chapterNames = [
   "第一节学习步骤",
   "第二节学习步骤",
@@ -169,7 +169,7 @@ test("all numbered lessons are released but remaining modules are real previews,
   );
   await axeCheck(page);
 });
-test("A and B are available while all twelve tool tags remain unmade plans without learning links", async ({
+test("A B T01 are available while eleven remaining tool tags stay unmade without learning links", async ({
   page,
 }) => {
   await page.goto("/");
@@ -185,10 +185,16 @@ test("A and B are available while all twelve tool tags remain unmade plans witho
     "已制作",
   );
   await expect(outline.locator('[data-coverage-id="B"] button')).toHaveCount(1);
+  await expect(outline.locator('[data-coverage-id="T01"]')).toContainText(
+    "已制作",
+  );
+  await expect(outline.locator('[data-coverage-id="T01"] button')).toHaveCount(
+    1,
+  );
   for (const id of [
     ...Array.from(
-      { length: 12 },
-      (_, i) => "T" + String(i + 1).padStart(2, "0"),
+      { length: 11 },
+      (_, i) => "T" + String(i + 2).padStart(2, "0"),
     ),
   ]) {
     const tag = outline.locator(`[data-coverage-id="${id}"]`);

@@ -1,0 +1,148 @@
+.tool-one {
+  --tool01-line: #d6cbdf;
+}
+.tool01-workbench {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.tool01-boundary,
+.tool01-preparation,
+.tool01-check,
+.tool01-output {
+  border: 1px solid var(--tool01-line);
+  border-radius: 14px;
+  padding: 18px;
+  background: #f5f1f9;
+  color: #343044;
+  overflow-wrap: anywhere;
+}
+.tool01-config {
+  display: grid;
+  gap: 18px;
+}
+.tool01-config fieldset {
+  min-width: 0;
+  border: 1px solid var(--tool01-line);
+  border-radius: 14px;
+  padding: 18px;
+}
+.tool-one legend {
+  padding: 0 8px;
+  font-weight: 700;
+}
+.tool-one label:not(.checkbox-label) {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.tool-one select,
+.tool-one input[type="text"],
+.tool-one textarea.tool01-context {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid #93839f;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: #302a3c;
+  font: inherit;
+  min-height: 44px;
+  margin: 8px 0;
+}
+.tool-one textarea.tool01-context {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.tool-one button {
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.tool01-choice {
+  margin: 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--tool01-line);
+}
+.tool01-choice button[aria-pressed="true"] {
+  background: #eee7f5;
+  border-color: #76518d;
+  color: #3d2852;
+}
+.tool01-timeline {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.tool01-timeline li {
+  padding: 16px;
+  border: 1px solid var(--tool01-line);
+  border-radius: 12px;
+  background: white;
+  color: #343044;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tool01-timeline li[aria-current="step"] {
+  border: 2px solid #79538f;
+  background: #f4eef9;
+}
+.tool01-lane {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5b476c;
+  margin-bottom: 8px;
+}
+.tool01-now {
+  display: block;
+  font-weight: 700;
+  color: #583879;
+}
+.tool01-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0;
+}
+.tool01-feedback {
+  border-left: 3px solid #80638f;
+  padding: 14px;
+  background: #f5f1f9;
+  color: #343044;
+  line-height: 1.75;
+}
+.tool01-output [data-real-count] {
+  font-size: 24px;
+}
+.tool01-output h3,
+.tool01-preparation h3 {
+  margin-top: 0;
+}
+@media (max-width: 600px) {
+  .tool01-config fieldset,
+  .tool01-boundary,
+  .tool01-preparation,
+  .tool01-check,
+  .tool01-output {
+    padding: 14px;
+  }
+  .tool01-actions button {
+    width: 100%;
+  }
+  .tool01-choice button {
+    width: 100%;
+  }
+}
+
+.tool-one .agent-editor textarea {
+  min-height: 430px;
+}
+@media (max-width: 600px) {
+  .tool-one .agent-editor textarea {
+    min-height: 360px;
+  }
+}

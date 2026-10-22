@@ -163,7 +163,7 @@ export default function StageB({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "综合阶段B练习已完成；这不代表需求正确或实现通过。下一模块T01 React / Next.js尚未制作，T01–T12仍为预告，课程没有全部结束。",
+        "综合阶段B练习已完成；这不代表需求正确或实现通过。可以继续T01 React / Next.js；T01已开放，T02–T12仍为预告，课程没有全部结束。",
       );
     else
       setNotice(
@@ -484,9 +484,13 @@ export default function StageB({ onStorageStatus, onNavigate }) {
           重置综合阶段B进度
         </button>
       </div>
+      {onNavigate && (
+        <button className="primary" onClick={() => onNavigate("T01")}>
+          继续T01 · React / Next.js
+        </button>
+      )}
       <p className="writeb-boundary">
-        下一模块 T01 · React / Next.js
-        尚未制作。T01–T12工具模块仍为预告，不是全课程结束。
+        T01已开放；T02–T12工具模块仍为预告，不是全课程结束。
       </p>
       {onNavigate && (
         <button onClick={() => onNavigate("A")}>返回综合A复习</button>

@@ -1,4 +1,4 @@
-// All32 numbered lessons plus separate stagesA/B are released. The12 tool
+// All32 numbered lessons plus separate stagesA/B are released. T01 is open; the11 other tool
 // coverage modules are read-only plans, never a fabricated33rd course.
 export async function assertRemainingPlans32(page, expect) {
   await expect(
@@ -8,7 +8,7 @@ export async function assertRemainingPlans32(page, expect) {
   await expect(page.locator(".coming-status")).toHaveCount(0);
   await expect(page.locator(".site-footer")).toContainText("01–32 · 32 / 32");
   await expect(page.locator(".site-footer")).toContainText(
-    "综合A/B已开放，T01–T12尚未制作",
+    "综合A/B已开放，T01已开放；T02–T12尚未制作",
   );
   const summary = page.getByText("路线核对说明与官方来源", { exact: true });
   if (!(await summary.evaluate((e) => e.closest("details").open)))
@@ -31,10 +31,16 @@ export async function assertRemainingPlans32(page, expect) {
     "已制作",
   );
   await expect(outline.locator('[data-coverage-id="B"] button')).toHaveCount(1);
+  await expect(outline.locator('[data-coverage-id="T01"]')).toContainText(
+    "已制作",
+  );
+  await expect(outline.locator('[data-coverage-id="T01"] button')).toHaveCount(
+    1,
+  );
   for (const id of [
     ...Array.from(
-      { length: 12 },
-      (_, i) => "T" + String(i + 1).padStart(2, "0"),
+      { length: 11 },
+      (_, i) => "T" + String(i + 2).padStart(2, "0"),
     ),
   ]) {
     const tag = outline.locator(`[data-coverage-id="${id}"]`);
