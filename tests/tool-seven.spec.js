@@ -1095,24 +1095,53 @@ test("actual item renderer error fixture destroys own instance and captured late
   });
   await b(page, "应用最早资源结果").click();
   await expect(player(page)).toHaveAttribute("data-ready", "true");
+  const trace = [];
+  const k = createKeyboardNavigator(page, expect, trace, {
+    lesson: "tool07-renderer-error-focus",
+    profile: info.project.name,
+  });
+  await k.act(
+    b(page, "播放或重播真实预览"),
+    "real player focus before renderer error",
+  );
+  const heldControl = await b(page, "播放或重播真实预览").elementHandle();
   await page.evaluate(() => {
     window.oldCallbacks07 = window.callbacks07;
     window.oldCallbacks07.error();
   });
   await expect(player(page)).toHaveAttribute("data-ready", "false");
+  // Assert immediately after error commit, before any later click/Tab can repair it.
+  await expect(b(page, "播放或重播真实预览")).toBeFocused();
+  expect(
+    await heldControl.evaluate(
+      (e) => e.isConnected && e === document.activeElement,
+    ),
+  ).toBe(true);
   await expect(lab(page)).toContainText("初始化/渲染失败");
   expect((await state(page)).owned).toBe(0);
   await load(page);
   await b(page, "采样第60帧").click();
   const before = await inspect(page);
+  await k.seek(
+    b(page, "取消本次准备"),
+    "newer external focus before old callbacks",
+  );
+  const externalFocus = await page.evaluate(
+    () => document.activeElement.outerHTML,
+  );
   await page.evaluate(() => {
     for (const f of Object.values(window.oldCallbacks07)) f();
   });
+  expect(await page.evaluate(() => document.activeElement.outerHTML)).toBe(
+    externalFocus,
+  );
+  await expect(b(page, "取消本次准备")).toBeFocused();
   expect(await inspect(page)).toEqual(before);
   await expect(lab(page)).not.toContainText("单次动画播放结束");
   save(info.project.name + "-renderer-error-late-fixture", {
     before,
     after: await inspect(page),
+    trace,
     fixture:
       "Captured genuine item listeners invoked after removal to model late delivery, not a real GPU fault",
   });

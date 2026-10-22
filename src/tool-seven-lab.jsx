@@ -27,6 +27,13 @@ function Player({
     [snapshot, setSnapshot] = useState(null);
   const blocked = reduced || hidden || data.mode === "static";
   useEffect(() => {
+    // Keep the controls mounted across resource changes/errors. Only the
+    // renderer belongs to this asset lifetime, so focused buttons stay put.
+    setReady(false);
+    setPlaying(false);
+    setSnapshot(null);
+    if (host.current) host.current.dataset.frame = "0";
+    if (out.current) out.current.textContent = "0";
     if (!asset) return;
     let live = true,
       c;
@@ -508,7 +515,7 @@ export default function Tool07Workbench({ data, patch }) {
             </select>
           </div>
           <Player
-            key={`${epoch}-${asset ? "loaded" : "empty"}`}
+            key={epoch}
             asset={asset}
             data={data}
             patch={patch}
