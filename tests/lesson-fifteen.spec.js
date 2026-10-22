@@ -68,7 +68,7 @@ const deny = () =>
     },
   });
 
-test("new feedback module loads on demand with twenty-two releases and twenty-third planned", async ({
+test("new feedback module loads on demand with twenty-three releases and twenty-fourth planned", async ({
   page,
 }) => {
   const urls = [];
@@ -78,7 +78,7 @@ test("new feedback module loads on demand with twenty-two releases and twenty-th
   expect(urls.some((u) => /lesson-fifteen-.*\.js/.test(u))).toBe(false);
   await open(page);
   await expect(page).toHaveTitle("Loading/Skeleton/Optimistic UI · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(22);
+  await expect(page.locator(".available-dot")).toHaveCount(23);
   expect(urls.some((u) => /lesson-fifteen-.*\.js/.test(u))).toBe(true);
 });
 test("actual spinner skeleton known progress success failure duplicate guard and canceled stale result", async ({

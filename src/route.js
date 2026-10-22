@@ -198,6 +198,10 @@ export const implementedCourseMetadata = {
     technology:
       "原生 scroll + CSS scroll timeline + IntersectionObserver · 无 GSAP",
   },
+  23: {
+    view: "pointer",
+    technology: "Pointer Events + CSS变量 / transform · 无图形库",
+  },
 };
 export const lessonCatalog = courseRoute.map((lesson, index) => {
   const id = String(index + 1).padStart(2, "0");

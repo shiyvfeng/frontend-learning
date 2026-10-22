@@ -119,7 +119,7 @@ async function focusSnapshot(p) {
     };
   });
 }
-test("twentieth is lazy with twenty-two releases and honest FLIP mechanism without Motion or external requests", async ({
+test("twentieth is lazy with twenty-three releases and honest FLIP mechanism without Motion or external requests", async ({
   page,
 }) => {
   const urls = [];
@@ -130,7 +130,7 @@ test("twentieth is lazy with twenty-two releases and honest FLIP mechanism witho
   await directory(page);
   expect(urls.some((u) => /lesson-twenty-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Layout Animation · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(22);
+  await expect(page.locator(".available-dot")).toHaveCount(23);
   await expect(page.getByTestId("layout-lab")).toContainText("未使用Motion");
   expect(
     urls

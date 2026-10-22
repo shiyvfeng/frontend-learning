@@ -173,7 +173,7 @@ test("nineteenth is lazy metadata opens nineteen only and all actual requests st
   await directory(page);
   expect(urls.some((u) => /lesson-nineteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Spring · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(22);
+  await expect(page.locator(".available-dot")).toHaveCount(23);
   await expect(page.getByTestId("spring-lab")).toContainText("无 Motion 依赖");
   expect(
     urls

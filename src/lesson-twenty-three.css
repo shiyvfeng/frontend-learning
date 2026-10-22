@@ -1,0 +1,198 @@
+.pointer23-lab {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.pointer23-controls,
+.pointer23-explain {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  background: #f3f1ed;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+}
+.pointer23-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.pointer23-lab button {
+  min-height: 42px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.pointer23-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.pointer23-caption {
+  display: grid;
+  gap: 8px;
+}
+.pointer23-caption input {
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #2b2934;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+}
+.pointer23-guide,
+.pointer23-readout,
+.pointer23-inspection,
+.pointer23-explain p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.pointer23-frame {
+  padding: 28px 24px;
+  border: 1px solid #d3cbdc;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  background: #f5f2f9;
+}
+.pointer23-bounds {
+  --px: 50%;
+  --py: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+  position: relative;
+  width: min(100%, 490px);
+  min-width: 0;
+  touch-action: auto;
+  isolation: isolate;
+  outline: 2px dashed #aaa0bc;
+  outline-offset: 6px;
+}
+
+.pointer23-card {
+  position: relative;
+  width: min(100%, 490px);
+  min-width: 0;
+  padding: 24px 20px;
+  border: 1px solid #bbb2cd;
+  border-radius: 20px;
+  background: #ded6ec;
+  transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry));
+  pointer-events: none;
+  transform-style: flat;
+  box-shadow: 0 12px 22px #33264813;
+  overflow: clip;
+}
+.pointer23-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    circle 125px at var(--px) var(--py),
+    #fff8d6 0%,
+    #b9a4e680 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+.pointer23-orbit {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  pointer-events: none;
+}
+.pointer23-orbit span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: #8072ac;
+  border-radius: 50%;
+}
+.pointer23-orbit span:nth-child(2) {
+  width: 40px;
+  height: 40px;
+  background: #46848a;
+}
+.pointer23-orbit span:nth-child(3) {
+  background: #ad7845;
+}
+.pointer23-copy {
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+  border-radius: 12px;
+  background: #fffffff2;
+  color: #302c38;
+  overflow-wrap: anywhere;
+}
+.pointer23-copy h3 {
+  font-size: 21px;
+  line-height: 1.5;
+  margin: 9px 0;
+}
+.pointer23-copy p {
+  line-height: 1.8;
+  margin: 0;
+}
+.pointer23-readout {
+  padding: 12px 16px;
+  background: #ede9f4;
+  border-radius: 10px;
+  font-variant-numeric: tabular-nums;
+  min-height: 52px;
+}
+.pointer23-positions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+.pointer23-controls h3 {
+  font-size: 16px;
+  margin: 0;
+}
+.pointer23-status {
+  min-height: 52px;
+  padding: 14px 16px;
+  background: #ece8f5;
+  color: #493b67;
+  border-radius: 10px;
+  line-height: 1.7;
+}
+.pointer23-lab[data-light="false"] .pointer23-glow {
+  opacity: 0;
+}
+.pointer23-lab[data-dynamic="false"] .pointer23-card,
+.pointer23-lab[data-tilt="false"] .pointer23-card {
+  transform: none;
+}
+@media (max-width: 600px) {
+  .pointer23-controls,
+  .pointer23-explain {
+    padding: 14px;
+  }
+  .pointer23-buttons > * {
+    flex: 1 1 110px;
+  }
+  .pointer23-frame {
+    padding: 20px 16px;
+  }
+  .pointer23-card {
+    padding: 16px 12px;
+  }
+  .pointer23-copy {
+    padding: 14px;
+  }
+  .pointer23-copy h3 {
+    font-size: 19px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pointer23-card {
+    transform: none !important;
+  }
+}

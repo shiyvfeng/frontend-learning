@@ -78,7 +78,7 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("eleventh SVG available on demand, twenty-third remains planned", async ({
+test("eleventh SVG available on demand, twenty-fourth remains planned", async ({
   page,
 }) => {
   const requests = [];
@@ -90,10 +90,10 @@ test("eleventh SVG available on demand, twenty-third remains planned", async ({
   await expect(page.locator("#vector-stage-heading")).toBeVisible();
   expect(requests.some((u) => /lesson-eleven-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("SVG · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(22);
-  await course(page, 22);
+  await expect(page.locator(".available-dot")).toHaveCount(23);
+  await course(page, 23);
   await expect(
-    page.getByRole("heading", { name: "Cursor/Pointer Driven", exact: true }),
+    page.getByRole("heading", { name: "Canvas", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
