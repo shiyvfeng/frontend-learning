@@ -1,0 +1,148 @@
+.canvas24-lab {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.canvas24-controls,
+.canvas24-explain,
+.canvas24-objects {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  background: #f3f1ed;
+  border: 1px solid #dedbd2;
+  border-radius: 12px;
+}
+.canvas24-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.canvas24-lab button {
+  min-height: 42px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.canvas24-lab button[aria-pressed="true"] {
+  background: #e5e0f3;
+  border-color: #716099;
+}
+.canvas24-caption {
+  display: grid;
+  gap: 8px;
+}
+.canvas24-caption input {
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #2b2934;
+  border: 1px solid #8a857c;
+  border-radius: 8px;
+}
+.canvas24-guide,
+.canvas24-metrics,
+.canvas24-inspection,
+.canvas24-explain p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.canvas24-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.canvas24-wrapper {
+  position: relative;
+  aspect-ratio: 5/3;
+  width: 100%;
+  max-width: 840px;
+  justify-self: center;
+  min-width: 0;
+  border: 1px solid #aaa0bc;
+  border-radius: 12px;
+  overflow: clip;
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #e6e2ed 25%, transparent 25%),
+    linear-gradient(-45deg, #e6e2ed 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e6e2ed 75%),
+    linear-gradient(-45deg, transparent 75%, #e6e2ed 75%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0;
+}
+.canvas24-wrapper canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: auto;
+  border: 0;
+  padding: 0;
+}
+.canvas24-metrics {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: #5c536c;
+}
+.canvas24-objects h3 {
+  margin: 0;
+  font-size: 17px;
+}
+.canvas24-objects ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 9px;
+}
+.canvas24-objects li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.canvas24-objects li span {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.canvas24-inspection {
+  padding: 14px;
+  background: #ede9f4;
+  border-radius: 10px;
+  font-size: 13px;
+}
+.canvas24-status,
+.canvas24-fallback {
+  min-height: 52px;
+  padding: 14px 16px;
+  background: #ece8f5;
+  color: #493b67;
+  border-radius: 10px;
+  line-height: 1.7;
+}
+@media (max-width: 600px) {
+  .canvas24-controls,
+  .canvas24-explain,
+  .canvas24-objects {
+    padding: 14px;
+  }
+  .canvas24-buttons > * {
+    flex: 1 1 120px;
+  }
+  .canvas24-objects li {
+    display: grid;
+    gap: 5px;
+  }
+  .canvas24-objects li button {
+    text-align: left;
+  }
+}

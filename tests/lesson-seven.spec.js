@@ -82,15 +82,15 @@ async function quiz(page) {
     await page.locator(".quiz-card").nth(i).getByRole("button").nth(v).click();
   await next(page);
 }
-test("seventh available, twenty-fourth unmade, existing route and tags remain plans", async ({
+test("seventh available, twenty-fifth unmade, existing route and tags remain plans", async ({
   page,
 }) => {
   await open(page);
   await expect(page).toHaveTitle("圆角阴影层级 · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(23);
-  await expect(page.locator(".site-footer")).toContainText("01–23");
-  await course(page, 23);
-  await expect(page.getByRole("heading", { name: "Canvas" })).toBeVisible();
+  await expect(page.locator(".available-dot")).toHaveCount(24);
+  await expect(page.locator(".site-footer")).toContainText("01–24");
+  await course(page, 24);
+  await expect(page.getByRole("heading", { name: "WebGL/Shader" })).toBeVisible();
   await expect(page.locator(".coming-status")).toHaveText("尚未制作");
 });
 test("radius border shadow and brightness change actual CSS while fixed reference stays intact", async ({

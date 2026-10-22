@@ -24,6 +24,7 @@ const LessonTwelve = React.lazy(() => import("./lesson-twelve"));
 const LessonThirteen = React.lazy(() => import("./lesson-thirteen"));
 const LessonFourteen = React.lazy(() => import("./lesson-fourteen"));
 const LessonFifteen = React.lazy(() => import("./lesson-fifteen"));
+const LessonTwentyFour = React.lazy(() => import("./lesson-twenty-four"));
 const LessonTwentyThree = React.lazy(() => import("./lesson-twenty-three"));
 const LessonTwentyTwo = React.lazy(() => import("./lesson-twenty-two"));
 const LessonTwentyOne = React.lazy(() => import("./lesson-twenty-one"));
@@ -55,6 +56,7 @@ const lessonViews = {
   shared: LessonTwentyOne,
   scroll: LessonTwentyTwo,
   pointer: LessonTwentyThree,
+  canvas: LessonTwentyFour,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";
