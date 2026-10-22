@@ -223,11 +223,37 @@ test("invalid real mouse release and Escape preserve original committed board", 
 test("lost capture fixture and window blur cancel without accepting late pointerup", async ({
   page,
 }, info) => {
+  await page.addInitScript(() => {
+    window.captureEvents31 = [];
+    for (const type of ["gotpointercapture", "lostpointercapture"])
+      document.addEventListener(
+        type,
+        (e) => window.captureEvents31.push({ type, id: e.pointerId }),
+        true,
+      );
+  });
   await open(page);
-  await dragStart(page);
+  const r = await dragStart(page);
+  // setPointerCapture first sets a pending override. A real move activates it;
+  // releasing before gotpointercapture can validly produce no lost event.
+  await page.mouse.move(r.x + r.width / 2 + 2, r.y + r.height / 2 + 2);
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        window.captureEvents31.some((e) => e.type === "gotpointercapture"),
+      ),
+    )
+    .toBe(true);
   const id = Number(await lab(page).getAttribute("data-pointer-id"));
   await handle(page, "a").evaluate((e, id) => e.releasePointerCapture(id), id);
   await page.mouse.move(3, 3);
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        window.captureEvents31.some((e) => e.type === "lostpointercapture"),
+      ),
+    )
+    .toBe(true);
   await idle(page);
   await page.mouse.up();
   expect(await board(page)).toEqual(initialBoard31());
@@ -237,6 +263,7 @@ test("lost capture fixture and window blur cancel without accepting late pointer
   await idle(page);
   expect(await board(page)).toEqual(initialBoard31());
   save(`cancel-fixtures-${info.project.name}`, {
+    captureEvents: await page.evaluate(() => window.captureEvents31),
     captureReleaseAPI: true,
     windowBlurDispatchedFixture: true,
     lateUpIgnored: true,
