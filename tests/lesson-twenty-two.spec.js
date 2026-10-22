@@ -204,6 +204,132 @@ test("real keyboard scroll drives JS and actual native CSS timeline reversibly w
     JSON.stringify({ outer, native, backward: true }, null, 2),
   );
 });
+test("delayed navigation preserves newer real Tab focus and real End/Home scrolling", async ({
+  page,
+}, info) => {
+  await page.addInitScript(instrument);
+  await open(page);
+  await expect(page.locator("#scroll-animation-stage-heading")).toBeFocused();
+  await page.evaluate(() => (window.holdScrollFrame = true));
+  await stage(page, 0).click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollFrames.length))
+    .toBeGreaterThan(0);
+  const trace = [],
+    { seek } = createKeyboardNavigator(page, expect, trace, {
+      lesson: "lesson22-late-navigation",
+      profile: info.project.name,
+    });
+  await seek(region(page), "scroll region after delayed navigation");
+  const outer = await page.evaluate(() => scrollY);
+  await page.keyboard.press("End");
+  await expect
+    .poll(() => region(page).evaluate((e) => e.scrollTop))
+    .toBeGreaterThan(0);
+  await page.evaluate(() => {
+    window.holdScrollFrame = false;
+    window.scrollFrames.splice(0).forEach((cb) => cb(performance.now()));
+  });
+  // Check immediately after delivery: no subsequent Tab/click may hide a steal.
+  await expect(region(page)).toBeFocused();
+  await expect
+    .poll(() => lab(page).getAttribute("data-progress").then(Number))
+    .toBe(1);
+  await page.keyboard.press("Home");
+  await expect
+    .poll(() => lab(page).getAttribute("data-progress").then(Number))
+    .toBe(0);
+  await expect(region(page)).toBeFocused();
+  expect(await page.evaluate(() => scrollY)).toBe(outer);
+  mkdirSync(out, { recursive: true });
+  writeFileSync(
+    `${out}/late-navigation-${info.project.name}.json`,
+    JSON.stringify(
+      {
+        passed: true,
+        trace,
+        outer,
+        realKeys: ["Tab", "End", "Home"],
+        fixture:
+          "delayed JS RAF delivery only; focus and scrolling use real keyboard input",
+      },
+      null,
+      2,
+    ),
+  );
+});
+test("navigation normally focuses heading; cancelled generations reset and unmount cannot steal newer focus", async ({
+  page,
+}) => {
+  await page.addInitScript(instrument);
+  await open(page);
+  const heading = page.locator("#scroll-animation-stage-heading");
+  await stage(page, 1).click();
+  await expect(heading).toBeFocused();
+  await page.evaluate(() => (window.holdScrollFrame = true));
+  await stage(page, 0).click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollFrames.length))
+    .toBeGreaterThan(0);
+  await page.keyboard.press("Tab");
+  await expect(stage(page, 1)).toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  await expect(stage(page, 0)).toBeFocused();
+  await page.evaluate(() =>
+    window.scrollFrames.splice(0).forEach((cb) => cb(performance.now())),
+  );
+  await expect(stage(page, 0)).toBeFocused();
+  await stage(page, 0).click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollFrames.length))
+    .toBeGreaterThan(0);
+  await page.evaluate(() => {
+    window.oldNavigationFrames = window.scrollFrames.splice(0);
+  });
+  await stage(page, 2).click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollFrames.length))
+    .toBeGreaterThan(0);
+  await page.evaluate(() =>
+    window.oldNavigationFrames.forEach((cb) => cb(performance.now())),
+  );
+  await expect(stage(page, 2)).toBeFocused();
+  await page.evaluate(() => {
+    window.holdScrollFrame = false;
+    window.scrollFrames.splice(0).forEach((cb) => cb(performance.now()));
+  });
+  await expect(heading).toBeFocused();
+  await btn(page, "重置第二十二节进度").click();
+  await page.evaluate(() => (window.holdScrollFrame = true));
+  await btn(page, "确认重置第二十二节").click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollFrames.length))
+    .toBeGreaterThan(0);
+  const trace = [],
+    { seek } = createKeyboardNavigator(page, expect, trace, {
+      lesson: "lesson22-reset-owner",
+      profile: "both",
+    });
+  await seek(region(page), "new focus after reset");
+  await page.evaluate(() =>
+    window.scrollFrames.splice(0).forEach((cb) => cb(performance.now())),
+  );
+  await expect(region(page)).toBeFocused();
+  await stage(page, 0).click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollFrames.length))
+    .toBeGreaterThan(0);
+  const nav = page.getByRole("navigation", { name: "课程目录" });
+  if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
+  await nav.getByRole("button").nth(23).click();
+  await expect(page.locator("#canvas-stage-stage-heading")).toBeFocused();
+  await page.evaluate(() => {
+    window.holdScrollFrame = false;
+    window.oldNavigationFrames.forEach((cb) => cb(performance.now()));
+    window.scrollFrames.splice(0).forEach((cb) => cb(performance.now()));
+  });
+  await expect(page.locator("#canvas-stage-stage-heading")).toBeFocused();
+});
 test("middle range clamps outside endpoints while native CSS remains whole range", async ({
   page,
 }) => {

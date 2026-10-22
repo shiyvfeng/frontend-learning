@@ -48,7 +48,9 @@ export default function LessonTwentyTwo({ onStorageStatus }) {
     dialogRef = useRef(null),
     resetRef = useRef(null),
     generation = useRef(0),
-    copyBusy = useRef(false);
+    copyBusy = useRef(false),
+    navigationFrame = useRef(0),
+    focusRevision = useRef(0);
   const patch = (x) =>
     setData((old) => ({ ...old, ...(typeof x === "function" ? x(old) : x) }));
   useEffect(() => {
@@ -60,9 +62,16 @@ export default function LessonTwentyTwo({ onStorageStatus }) {
     }
   }, [data, onStorageStatus]);
   useEffect(() => {
-    headingRef.current?.focus();
+    const trackFocus = () => focusRevision.current++;
+    document.addEventListener("focusin", trackFocus);
+    const active = document.activeElement;
+    if (!headingRef.current?.closest(".lesson-twenty-two")?.contains(active))
+      headingRef.current?.focus();
     return () => {
       generation.current++;
+      document.removeEventListener("focusin", trackFocus);
+      if (navigationFrame.current)
+        cancelAnimationFrame(navigationFrame.current);
     };
   }, []);
   useEffect(() => {
@@ -105,12 +114,27 @@ export default function LessonTwentyTwo({ onStorageStatus }) {
   ];
   const ready = tasks.map((items) => items.every(([ok]) => ok));
   const step = scrollSteps[data.step];
+  const focusHeading = () => {
+    const before = document.activeElement,
+      revision = focusRevision.current,
+      id = generation.current;
+    if (navigationFrame.current) cancelAnimationFrame(navigationFrame.current);
+    navigationFrame.current = requestAnimationFrame(() => {
+      if (generation.current !== id) return;
+      navigationFrame.current = 0;
+      // A later focus choice wins, even if the user moves away and back.
+      if (focusRevision.current !== revision) return;
+      const active = document.activeElement;
+      if (active === before || active === document.body)
+        headingRef.current?.focus();
+    });
+  };
   const go = (next) => {
     patch({ step: next });
     generation.current++;
     setNotice("");
     setCopyMessage("");
-    requestAnimationFrame(() => headingRef.current?.focus());
+    focusHeading();
   };
   const finish = () => {
     if (!ready[data.step]) {
@@ -175,6 +199,9 @@ export default function LessonTwentyTwo({ onStorageStatus }) {
   };
   const reset = () => {
     generation.current++;
+    // Close the modal before capturing focus ownership for the reset heading.
+    dialogRef.current?.close();
+    resetRef.current?.focus();
     try {
       localStorage.removeItem(SCROLL_STORAGE);
     } catch {}
@@ -184,7 +211,7 @@ export default function LessonTwentyTwo({ onStorageStatus }) {
     setResetOpen(false);
     setCopyMessage("");
     setNotice("已重置第二十二节的进度、参数与草稿；前二十一节进度已保留。");
-    requestAnimationFrame(() => headingRef.current?.focus());
+    focusHeading();
   };
   return (
     <div className="lesson-two lesson-twenty-two">
