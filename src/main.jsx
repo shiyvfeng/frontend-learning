@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { lessons, steps, responsibilities, questions } from "./content";
 import "./styles.css";
-import { Icon, Roadmap } from "./shared";
+import { Icon, Roadmap, CourseNavigationContext } from "./shared";
 import LessonTwo from "./lesson-two";
 import LessonThree from "./lesson-three";
 import LessonFour from "./lesson-four";
@@ -12,6 +12,7 @@ import LessonSeven from "./lesson-seven";
 import LessonEight from "./lesson-eight";
 import {
   lessonCatalog,
+  coverageCatalog,
   availableLessons,
   availabilityText,
   availabilityFooter,
@@ -24,6 +25,7 @@ const LessonTwelve = React.lazy(() => import("./lesson-twelve"));
 const LessonThirteen = React.lazy(() => import("./lesson-thirteen"));
 const LessonFourteen = React.lazy(() => import("./lesson-fourteen"));
 const LessonFifteen = React.lazy(() => import("./lesson-fifteen"));
+const StageA = React.lazy(() => import("./stage-a"));
 const LessonThirtyTwo = React.lazy(() => import("./lesson-thirty-two"));
 const LessonThirtyOne = React.lazy(() => import("./lesson-thirty-one"));
 const LessonThirty = React.lazy(() => import("./lesson-thirty"));
@@ -73,6 +75,7 @@ const lessonViews = {
   windowed: LessonThirty,
   move: LessonThirtyOne,
   space: LessonThirtyTwo,
+  handoff: StageA,
 };
 
 const STORAGE = "frontend-observatory.lesson1.v1";
@@ -504,8 +507,17 @@ function App() {
   const [storageMessage, setStorageMessage] =
     useState("进度仅保存在当前浏览器");
   const [course, setCourse] = useState(0);
-  const activeLesson = lessonCatalog[course];
+  const activeLesson =
+    typeof course === "string"
+      ? coverageCatalog.find((item) => item.id === course)
+      : lessonCatalog[course];
   const ActiveLesson = lessonViews[activeLesson.view];
+  const openCoverage = (id) => {
+    if (!coverageCatalog.some((item) => item.id === id && item.available))
+      return;
+    setCourse(id);
+    setMenu(false);
+  };
   const [menu, setMenu] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const [notice, setNotice] = useState("");
@@ -642,11 +654,11 @@ function App() {
     requestAnimationFrame(() => headingRef.current?.focus());
   };
   useEffect(() => {
-    document.title = `${lessons[course][1]} · 前端观察室`;
+    document.title = `${activeLesson.title} · 前端观察室`;
   }, [course]);
   const step = steps[data.step];
   return (
-    <>
+    <CourseNavigationContext.Provider value={openCoverage}>
       <a className="skip-link" href="#lesson">
         跳到课程内容
       </a>
@@ -711,6 +723,31 @@ function App() {
               </button>
             ))}
           </nav>
+          <div className="coverage-caption">
+            综合与工具模块{" "}
+            <span>
+              {coverageCatalog.filter((item) => item.available).length} /{" "}
+              {coverageCatalog.length}
+            </span>
+          </div>
+          <nav aria-label="综合与工具模块">
+            {coverageCatalog.map((item) =>
+              item.available ? (
+                <button
+                  key={item.id}
+                  className={`coverage-link ${course === item.id ? "current" : ""}`}
+                  aria-current={course === item.id ? "page" : undefined}
+                  onClick={() => openCoverage(item.id)}
+                >
+                  {item.id} · {item.title} · 可学习
+                </button>
+              ) : (
+                <span className="coverage-preview" key={item.id}>
+                  {item.id} · {item.title} · 尚未制作
+                </span>
+              ),
+            )}
+          </nav>
           <div className="sidebar-foot">
             <span className="little-square" /> 给与 Agent 协作的你
             <br />
@@ -728,7 +765,7 @@ function App() {
               {menu ? "关闭目录" : "☰ 课程"}
             </button>
             <div className="breadcrumb">
-              学习路线 <span>/</span> {lessons[course][0]}
+              学习路线 <span>/</span> {activeLesson.label || activeLesson.title}
             </div>
             <div className="saved">
               <span className="saved-dot" />
@@ -1133,7 +1170,10 @@ function App() {
               </>
             ) : ActiveLesson ? (
               <React.Suspense fallback={<p role="status">正在载入本课实验…</p>}>
-                <ActiveLesson onStorageStatus={setStorageMessage} />
+                <ActiveLesson
+                  onStorageStatus={setStorageMessage}
+                  onNavigate={openCoverage}
+                />
               </React.Suspense>
             ) : (
               <section className="coming-soon">
@@ -1196,7 +1236,7 @@ function App() {
           </button>
         </div>
       </dialog>
-    </>
+    </CourseNavigationContext.Provider>
   );
 }
 

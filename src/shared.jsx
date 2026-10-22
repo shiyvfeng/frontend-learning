@@ -1,4 +1,5 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
+export const CourseNavigationContext = createContext(null);
 import { sources } from "./content";
 import {
   courseRoute,
@@ -64,6 +65,7 @@ export function Icon({ type = "layers", size = 20 }) {
   );
 }
 export function Roadmap() {
+  const navigate = useContext(CourseNavigationContext);
   return (
     <details className="roadmap-details">
       <summary>
@@ -112,12 +114,19 @@ export function Roadmap() {
           </ol>
           <p>
             A、B 和 T01–T12
-            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习；这些覆盖计划尚未作为独立模块制作。编号课开放不代表全课程结束，后续继续逐模块推进。
+            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习；综合阶段A已制作，其余13模块尚未作为独立模块制作。编号课开放不代表全课程结束，后续继续逐模块推进。
           </p>
           <div className="source-links">
-            {coverageCatalog.map(({ id, title, status }) => (
+            {coverageCatalog.map(({ id, title, status, available }) => (
               <span key={id} data-coverage-id={id}>
-                {id} · {title} · {status}
+                {available && navigate ? (
+                  <button className="text-button" onClick={() => navigate(id)}>
+                    学习 {id} · {title}
+                  </button>
+                ) : (
+                  `${id} · ${title}`
+                )}{" "}
+                · {status}
               </span>
             ))}
           </div>

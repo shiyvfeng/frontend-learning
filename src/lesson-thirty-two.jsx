@@ -37,7 +37,7 @@ function SpaceReferences() {
     </details>
   );
 }
-export default function LessonThirtyTwo({ onStorageStatus }) {
+export default function LessonThirtyTwo({ onStorageStatus, onNavigate }) {
   const [data, setData] = useState(readSpaceProgress),
     [notice, setNotice] = useState(""),
     [copyMessage, setCopyMessage] = useState(""),
@@ -456,6 +456,11 @@ export default function LessonThirtyTwo({ onStorageStatus }) {
           重置第三十二节进度
         </button>
       </div>
+      {onNavigate && (
+        <button className="primary" onClick={() => onNavigate("A")}>
+          继续综合阶段A · 设计工具映射
+        </button>
+      )}
       <SpaceReferences />
       <Roadmap />
       <dialog

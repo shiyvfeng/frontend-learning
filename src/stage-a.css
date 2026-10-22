@@ -1,0 +1,206 @@
+.stage-a {
+  --mapa-stroke: #d6cbdf;
+}
+.mapa-boundary,
+.mapa-model {
+  padding: 18px;
+  border: 1px solid var(--mapa-stroke);
+  border-radius: 14px;
+  background: #f4f0f8;
+  color: #343044;
+}
+.mapa-pairing,
+.mapa-config {
+  display: grid;
+  gap: 16px;
+}
+.mapa-pair,
+.mapa-config fieldset,
+.mapa-events {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--mapa-stroke);
+  border-radius: 14px;
+}
+.stage-a legend {
+  font-weight: 700;
+  padding: 0 8px;
+}
+.stage-a select,
+.stage-a input[type="text"] {
+  width: 100%;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #93839f;
+  border-radius: 8px;
+  color: #302a3c;
+  background: white;
+  font: inherit;
+  margin: 8px 0;
+}
+.stage-a button {
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.mapa-config button,
+.mapa-events button {
+  margin: 4px;
+}
+.mapa-config button[aria-pressed="true"] {
+  background: #eee7f5;
+  border-color: #76518d;
+  color: #3d2852;
+}
+.mapa-rule {
+  border-left: 3px solid #80638f;
+  padding: 10px 14px;
+  margin-top: 10px;
+}
+.mapa-workbench {
+  display: grid;
+  gap: 20px;
+}
+.mapa-preview {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  container-type: inline-size;
+  margin-inline: auto;
+  --mapa-surface: #fffdf9;
+  --mapa-text: #302a3a;
+  --mapa-accent: #65437c;
+  background: var(--mapa-surface);
+  color: var(--mapa-text);
+  border: 1px solid #a99ab5;
+  border-radius: 18px;
+  overflow-wrap: anywhere;
+}
+.mapa-preview.dark {
+  --mapa-surface: #292332;
+  --mapa-text: #faf3ff;
+  --mapa-accent: #dabaf1;
+}
+.mapa-preview > header,
+.mapa-preview > footer {
+  padding: var(--mapa-space);
+}
+.mapa-preview h3,
+.mapa-preview h4,
+.mapa-preview p {
+  color: inherit;
+}
+.mapa-preview .mapa-brand {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+.mapa-preview h3 {
+  margin: 14px 0 8px;
+  font-size: 25px;
+}
+.mapa-preview footer {
+  font-size: 12px;
+}
+.mapa-cards {
+  gap: var(--mapa-space);
+  padding: 0 var(--mapa-space);
+}
+.mapa-cards.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.mapa-cards.flex {
+  display: flex;
+  flex-direction: column;
+}
+@container (min-width: 520px) {
+  .mapa-cards.grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mapa-cards.flex {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .mapa-cards.flex .mapa-card {
+    flex: 1 1 200px;
+  }
+}
+.mapa-card {
+  min-width: 0;
+  padding: var(--mapa-space);
+  border: 1px solid #a99ab5;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+.mapa-card h4 {
+  font-size: 18px;
+  line-height: 1.45;
+  margin: 10px 0;
+}
+.mapa-card-icon {
+  font-size: 24px;
+  color: var(--mapa-accent);
+}
+.mapa-card button {
+  width: 100%;
+  background: var(--mapa-accent);
+  color: var(--mapa-surface);
+  border: 2px solid var(--mapa-accent);
+  padding: 10px;
+}
+.mapa-card.outline button {
+  color: var(--mapa-accent);
+  background: var(--mapa-surface);
+}
+.mapa-card button[aria-busy="true"] {
+  border-style: dashed;
+}
+.mapa-preview .mapa-state {
+  padding: 10px;
+  color: var(--mapa-text);
+  background: var(--mapa-surface);
+  border-left: 3px solid var(--mapa-accent);
+  font-size: 13px;
+}
+.mapa-preview [data-feedback="error"] {
+  background-color: #fbe6e1;
+  color: #54261c;
+}
+.mapa-preview [data-feedback="success"] {
+  background-color: #dceee5;
+  color: #204233;
+}
+.mapa-preview[data-motion="feedback"] .mapa-state {
+  transition: background-color 120ms linear;
+}
+.mapa-events select {
+  max-width: 250px;
+  display: block;
+}
+.mapa-rule p,
+.mapa-events p,
+.mapa-config p {
+  line-height: 1.7;
+}
+.mapa-handoff label {
+  display: block;
+  font-weight: 600;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mapa-preview[data-motion="feedback"] .mapa-state {
+    transition: none;
+  }
+}
+@media (max-width: 600px) {
+  .mapa-pair,
+  .mapa-config fieldset,
+  .mapa-events {
+    padding: 12px;
+  }
+  .mapa-config button,
+  .mapa-events button {
+    margin: 4px 0;
+    width: 100%;
+  }
+}

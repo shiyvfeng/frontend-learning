@@ -2215,3 +2215,9 @@ dialog p {
     columns: 1;
   }
 }
+
+/* Separate unnumbered coverage modules from the32 numbered lessons. */
+.coverage-link { width: 100%; text-align: left; padding: 12px; margin: 4px 0; border-radius: 10px; }
+.coverage-preview { display: block; padding: 7px 12px; color: #6b6176; font-size: 12px; }
+.coverage-link.current { border-color: #8b6ba1; background: #eee7f5; }
+.coverage-caption { padding: 24px 12px 10px; font-size: 12px; color: #6b6176; display: flex; justify-content: space-between; }
