@@ -158,8 +158,8 @@
 }
 .mapa-preview .mapa-state {
   padding: 10px;
-  color: var(--mapa-text);
-  background: var(--mapa-surface);
+  color: #302a3a;
+  background: #f2edf6;
   border-left: 3px solid var(--mapa-accent);
   font-size: 13px;
 }

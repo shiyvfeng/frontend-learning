@@ -779,3 +779,78 @@ test("malformed persisted A values sanitize independently and never create inval
   expect(d.draft).toHaveLength(8000);
   expect(d.answers).toEqual([null, 0, null]);
 });
+
+test("dark feedback transition keeps readable contrast at every sampled frame through failure and success", async ({
+  page,
+}, info) => {
+  await open(page, 2);
+  await btn(page, "surface/text 深色mode").click();
+  await btn(page, "反馈底色过渡120ms").click();
+  const evidence = [];
+  for (const outcome of ["error", "success"]) {
+    await page.locator("#mapa-result").selectOption(outcome);
+    await cardButton(page).click();
+    await page
+      .locator(".mapa-events button")
+      .first()
+      .evaluate((button) => {
+        window.contrastSamplesA = new Promise((resolve) =>
+          button.addEventListener(
+            "click",
+            () => {
+              const rows = [],
+                start = performance.now();
+              const sample = () => {
+                const e = document.querySelector("[data-card=A] .mapa-state"),
+                  s = getComputedStyle(e);
+                rows.push({
+                  t: performance.now() - start,
+                  phase: e.closest("[data-phase]").dataset.phase,
+                  color: s.color,
+                  background: s.backgroundColor,
+                });
+                if (performance.now() - start < 240)
+                  requestAnimationFrame(sample);
+                else resolve(rows);
+              };
+              sample();
+            },
+            { once: true, capture: true },
+          ),
+        );
+      });
+    await btn(page, "投递最早教学结果 (1)").click();
+    const samples = await page.evaluate(() => window.contrastSamplesA);
+    const luminance = (color) => {
+      const channels = color
+        .match(/[\d.]+/g)
+        .slice(0, 3)
+        .map(Number)
+        .map((x) => x / 255)
+        .map((x) => (x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4));
+      return channels.reduce(
+        (sum, x, i) => sum + x * [0.2126, 0.7152, 0.0722][i],
+        0,
+      );
+    };
+    for (const row of samples) {
+      const [low, high] = [
+        luminance(row.color),
+        luminance(row.background),
+      ].sort((a, b) => a - b);
+      row.contrast = (high + 0.05) / (low + 0.05);
+      expect(row.contrast).toBeGreaterThanOrEqual(4.5);
+    }
+    expect(samples.some((row) => row.phase === outcome)).toBe(true);
+    expect(new Set(samples.map((row) => row.background)).size).toBeGreaterThan(
+      2,
+    );
+    evidence.push({
+      outcome,
+      samples,
+      minimum: Math.min(...samples.map((row) => row.contrast)),
+    });
+  }
+  await axes(page);
+  save(`transition-contrast-${info.project.name}`, evidence);
+});
