@@ -22,7 +22,7 @@ function SpringReferences() {
       <div className="roadmap-body">
         <p>
           本课时间插值和spring都在本地requestAnimationFrame运行，spring为手写物理数值积分，没有接入Motion或Android库。时间曲线是预设linear/cubic-out，spring则逐步计算位置和速度，可响应运行中目标变化。固定子步与时间戳保护避免依赖刷新率；质量固定，参数使用本课单位。没有循环演示或联网，减少动态直接呈现静态目标，后台/离课会清理。官方Android来源仅核对弹簧概念，不声称使用其API。Layout
-          Animation留到20，开放状态以目录为准。
+          Animation另见20，开放状态以目录为准。
         </p>
         <div className="source-links">
           {springSources.map(([text, url]) => (

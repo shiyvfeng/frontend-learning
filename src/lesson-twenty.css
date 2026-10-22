@@ -1,0 +1,214 @@
+.lesson-twenty .layout-lab {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #ded7ec;
+  border-radius: 18px;
+  background: #f6f3fa;
+  padding: 22px;
+  min-width: 0;
+}
+.layout-controls,
+.layout-actions,
+.layout-readout,
+.layout-explain,
+.layout-status,
+.layout-fallback {
+  position: relative;
+  z-index: 5;
+}
+.layout-controls,
+.layout-actions {
+  background: #f6f3fa;
+}
+.layout-heading {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.layout-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+.layout-lab button {
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid #cfc3e6;
+  border-radius: 8px;
+  background: #fff;
+  color: #4b3b79;
+  font: inherit;
+}
+.layout-lab p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #61576f;
+}
+.layout-lab h3 {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+.layout-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.layout-list {
+  display: grid;
+  gap: 16px;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+  overflow-anchor: none;
+}
+.layout-card {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #d8cdea;
+  background: white;
+  border-radius: 13px;
+  padding: 18px;
+  min-width: 0;
+  transform: none;
+  transition: none !important;
+}
+.layout-card:focus-within {
+  z-index: 4;
+}
+.layout-card-body {
+  min-width: 0;
+}
+.layout-card h3 {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.layout-card label {
+  display: grid;
+  gap: 7px;
+  font-size: 12px;
+  color: #655973;
+}
+.layout-card input {
+  font: inherit;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid #c9bddc;
+  border-radius: 8px;
+  width: 100%;
+  min-width: 0;
+  background: #fff;
+  color: #302a3a;
+}
+.layout-illustration {
+  display: block;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  flex: none;
+}
+.layout-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.layout-card-actions button {
+  font-size: 12px;
+}
+.layout-details p {
+  overflow-wrap: anywhere;
+  margin-top: 15px;
+}
+.layout-details[hidden] {
+  display: none;
+}
+.layout-status,
+.layout-fallback {
+  padding: 15px;
+  background: #ede6fa;
+  border: 1px solid #d8c8ed;
+  border-radius: 10px;
+  min-height: 58px;
+}
+.layout-readout,
+.layout-explain {
+  border: 1px solid #dfd6ed;
+  border-radius: 13px;
+  background: #fff;
+  padding: 18px;
+  margin: 20px 0;
+  min-width: 0;
+}
+.layout-readout p,
+.layout-readout li {
+  overflow-wrap: anywhere;
+}
+.layout-readout li {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 8px 0;
+}
+.layout-readout ul {
+  padding-left: 18px;
+}
+.layout-readout summary {
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 10px 0;
+  color: #473a68;
+}
+.layout-explain p {
+  line-height: 2;
+}
+.layout-explain .checkbox-label {
+  margin-top: 20px;
+}
+@media (max-width: 700px) {
+  .lesson-twenty .layout-lab {
+    padding: 14px;
+  }
+  .layout-controls {
+    grid-template-columns: 1fr;
+  }
+  .layout-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .layout-card {
+    grid-template-columns: 52px minmax(0, 1fr);
+    padding: 14px;
+    gap: 12px;
+  }
+  .layout-card-actions {
+    grid-column: 1/-1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .layout-card-actions button {
+    flex: 1;
+  }
+  .layout-heading {
+    font-size: 13px;
+  }
+  .layout-readout,
+  .layout-explain {
+    padding: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson-twenty .layout-card {
+    transition: none !important;
+    animation: none !important;
+  }
+}

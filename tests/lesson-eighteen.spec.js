@@ -93,7 +93,7 @@ test("eighteenth lazy route opens first eighteen only without Motion or external
   await directory(page);
   expect(requests.some((u) => /lesson-eighteen-.*\.js/.test(u))).toBe(true);
   await expect(page).toHaveTitle("Enter/Exit · 前端观察室");
-  await expect(page.locator(".available-dot")).toHaveCount(19);
+  await expect(page.locator(".available-dot")).toHaveCount(20);
   await expect(page.getByTestId("presence-lab")).toContainText("未使用 Motion");
   expect(
     requests
@@ -451,7 +451,7 @@ test("missing or throwing WAAPI completes immediately with honest fallback and n
     await c.close();
   }
 });
-test("experiment and generated brief agree on notification-only animation scope and layout remains planned", async ({
+test("experiment and generated brief agree on notification-only animation scope and layout stays outside this experiment", async ({
   page,
 }, info) => {
   await open(page);
@@ -461,7 +461,7 @@ test("experiment and generated brief agree on notification-only animation scope 
     "其余通知会按正常布局重新排列，可能直接跳到新位置",
   );
   await expect(scope).toContainText("尚未实现 Layout Animation");
-  await expect(scope).toContainText("布局动画留到第20课");
+  await expect(scope).toContainText("布局动画另见第20课");
   const wording = await scope.innerText();
   await fit(page);
   mkdirSync(out, { recursive: true });
