@@ -117,6 +117,149 @@ async function mouseDrag(p, id, target, cancel) {
   await expect(sort(p)).toHaveAttribute("data-sort-phase", "idle");
 }
 
+async function visibilityFixture(p) {
+  await p.evaluate(() => {
+    window.hidden12 = false;
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      get: () => window.hidden12,
+    });
+  });
+  return async (hidden) => {
+    await p.evaluate((value) => {
+      window.hidden12 = value;
+      document.dispatchEvent(new Event("visibilitychange"));
+    }, hidden);
+    await expect.poll(async () => (await vv(p)).visible).toBe(!hidden);
+  };
+}
+test("nonzero native scroll survives hidden resume with same DOM window and external focus", async ({
+  page,
+}, info) => {
+  await open(page, 2);
+  const visibility = await visibilityFixture(page);
+  const e = page.locator(".tool12-scroll");
+  await e.click();
+  await page.keyboard.press("End");
+  await expect(row(page, "item-2000")).toBeVisible();
+  await f(page, "note").fill("非零恢复仍保留编辑");
+  const readPosition = () =>
+    e.evaluate((el) => ({
+      top: el.scrollTop,
+      ids: [...el.querySelectorAll("[data-row-id]")].map(
+        (n) => n.dataset.rowId,
+      ),
+      focus: document.activeElement?.id,
+    }));
+  const before = await readPosition();
+  expect(before.top).toBeGreaterThan(100000);
+  await visibility(true);
+  expect((await vv(page)).runtime).toMatchObject({
+    rectObservers: 0,
+    offsetObservers: 0,
+  });
+  await visibility(false);
+  const after = await readPosition();
+  save(info.project.name + "-nonzero-visibility", { before, after });
+  expect(after.top).toBeCloseTo(before.top, 0);
+  expect(after.ids).toEqual(before.ids);
+  await expect(f(page, "note")).toBeFocused();
+  await expect(f(page, "note")).toHaveValue("非零恢复仍保留编辑");
+  await expect(row(page, "item-2000")).toBeVisible();
+  await visibility(true);
+  await f(page, "overscan").selectOption("6");
+  // Repeated notifications and a show/hide in one turn must not replace the
+  // saved position with the disabled viewport's temporarily clamped zero.
+  await page.evaluate(() => {
+    document.dispatchEvent(new Event("visibilitychange"));
+    for (const value of [false, true]) {
+      window.hidden12 = value;
+      document.dispatchEvent(new Event("visibilitychange"));
+    }
+  });
+  await visibility(false);
+  expect(await e.evaluate((el) => el.scrollTop)).toBeCloseTo(before.top, 0);
+  await expect(row(page, "item-2000")).toBeVisible();
+  expect((await vv(page)).overscan).toBe(6);
+  await expect(f(page, "note")).toBeFocused();
+});
+
+test("hidden filter reset and navigation supersede saved offset and retired visibility callbacks", async ({
+  page,
+}, info) => {
+  await open(page);
+  await page.evaluate(() => {
+    const add = document.addEventListener.bind(document);
+    window.visibilityCallbacks12 = [];
+    document.addEventListener = (type, cb, options) => {
+      if (type === "visibilitychange") window.visibilityCallbacks12.push(cb);
+      return add(type, cb, options);
+    };
+  });
+  await stage(page, 2).click();
+  const visibility = await visibilityFixture(page);
+  const e = page.locator(".tool12-scroll");
+  const evidence = [];
+  for (const filter of ["odd", "all", "empty"]) {
+    await e.click();
+    await page.keyboard.press("End");
+    expect(await e.evaluate((el) => el.scrollTop)).toBeGreaterThan(70000);
+    await visibility(true);
+    await f(page, "filter").selectOption(filter);
+    await visibility(false);
+    await expect.poll(() => e.evaluate((el) => el.scrollTop)).toBe(0);
+    if (filter === "empty")
+      await expect(e.locator("[data-row-id]")).toHaveCount(0);
+    else await expect(row(page, "item-0001")).toBeVisible();
+    const view = await vv(page);
+    expect(view.count).toBe(
+      filter === "empty" ? 0 : filter === "odd" ? 1000 : 2000,
+    );
+    evidence.push({
+      filter,
+      view,
+      top: await e.evaluate((el) => el.scrollTop),
+    });
+  }
+  await f(page, "filter").selectOption("all");
+  await e.click();
+  await page.keyboard.press("End");
+  await expect(row(page, "item-2000")).toBeVisible();
+  await visibility(true);
+  await stage(page, 1).click();
+  await page.evaluate(() => {
+    window.hidden12 = false;
+    for (const cb of window.visibilityCallbacks12)
+      cb(new Event("visibilitychange"));
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  expect((await sv(page)).runtime.virtualComponents).toBe(0);
+  await stage(page, 2).click();
+  await expect(row(page, "item-0001")).toBeVisible();
+  await e.click();
+  await page.keyboard.press("End");
+  await expect(row(page, "item-2000")).toBeVisible();
+  await visibility(true);
+  await b(page, "重置T12工具专题进度").click();
+  await b(page, "确认重置T12工具专题").click();
+  await page.evaluate(() => {
+    window.hidden12 = false;
+    for (const cb of window.visibilityCallbacks12)
+      cb(new Event("visibilitychange"));
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await stage(page, 2).click();
+  await expect(row(page, "item-0001")).toBeVisible();
+  expect(await e.evaluate((el) => el.scrollTop)).toBe(0);
+  await expect(f(page, "note")).toHaveValue("");
+  expect((await vv(page)).runtime).toMatchObject({
+    virtualComponents: 1,
+    rectObservers: 1,
+    offsetObservers: 1,
+  });
+  save(info.project.name + "-visibility-newer-intent", evidence);
+});
+
 test("native stable-ID transactional model preview duplicate cancel stale token undo and disposal", async () => {
   const base = runtimeState(),
     s = createSortSession();

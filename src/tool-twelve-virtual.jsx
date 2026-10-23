@@ -42,6 +42,11 @@ const rect = tracked("rectObservers", observeElementRect),
 export default function VirtualLab({ data, patch }) {
   const viewport = useRef(null),
     alive = useRef(true),
+    resume = useRef({
+      filter: data.filter,
+      offset: 0,
+      hidden: document.hidden,
+    }),
     latest = useRef({ data, patch }),
     offscreen = useRef(new Map());
   latest.current = { data, patch };
@@ -65,6 +70,12 @@ export default function VirtualLab({ data, patch }) {
     observeElementOffset: offset,
     useFlushSync: false,
     enabled: visible,
+    // Disabling Virtual clears its offset and measurements. Restore this
+    // instance's position only while the same filtered dataset is active.
+    initialOffset: () =>
+      resume.current.filter === latest.current.data.filter
+        ? resume.current.offset
+        : 0,
   });
   const items = v.getVirtualItems(),
     mark = useRef((...keys) => {
@@ -79,6 +90,18 @@ export default function VirtualLab({ data, patch }) {
     alive.current = true;
     metrics.virtualComponents++;
     const hidden = () => {
+      if (!alive.current) return;
+      if (document.hidden && !resume.current.hidden) {
+        resume.current = {
+          filter: latest.current.data.filter,
+          offset: v.options.enabled
+            ? (viewport.current?.scrollTop ?? 0)
+            : resume.current.filter === latest.current.data.filter
+              ? resume.current.offset
+              : 0,
+          hidden: true,
+        };
+      } else if (!document.hidden) resume.current.hidden = false;
       v.cancelScroll();
       setVisible(!document.hidden);
     };
@@ -94,6 +117,11 @@ export default function VirtualLab({ data, patch }) {
     };
   }, [v]);
   useLayoutEffect(() => {
+    resume.current = {
+      filter: data.filter,
+      offset: 0,
+      hidden: document.hidden,
+    };
     v.cancelScroll();
     v.scrollToOffset(0, { behavior: "auto" });
   }, [data.filter, v]);
