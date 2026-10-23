@@ -141,7 +141,7 @@ test("official sources six, actual module provenance and both route need combina
     "setOption",
     "resize",
     "dispose",
-    "T11–T12仍为2个预告",
+    "T12仍为1个预告",
   ])
     expect(tool09Brief(good())).toContain(t);
 });
@@ -907,14 +907,14 @@ for (const reducedMotion of ["no-preference", "reduce"])
     await c.close();
   });
 
-test("T08 exit opens T09 twelve entries two previews and no fabricated numbered33", async ({
+test("T08 exit opens T09 twelve entries one preview and no fabricated numbered33", async ({
   page,
 }) => {
   await page.goto("/");
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(12);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(2);
+  await expect(nav.getByRole("button")).toHaveCount(13);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(1);
   await nav.getByRole("button", { name: /T08/ }).click();
   await b(page, "继续T09 · ECharts / D3").click();
   await expect(f(page, "stage-heading")).toBeVisible();

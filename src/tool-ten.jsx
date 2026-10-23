@@ -154,7 +154,7 @@ export default function ToolTen({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T10工具专题已完成；不代表真实接口或生产缓存策略已验收。T11/T12仍为2个预告，课程继续推进。",
+        "T10工具专题已完成；不代表真实接口或生产缓存策略已验收。T12仍为1个预告，课程继续推进。",
       );
     else
       setNotice(
@@ -545,9 +545,9 @@ export default function ToolTen({ onStorageStatus, onNavigate }) {
         </button>
       </div>
       <p className="tool10-boundary">
-        下一专题 T11 · XState
-        尚未制作；T11/T12共2工具模块仍为预告，课程尚未全部结束。
+        T11 · XState已开放；T12共1工具模块仍为预告，课程尚未全部结束。
       </p>
+      {onNavigate && <button onClick={() => onNavigate("T11")}>继续T11 · XState</button>}
       {onNavigate && (
         <button onClick={() => onNavigate("T09")}>返回T09复习</button>
       )}

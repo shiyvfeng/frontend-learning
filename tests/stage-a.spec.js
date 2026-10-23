@@ -500,7 +500,7 @@ async function finishFlow(p, info, mode) {
   await act(btn(p, "完成综合阶段A"), "finish A");
   expect((await read(p)).done).toEqual([0, 1, 2, 3, 4]);
   await expect(p.locator(".notice")).toContainText(
-    "可以继续综合阶段B「Agent指令能力」。T01/T02/T03/T04/T05/T06/T07/T08/T09/T10已开放，T11–T12仍为预告",
+    "可以继续综合阶段B「Agent指令能力」。T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放，T12仍为预告",
   );
   await p.reload();
   await directory(p, act);

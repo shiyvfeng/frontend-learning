@@ -151,7 +151,7 @@ export default function ToolSix({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T06工具专题已完成；不代表安装库就完成生产验收。可以继续T07「Rive / Lottie」，T11–T12仍为2个预告。",
+        "T06工具专题已完成；不代表安装库就完成生产验收。可以继续T07「Rive / Lottie」，T12仍为1个预告。",
       );
     else
       setNotice(
@@ -540,7 +540,7 @@ export default function ToolSix({ onStorageStatus, onNavigate }) {
         </button>
       </div>
       <p className="tool06-boundary">
-        下一专题 T07 · Rive / Lottie 已开放；T11–T12共2工具模块仍为预告，课程尚未全部结束。
+        下一专题 T07 · Rive / Lottie 已开放；T12共1工具模块仍为预告，课程尚未全部结束。
       </p>
       {onNavigate && (
         <button onClick={() => onNavigate("T05")}>返回T05复习</button>

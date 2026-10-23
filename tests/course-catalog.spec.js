@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
 const summary =
-  "目前 01–32 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08/T09/T10已开放；T11–T12共2工具模块尚未制作，课程仍在继续。";
+  "目前 01–32 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放；T12共1工具模块尚未制作，课程仍在继续。";
 const chapterNames = [
   "第一节学习步骤",
   "第二节学习步骤",
@@ -227,10 +227,11 @@ test("A B T01 T02 T03 T04 T05 T06 T07 T08 T09 T10 are available while two remain
   await expect(outline.locator('[data-coverage-id="T08"] button')).toHaveCount(
     1,
   );
+  await expect(outline.locator('[data-coverage-id="T11"] button')).toHaveCount(1);
   for (const id of [
     ...Array.from(
-      { length: 2 },
-      (_, i) => "T" + String(i + 11).padStart(2, "0"),
+      { length: 1 },
+      (_, i) => "T" + String(i + 12).padStart(2, "0"),
     ),
   ]) {
     const tag = outline.locator(`[data-coverage-id="${id}"]`);

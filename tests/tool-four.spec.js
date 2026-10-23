@@ -110,7 +110,7 @@ test("actual local source provenance MIT dependency reuse and truthful finite mo
     "未运行shadcn CLI",
   );
   expect(tool04Brief(good())).toContain("不写项目文件");
-  expect(tool04Brief(good())).toContain("T11–T12仍为2个预告");
+  expect(tool04Brief(good())).toContain("T12仍为1个预告");
 });
 test("tokens variants sizes and real computed values share source while instances retain independent counts", async ({
   page,
@@ -897,8 +897,8 @@ test("T03 exit opens actual T04 and leaves six previews without invented numbere
   await expect(field(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(12);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(2);
+  await expect(nav.getByRole("button")).toHaveCount(13);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(1);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator('[data-lesson-id="38"]')).toHaveCount(0);
 });

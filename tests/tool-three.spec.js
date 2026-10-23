@@ -131,7 +131,7 @@ test("real primitive package and source use Radix parts while Base UI is not ins
     "Base UI仅作未安装",
     "不是浏览器top layer",
     "不要把ARIA声明当成",
-    "T11–T12仍为2个预告",
+    "T12仍为1个预告",
   ])
     expect(text).toContain(t);
 });
@@ -961,8 +961,8 @@ test("T02 exit enters actual T03, six tool previews remain readonly without inve
   await expect(page.locator("#tool03-stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(12);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(2);
+  await expect(nav.getByRole("button")).toHaveCount(13);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(1);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator("body")).toContainText("T04 · shadcn/ui");
   await expect(page.locator('[data-lesson-id="37"]')).toHaveCount(0);
