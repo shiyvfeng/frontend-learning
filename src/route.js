@@ -339,14 +339,17 @@ export const availableLessonRange = formatRanges(
 export const allCourseAvailable =
   availableLessons.length === lessonCatalog.length &&
   coverageCatalog.every((c) => c.available);
+export const availableEntryCount =
+  availableLessons.length + coverageCatalog.filter((c) => c.available).length;
+export const totalEntryCount = lessonCatalog.length + coverageCatalog.length;
 export const availabilityText = allCourseAvailable
-  ? `目前 ${availableLessonRange} 编号课、综合阶段A/B及T01–T12均可学习，共46项入口；学习进度各自保存，可按需要回顾。`
+  ? `目前 ${availableLessonRange} 编号课、综合阶段A/B及T01–T12均可学习，共${availableEntryCount}项入口；学习进度各自保存，可按需要回顾。`
   : `已开放${availableLessons.length}个编号课；其余实施状态以目录为准。`;
-export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}（编号课；综合A/B与T01–T12全部开放，共46项入口）`;
+export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}（编号课；${allCourseAvailable ? `综合A/B与T01–T12全部开放，共${availableEntryCount}项入口` : `综合/工具${coverageCatalog.filter((c) => c.available).length}/${coverageCatalog.length}项已开放`}）`;
 export function nextLessonHint(index) {
   const next = lessonCatalog[index + 1];
   if (!next)
-    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01–T12已开放，原46项入口已制作，各章学习进度独立。`;
+    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。${allCourseAvailable ? `T01–T12已开放，原${availableEntryCount}项入口已制作，各章学习进度独立。` : "综合/工具入口请以当前目录开放状态为准。"}`;
   return next.available
     ? `可以从课程目录继续 ${next.id} ${next.title}。`
     : `下一课 ${next.id} ${next.title} 尚未制作。`;
