@@ -174,7 +174,7 @@ test("official sources exact six and original attribution has no previous animat
     "Spline",
     "DPR",
     "dispose",
-    "T12仍为1个预告",
+    "原46项入口已制作",
   ])
     expect(tool08Brief(good())).toContain(s);
 });
@@ -1162,7 +1162,7 @@ for (const reducedMotion of ["no-preference", "reduce"])
     });
     await c.close();
   });
-test("T07 exit opens actual T08 twelve entries one preview32 numbered and derived roadmap exact", async ({
+test("T07 exit opens actual T08 twelve entries zero previews32 numbered and derived roadmap exact", async ({
   page,
 }) => {
   await open(page);
@@ -1171,10 +1171,10 @@ test("T07 exit opens actual T08 twelve entries one preview32 numbered and derive
   await expect(f(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(13);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(1);
+  await expect(nav.getByRole("button")).toHaveCount(14);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(0);
   await expect(nav.getByRole("button", { name: /T11/ })).toHaveCount(1);
-  await expect(nav.getByRole("button", { name: /T12/ })).toHaveCount(0);
+  await expect(nav.getByRole("button", { name: /T12/ })).toHaveCount(1);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await nav
     .getByRole("button", {
@@ -1185,7 +1185,7 @@ test("T07 exit opens actual T08 twelve entries one preview32 numbered and derive
   await page.getByText("路线核对说明与官方来源", { exact: true }).click();
   await page.getByText("查看完整 32 课目录及覆盖标签", { exact: true }).click();
   await expect(page.locator(".full-course-outline")).toContainText(
-    "其他1个工具模块尚未作为独立模块制作",
+    "全部14个综合/工具标签均已制作，共46项入口",
   );
   await expect(page.locator('[data-lesson-id="42"]')).toHaveCount(0);
 });

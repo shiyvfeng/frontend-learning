@@ -151,7 +151,7 @@ export default function ToolEleven({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T11工具专题已完成；不代表图或状态机已证明业务正确。T12仍为1个预告，课程继续推进。",
+        "T11工具专题已完成；不代表图或状态机已证明业务正确。原46项入口已制作，各章学习进度独立。",
       );
     else
       setNotice(
@@ -541,10 +541,8 @@ export default function ToolEleven({ onStorageStatus, onNavigate }) {
           重置T11工具专题进度
         </button>
       </div>
-      <p className="tool11-boundary">
-        下一专题 T12 · dnd-kit / Virtualization
-        尚未制作；T12仍为1个工具预告，课程尚未全部结束。
-      </p>
+      <p className="tool11-boundary">T12 · dnd-kit / Virtualization已开放；原46项入口已制作，各章学习进度独立。</p>
+      {onNavigate && <button onClick={()=>onNavigate("T12")}>继续T12 · dnd-kit / Virtualization</button>}
       {onNavigate && (
         <button onClick={() => onNavigate("T10")}>返回T10复习</button>
       )}

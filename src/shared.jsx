@@ -114,7 +114,8 @@ export function Roadmap() {
           </ol>
           <p>
             A、B 和 T01–T12
-            是实施覆盖标签，不是原文的统一课程编号；工具会穿插到相关章节，综合能力持续练习。已制作标签：{coverageCatalog.filter((c)=>c.available).map((c)=>c.id).join(" / ")}；其他{coverageCatalog.filter((c)=>!c.available).length}个工具模块尚未作为独立模块制作。编号课开放不代表全课程结束，后续继续逐模块推进。
+            是实施覆盖标签，不是原文的统一课程编号；工具穿插到相关章节，综合能力持续练习。已制作标签：{coverageCatalog.filter(c=>c.available).map(c=>c.id).join(" / ")}；{coverageCatalog.every(c=>c.available)?"全部14个综合/工具标签均已制作，共46项入口。目录制作齐备不等于学习进度全部通过，可按需要回顾。":`其余${coverageCatalog.filter(c=>!c.available).length}个标签的实施状态以目录为准。`}
+
           </p>
           <div className="source-links">
             {coverageCatalog.map(({ id, title, status, available }) => (

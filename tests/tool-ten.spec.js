@@ -139,7 +139,7 @@ test("official sources six real Query version no previous graphics residue and c
     "staleTime",
     "static",
     "数据库",
-    "T12仍为1个预告",
+    "原46项入口已制作",
   ])
     expect(tool10Brief(good())).toContain(s);
 });
@@ -939,14 +939,14 @@ test("config group policy changes revoke review but preserve manually edited dra
   await b(page, "重新生成工具选型草稿").click();
   expect(await f(page, "agent-draft").inputValue()).toContain("分组=B");
 });
-test("T09 exit opens T10 thirteen coverage entries one preview while numbered remains32", async ({
+test("T09 exit opens T10 thirteen coverage entries zero previews while numbered remains32", async ({
   page,
 }) => {
   await page.goto("/");
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(13);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(1);
+  await expect(nav.getByRole("button")).toHaveCount(14);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(0);
   await nav.getByRole("button", { name: /T09/ }).click();
   await b(page, "继续T10 · TanStack Query").click();
   await expect(f(page, "stage-heading")).toBeVisible();

@@ -2,8 +2,7 @@ import { assertRemainingPlans32 } from "./catalog-boundary.js";
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
-const summary =
-  "目前 01–32 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放；T12共1工具模块尚未制作，课程仍在继续。";
+const summary = '目前 01–32 编号课、综合阶段A/B及T01–T12均可学习，共46项入口；学习进度各自保存，可按需要回顾。';
 const chapterNames = [
   "第一节学习步骤",
   "第二节学习步骤",
@@ -228,17 +227,11 @@ test("A B T01 T02 T03 T04 T05 T06 T07 T08 T09 T10 are available while two remain
     1,
   );
   await expect(outline.locator('[data-coverage-id="T11"] button')).toHaveCount(1);
-  for (const id of [
-    ...Array.from(
-      { length: 1 },
-      (_, i) => "T" + String(i + 12).padStart(2, "0"),
-    ),
-  ]) {
-    const tag = outline.locator(`[data-coverage-id="${id}"]`);
-    await expect(tag).toContainText("尚未制作");
-    await expect(tag.locator('a,button,[role="button"]')).toHaveCount(0);
+  for(const id of ["A","B",...Array.from({length:12},(_,i)=>"T"+String(i+1).padStart(2,"0"))]){
+    const tag=outline.locator(`[data-coverage-id="${id}"]`);await expect(tag).toContainText("已制作");await expect(tag.locator('button')).toHaveCount(1);
   }
-  await expect(outline).toContainText("尚未作为独立模块制作");
+  await expect(outline.locator('[data-coverage-id]').filter({hasText:'尚未制作'})).toHaveCount(0);
+  await expect(outline).toContainText("全部14个综合/工具标签均已制作，共46项入口");
   await axeCheck(page);
   expect(
     await page.evaluate(

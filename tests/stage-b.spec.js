@@ -513,7 +513,7 @@ async function fullFlow(p, info, mode) {
   await act(btn(p, "完成综合阶段B"), "finish B");
   expect((await read(p)).done).toEqual([0, 1, 2, 3, 4]);
   await expect(p.locator(".notice")).toContainText(
-    "T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放，T12仍为预告",
+    "T01–T12已开放，原46项入口已制作",
   );
   await expect(p.locator(".notice")).not.toContainText("全课程已完成");
   const before = await read(p);
@@ -749,13 +749,13 @@ test("malformed stored types lengths and source revisions sanitize without inven
   expect(d.reviewed).toBe(false);
   expect(d.draft).toHaveLength(12000);
 });
-test("A exit opens actual B, directory stays32 plus A/B and T01/T02/T03/T04/T05/T06/T07 open while1 tool remains previews", async ({
+test("A exit opens actual B, directory stays32 plus A/B and T01/T02/T03/T04/T05/T06/T07 open with all14 modules available", async ({
   page,
 }) => {
   await page.goto("/");
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await btn(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(13);
+  await expect(nav.getByRole("button")).toHaveCount(14);
   await nav
     .getByRole("button", { name: "A · 设计工具映射 · 可学习", exact: true })
     .click();
@@ -765,10 +765,10 @@ test("A exit opens actual B, directory stays32 plus A/B and T01/T02/T03/T04/T05/
   ).toBeVisible();
   await expect(page).toHaveTitle("Agent 指令能力 · 前端观察室");
   await expect(page.locator(".site-footer")).toContainText(
-    "综合A/B已开放，T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放；T12尚未制作",
+    "综合A/B与T01–T12全部开放，共46项入口",
   );
   await expect(page.locator(".writeb-boundary").last()).toContainText(
-    "T12工具模块仍为预告",
+    "原46项入口已制作",
   );
   await page.getByText("路线核对说明与官方来源", { exact: true }).click();
   await page.getByText("查看完整 32 课目录及覆盖标签", { exact: true }).click();
@@ -776,16 +776,11 @@ test("A exit opens actual B, directory stays32 plus A/B and T01/T02/T03/T04/T05/
   await expect(outline.locator(":scope > ol > li")).toHaveCount(32);
   await expect(
     outline.locator("[data-coverage-id]").filter({ hasText: "尚未制作" }),
-  ).toHaveCount(1);
-  for (const id of ["A", "B", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "T11"])
+  ).toHaveCount(0);
+  for (const id of ["A", "B", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "T11", "T12"])
     await expect(
       outline.locator(`[data-coverage-id=${id}] button`),
     ).toHaveCount(1);
-  for (let i = 12; i <= 12; i++)
-    await expect(
-      outline.locator(
-        `[data-coverage-id=T${String(i).padStart(2, "0")}] a,[data-coverage-id=T${String(i).padStart(2, "0")}] button`,
-      ),
-    ).toHaveCount(0);
+  await expect(outline.locator('[data-coverage-id=T12] button')).toHaveCount(1);
   await expect(outline.locator('[data-lesson-id="34"]')).toHaveCount(0);
 });

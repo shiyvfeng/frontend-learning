@@ -148,6 +148,10 @@ export const coverageTags = [
 // Register a lesson only once its view is implemented. All availability UI reads
 // this release metadata; planned numbered lessons and coverage tags stay locked.
 export const implementedCourseMetadata = {
+  T12: {
+    view: "interactionTools",
+    technology: "真实TanStack Virtual3.14.22 / 独立原生排序 · dnd-kit候选",
+  },
   T11: {
     view: "machineTools",
     technology: "真实XState核心5.33.3 / actor与invoke · 本地手动Promise接口",
@@ -332,17 +336,17 @@ const formatRanges = (numbers) => {
 export const availableLessonRange = formatRanges(
   availableLessons.map((lesson) => lesson.index + 1),
 );
-export const availabilityText =
-  availableLessons.length === lessonCatalog.length
-    ? `目前 ${availableLessonRange} 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放；T12共1工具模块尚未制作，课程仍在继续。`
-    : availableLessons.length
-      ? `目前 ${availableLessonRange} 课可以学习。其余保留目录，按节逐步制作。`
-      : "课程尚未制作，当前提供目录预览。";
-export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}${availableLessons.length === lessonCatalog.length ? "（编号课；另有综合A/B已开放，T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放；T12尚未制作）" : ""}`;
+export const allCourseAvailable =
+  availableLessons.length === lessonCatalog.length &&
+  coverageCatalog.every((c) => c.available);
+export const availabilityText = allCourseAvailable
+  ? `目前 ${availableLessonRange} 编号课、综合阶段A/B及T01–T12均可学习，共46项入口；学习进度各自保存，可按需要回顾。`
+  : `已开放${availableLessons.length}个编号课；其余实施状态以目录为准。`;
+export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}（编号课；综合A/B与T01–T12全部开放，共46项入口）`;
 export function nextLessonHint(index) {
   const next = lessonCatalog[index + 1];
   if (!next)
-    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01/T02/T03/T04/T05/T06/T07/T08/T09/T10/T11已开放，T12尚未制作，课程仍在继续。`;
+    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01–T12已开放，原46项入口已制作，各章学习进度独立。`;
   return next.available
     ? `可以从课程目录继续 ${next.id} ${next.title}。`
     : `下一课 ${next.id} ${next.title} 尚未制作。`;

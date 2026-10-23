@@ -151,7 +151,7 @@ export default function ToolFive({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T05工具专题已完成；不代表引入库就完成全部交互或生产验收。可以继续T06 GSAP / ScrollTrigger，T12仍为1个预告。",
+        "T05工具专题已完成；不代表引入库就完成全部交互或生产验收。可以继续T06 GSAP / ScrollTrigger，原46项入口已制作。",
       );
     else
       setNotice(
@@ -543,7 +543,7 @@ export default function ToolFive({ onStorageStatus, onNavigate }) {
       </div>
       <p className="tool05-boundary">
         T06 GSAP /
-        ScrollTrigger已开放；T12共1工具模块仍为预告，课程尚未全部结束。
+        ScrollTrigger已开放；原46项入口已制作，各章学习进度独立。
       </p>
       {onNavigate && (
         <button onClick={() => onNavigate("T06")}>

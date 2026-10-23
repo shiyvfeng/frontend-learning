@@ -1,0 +1,346 @@
+.tool12-panel,
+.tool12-runtime,
+.tool12-controls,
+.tool12-snapshot {
+  border: 1px solid #d9dae8;
+  border-radius: 16px;
+  background: #fff;
+  padding: 16px;
+  margin: 16px 0;
+  min-width: 0;
+}
+.tool12-runtime {
+  background: #f4f2ff;
+  color: #33304f;
+}
+.tool12-panel p,
+.tool12-runtime p,
+.tool12-boundary,
+.tool12-feedback {
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.tool12-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.tool-twelve button,
+.tool-twelve select {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.tool12-buttons [aria-pressed="true"] {
+  background: #edebff;
+  border-color: #6860ce;
+  color: #342e7c;
+}
+.tool-twelve select {
+  min-height: 44px;
+  background: white;
+  color: #24243b;
+  border: 1px solid #77788b;
+  border-radius: 8px;
+  padding: 8px;
+}
+.tool12-controls {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(130px, 2fr);
+  gap: 12px;
+  align-items: center;
+}
+.tool12-controls .checkbox-label {
+  grid-column: 1/-1;
+}
+.tool12-snapshot {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.tool12-context {
+  width: 100%;
+  min-height: 150px;
+  box-sizing: border-box;
+  padding: 12px;
+  line-height: 1.7;
+  border: 1px solid #8d8ba4;
+  border-radius: 10px;
+}
+.tool12-context-editor {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+.tool-twelve :focus-visible {
+  outline: 3px solid #655be0;
+  outline-offset: 3px;
+}
+.tool-twelve .agent-editor textarea {
+  scroll-margin-block: 100px;
+}
+.tool-twelve table {
+  width: 100%;
+  table-layout: fixed;
+  font-size: 13px;
+  line-height: 1.7;
+  border-collapse: collapse;
+}
+.tool-twelve th,
+.tool-twelve td {
+  overflow-wrap: anywhere;
+  padding: 10px;
+  border: 1px solid #d9dae8;
+  text-align: left;
+}
+.tool12-error {
+  padding: 12px;
+  background: #fff1ef;
+  color: #802d24;
+}
+.tool12-panel ul {
+  padding-left: 20px;
+  line-height: 1.9;
+}
+.tool12-hero-boundary {
+  font-size: 13px;
+  line-height: 1.8;
+}
+@media (max-width: 700px) {
+  .tool12-controls {
+    grid-template-columns: 1fr;
+  }
+  .tool12-controls .checkbox-label {
+    grid-column: auto;
+  }
+  .tool12-buttons button {
+    flex: 1 1 auto;
+    min-height: 44px;
+  }
+  .tool12-panel,
+  .tool12-runtime,
+  .tool12-controls {
+    padding: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-twelve * {
+    scroll-behavior: auto;
+  }
+}
+
+.tool12-result {
+  padding: 18px;
+  border: 1px solid #d9dae8;
+  border-radius: 16px;
+  background: #f6f4ff;
+  margin: 14px 0;
+  min-width: 0;
+}
+.tool12-result p,
+.tool12-key {
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.tool12-result .tool12-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #403373;
+}
+.tool12-records {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.tool12-records li {
+  padding: 12px;
+  background: #f6f5fb;
+  border: 1px solid #d9dae8;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.tool12-snapshot {
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.tool12-session-reset {
+  margin: 12px 0;
+  max-width: 100%;
+}
+
+.tool12-graph {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.tool12-graph > li {
+  border: 1px solid #c6c3d8;
+  border-radius: 12px;
+  padding: 14px;
+  background: #faf9fd;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.tool12-graph > li.current {
+  border: 2px solid #6552b5;
+  background: #efebff;
+}
+.tool12-graph strong,
+.tool12-graph span,
+.tool12-graph small {
+  display: block;
+  color: #35304a;
+}
+.tool12-graph ul {
+  padding-left: 18px;
+}
+.tool-twelve input:not([type="checkbox"]) {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid #77788b;
+  border-radius: 8px;
+  color: #24243b;
+  background: white;
+}
+.tool12-events {
+  font-size: 12px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  padding-left: 22px;
+}
+.tool12-config label,
+.tool12-controls label {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.tool12-transitions,
+.tool12-can {
+  margin: 16px 0;
+}
+.tool12-receipt {
+  font-weight: 600;
+  color: #34305a;
+}
+.tool12-graph > li ul li {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.tool12-board {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.tool12-board > li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #c7c4d8;
+  border-radius: 12px;
+  padding: 12px;
+  background: #faf9ff;
+  min-width: 0;
+}
+.tool12-board > li.source {
+  border: 2px solid #6552b5;
+}
+.tool12-board > li.target {
+  background: #ece8ff;
+}
+.tool12-board > li strong,
+.tool12-board > li span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.tool12-board > li span {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.tool-twelve .tool12-handle {
+  touch-action: none;
+  cursor: grab;
+  min-width: 48px;
+  min-height: 48px;
+  font-size: 24px;
+  padding: 4px;
+  color: #413473;
+}
+.tool12-scroll {
+  height: min(300px, 52vh);
+  min-height: 150px;
+  overflow: auto;
+  overscroll-behavior: auto;
+  border: 1px solid #77738e;
+  border-radius: 12px;
+  background: #fff;
+  touch-action: pan-y pinch-zoom;
+  position: relative;
+}
+.tool12-space {
+  position: relative;
+  width: 100%;
+}
+.tool12-row {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  border-bottom: 1px solid #ddd9e9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: #fff;
+  min-width: 0;
+}
+.tool12-row.selected {
+  background: #eeebff;
+  border-left: 4px solid #6552b5;
+}
+.tool12-row strong,
+.tool12-row span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.tool12-row span {
+  font-size: 12px;
+  color: #4a455f;
+}
+.tool12-counts {
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.tool12-empty {
+  padding: 18px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.tool12-controls button {
+  min-height: 44px;
+}
+.tool12-panel > input {
+  margin-top: 8px;
+}

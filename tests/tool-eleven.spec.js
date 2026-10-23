@@ -330,7 +330,7 @@ test("official sources actual stable core selection limits and no Query or old s
     "AbortSignal",
     "Promise actor",
     "actor.stop",
-    "T12仍为1个预告",
+    "原46项入口已制作",
   ])
     expect(tool11Brief(good())).toContain(term);
 });
@@ -876,15 +876,15 @@ test("unavailable storage does not break actual machine or controls", async ({
   ).toBeVisible();
 });
 
-test("T10 exit opens T11 thirteen released entries one T12 preview while numbered remains32", async ({
+test("T10 exit opens T11 fourteen released entries one T12 preview while numbered remains32", async ({
   page,
 }) => {
   await page.goto("/");
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(13);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(1);
-  await expect(nav.locator(".coverage-preview")).toContainText("T12");
+  await expect(nav.getByRole("button")).toHaveCount(14);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(0);
+  await expect(nav.getByRole("button",{name:/T12/})).toHaveCount(1);
   await nav.getByRole("button", { name: /T10/ }).click();
   await b(page, "继续T11 · XState").click();
   await expect(f(page, "stage-heading")).toBeVisible();
