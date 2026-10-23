@@ -9,7 +9,11 @@ import {
   useMutation,
   useQuery,
 } from "@tanstack/react-query";
-import { createLocalSession, queryKey } from "./tool-ten-runtime";
+import {
+  applyMutationResult,
+  createLocalSession,
+  queryKey,
+} from "./tool-ten-runtime";
 import { recommendation } from "./tool-ten-content";
 const add = (a, v) => [...new Set([...a, v])];
 function Reader({ s, data, observing, mark }) {
@@ -114,16 +118,8 @@ function SessionLab({ data, patch, s }) {
     });
   const mutation = useMutation({
     mutationFn: ({ group }) => s.api.write(group),
-    onSuccess: (value, v) => {
-      if (!s.alive) return;
-      s.expected ??= {};
-      s.expected[v.group] = value.version;
-      mark("mutationSeen");
-      void s.client.invalidateQueries({
-        queryKey: queryKey(v.group),
-        exact: true,
-      });
-    },
+    onSuccess: (value, v) =>
+      applyMutationResult(s, value, v, () => mark("mutationSeen")),
     onSettled: () => {
       if (s.alive) s.busyWrite = false;
     },
@@ -307,7 +303,7 @@ function SessionLab({ data, patch, s }) {
         <div className="tool10-panel">
           <h3>真实useMutation → 定向invalidation</h3>
           <p>
-            写入捕获点击时的分组，本地成功后该组数量+1/版本+1，再invalidate对应key。写入成功和读到新版本是两个阶段；换到另一组不改错误的缓存。
+            写入捕获点击时的分组，本地成功后该组数量+1/版本+1。先取消同组未完成的旧读取，再invalidate该key重读，包括首次尚无缓存时；别组不受影响。写入成功和读到新版本是两个阶段。
           </p>
           <div className="tool10-buttons">
             <button

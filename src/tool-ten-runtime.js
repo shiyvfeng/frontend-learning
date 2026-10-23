@@ -4,6 +4,24 @@ let sessions = 0,
   created = 0;
 export const runtimeState = () => ({ sessions, requests, created });
 export const queryKey = (group) => ["tool10", "loans", group];
+export async function applyMutationResult(
+  session,
+  value,
+  variables,
+  onApplied,
+) {
+  if (!session.alive) return;
+  const key = queryKey(variables.group);
+  // In Query 5.104.5, invalidate/refetch may reuse a first read without data.
+  // Explicit cancellation is required even before the first cache value exists.
+  await session.client.cancelQueries({ queryKey: key, exact: true });
+  if (!session.alive) return;
+  session.expected ??= {};
+  session.expected[variables.group] = value.version;
+  onApplied?.();
+  if (session.alive)
+    void session.client.invalidateQueries({ queryKey: key, exact: true });
+}
 export function createLocalSession() {
   let alive = true,
     revision = 0,

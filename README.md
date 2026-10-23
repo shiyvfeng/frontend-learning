@@ -490,7 +490,7 @@ pin仅固定框内无交互图示并保留占位，所有控件/完整文字在�
 
 真实运行@tanstack/react-query 5.104.5，作用域QueryClientProvider/useQuery/useMutation；query key含资源与A/B分组。接口是本地手动Promise，无真实服务器、库存保存或网络测速。首次读取、新鲜缓存命中、stale0/Infinity策略、旧data后台刷新/失败/重试、参数隔离、另一key预取与乱序结果均由真实库状态驱动。
 
-手动投递控制queryFn与mutationFn返回的Promise，最多8待处理/24历史；读取捕获开始快照，mutation捕获分组，本地成功后数量/版本+1并定向invalidate，写入成功与读到新版本分别反馈。queryFn消费AbortSignal，cancelQueries恢复先前状态；已取消旧Promise迟到结果隔离。写入只支持本地投递前取消，不承诺撤销已提交真实服务器修改。
+手动投递控制queryFn与mutationFn返回的Promise，最多8待处理/24历史；读取捕获开始快照，mutation捕获分组，本地成功后数量/版本+1，先取消该精确key的旧读取，确认会话仍有效后再定向invalidate（包括首次无缓存时，不能复用写入前的旧Promise），写入成功与读到新版本分别反馈。queryFn消费AbortSignal，cancelQueries恢复先前状态；已取消旧Promise迟到结果隔离。写入只支持本地投递前取消，不承诺撤销已提交真实服务器修改。
 
 演练显式retry=false、关闭焦点/重连自动刷新、gcTime=Infinity，避免计时门槛；不同于通常staleTime0、客户端重试3次、inactive5分钟GC的默认值。Infinity允许显式失效，非static；stale不自动表示无效，也不等于数据库/永久保存。简单场景可用已有框架loader或普通请求，本地UI展开独立React状态。离站/会话重建取消请求、拒绝未完成本地Promise、清订阅及缓存，无后台轮询。
 

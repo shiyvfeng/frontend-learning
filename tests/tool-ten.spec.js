@@ -9,6 +9,7 @@ import {
   recommendation,
 } from "../src/tool-ten-content.js";
 import {
+  applyMutationResult,
   createLocalSession,
   queryKey,
   runtimeState,
@@ -983,4 +984,203 @@ test("375 short viewport long inert brief and actual Tab focus axe without overf
   await page
     .locator(".agent-editor")
     .screenshot({ path: `${out}/${info.project.name}-short.png` });
+});
+
+test("initial uncached read after mutation response cannot settle stale fresh data", async ({
+  page,
+}, info) => {
+  await open(page, 2);
+  await b(page, "开启读取或手动重试").click();
+  await pending(page);
+  await b(page, "提交当前组数量+1").click();
+  await pending(page, 2);
+  await b(page, "投递#2成功").click();
+  await expect.poll(async () => (await session(page)).source.A.version).toBe(2);
+  await b(page, "投递#1成功").click();
+  const observed = await inspect(page);
+  save(info.project.name + "-initial-read-mutation-observed", observed);
+  expect(observed.source.A).toEqual({ group: "A", count: 9, version: 2 });
+  expect(observed.records.find((r) => r.id === 1)).toMatchObject({
+    status: "canceled",
+    lateIgnored: true,
+  });
+  expect(observed.records.find((r) => r.id === 3)).toMatchObject({
+    kind: "read",
+    group: "A",
+    status: "pending",
+    snapshot: { count: 9, version: 2 },
+  });
+  await b(page, "投递#3成功").click();
+  await expect(result(page)).toHaveAttribute("data-count", "9");
+  await expect(result(page)).toHaveAttribute("data-version", "2");
+  await expect(result(page)).toHaveAttribute("data-fetch", "idle");
+  await expect(result(page)).toHaveAttribute("data-stale", "false");
+  const final = await inspect(page);
+  expect(final.queries.find((q) => q.key[2] === "A")).toMatchObject({
+    status: "success",
+    fetchStatus: "idle",
+    invalidated: false,
+    data: { group: "A", count: 9, version: 2 },
+  });
+  save(info.project.name + "-initial-read-mutation-final", final);
+});
+
+test("first uncached mutation captured A only cancels A while switched B remains pending", async ({
+  page,
+}, info) => {
+  await open(page, 2);
+  await b(page, "开启读取或手动重试").click();
+  await pending(page);
+  await b(page, "提交当前组数量+1").click();
+  await pending(page, 2);
+  await f(page, "group").selectOption("B");
+  await expect(page.locator('[data-request-id="1"]')).toHaveAttribute(
+    "data-request-status",
+    "canceled",
+  );
+  await pending(page, 2);
+  await b(page, "投递#2成功").click();
+  await expect
+    .poll(
+      async () =>
+        (await session(page)).queries.find((q) => q.key[2] === "A").invalidated,
+    )
+    .toBe(true);
+  await expect(page.locator('[data-request-id="3"]')).toHaveAttribute(
+    "data-request-status",
+    "pending",
+  );
+  await b(page, "投递#1成功").click();
+  await b(page, "投递#3成功").click();
+  await expect(result(page)).toHaveAttribute("data-group", "B");
+  await expect(result(page)).toHaveAttribute("data-count", "3");
+  let s = await inspect(page);
+  expect(s.source.A).toMatchObject({ count: 9, version: 2 });
+  expect(s.queries.find((q) => q.key[2] === "B")).toMatchObject({
+    data: { group: "B", count: 3, version: 1 },
+    invalidated: false,
+  });
+  expect(s.queries.find((q) => q.key[2] === "A")).toMatchObject({
+    data: null,
+    invalidated: true,
+  });
+  await f(page, "group").selectOption("A");
+  await pending(page);
+  await b(page, "投递#4成功").click();
+  await expect(result(page)).toHaveAttribute("data-count", "9");
+  await expect(result(page)).toHaveAttribute("data-version", "2");
+  save(info.project.name + "-initial-write-switched-key", await inspect(page));
+});
+test("actual QueryClient cancellation barrier targets captured exact key before invalidation Node fixture", async () => {
+  const s = createLocalSession(),
+    pa = s.client
+      .fetchQuery({
+        queryKey: queryKey("A"),
+        queryFn: ({ signal }) => s.api.read("A", signal),
+      })
+      .catch((e) => e),
+    pb = s.client
+      .fetchQuery({
+        queryKey: queryKey("B"),
+        queryFn: ({ signal }) => s.api.read("B", signal),
+      })
+      .catch((e) => e),
+    write = s.api.write("A");
+  s.api.deliver(3, true);
+  const value = await write,
+    originalCancel = s.client.cancelQueries.bind(s.client),
+    originalInvalidate = s.client.invalidateQueries.bind(s.client),
+    canceled = [],
+    invalidated = [];
+  let release,
+    marked = 0;
+  s.client.cancelQueries = (filters) => {
+    canceled.push(filters);
+    const actual = originalCancel(filters);
+    return new Promise((resolve) => (release = () => actual.then(resolve)));
+  };
+  s.client.invalidateQueries = (filters) => {
+    invalidated.push(filters);
+    return originalInvalidate(filters);
+  };
+  const applying = applyMutationResult(
+    s,
+    value,
+    { group: "A" },
+    () => marked++,
+  );
+  expect(canceled).toEqual([{ queryKey: queryKey("A"), exact: true }]);
+  expect(invalidated).toEqual([]);
+  expect(s.api.snapshot().records.find((r) => r.id === 1).status).toBe(
+    "canceled",
+  );
+  expect(s.api.snapshot().records.find((r) => r.id === 2).status).toBe(
+    "pending",
+  );
+  release();
+  await applying;
+  expect(invalidated).toEqual([{ queryKey: queryKey("A"), exact: true }]);
+  expect(marked).toBe(1);
+  expect(s.client.getQueryState(queryKey("A")).isInvalidated).toBe(true);
+  expect(s.client.getQueryState(queryKey("B")).fetchStatus).toBe("fetching");
+  expect(s.client.getQueryState(queryKey("B")).isInvalidated).toBe(false);
+  s.client.cancelQueries = originalCancel;
+  s.destroy();
+  await Promise.all([pa, pb]);
+});
+test("destroy during awaited mutation cancellation and later success cannot revive old or newer client Node fixture", async () => {
+  const baseline = runtimeState(),
+    s = createLocalSession(),
+    readPromise = s.client
+      .fetchQuery({
+        queryKey: queryKey("A"),
+        queryFn: ({ signal }) => s.api.read("A", signal),
+      })
+      .catch((e) => e),
+    write = s.api.write("A");
+  s.api.deliver(2, true);
+  const value = await write,
+    original = s.client.cancelQueries.bind(s.client);
+  let release,
+    cancelCalls = 0,
+    invalidations = 0,
+    marks = 0;
+  s.client.cancelQueries = (filters) => {
+    cancelCalls++;
+    const actual = original(filters);
+    return new Promise((resolve) => (release = () => actual.then(resolve)));
+  };
+  s.client.invalidateQueries = () => {
+    invalidations++;
+    return Promise.resolve();
+  };
+  const applying = applyMutationResult(s, value, { group: "A" }, () => marks++);
+  s.client.cancelQueries = original;
+  s.destroy();
+  const current = createLocalSession();
+  current.client.setQueryData(queryKey("B"), {
+    group: "B",
+    count: 3,
+    version: 1,
+  });
+  release();
+  await applying;
+  await readPromise;
+  await applyMutationResult(s, value, { group: "B" }, () => marks++);
+  expect(cancelCalls).toBe(1);
+  expect(invalidations).toBe(0);
+  expect(marks).toBe(0);
+  expect(s.client.getQueryCache().getAll()).toEqual([]);
+  expect(s.api.deliver(1, true)).toContain("会话已结束");
+  expect(current.client.getQueryData(queryKey("B"))).toEqual({
+    group: "B",
+    count: 3,
+    version: 1,
+  });
+  expect(current.client.getQueryCache().getAll()).toHaveLength(1);
+  current.destroy();
+  expect(runtimeState()).toMatchObject({
+    sessions: baseline.sessions,
+    requests: baseline.requests,
+  });
 });
