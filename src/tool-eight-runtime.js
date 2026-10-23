@@ -236,6 +236,7 @@ export function createScene(host, onState) {
     });
   }
   const visibility = () => {
+    if (!alive) return;
     cancel();
     if (document.hidden) {
       release();
@@ -270,6 +271,8 @@ export function createScene(host, onState) {
   };
   const resize = () => request(),
     trackDPR = () => {
+      // A retired callback cannot subscribe again after destroy.
+      if (!alive) return;
       dprQuery?.removeEventListener("change", changedDPR);
       dprQuery = matchMedia(`(resolution: ${devicePixelRatio}dppx)`);
       dprQuery.addEventListener("change", changedDPR);

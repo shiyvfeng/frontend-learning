@@ -746,6 +746,24 @@ test("held old callback after release cannot allocate resources or steal newer e
   page,
 }, info) => {
   await page.addInitScript(() => {
+    const raw = matchMedia.bind(window);
+    window.dprListeners08 = [];
+    window.matchMedia = (query) => {
+      const m = raw(query),
+        add = m.addEventListener.bind(m),
+        remove = m.removeEventListener.bind(m);
+      m.addEventListener = (type, fn, ...rest) => {
+        if (type === "change" && query.startsWith("(resolution:"))
+          window.dprListeners08.push({ m, fn, active: true });
+        return add(type, fn, ...rest);
+      };
+      m.removeEventListener = (type, fn, ...rest) => {
+        for (const r of window.dprListeners08)
+          if (r.m === m && r.fn === fn) r.active = false;
+        return remove(type, fn, ...rest);
+      };
+      return m;
+    };
     const raf = requestAnimationFrame.bind(window);
     window.held08 = [];
     window.requestAnimationFrame = (cb) =>
@@ -774,7 +792,14 @@ test("held old callback after release cannot allocate resources or steal newer e
   await page.evaluate(() => {
     window.hold08 = false;
     for (const f of window.held08.splice(0)) f();
+    const old = window.dprListeners08.map((r) => r.fn);
+    for (const fn of old) fn();
   });
+  expect(
+    await page.evaluate(
+      () => window.dprListeners08.filter((r) => r.active).length,
+    ),
+  ).toBe(0);
   expect(await state(page)).toEqual(before);
   expect(await page.evaluate(() => document.activeElement.outerHTML)).toBe(
     focus,
@@ -783,6 +808,11 @@ test("held old callback after release cannot allocate resources or steal newer e
     before,
     after: await state(page),
     trace,
+    activeDPRListeners: await page.evaluate(
+      () => window.dprListeners08.filter((r) => r.active).length,
+    ),
+    fixture:
+      "Held actual RAF and captured native MQL callbacks delivered after removal; not a physical DPR switch",
   });
 });
 test("contract parameter edits preserve draft revoke review and regenerate current product values", async ({
