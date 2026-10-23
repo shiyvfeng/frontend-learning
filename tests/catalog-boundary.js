@@ -1,5 +1,5 @@
-// All32 numbered lessons, stagesA/B and T01–T10 are open. The two other
-// tool modules are read-only plans, never a fabricated33rd numbered lesson.
+// All32 numbered lessons, stagesA/B and T01–T11 are open. The one remaining
+// tool module is a read-only plan, never a fabricated33rd numbered lesson.
 export async function assertRemainingPlans32(page, expect) {
   await expect(
     page.getByRole("navigation", { name: "第三十二节学习步骤" }),

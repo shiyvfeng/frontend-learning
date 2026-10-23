@@ -1173,7 +1173,8 @@ test("T07 exit opens actual T08 twelve entries one preview32 numbered and derive
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
   await expect(nav.getByRole("button")).toHaveCount(13);
   await expect(nav.locator(".coverage-preview")).toHaveCount(1);
-  await expect(nav.getByRole("button", { name: /T11/ })).toHaveCount(0);
+  await expect(nav.getByRole("button", { name: /T11/ })).toHaveCount(1);
+  await expect(nav.getByRole("button", { name: /T12/ })).toHaveCount(0);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await nav
     .getByRole("button", {
@@ -1184,7 +1185,7 @@ test("T07 exit opens actual T08 twelve entries one preview32 numbered and derive
   await page.getByText("路线核对说明与官方来源", { exact: true }).click();
   await page.getByText("查看完整 32 课目录及覆盖标签", { exact: true }).click();
   await expect(page.locator(".full-course-outline")).toContainText(
-    "其他2个工具模块尚未作为独立模块制作",
+    "其他1个工具模块尚未作为独立模块制作",
   );
   await expect(page.locator('[data-lesson-id="42"]')).toHaveCount(0);
 });

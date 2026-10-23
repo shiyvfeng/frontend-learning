@@ -776,12 +776,12 @@ test("A exit opens actual B, directory stays32 plus A/B and T01/T02/T03/T04/T05/
   await expect(outline.locator(":scope > ol > li")).toHaveCount(32);
   await expect(
     outline.locator("[data-coverage-id]").filter({ hasText: "尚未制作" }),
-  ).toHaveCount(2);
-  for (const id of ["A", "B", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10"])
+  ).toHaveCount(1);
+  for (const id of ["A", "B", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "T11"])
     await expect(
       outline.locator(`[data-coverage-id=${id}] button`),
     ).toHaveCount(1);
-  for (let i = 11; i <= 12; i++)
+  for (let i = 12; i <= 12; i++)
     await expect(
       outline.locator(
         `[data-coverage-id=T${String(i).padStart(2, "0")}] a,[data-coverage-id=T${String(i).padStart(2, "0")}] button`,

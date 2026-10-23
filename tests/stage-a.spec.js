@@ -627,7 +627,7 @@ test("corrupt unavailable storage is scoped to A and design inputs remain operab
     "让设计约束成为真实布局",
   );
 });
-test("directory roadmap and32 exit open actual A without invented33 while B and T01/T02/T03/T04/T05/T06/T07 open and2 tools stay planned", async ({
+test("directory roadmap and32 exit open actual A without invented33 while B and T01/T02/T03/T04/T05/T06/T07 open and only T12 stays planned", async ({
   page,
 }) => {
   await page.goto("/");
@@ -653,8 +653,10 @@ test("directory roadmap and32 exit open actual A without invented33 while B and 
   await expect(outline.locator("[data-coverage-id=T03] button")).toHaveCount(1);
   await expect(
     outline.locator("[data-coverage-id]").filter({ hasText: "尚未制作" }),
-  ).toHaveCount(2);
+  ).toHaveCount(1);
   await expect(outline.locator("[data-coverage-id=T06] button")).toHaveCount(1);
+  await expect(outline.locator("[data-coverage-id=T11] button")).toHaveCount(1);
+  await expect(outline.locator("[data-coverage-id=T12] button")).toHaveCount(0);
   await expect(outline.locator('[data-lesson-id="33"]')).toHaveCount(0);
 });
 

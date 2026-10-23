@@ -1011,7 +1011,7 @@ test("T06 exit opens actual T07 ten available tags four readonly tools and numbe
   await page.getByText("路线核对说明与官方来源", { exact: true }).click();
   await page.getByText("查看完整 32 课目录及覆盖标签", { exact: true }).click();
   await expect(page.locator(".full-course-outline")).toContainText(
-    "其他2个工具模块尚未作为独立模块制作",
+    "其他1个工具模块尚未作为独立模块制作",
   );
   await expect(
     page.locator(".full-course-outline [data-coverage-id=T07] button"),

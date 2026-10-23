@@ -404,7 +404,7 @@ test("failure and incorrect attempt guard use actual invoke then retry succeeds"
   await b(page, "投递当前结果成功").click();
   await phase(page, "reserved");
   expect((await view(page)).service.calls).toBe(3);
-  expect((await read(page)).retrySeen).toBe(true);
+  await expect.poll(async () => (await read(page)).retrySeen).toBe(true);
 });
 
 test("noncooperating canceled real Promise child stopped and late output does not finish current request", async ({
@@ -811,6 +811,7 @@ for (const reducedMotion of ["no-preference", "reduce"])
       (l, v) => l.selectOption(v),
       async (l, t) => l.fill((await l.inputValue()) + t),
     );
+    expect(await p.evaluate(() => window.keys11)).toBe(0);
     const draft = (await read(p)).draft;
     await p.reload();
     await directory(p, act);
