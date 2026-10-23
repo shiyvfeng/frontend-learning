@@ -154,7 +154,7 @@ export default function ToolEight({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T08工具专题已完成；不代表库已满足生产要求。T09–T12仍为4个预告，课程继续推进。",
+        "T08工具专题已完成；不代表库已满足生产要求。T10–T12仍为3个预告，课程继续推进。",
       );
     else
       setNotice(
@@ -546,8 +546,9 @@ export default function ToolEight({ onStorageStatus, onNavigate }) {
       </div>
       <p className="tool08-boundary">
         下一专题 T09 · ECharts / D3
-        尚未制作；T09–T12共4工具模块仍为预告，课程尚未全部结束。
+        已开放；T10–T12共3工具模块仍为预告，课程尚未全部结束。
       </p>
+      {onNavigate && <button onClick={() => onNavigate("T09")}>继续T09 · ECharts / D3</button>}
       {onNavigate && (
         <button onClick={() => onNavigate("T07")}>返回T07复习</button>
       )}

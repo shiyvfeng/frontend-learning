@@ -153,7 +153,7 @@ test("actual pinned Motion lazy runtime and CSS division are honest while existi
     "inert",
     "position",
     "不声称卡片尺寸平滑",
-    "T09–T12仍为4个预告",
+    "T10–T12仍为3个预告",
   ])
     expect(tool05Brief(good())).toContain(s);
 });
@@ -1102,8 +1102,8 @@ test("T04 exit opens actual T05 with ten available tags and four readonly previe
   await expect(field(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(10);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(4);
+  await expect(nav.getByRole("button")).toHaveCount(11);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(3);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(nav.getByRole("button", { name: /T06/ })).toHaveCount(1);
   await expect(nav.getByRole("button", { name: /T07/ })).toHaveCount(1);

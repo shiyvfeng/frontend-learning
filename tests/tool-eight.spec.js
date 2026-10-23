@@ -174,7 +174,7 @@ test("official sources exact six and original attribution has no previous animat
     "Spline",
     "DPR",
     "dispose",
-    "T09–T12仍为4个预告",
+    "T10–T12仍为3个预告",
   ])
     expect(tool08Brief(good())).toContain(s);
 });
@@ -1171,9 +1171,9 @@ test("T07 exit opens actual T08 ten entries four previews32 numbered and derived
   await expect(f(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(10);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(4);
-  await expect(nav.getByRole("button", { name: /T09/ })).toHaveCount(0);
+  await expect(nav.getByRole("button")).toHaveCount(11);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(3);
+  await expect(nav.getByRole("button", { name: /T10/ })).toHaveCount(0);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await nav
     .getByRole("button", {
@@ -1184,7 +1184,7 @@ test("T07 exit opens actual T08 ten entries four previews32 numbered and derived
   await page.getByText("路线核对说明与官方来源", { exact: true }).click();
   await page.getByText("查看完整 32 课目录及覆盖标签", { exact: true }).click();
   await expect(page.locator(".full-course-outline")).toContainText(
-    "其他4个工具模块尚未作为独立模块制作",
+    "其他3个工具模块尚未作为独立模块制作",
   );
   await expect(page.locator('[data-lesson-id="42"]')).toHaveCount(0);
 });

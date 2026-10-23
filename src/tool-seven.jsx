@@ -156,7 +156,7 @@ export default function ToolSeven({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T07工具专题已完成；不代表库已满足生产要求。T08已开放，T09–T12仍为4个预告，课程继续推进。",
+        "T07工具专题已完成；不代表库已满足生产要求。T08已开放，T10–T12仍为3个预告，课程继续推进。",
       );
     else
       setNotice(
@@ -546,7 +546,7 @@ export default function ToolSeven({ onStorageStatus, onNavigate }) {
       </div>
       <p className="tool07-boundary">
         下一专题 T08 · Three.js / R3F / Spline
-        已开放；T09–T12共4工具模块仍为预告，课程尚未全部结束。
+        已开放；T10–T12共3工具模块仍为预告，课程尚未全部结束。
       </p>
       {onNavigate && (
         <button onClick={() => onNavigate("T06")}>返回T06复习</button>

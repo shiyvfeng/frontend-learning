@@ -148,9 +148,22 @@ export const coverageTags = [
 // Register a lesson only once its view is implemented. All availability UI reads
 // this release metadata; planned numbered lessons and coverage tags stay locked.
 export const implementedCourseMetadata = {
-  T08: {view:"threeRoutes",technology:"真实Three.js0.186.1 / R3F与Spline路线示意"},
-  T07: {view:"assetAnimation",technology:"真实lottie-web5.13.0 / 原创JSON · Rive与dotLottie契约模拟"},
-  T06: { view: "gsapLab", technology: "真实GSAP3.15.0 Timeline / ScrollTrigger · 局部原生滚动" },
+  T09: {
+    view: "chartTools",
+    technology: "真实D3模块 / SVG数据绑定 · ECharts配置候选示意",
+  },
+  T08: {
+    view: "threeRoutes",
+    technology: "真实Three.js0.186.1 / R3F与Spline路线示意",
+  },
+  T07: {
+    view: "assetAnimation",
+    technology: "真实lottie-web5.13.0 / 原创JSON · Rive与dotLottie契约模拟",
+  },
+  T06: {
+    view: "gsapLab",
+    technology: "真实GSAP3.15.0 Timeline / ScrollTrigger · 局部原生滚动",
+  },
   T05: {
     view: "motionLab",
     technology: "真实Motion14.6.0 / Presence与position布局 / CSS简单反馈",
@@ -163,7 +176,10 @@ export const implementedCourseMetadata = {
     view: "primitives",
     technology: "真实Radix Dialog1.3.1 + 本站CSS / Base UI候选说明",
   },
-  T02: {view:"utilities",technology:"Tailwind CSS4.3.3 CLI真实编译 / 独立iframe，无全站Preflight"},
+  T02: {
+    view: "utilities",
+    technology: "Tailwind CSS4.3.3 CLI真实编译 / 独立iframe，无全站Preflight",
+  },
   T01: {
     view: "reactNext",
     technology: "React + Vite真实UI / 本地Next流程模拟 · 无Next服务器",
@@ -310,15 +326,15 @@ export const availableLessonRange = formatRanges(
 );
 export const availabilityText =
   availableLessons.length === lessonCatalog.length
-    ? `目前 ${availableLessonRange} 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08已开放；T09–T12共4工具模块尚未制作，课程仍在继续。`
+    ? `目前 ${availableLessonRange} 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08/T09已开放；T10–T12共3工具模块尚未制作，课程仍在继续。`
     : availableLessons.length
       ? `目前 ${availableLessonRange} 课可以学习。其余保留目录，按节逐步制作。`
       : "课程尚未制作，当前提供目录预览。";
-export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}${availableLessons.length === lessonCatalog.length ? "（编号课；另有综合A/B已开放，T01/T02/T03/T04/T05/T06/T07/T08已开放；T09–T12尚未制作）" : ""}`;
+export const availabilityFooter = `可学习课程 ${availableLessonRange || "暂无"} · ${availableLessons.length} / ${lessonCatalog.length}${availableLessons.length === lessonCatalog.length ? "（编号课；另有综合A/B已开放，T01/T02/T03/T04/T05/T06/T07/T08/T09已开放；T10–T12尚未制作）" : ""}`;
 export function nextLessonHint(index) {
   const next = lessonCatalog[index + 1];
   if (!next)
-    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01/T02/T03/T04/T05/T06/T07/T08已开放，T09–T12尚未制作，课程仍在继续。`;
+    return `已到${lessonCatalog.length}个编号课的末尾；可以继续综合阶段A「设计工具映射」，再到B「Agent指令能力」。T01/T02/T03/T04/T05/T06/T07/T08/T09已开放，T10–T12尚未制作，课程仍在继续。`;
   return next.available
     ? `可以从课程目录继续 ${next.id} ${next.title}。`
     : `下一课 ${next.id} ${next.title} 尚未制作。`;

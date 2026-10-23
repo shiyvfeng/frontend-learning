@@ -624,7 +624,7 @@ test("quiz incorrect explanations allow retry and brief separates seconds distan
     "CSS",
     "Motion",
     "清理",
-    "T09–T12仍为4个预告",
+    "T10–T12仍为3个预告",
     "不是MIT",
     "不提供任意动画创作",
   ])
@@ -975,8 +975,8 @@ test("T05 exit opens real T06 ten available tags four readonly tools and keeps n
   await expect(field(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(10);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(4);
+  await expect(nav.getByRole("button")).toHaveCount(11);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(3);
   await expect(nav.getByRole("button", { name: /T07/ })).toHaveCount(1);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator('[data-lesson-id="40"]')).toHaveCount(0);
