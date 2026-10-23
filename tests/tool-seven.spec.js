@@ -595,7 +595,7 @@ test("quiz retry explains format binding and business without keyword scoring or
     "取消",
     "destroy",
     "375px",
-    "T10–T12仍为3个预告",
+    "T11–T12仍为2个预告",
   ])
     expect(tool07Brief(good())).toContain(t);
 });
@@ -1000,8 +1000,8 @@ test("T06 exit opens actual T07 ten available tags four readonly tools and numbe
   await expect(f(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(11);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(3);
+  await expect(nav.getByRole("button")).toHaveCount(12);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(2);
   await expect(nav.getByRole("button", { name: /T08/ })).toHaveCount(1);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator('[data-lesson-id="41"]')).toHaveCount(0);
@@ -1011,7 +1011,7 @@ test("T06 exit opens actual T07 ten available tags four readonly tools and numbe
   await page.getByText("路线核对说明与官方来源", { exact: true }).click();
   await page.getByText("查看完整 32 课目录及覆盖标签", { exact: true }).click();
   await expect(page.locator(".full-course-outline")).toContainText(
-    "其他3个工具模块尚未作为独立模块制作",
+    "其他2个工具模块尚未作为独立模块制作",
   );
   await expect(
     page.locator(".full-course-outline [data-coverage-id=T07] button"),

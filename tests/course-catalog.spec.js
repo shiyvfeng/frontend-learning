@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const axe = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
 const summary =
-  "目前 01–32 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08/T09已开放；T10–T12共3工具模块尚未制作，课程仍在继续。";
+  "目前 01–32 编号课可以学习；综合阶段A/B及T01/T02/T03/T04/T05/T06/T07/T08/T09/T10已开放；T11–T12共2工具模块尚未制作，课程仍在继续。";
 const chapterNames = [
   "第一节学习步骤",
   "第二节学习步骤",
@@ -169,7 +169,7 @@ test("all numbered lessons are released but remaining modules are real previews,
   );
   await axeCheck(page);
 });
-test("A B T01 T02 T03 T04 T05 T06 T07 T08 T09 are available while three remaining tool tags stay unmade without learning links", async ({
+test("A B T01 T02 T03 T04 T05 T06 T07 T08 T09 T10 are available while two remaining tool tags stay unmade without learning links", async ({
   page,
 }) => {
   await page.goto("/");
@@ -229,8 +229,8 @@ test("A B T01 T02 T03 T04 T05 T06 T07 T08 T09 are available while three remainin
   );
   for (const id of [
     ...Array.from(
-      { length: 3 },
-      (_, i) => "T" + String(i + 10).padStart(2, "0"),
+      { length: 2 },
+      (_, i) => "T" + String(i + 11).padStart(2, "0"),
     ),
   ]) {
     const tag = outline.locator(`[data-coverage-id="${id}"]`);

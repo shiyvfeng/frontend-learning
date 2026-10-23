@@ -152,7 +152,7 @@ export default function ToolNine({ onStorageStatus, onNavigate }) {
     if (data.step < 4) go(data.step + 1);
     else if ([0, 1, 2, 3].every((n) => data.done.includes(n)))
       setNotice(
-        "T09工具专题已完成；不代表图表已完成生产验收。T10–T12仍为3个预告，课程继续推进。",
+        "T09工具专题已完成；不代表图表已完成生产验收。T11–T12仍为2个预告，课程继续推进。",
       );
     else
       setNotice(
@@ -544,8 +544,9 @@ export default function ToolNine({ onStorageStatus, onNavigate }) {
       </div>
       <p className="tool09-boundary">
         下一专题 T10 · TanStack Query
-        尚未制作；T10–T12共3工具模块仍为预告，课程尚未全部结束。
+        已开放；T11–T12共2工具模块仍为预告，课程尚未全部结束。
       </p>
+      {onNavigate && <button onClick={() => onNavigate("T10")}>继续T10 · TanStack Query</button>}
       {onNavigate && (
         <button onClick={() => onNavigate("T08")}>返回T08复习</button>
       )}
