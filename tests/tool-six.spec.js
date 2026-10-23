@@ -624,7 +624,7 @@ test("quiz incorrect explanations allow retry and brief separates seconds distan
     "CSS",
     "Motion",
     "清理",
-    "T08–T12仍为5个预告",
+    "T09–T12仍为4个预告",
     "不是MIT",
     "不提供任意动画创作",
   ])
@@ -966,7 +966,7 @@ for (const reducedMotion of ["no-preference", "reduce"])
     );
     await c.close();
   });
-test("T05 exit opens real T06 nine available tags five readonly tools and keeps numbered32", async ({
+test("T05 exit opens real T06 ten available tags four readonly tools and keeps numbered32", async ({
   page,
 }) => {
   await open(page);
@@ -975,8 +975,8 @@ test("T05 exit opens real T06 nine available tags five readonly tools and keeps 
   await expect(field(page, "stage-heading")).toBeVisible();
   const nav = page.getByRole("navigation", { name: "综合与工具模块" });
   if (!(await nav.isVisible())) await b(page, "☰ 课程").click();
-  await expect(nav.getByRole("button")).toHaveCount(9);
-  await expect(nav.locator(".coverage-preview")).toHaveCount(5);
+  await expect(nav.getByRole("button")).toHaveCount(10);
+  await expect(nav.locator(".coverage-preview")).toHaveCount(4);
   await expect(nav.getByRole("button", { name: /T07/ })).toHaveCount(1);
   await expect(page.locator(".available-dot")).toHaveCount(32);
   await expect(page.locator('[data-lesson-id="40"]')).toHaveCount(0);

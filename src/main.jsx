@@ -27,6 +27,7 @@ const LessonFourteen = React.lazy(() => import("./lesson-fourteen"));
 const LessonFifteen = React.lazy(() => import("./lesson-fifteen"));
 const ToolThree = React.lazy(() => import("./tool-three"));
 const ToolFour = React.lazy(() => import("./tool-four"));
+const ToolEight = React.lazy(() => import("./tool-eight"));
 const ToolSeven = React.lazy(() => import("./tool-seven"));
 const ToolSix = React.lazy(() => import("./tool-six"));
 const ToolFive = React.lazy(() => import("./tool-five"));
@@ -89,6 +90,7 @@ const lessonViews = {
   utilities: ToolTwo,
   primitives: ToolThree,
   localComponents: ToolFour,
+  threeRoutes: ToolEight,
   assetAnimation: ToolSeven,
   gsapLab: ToolSix,
   motionLab: ToolFive,
